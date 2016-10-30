@@ -1,5 +1,6 @@
 package sk.upjs.ics.paz1c.fitnesscentrum;
 
+import sk.upjs.ics.paz1c.fitnesscentrum.entity.Zakaznik;
 import java.time.LocalDateTime;
 import java.time.Month;
 import org.junit.After;

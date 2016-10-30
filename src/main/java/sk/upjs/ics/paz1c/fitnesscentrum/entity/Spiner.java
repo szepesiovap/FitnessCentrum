@@ -1,5 +1,5 @@
 
-package sk.upjs.ics.paz1c.fitnesscentrum;
+package sk.upjs.ics.paz1c.fitnesscentrum.entity;
 
 public class Spiner {
     private int id;

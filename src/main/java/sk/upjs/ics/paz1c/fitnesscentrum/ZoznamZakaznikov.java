@@ -1,5 +1,7 @@
 package sk.upjs.ics.paz1c.fitnesscentrum;
 
+import sk.upjs.ics.paz1c.fitnesscentrum.dao.ZakaznikDao;
+import sk.upjs.ics.paz1c.fitnesscentrum.entity.Zakaznik;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -34,18 +36,4 @@ public class ZoznamZakaznikov implements ZakaznikDao {
         return zoznamZakaznikov;
     }
 
-    @Override
-    public void novaPermanentka(Zakaznik zakaznik) {
-        zoznamZakaznikov.add(zakaznik);
-    }
-
-    @Override
-    public void novyJednorazovyVstup(Zakaznik zakaznik) {
-        zoznamZakaznikov.add(zakaznik);
-    }
-
-    @Override
-    public void novyStudent(Zakaznik zakaznik) {
-        zoznamZakaznikov.add(zakaznik);
-    }
 }

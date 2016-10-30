@@ -1,6 +1,9 @@
 package sk.upjs.ics.paz1c.fitnesscentrum;
 
+import sk.upjs.ics.paz1c.fitnesscentrum.dao.impl.MySQLZakaznikDao;
+import sk.upjs.ics.paz1c.fitnesscentrum.entity.Zakaznik;
 import javax.swing.table.AbstractTableModel;
+import sk.upjs.ics.paz1c.fitnesscentrum.dao.ZakaznikDao;
 
 /**
  *
@@ -8,9 +11,9 @@ import javax.swing.table.AbstractTableModel;
  */
 public class ZakaznikTableModel extends AbstractTableModel {
 
-    private ZakaznikDao zakaznikDao = ZakaznikDaoFactory.INSTANCE.getZakaznikDao();
+    private ZakaznikDao zakaznikDao = DaoFactory.INSTANCE.getMySQLZakaznikDao();
 
-    private static final String[] NAZVY_STLPCOV = {"Meno"};
+    private static final String[] NAZVY_STLPCOV = {"Meno", "Pritomny", "Posledny prichod", "id pernamentky"};
 
     private static final int POCET_STLPCOV = NAZVY_STLPCOV.length;
 
@@ -30,8 +33,20 @@ public class ZakaznikTableModel extends AbstractTableModel {
         switch (columnIndex) {
             case 0:
                 return zakaznik.getMeno();
+            case 1:
+                return zakaznik.isPritomny();
+            case 2:
+                return zakaznik.getPoslednyPrichod();
+            case 3:
+                return zakaznik.getIdPernamentky();
             default:
                 return "???";
-        }    }
+        }
+    }
+
+    @Override
+    public String getColumnName(int columnIndex) {
+        return NAZVY_STLPCOV[columnIndex];
+    }
 
 }
