@@ -19,11 +19,18 @@ public class MySQLZakaznikDao implements ZakaznikDao {
         dataSource.setPassword("root");
 
         jdbcTemplate = new JdbcTemplate(dataSource);
+        
+        
     }
 
     @Override
     public List<Zakaznik> dajVsetkychZakaznikov() {
         String sql = "SELECT *  FROM zakaznik";
+        return jdbcTemplate.query(sql, new ZakaznikRowMapper());
+    }
+    
+    public List<Zakaznik> dajPritomnychZakaznikov() {
+        String sql = "SELECT *  FROM zakaznik WHERE pritomny=1";
         return jdbcTemplate.query(sql, new ZakaznikRowMapper());
     }
 
