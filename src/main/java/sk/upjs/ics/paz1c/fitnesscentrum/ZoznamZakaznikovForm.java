@@ -5,6 +5,8 @@
  */
 package sk.upjs.ics.paz1c.fitnesscentrum;
 
+import sk.upjs.ics.paz1c.fitnesscentrum.dao.impl.MySQLZakaznikDao;
+
 /**
  *
  * @author patka
@@ -43,7 +45,7 @@ public class ZoznamZakaznikovForm extends javax.swing.JFrame {
 
         tabbedPane.addTab("Pritomni", pritomniScrollPane);
 
-        zoznamZakaznikovTable.setModel(new ZakaznikTableModel());
+        zoznamZakaznikovTable.setModel(new ZakaznikSPernamentkouTableModel());
         zoznamZakaznikovScrollPane.setViewportView(zoznamZakaznikovTable);
 
         tabbedPane.addTab("Zoznam", zoznamZakaznikovScrollPane);
@@ -88,7 +90,9 @@ public class ZoznamZakaznikovForm extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(ZoznamZakaznikovForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
-
+        
+        MySQLZakaznikDao sql = new MySQLZakaznikDao();
+        System.out.println(sql.dajVsetkychZakaznikovSPernamentkou());
               
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {

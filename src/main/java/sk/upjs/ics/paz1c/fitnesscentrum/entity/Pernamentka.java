@@ -7,6 +7,9 @@ public class Pernamentka {
     private int cislo;
     private Typ typ;
     private Date platnaOd;
+    private Date platnaDo;
+    private double kredit;
+
 
     public int getId() {
         return id;
@@ -55,9 +58,10 @@ public class Pernamentka {
     public void setKredit(double kredit) {
         this.kredit = kredit;
     }
-    private Date platnaDo;
-    private double kredit;
 
-
+    @Override
+    public String toString() {
+        return "Pernamentka{" + "id=" + id + ", cislo=" + cislo + ", typ=" + typ + ", platnaOd=" + platnaOd + ", platnaDo=" + platnaDo + ", kredit=" + kredit + '}';
+    }
     
 }
