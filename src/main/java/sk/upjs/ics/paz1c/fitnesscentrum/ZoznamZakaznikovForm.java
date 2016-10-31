@@ -29,34 +29,25 @@ public class ZoznamZakaznikovForm extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        tabbedPane = new javax.swing.JTabbedPane();
-        pritomniScrollPane = new javax.swing.JScrollPane();
-        pritomniTable = new javax.swing.JTable();
-        zoznamZakaznikovScrollPane = new javax.swing.JScrollPane();
-        zoznamZakaznikovTable = new javax.swing.JTable();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        ZoznamZakaznikovTable = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        pritomniTable.setModel(new PritomniZakazniciTableModel()
-        );
-        pritomniScrollPane.setViewportView(pritomniTable);
-
-        tabbedPane.addTab("Pritomni", pritomniScrollPane);
-
-        zoznamZakaznikovTable.setModel(new ZakaznikTableModel());
-        zoznamZakaznikovScrollPane.setViewportView(zoznamZakaznikovTable);
-
-        tabbedPane.addTab("Zoznam", zoznamZakaznikovScrollPane);
+        ZoznamZakaznikovTable.setModel(new ZakaznikTableModel());
+        jScrollPane1.setViewportView(ZoznamZakaznikovTable);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(tabbedPane, javax.swing.GroupLayout.DEFAULT_SIZE, 720, Short.MAX_VALUE)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 400, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(tabbedPane, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 410, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(0, 25, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         pack();
@@ -99,10 +90,7 @@ public class ZoznamZakaznikovForm extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JScrollPane pritomniScrollPane;
-    private javax.swing.JTable pritomniTable;
-    private javax.swing.JTabbedPane tabbedPane;
-    private javax.swing.JScrollPane zoznamZakaznikovScrollPane;
-    private javax.swing.JTable zoznamZakaznikovTable;
+    private javax.swing.JTable ZoznamZakaznikovTable;
+    private javax.swing.JScrollPane jScrollPane1;
     // End of variables declaration//GEN-END:variables
 }

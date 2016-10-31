@@ -2,6 +2,10 @@ package sk.upjs.ics.paz1c.fitnesscentrum.entity;
 
 import java.time.LocalDateTime;
 
+/**
+ *
+ * @author patka
+ */
 public class Zakaznik {
 
     private int id;
