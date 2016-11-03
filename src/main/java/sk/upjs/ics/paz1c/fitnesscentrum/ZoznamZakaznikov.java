@@ -5,7 +5,6 @@ import sk.upjs.ics.paz1c.fitnesscentrum.entity.Zakaznik;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
-import sk.upjs.ics.paz1c.fitnesscentrum.entity.ZakaznikSPernamentkou;
 
 /**
  *
@@ -35,11 +34,6 @@ public class ZoznamZakaznikov implements ZakaznikDao {
     @Override
     public List<Zakaznik> dajVsetkychZakaznikov() {
         return zoznamZakaznikov;
-    }
-
-    @Override
-    public List<ZakaznikSPernamentkou> dajVsetkychZakaznikovSPernamentkou() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override

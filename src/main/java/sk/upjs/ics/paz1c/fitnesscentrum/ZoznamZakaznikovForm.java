@@ -45,7 +45,7 @@ public class ZoznamZakaznikovForm extends javax.swing.JFrame {
 
         tabbedPane.addTab("Pritomni", pritomniScrollPane);
 
-        zoznamZakaznikovTable.setModel(new ZakaznikSPernamentkouTableModel());
+        zoznamZakaznikovTable.setModel(new ZakaznikTableModel());
         zoznamZakaznikovScrollPane.setViewportView(zoznamZakaznikovTable);
 
         tabbedPane.addTab("Zoznam", zoznamZakaznikovScrollPane);
@@ -90,9 +90,6 @@ public class ZoznamZakaznikovForm extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(ZoznamZakaznikovForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
-        
-        MySQLZakaznikDao sql = new MySQLZakaznikDao();
-        System.out.println(sql.dajVsetkychZakaznikovSPernamentkou());
               
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {

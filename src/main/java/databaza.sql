@@ -18,22 +18,6 @@ CREATE SCHEMA IF NOT EXISTS `fitnesscentrum` DEFAULT CHARACTER SET utf8 ;
 USE `fitnesscentrum` ;
 
 -- -----------------------------------------------------
--- Table `fitnesscentrum`.`pernamentka`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `fitnesscentrum`.`pernamentka` (
-  `id` INT(11) NOT NULL AUTO_INCREMENT,
-  `cislo` BIGINT(8) NULL DEFAULT NULL,
-  `typ` VARCHAR(45) NULL DEFAULT NULL,
-  `platnost_od` DATETIME NULL DEFAULT NULL,
-  `platnost_do` DATETIME NULL DEFAULT NULL,
-  `kredit` DOUBLE NULL DEFAULT NULL,
-  PRIMARY KEY (`id`))
-ENGINE = InnoDB
-AUTO_INCREMENT = 2
-DEFAULT CHARACTER SET = utf8;
-
-
--- -----------------------------------------------------
 -- Table `fitnesscentrum`.`recepcny`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `fitnesscentrum`.`recepcny` (
@@ -68,11 +52,11 @@ CREATE TABLE IF NOT EXISTS `fitnesscentrum`.`spinning` (
   `cas` TIME NULL DEFAULT NULL,
   `kapacita` INT(11) NULL DEFAULT NULL,
   `volne` INT(11) NULL DEFAULT NULL,
-  `idSpiner` INT(11) NULL DEFAULT NULL,
+  `idTrener` INT(11) NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
-  INDEX `idTrenera_idx` (`idSpiner` ASC),
+  INDEX `idTrenera_idx` (`idTrener` ASC),
   CONSTRAINT `idTrenera`
-    FOREIGN KEY (`idSpiner`)
+    FOREIGN KEY (`idTrener`)
     REFERENCES `fitnesscentrum`.`spiner` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
@@ -89,17 +73,15 @@ CREATE TABLE IF NOT EXISTS `fitnesscentrum`.`zakaznik` (
   `meno_priezvisko` VARCHAR(45) NULL DEFAULT NULL,
   `posledny_prichod` TIMESTAMP NULL DEFAULT NULL,
   `pritomny` TINYINT(1) NULL DEFAULT NULL,
-  `idPernamentky` INT(11) NULL DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  INDEX `idPernamentky_idx` (`idPernamentky` ASC),
-  CONSTRAINT `idPernamentky`
-    FOREIGN KEY (`idPernamentky`)
-    REFERENCES `fitnesscentrum`.`pernamentka` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
+  `kredit` INT(11) NULL DEFAULT NULL,
+  `cislo_pernamentky` INT(11) NULL DEFAULT NULL,
+  `platna_od` DATE NULL DEFAULT NULL,
+  `platna_do` DATE NULL DEFAULT NULL,
+  PRIMARY KEY (`id`))
 ENGINE = InnoDB
 AUTO_INCREMENT = 2
 DEFAULT CHARACTER SET = utf8;
+
 
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;

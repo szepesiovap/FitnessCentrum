@@ -1,6 +1,5 @@
 package sk.upjs.ics.paz1c.fitnesscentrum;
 
-import sk.upjs.ics.paz1c.fitnesscentrum.dao.impl.MySQLZakaznikDao;
 import sk.upjs.ics.paz1c.fitnesscentrum.entity.Zakaznik;
 import javax.swing.table.AbstractTableModel;
 import sk.upjs.ics.paz1c.fitnesscentrum.dao.ZakaznikDao;
@@ -13,7 +12,7 @@ public class ZakaznikTableModel extends AbstractTableModel {
 
     private ZakaznikDao zakaznikDao = DaoFactory.INSTANCE.getMySQLZakaznikDao();
 
-    private static final String[] NAZVY_STLPCOV = {"Meno", "Pritomny", "Posledny prichod", "id pernamentky"};
+    private static final String[] NAZVY_STLPCOV = {"Meno", "Pritomny", "Posledny prichod", "kredit", "cislo pernamentky", "platna od", "platna do"};
 
     private static final int POCET_STLPCOV = NAZVY_STLPCOV.length;
 
@@ -38,7 +37,13 @@ public class ZakaznikTableModel extends AbstractTableModel {
             case 2:
                 return zakaznik.getPoslednyPrichod();
             case 3:
-                return zakaznik.getIdPernamentky();
+                return zakaznik.getKredit();
+            case 4:
+                return zakaznik.getCisloPernamentky();
+            case 5: 
+                return zakaznik.getPlatnaOd();
+            case 6: 
+                return zakaznik.getPlatnaDo();
             default:
                 return "???";
         }

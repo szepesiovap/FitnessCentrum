@@ -1,15 +1,51 @@
 package sk.upjs.ics.paz1c.fitnesscentrum.entity;
 
 import java.time.LocalDateTime;
+import java.util.Date;
 
 public class Zakaznik {
 
     private int id;
     private String meno;
     private LocalDateTime poslednyPrichod;
-    private int idPernamentky;
     private boolean pritomny;
-    
+    private double kredit;
+    private int cisloPernamentky;
+    private Date platnaOd;
+    private Date platnaDo;
+
+    public double getKredit() {
+        return kredit;
+    }
+
+    public void setKredit(double kredit) {
+        this.kredit = kredit;
+    }
+
+    public double getCisloPernamentky() {
+        return cisloPernamentky;
+    }
+
+    public void setCisloPernamentky(int cisloPernamentky) {
+        this.cisloPernamentky = cisloPernamentky;
+    }
+
+    public Date getPlatnaOd() {
+        return platnaOd;
+    }
+
+    public void setPlatnaOd(Date platnaOd) {
+        this.platnaOd = platnaOd;
+    }
+
+    public Date getPlatnaDo() {
+        return platnaDo;
+    }
+
+    public void setPlatnaDo(Date platnaDo) {
+        this.platnaDo = platnaDo;
+    }
+     
     public int getId() {
         return id;
     }
@@ -34,14 +70,6 @@ public class Zakaznik {
         this.poslednyPrichod = poslednyPrichod;
     }
 
-    public int getIdPernamentky() {
-        return idPernamentky;
-    }
-
-    public void setIdPernamentky(int idPernamentky) {
-        this.idPernamentky = idPernamentky;
-    }
-
     public boolean isPritomny() {
         return pritomny;
     }
@@ -52,7 +80,7 @@ public class Zakaznik {
 
     @Override
     public String toString() {
-        return "Zakaznik2{" + "id=" + id + ", meno=" + meno + ", poslednyPrichod=" + poslednyPrichod + ", idPernamentky=" + idPernamentky + ", pritomny=" + pritomny + '}';
+        return "Zakaznik{" + "id=" + id + ", meno=" + meno + ", poslednyPrichod=" + poslednyPrichod + ", pritomny=" + pritomny + ", kredit=" + kredit + ", cisloPernamentky=" + cisloPernamentky + ", platnaOd=" + platnaOd + ", platnaDo=" + platnaDo + '}';
     }
 
     
