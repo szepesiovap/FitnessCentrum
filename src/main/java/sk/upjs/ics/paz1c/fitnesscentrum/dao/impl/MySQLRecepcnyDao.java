@@ -27,16 +27,12 @@ public class MySQLRecepcnyDao implements RecepcnyDao {
     public Recepcny dajRecepcneho(String login, String heslo) {
         Recepcny recepcny= new Recepcny();
         String sql = "SELECT login, heslo FROM recepcny WHERE login = '" +login + "' AND heslo = '"+ heslo + "'";
-       
+
         try {
-            jdbcTemplate.queryForObject(sql, new RecepcnyRowMapper());
-        } catch (Exception e) {
+        jdbcTemplate.queryForObject(sql, new RecepcnyRowMapper());
+        } catch (Exception EmptyResultDataAccessException) {
             return null;
-        }
-  
-        System.out.println("Takyto pouzivatel neexistuje");
-              
-        
+        }            
        return recepcny;
     }
     

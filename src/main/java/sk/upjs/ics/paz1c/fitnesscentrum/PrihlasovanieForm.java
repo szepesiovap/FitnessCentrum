@@ -8,6 +8,7 @@ package sk.upjs.ics.paz1c.fitnesscentrum;
 import java.util.Locale;
 import javax.swing.JOptionPane;
 import javax.swing.JPasswordField;
+import sk.upjs.ics.paz1c.fitnesscentrum.entity.Recepcny;
 
 /**
  *
@@ -120,13 +121,13 @@ public class PrihlasovanieForm extends javax.swing.JFrame {
     private void prihlasitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_prihlasitButtonActionPerformed
         String heslo = hesloPasswordField.getText();
         String login = loginTextField.getText();
-        DaoFactory.INSTANCE.getLReceocnyDao().dajRecepcneho(login, heslo);
-        
-        //"SELECT heslo FROM recepcny WHERE login ='" + loginField.getText() + "'";
-        if ("patka".equals(login) && "heslo".equals(heslo)) {
+
+        Recepcny recepcny = DaoFactory.INSTANCE.getLReceocnyDao().dajRecepcneho(login, heslo);
+        if (recepcny != null) {
             new ZoznamZakaznikovForm().setVisible(true);
-        }else{
-            JOptionPane.showMessageDialog(null, "Nespravne udaje");
+            this.setVisible(false);
+        } else {
+           JOptionPane.showMessageDialog(null, "Nespravne udaje");
         }
 
     }//GEN-LAST:event_prihlasitButtonActionPerformed
