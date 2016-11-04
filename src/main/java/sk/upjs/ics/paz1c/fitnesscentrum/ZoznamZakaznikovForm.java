@@ -31,7 +31,7 @@ public class ZoznamZakaznikovForm extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        tabbedPane = new javax.swing.JTabbedPane();
+        zoznamVsetkychPane = new javax.swing.JTabbedPane();
         pritomniScrollPane = new javax.swing.JScrollPane();
         pritomniTable = new javax.swing.JTable();
         zoznamZakaznikovScrollPane = new javax.swing.JScrollPane();
@@ -43,22 +43,22 @@ public class ZoznamZakaznikovForm extends javax.swing.JFrame {
         );
         pritomniScrollPane.setViewportView(pritomniTable);
 
-        tabbedPane.addTab("Pritomni", pritomniScrollPane);
+        zoznamVsetkychPane.addTab("Pritomni", pritomniScrollPane);
 
         zoznamZakaznikovTable.setModel(new ZakaznikTableModel());
         zoznamZakaznikovScrollPane.setViewportView(zoznamZakaznikovTable);
 
-        tabbedPane.addTab("Zoznam", zoznamZakaznikovScrollPane);
+        zoznamVsetkychPane.addTab("Zoznam", zoznamZakaznikovScrollPane);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(tabbedPane, javax.swing.GroupLayout.DEFAULT_SIZE, 720, Short.MAX_VALUE)
+            .addComponent(zoznamVsetkychPane, javax.swing.GroupLayout.DEFAULT_SIZE, 720, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(tabbedPane, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 410, Short.MAX_VALUE)
+            .addComponent(zoznamVsetkychPane, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 410, Short.MAX_VALUE)
         );
 
         pack();
@@ -94,7 +94,8 @@ public class ZoznamZakaznikovForm extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new ZoznamZakaznikovForm().setVisible(true);
+                new PrihlasovanieForm().setVisible(true);
+                //new ZoznamZakaznikovForm().setVisible(true);
             }
         });
     }
@@ -102,7 +103,7 @@ public class ZoznamZakaznikovForm extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JScrollPane pritomniScrollPane;
     private javax.swing.JTable pritomniTable;
-    private javax.swing.JTabbedPane tabbedPane;
+    private javax.swing.JTabbedPane zoznamVsetkychPane;
     private javax.swing.JScrollPane zoznamZakaznikovScrollPane;
     private javax.swing.JTable zoznamZakaznikovTable;
     // End of variables declaration//GEN-END:variables

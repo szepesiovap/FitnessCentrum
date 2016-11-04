@@ -7,5 +7,5 @@ public interface ZakaznikDao {
 
     List<Zakaznik> dajVsetkychZakaznikov();
     List<Zakaznik> dajPritomnychZakaznikov();
-     
+    
 }
