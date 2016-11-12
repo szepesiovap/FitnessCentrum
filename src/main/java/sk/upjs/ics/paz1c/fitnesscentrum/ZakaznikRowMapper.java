@@ -8,9 +8,6 @@ import org.springframework.jdbc.core.RowMapper;
 
 public class ZakaznikRowMapper implements RowMapper<Zakaznik> {
     
-    public ZakaznikRowMapper() {
-    }
-    
     @Override
     public Zakaznik mapRow(ResultSet rs, int i) throws SQLException {
         Zakaznik zakaznik = new Zakaznik();

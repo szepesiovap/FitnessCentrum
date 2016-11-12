@@ -5,14 +5,23 @@ import java.util.Date;
 
 public class Zakaznik {
 
-    private int id;
+    private Integer id;
     private String meno;
     private LocalDateTime poslednyPrichod;
     private boolean pritomny;
     private double kredit;
-    private int cisloPernamentky;
+    private Integer cisloPermanentky;
     private Date platnaOd;
     private Date platnaDo;
+    private Integer idKluca;
+
+    public Integer getIdKluca() {
+        return idKluca;
+    }
+
+    public void setIdKluca(Integer idKluca) {
+        this.idKluca = idKluca;
+    }
 
     public double getKredit() {
         return kredit;
@@ -22,12 +31,12 @@ public class Zakaznik {
         this.kredit = kredit;
     }
 
-    public double getCisloPernamentky() {
-        return cisloPernamentky;
+    public Integer getCisloPermanentky() {
+        return cisloPermanentky;
     }
 
-    public void setCisloPernamentky(int cisloPernamentky) {
-        this.cisloPernamentky = cisloPernamentky;
+    public void setCisloPermanentky(int cisloPermanentky) {
+        this.cisloPermanentky = cisloPermanentky;
     }
 
     public Date getPlatnaOd() {
@@ -45,7 +54,7 @@ public class Zakaznik {
     public void setPlatnaDo(Date platnaDo) {
         this.platnaDo = platnaDo;
     }
-     
+
     public int getId() {
         return id;
     }
@@ -80,8 +89,7 @@ public class Zakaznik {
 
     @Override
     public String toString() {
-        return "Zakaznik{" + "id=" + id + ", meno=" + meno + ", poslednyPrichod=" + poslednyPrichod + ", pritomny=" + pritomny + ", kredit=" + kredit + ", cisloPernamentky=" + cisloPernamentky + ", platnaOd=" + platnaOd + ", platnaDo=" + platnaDo + '}';
+        return "Zakaznik{" + "id=" + id + ", meno=" + meno + ", poslednyPrichod=" + poslednyPrichod + ", pritomny=" + pritomny + ", kredit=" + kredit + ", cisloPernamentky=" + cisloPermanentky + ", platnaOd=" + platnaOd + ", platnaDo=" + platnaDo + '}';
     }
 
-    
 }

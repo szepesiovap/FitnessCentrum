@@ -12,7 +12,7 @@ public class ZakaznikTableModel extends AbstractTableModel {
 
     private ZakaznikDao zakaznikDao = DaoFactory.INSTANCE.getMySQLZakaznikDao();
 
-    private static final String[] NAZVY_STLPCOV = {"Meno", "Pritomny", "Posledny prichod", "kredit", "cislo pernamentky", "platna od", "platna do"};
+    private static final String[] NAZVY_STLPCOV = {"Meno", "Pritomny", "Posledny prichod", "Kredit", "Cislo permanentky", "Platna od", "Platna do"};
 
     private static final int POCET_STLPCOV = NAZVY_STLPCOV.length;
 
@@ -39,7 +39,7 @@ public class ZakaznikTableModel extends AbstractTableModel {
             case 3:
                 return zakaznik.getKredit();
             case 4:
-                return zakaznik.getCisloPernamentky();
+                return zakaznik.getCisloPermanentky();
             case 5: 
                 return zakaznik.getPlatnaOd();
             case 6: 

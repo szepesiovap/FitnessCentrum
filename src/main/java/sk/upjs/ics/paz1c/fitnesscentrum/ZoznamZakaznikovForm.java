@@ -7,10 +7,6 @@ package sk.upjs.ics.paz1c.fitnesscentrum;
 
 import sk.upjs.ics.paz1c.fitnesscentrum.dao.impl.MySQLZakaznikDao;
 
-/**
- *
- * @author patka
- */
 public class ZoznamZakaznikovForm extends javax.swing.JFrame {
 
      private ZakaznikTableModel zakaznikTableModel;
@@ -38,6 +34,8 @@ public class ZoznamZakaznikovForm extends javax.swing.JFrame {
         zoznamZakaznikovTable = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Fitnesscentrum");
+        setName("zoznamZakaznikovFrame"); // NOI18N
 
         pritomniTable.setModel(new PritomniZakazniciTableModel()
         );
@@ -95,7 +93,7 @@ public class ZoznamZakaznikovForm extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new PrihlasovanieForm().setVisible(true);
-                //new ZoznamZakaznikovForm().setVisible(true);
+                // new ZoznamZakaznikovForm().setVisible(true);
             }
         });
     }

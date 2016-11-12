@@ -6,10 +6,6 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- *
- * @author patka
- */
 public class ZoznamZakaznikov implements ZakaznikDao {
 
     private List<Zakaznik> zoznamZakaznikov = new ArrayList<>();
@@ -38,7 +34,23 @@ public class ZoznamZakaznikov implements ZakaznikDao {
 
     @Override
     public List<Zakaznik> dajPritomnychZakaznikov() {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    @Override
+    public void pridajZakaznika(Zakaznik zakaznik) {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    @Override
+    public void prichod(int idZakaznika, int idKluca) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+
+    @Override
+    public void odchod(int idZakaznika) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
 
 }
