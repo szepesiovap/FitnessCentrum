@@ -12,6 +12,9 @@ public interface ZakaznikDao {
 
     public void pridajZakaznika(Zakaznik zakaznik);
 
+    //public void vymazZakaznika(Zakaznik zakaznik);
+    // public void updateZakaznika(Zakaznik zakaznik);
+    
     public void prichod(int idZakaznika, int idKluca);
 
     public void odchod(int idZakaznika);

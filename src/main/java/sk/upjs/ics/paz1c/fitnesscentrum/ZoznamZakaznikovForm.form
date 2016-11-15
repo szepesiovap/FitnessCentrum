@@ -25,12 +25,52 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Component id="zoznamVsetkychPane" alignment="0" pref="720" max="32767" attributes="0"/>
+          <Group type="102" alignment="0" attributes="0">
+              <Component id="zoznamVsetkychPane" min="-2" pref="488" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" alignment="1" attributes="0">
+                      <EmptySpace max="32767" attributes="0"/>
+                      <Component id="ZakaznikLabel" min="-2" pref="78" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="37" max="-2" attributes="0"/>
+                  </Group>
+                  <Group type="102" attributes="0">
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                          <Group type="102" attributes="0">
+                              <Component id="PridatZakaznikaButton" min="-2" pref="65" max="-2" attributes="0"/>
+                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                              <Component id="VymazZakaznikaButton" max="32767" attributes="0"/>
+                          </Group>
+                          <Group type="102" alignment="0" attributes="0">
+                              <Component id="PrichodButton" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="OdchodButton" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                      </Group>
+                      <EmptySpace pref="20" max="32767" attributes="0"/>
+                  </Group>
+              </Group>
+          </Group>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
           <Component id="zoznamVsetkychPane" alignment="1" pref="410" max="32767" attributes="0"/>
+          <Group type="102" alignment="0" attributes="0">
+              <EmptySpace max="-2" attributes="0"/>
+              <Component id="ZakaznikLabel" min="-2" pref="34" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="PridatZakaznikaButton" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="VymazZakaznikaButton" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="PrichodButton" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="OdchodButton" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace max="32767" attributes="0"/>
+          </Group>
       </Group>
     </DimensionLayout>
   </Layout>
@@ -84,5 +124,39 @@
         </Container>
       </SubComponents>
     </Container>
+    <Component class="javax.swing.JButton" name="PridatZakaznikaButton">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Prida&#x165;"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="PridatZakaznikaButtonActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="VymazZakaznikaButton">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Vyma&#x17e;"/>
+        <Property name="enabled" type="boolean" value="false"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="VymazZakaznikaButtonActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JLabel" name="ZakaznikLabel">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Z&#xe1;kazn&#xed;k"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JButton" name="PrichodButton">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Pr&#xed;chod"/>
+        <Property name="enabled" type="boolean" value="false"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JButton" name="OdchodButton">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Odchod"/>
+        <Property name="enabled" type="boolean" value="false"/>
+      </Properties>
+    </Component>
   </SubComponents>
 </Form>

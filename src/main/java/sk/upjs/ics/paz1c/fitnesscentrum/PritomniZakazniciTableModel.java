@@ -18,7 +18,7 @@ public class PritomniZakazniciTableModel extends AbstractTableModel {
 
     @Override
     public int getRowCount() {
-        return zakaznikDao.dajVsetkychZakaznikov().size();
+        return zakaznikDao.dajPritomnychZakaznikov().size();
     }
 
     @Override
@@ -28,7 +28,7 @@ public class PritomniZakazniciTableModel extends AbstractTableModel {
 
     @Override
     public Object getValueAt(int rowIndex, int columnIndex) {
-        Zakaznik zakaznik = zakaznikDao.dajVsetkychZakaznikov().get(rowIndex);
+        Zakaznik zakaznik = zakaznikDao.dajPritomnychZakaznikov().get(rowIndex);
         switch (columnIndex) {
             case 0:
                 return "18M";

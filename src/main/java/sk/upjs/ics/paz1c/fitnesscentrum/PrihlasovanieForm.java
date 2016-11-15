@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package sk.upjs.ics.paz1c.fitnesscentrum;
 
 import java.util.Locale;
@@ -10,10 +5,6 @@ import javax.swing.JOptionPane;
 import javax.swing.JPasswordField;
 import sk.upjs.ics.paz1c.fitnesscentrum.entity.Recepcny;
 
-/**
- *
- * @author Marcela
- */
 public class PrihlasovanieForm extends javax.swing.JFrame {
 
     /**
@@ -124,13 +115,13 @@ public class PrihlasovanieForm extends javax.swing.JFrame {
         String heslo = hesloPasswordField.getText();
         String login = loginTextField.getText();
 
-        Recepcny recepcny = DaoFactory.INSTANCE.getLReceocnyDao().dajRecepcneho(login, heslo);
+        Recepcny recepcny = DaoFactory.INSTANCE.getRecepcnyDao().dajRecepcneho(login, heslo);
         //docasne!!!!!!!
-        if ((recepcny != null) ||(1==1)) {
+        if ((recepcny != null) || (1 == 1)) {
             new ZoznamZakaznikovForm().setVisible(true);
             this.setVisible(false);
         } else {
-           JOptionPane.showMessageDialog(null, "Nespravne udaje");
+            JOptionPane.showMessageDialog(null, "Nespravne udaje");
         }
 
     }//GEN-LAST:event_prihlasitButtonActionPerformed

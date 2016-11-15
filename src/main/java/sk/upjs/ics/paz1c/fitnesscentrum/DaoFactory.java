@@ -28,7 +28,7 @@ public enum DaoFactory {
         return new MySQLZakaznikDao();
     }
 
-    public RecepcnyDao getLReceocnyDao() {
+    public RecepcnyDao getRecepcnyDao() {
         return new MySQLRecepcnyDao();
     }
 

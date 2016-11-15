@@ -11,7 +11,7 @@ public class Spinning {
     private int volne;
     private int idSpinera;
     
-    //dorobit zoznam prihlasenych
+    //TODO : dorobit zoznam prihlasenych
 
     public int getId() {
         return id;

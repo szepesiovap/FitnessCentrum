@@ -40,9 +40,9 @@ public class ZakaznikTableModel extends AbstractTableModel {
                 return zakaznik.getKredit();
             case 4:
                 return zakaznik.getCisloPermanentky();
-            case 5: 
+            case 5:
                 return zakaznik.getPlatnaOd();
-            case 6: 
+            case 6:
                 return zakaznik.getPlatnaDo();
             default:
                 return "???";
@@ -54,4 +54,7 @@ public class ZakaznikTableModel extends AbstractTableModel {
         return NAZVY_STLPCOV[columnIndex];
     }
 
+    public void aktualizovat() {
+        fireTableDataChanged();
+    }
 }

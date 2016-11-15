@@ -9,13 +9,20 @@ import sk.upjs.ics.paz1c.fitnesscentrum.dao.impl.MySQLZakaznikDao;
 
 public class ZoznamZakaznikovForm extends javax.swing.JFrame {
 
-     private ZakaznikTableModel zakaznikTableModel;
+    private ZakaznikTableModel zakaznikTableModel;
+
     /**
      * Creates new form ZoznamZakaznikovForm
      */
     public ZoznamZakaznikovForm() {
         zakaznikTableModel = new ZakaznikTableModel();
         initComponents();
+        aktualizovatZoznamUloh();
+    }
+
+    public void aktualizovatZoznamUloh() {
+        ZakaznikTableModel model = (ZakaznikTableModel) zoznamZakaznikovTable.getModel();
+        model.aktualizovat();
     }
 
     /**
@@ -32,6 +39,11 @@ public class ZoznamZakaznikovForm extends javax.swing.JFrame {
         pritomniTable = new javax.swing.JTable();
         zoznamZakaznikovScrollPane = new javax.swing.JScrollPane();
         zoznamZakaznikovTable = new javax.swing.JTable();
+        PridatZakaznikaButton = new javax.swing.JButton();
+        VymazZakaznikaButton = new javax.swing.JButton();
+        ZakaznikLabel = new javax.swing.JLabel();
+        PrichodButton = new javax.swing.JButton();
+        OdchodButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Fitnesscentrum");
@@ -48,19 +60,81 @@ public class ZoznamZakaznikovForm extends javax.swing.JFrame {
 
         zoznamVsetkychPane.addTab("Zoznam", zoznamZakaznikovScrollPane);
 
+        PridatZakaznikaButton.setText("Pridať");
+        PridatZakaznikaButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                PridatZakaznikaButtonActionPerformed(evt);
+            }
+        });
+
+        VymazZakaznikaButton.setText("Vymaž");
+        VymazZakaznikaButton.setEnabled(false);
+        VymazZakaznikaButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                VymazZakaznikaButtonActionPerformed(evt);
+            }
+        });
+
+        ZakaznikLabel.setText("Zákazník");
+
+        PrichodButton.setText("Príchod");
+        PrichodButton.setEnabled(false);
+
+        OdchodButton.setText("Odchod");
+        OdchodButton.setEnabled(false);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(zoznamVsetkychPane, javax.swing.GroupLayout.DEFAULT_SIZE, 720, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(zoznamVsetkychPane, javax.swing.GroupLayout.PREFERRED_SIZE, 488, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(ZakaznikLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(37, 37, 37))
+                    .addGroup(layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(PridatZakaznikaButton, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(VymazZakaznikaButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(PrichodButton)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(OdchodButton)))
+                        .addContainerGap(20, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(zoznamVsetkychPane, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 410, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(ZakaznikLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(PridatZakaznikaButton)
+                    .addComponent(VymazZakaznikaButton))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(PrichodButton)
+                    .addComponent(OdchodButton))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void PridatZakaznikaButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PridatZakaznikaButtonActionPerformed
+        new NovyZakaznikForm(this).setVisible(true);
+
+    }//GEN-LAST:event_PridatZakaznikaButtonActionPerformed
+
+    private void VymazZakaznikaButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_VymazZakaznikaButtonActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_VymazZakaznikaButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -88,7 +162,7 @@ public class ZoznamZakaznikovForm extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(ZoznamZakaznikovForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
-              
+
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
@@ -99,6 +173,11 @@ public class ZoznamZakaznikovForm extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton OdchodButton;
+    private javax.swing.JButton PrichodButton;
+    private javax.swing.JButton PridatZakaznikaButton;
+    private javax.swing.JButton VymazZakaznikaButton;
+    private javax.swing.JLabel ZakaznikLabel;
     private javax.swing.JScrollPane pritomniScrollPane;
     private javax.swing.JTable pritomniTable;
     private javax.swing.JTabbedPane zoznamVsetkychPane;

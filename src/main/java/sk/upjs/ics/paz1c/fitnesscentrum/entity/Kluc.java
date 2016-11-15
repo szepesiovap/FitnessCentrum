@@ -1,6 +1,10 @@
 package sk.upjs.ics.paz1c.fitnesscentrum.entity;
 
 public class Kluc {
+    
+    private Long idKluca;
+    private String menoKluca;
+    private Long idZakaznika;
 
     public String getMenoKluca() {
         return menoKluca;
@@ -25,8 +29,5 @@ public class Kluc {
     public void setIdKluca(Long idKluca) {
         this.idKluca = idKluca;
     }
-    
-    private Long idKluca;
-    private String menoKluca;
-    private Long idZakaznika;
+
 }
