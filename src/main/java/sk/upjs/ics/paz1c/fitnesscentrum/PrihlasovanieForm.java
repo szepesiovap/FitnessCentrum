@@ -1,12 +1,10 @@
 package sk.upjs.ics.paz1c.fitnesscentrum;
 
-import java.util.Locale;
 import javax.swing.JOptionPane;
-import javax.swing.JPasswordField;
 import sk.upjs.ics.paz1c.fitnesscentrum.entity.Recepcny;
 
 public class PrihlasovanieForm extends javax.swing.JFrame {
-
+    
     /**
      * Creates new form PrihlasovanieForm
      */
@@ -119,9 +117,9 @@ public class PrihlasovanieForm extends javax.swing.JFrame {
         //docasne!!!!!!!
         if ((recepcny != null) || (1 == 1)) {
             new ZoznamZakaznikovForm().setVisible(true);
-            this.setVisible(false);
+            this.dispose();
         } else {
-            JOptionPane.showMessageDialog(null, "Nespravne udaje");
+            JOptionPane.showMessageDialog(null, "Nespravne prihlasovacie udaje");
         }
 
     }//GEN-LAST:event_prihlasitButtonActionPerformed

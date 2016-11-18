@@ -31,5 +31,4 @@ public enum DaoFactory {
     public RecepcnyDao getRecepcnyDao() {
         return new MySQLRecepcnyDao();
     }
-
 }

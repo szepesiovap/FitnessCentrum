@@ -23,31 +23,39 @@ public class NovyZakaznikForm extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        MenoZakaznikaTextField = new javax.swing.JTextField();
-        MenoZakaznikaLabel = new javax.swing.JLabel();
-        PriezviskoZakaznikaLabel = new javax.swing.JLabel();
-        PriezviskoZakaznikaTextField = new javax.swing.JTextField();
-        jLabel1 = new javax.swing.JLabel();
-        UlozButton = new javax.swing.JButton();
+        menoZakaznikaTextField = new javax.swing.JTextField();
+        menoZakaznikaLabel = new javax.swing.JLabel();
+        priezviskoZakaznikaLabel = new javax.swing.JLabel();
+        priezviskoZakaznikaTextField = new javax.swing.JTextField();
+        novyZakaznikLabel = new javax.swing.JLabel();
+        ulozButton = new javax.swing.JButton();
+        zrusitButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        MenoZakaznikaTextField.addActionListener(new java.awt.event.ActionListener() {
+        menoZakaznikaTextField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                MenoZakaznikaTextFieldActionPerformed(evt);
+                menoZakaznikaTextFieldActionPerformed(evt);
             }
         });
 
-        MenoZakaznikaLabel.setText("Meno: ");
+        menoZakaznikaLabel.setText("Meno: ");
 
-        PriezviskoZakaznikaLabel.setText("Priezvisko:");
+        priezviskoZakaznikaLabel.setText("Priezvisko:");
 
-        jLabel1.setText("Nový zákazník");
+        novyZakaznikLabel.setText("Nový zákazník");
 
-        UlozButton.setText("Ulož");
-        UlozButton.addActionListener(new java.awt.event.ActionListener() {
+        ulozButton.setText("Ulož");
+        ulozButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                UlozButtonActionPerformed(evt);
+                ulozButtonActionPerformed(evt);
+            }
+        });
+
+        zrusitButton.setText("Zrušiť");
+        zrusitButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                zrusitButtonActionPerformed(evt);
             }
         });
 
@@ -57,65 +65,74 @@ public class NovyZakaznikForm extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(35, 35, 35)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(MenoZakaznikaLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(PriezviskoZakaznikaLabel))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(MenoZakaznikaTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 110, Short.MAX_VALUE)
-                    .addComponent(PriezviskoZakaznikaTextField))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(UlozButton)
-                .addGap(20, 20, 20))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(menoZakaznikaLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(priezviskoZakaznikaLabel))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(menoZakaznikaTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 110, Short.MAX_VALUE)
+                            .addComponent(priezviskoZakaznikaTextField)))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                        .addGap(59, 59, 59)
+                        .addComponent(ulozButton, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(29, 29, 29)
+                        .addComponent(zrusitButton)))
+                .addContainerGap(35, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(116, Short.MAX_VALUE)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(73, 73, 73))
+                .addContainerGap(98, Short.MAX_VALUE)
+                .addComponent(novyZakaznikLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(98, 98, 98))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(11, 11, 11)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(MenoZakaznikaTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(MenoZakaznikaLabel))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(PriezviskoZakaznikaLabel)
-                            .addComponent(PriezviskoZakaznikaTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(48, 48, 48)
-                        .addComponent(UlozButton)))
-                .addContainerGap(67, Short.MAX_VALUE))
+                .addComponent(novyZakaznikLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(11, 11, 11)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(menoZakaznikaTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(menoZakaznikaLabel))
+                .addGap(9, 9, 9)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(priezviskoZakaznikaLabel)
+                    .addComponent(priezviskoZakaznikaTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 30, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(zrusitButton)
+                    .addComponent(ulozButton))
+                .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void MenoZakaznikaTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenoZakaznikaTextFieldActionPerformed
+    private void menoZakaznikaTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menoZakaznikaTextFieldActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_MenoZakaznikaTextFieldActionPerformed
+    }//GEN-LAST:event_menoZakaznikaTextFieldActionPerformed
 
-    private void UlozButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UlozButtonActionPerformed
-        String menoZakaznika = MenoZakaznikaTextField.getText() +" "+ PriezviskoZakaznikaTextField.getText();
+    private void ulozButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ulozButtonActionPerformed
+        String menoZakaznika = menoZakaznikaTextField.getText() +" "+ priezviskoZakaznikaTextField.getText();
         
         Zakaznik zakaznik = new Zakaznik();
         zakaznik.setMeno(menoZakaznika);
         
         DaoFactory.INSTANCE.getMySQLZakaznikDao().pridajZakaznika(zakaznik);        
-        this.setVisible(false);
-        this.zoznamZakaznikovForm.aktualizovatZoznamUloh();
-    }//GEN-LAST:event_UlozButtonActionPerformed
+        this.zoznamZakaznikovForm.aktualizovatZoznamZakaznikov();
+        this.dispose();
+    }//GEN-LAST:event_ulozButtonActionPerformed
+
+    private void zrusitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_zrusitButtonActionPerformed
+        this.dispose();
+    }//GEN-LAST:event_zrusitButtonActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel MenoZakaznikaLabel;
-    private javax.swing.JTextField MenoZakaznikaTextField;
-    private javax.swing.JLabel PriezviskoZakaznikaLabel;
-    private javax.swing.JTextField PriezviskoZakaznikaTextField;
-    private javax.swing.JButton UlozButton;
-    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel menoZakaznikaLabel;
+    private javax.swing.JTextField menoZakaznikaTextField;
+    private javax.swing.JLabel novyZakaznikLabel;
+    private javax.swing.JLabel priezviskoZakaznikaLabel;
+    private javax.swing.JTextField priezviskoZakaznikaTextField;
+    private javax.swing.JButton ulozButton;
+    private javax.swing.JButton zrusitButton;
     // End of variables declaration//GEN-END:variables
 }

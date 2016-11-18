@@ -1,13 +1,10 @@
 package sk.upjs.ics.paz1c.fitnesscentrum.dao.impl;
 
-import java.sql.Timestamp;
-import java.time.LocalDateTime;
 import java.util.List;
 import org.springframework.jdbc.core.JdbcTemplate;
 import sk.upjs.ics.paz1c.fitnesscentrum.DaoFactory;
 import sk.upjs.ics.paz1c.fitnesscentrum.ZakaznikRowMapper;
 import sk.upjs.ics.paz1c.fitnesscentrum.dao.ZakaznikDao;
-import sk.upjs.ics.paz1c.fitnesscentrum.entity.Kluc;
 import sk.upjs.ics.paz1c.fitnesscentrum.entity.Zakaznik;
 
 public class MySQLZakaznikDao implements ZakaznikDao {
@@ -33,8 +30,7 @@ public class MySQLZakaznikDao implements ZakaznikDao {
         String sql = "SELECT *  FROM zakaznik WHERE pritomny=1";
         return jdbcTemplate.query(sql, zakaznikRowMapper);
     }
-    
-    
+        
     //zatial som napisala takuto verziu
     @Override
     public void pridajZakaznika(Zakaznik zakaznik) {
@@ -50,8 +46,8 @@ public class MySQLZakaznikDao implements ZakaznikDao {
 
     @Override
     public void prichod(int idZakaznika, int idKluca) {
-        String sql = "UPDATE zakaznik set pritomny=1,id_kluca= ?, posledny_prichod=timestamp(now()) where id = ?";
-        jdbcTemplate.update(sql, idZakaznika, idKluca);
+        String sql = "UPDATE zakaznik SET pritomny=1,id_kluca=?, posledny_prichod=timestamp(now()) where id = ?";
+        jdbcTemplate.update(sql, idKluca, idZakaznika);
     }
 
     @Override
@@ -60,4 +56,9 @@ public class MySQLZakaznikDao implements ZakaznikDao {
         jdbcTemplate.update(sql, idZakaznika);
     }
 
+    @Override
+    public void vymazZakaznika(int idZakaznika) {
+       String sql = "DELETE FROM zakaznik WHERE id = ?";
+       jdbcTemplate.update(sql, idZakaznika);
+    }
 }

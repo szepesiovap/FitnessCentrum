@@ -25,82 +25,95 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace min="-2" pref="35" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="MenoZakaznikaLabel" alignment="0" min="-2" pref="71" max="-2" attributes="0"/>
-                  <Component id="PriezviskoZakaznikaLabel" alignment="0" min="-2" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="1" attributes="0">
+                  <Group type="102" alignment="0" attributes="0">
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="menoZakaznikaLabel" alignment="0" min="-2" pref="71" max="-2" attributes="0"/>
+                          <Component id="priezviskoZakaznikaLabel" alignment="0" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                          <Component id="menoZakaznikaTextField" pref="110" max="32767" attributes="0"/>
+                          <Component id="priezviskoZakaznikaTextField" max="32767" attributes="0"/>
+                      </Group>
+                  </Group>
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace min="-2" pref="59" max="-2" attributes="0"/>
+                      <Component id="ulozButton" min="-2" pref="61" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="29" max="-2" attributes="0"/>
+                      <Component id="zrusitButton" min="-2" max="-2" attributes="0"/>
+                  </Group>
               </Group>
-              <EmptySpace type="separate" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                  <Component id="MenoZakaznikaTextField" pref="110" max="32767" attributes="0"/>
-                  <Component id="PriezviskoZakaznikaTextField" max="32767" attributes="0"/>
-              </Group>
-              <EmptySpace max="32767" attributes="0"/>
-              <Component id="UlozButton" min="-2" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
+              <EmptySpace pref="35" max="32767" attributes="0"/>
           </Group>
           <Group type="102" alignment="1" attributes="0">
-              <EmptySpace pref="116" max="32767" attributes="0"/>
-              <Component id="jLabel1" min="-2" pref="153" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="73" max="-2" attributes="0"/>
+              <EmptySpace pref="98" max="32767" attributes="0"/>
+              <Component id="novyZakaznikLabel" min="-2" pref="84" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="98" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" attributes="0">
-                      <Component id="jLabel1" min="-2" pref="23" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="11" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="1" attributes="0">
-                          <Component id="MenoZakaznikaTextField" min="-2" max="-2" attributes="0"/>
-                          <Component id="MenoZakaznikaLabel" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="PriezviskoZakaznikaLabel" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="PriezviskoZakaznikaTextField" alignment="3" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                  </Group>
-                  <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace min="-2" pref="48" max="-2" attributes="0"/>
-                      <Component id="UlozButton" min="-2" max="-2" attributes="0"/>
-                  </Group>
+              <Component id="novyZakaznikLabel" min="-2" pref="23" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="11" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="1" attributes="0">
+                  <Component id="menoZakaznikaTextField" min="-2" max="-2" attributes="0"/>
+                  <Component id="menoZakaznikaLabel" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace pref="67" max="32767" attributes="0"/>
+              <EmptySpace min="-2" pref="9" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="priezviskoZakaznikaLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="priezviskoZakaznikaTextField" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace pref="30" max="32767" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="zrusitButton" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="ulozButton" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
   </Layout>
   <SubComponents>
-    <Component class="javax.swing.JTextField" name="MenoZakaznikaTextField">
+    <Component class="javax.swing.JTextField" name="menoZakaznikaTextField">
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="MenoZakaznikaTextFieldActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="menoZakaznikaTextFieldActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JLabel" name="MenoZakaznikaLabel">
+    <Component class="javax.swing.JLabel" name="menoZakaznikaLabel">
       <Properties>
         <Property name="text" type="java.lang.String" value="Meno: "/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JLabel" name="PriezviskoZakaznikaLabel">
+    <Component class="javax.swing.JLabel" name="priezviskoZakaznikaLabel">
       <Properties>
         <Property name="text" type="java.lang.String" value="Priezvisko:"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="PriezviskoZakaznikaTextField">
+    <Component class="javax.swing.JTextField" name="priezviskoZakaznikaTextField">
     </Component>
-    <Component class="javax.swing.JLabel" name="jLabel1">
+    <Component class="javax.swing.JLabel" name="novyZakaznikLabel">
       <Properties>
         <Property name="text" type="java.lang.String" value="Nov&#xfd; z&#xe1;kazn&#xed;k"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JButton" name="UlozButton">
+    <Component class="javax.swing.JButton" name="ulozButton">
       <Properties>
         <Property name="text" type="java.lang.String" value="Ulo&#x17e;"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="UlozButtonActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="ulozButtonActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="zrusitButton">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Zru&#x161;i&#x165;"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="zrusitButtonActionPerformed"/>
       </Events>
     </Component>
   </SubComponents>

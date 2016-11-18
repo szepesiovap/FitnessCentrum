@@ -6,6 +6,8 @@ public class Recepcny {
     private String meno;
     private String login;
     private String heslo;
+    private String salt;
+    private String hash;
 
     public int getId() {
         return id;
@@ -38,5 +40,20 @@ public class Recepcny {
     public void setHeslo(String heslo) {
         this.heslo = heslo;
     }
+    
+    public String getHash() {
+        return hash;
+    }
 
+    public void setHash(String hash) {
+        this.hash = hash;
+    }
+
+    public String getSalt() {
+        return salt;
+    }
+
+    public void setSalt(String salt) {
+        this.salt = salt;
+    }
 }

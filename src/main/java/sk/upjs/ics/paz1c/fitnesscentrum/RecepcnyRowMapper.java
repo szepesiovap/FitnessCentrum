@@ -1,9 +1,7 @@
 package sk.upjs.ics.paz1c.fitnesscentrum;
 
-import sk.upjs.ics.paz1c.fitnesscentrum.entity.Zakaznik;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Timestamp;
 import org.springframework.jdbc.core.RowMapper;
 import sk.upjs.ics.paz1c.fitnesscentrum.entity.Recepcny;
 

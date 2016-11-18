@@ -44,6 +44,8 @@ public class ZakaznikTableModel extends AbstractTableModel {
                 return zakaznik.getPlatnaOd();
             case 6:
                 return zakaznik.getPlatnaDo();
+            case 7:
+                return zakaznik.getId();
             default:
                 return "???";
         }

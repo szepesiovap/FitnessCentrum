@@ -38,6 +38,8 @@ public class PritomniZakazniciTableModel extends AbstractTableModel {
                 return zakaznik.getPoslednyPrichod();
             case 3:
                 return "CASH";
+            case 4:
+                return zakaznik.getId();
             default:
                 return "???";
         }
@@ -47,5 +49,4 @@ public class PritomniZakazniciTableModel extends AbstractTableModel {
     public String getColumnName(int columnIndex) {
         return NAZVY_STLPCOV[columnIndex];
     }
-
 }
