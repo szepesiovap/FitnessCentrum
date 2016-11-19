@@ -45,7 +45,7 @@ public class MySQLZakaznikDao implements ZakaznikDao {
     }*/
 
     @Override
-    public void prichod(int idZakaznika, int idKluca) {
+    public void prichod(int idZakaznika, Integer idKluca) {
         String sql = "UPDATE zakaznik SET pritomny=1,id_kluca=?, posledny_prichod=timestamp(now()) where id = ?";
         jdbcTemplate.update(sql, idKluca, idZakaznika);
     }

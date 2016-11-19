@@ -11,8 +11,6 @@ public class Zakaznik {
     private boolean pritomny;
     private double kredit;
     private Integer cisloPermanentky;
-    private Date platnaOd;
-    private Date platnaDo;
     private Integer idKluca;
 
     public Integer getIdKluca() {
@@ -37,22 +35,6 @@ public class Zakaznik {
 
     public void setCisloPermanentky(int cisloPermanentky) {
         this.cisloPermanentky = cisloPermanentky;
-    }
-
-    public Date getPlatnaOd() {
-        return platnaOd;
-    }
-
-    public void setPlatnaOd(Date platnaOd) {
-        this.platnaOd = platnaOd;
-    }
-
-    public Date getPlatnaDo() {
-        return platnaDo;
-    }
-
-    public void setPlatnaDo(Date platnaDo) {
-        this.platnaDo = platnaDo;
     }
 
     public int getId() {
@@ -89,7 +71,7 @@ public class Zakaznik {
 
     @Override
     public String toString() {
-        return "Zakaznik{" + "id=" + id + ", meno=" + meno + ", poslednyPrichod=" + poslednyPrichod + ", pritomny=" + pritomny + ", kredit=" + kredit + ", cisloPernamentky=" + cisloPermanentky + ", platnaOd=" + platnaOd + ", platnaDo=" + platnaDo + '}';
+        return "Zakaznik{" + "id=" + id + ", meno=" + meno + ", poslednyPrichod=" + poslednyPrichod + ", pritomny=" + pritomny + ", kredit=" + kredit + ", cisloPernamentky=" + cisloPermanentky + '}';
     }
 
 }

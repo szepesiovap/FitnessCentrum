@@ -2,7 +2,7 @@ package sk.upjs.ics.paz1c.fitnesscentrum.form;
 
 public class OdhlasenieForm extends javax.swing.JFrame{
 
-    private static HlavneOknoForm hlavneOkno;
+  private static HlavneOknoForm hlavneOkno;
 
     /**
      * Creates new form OdhlasenieForm

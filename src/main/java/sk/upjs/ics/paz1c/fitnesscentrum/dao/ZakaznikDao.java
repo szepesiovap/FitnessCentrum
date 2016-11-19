@@ -14,7 +14,7 @@ public interface ZakaznikDao {
     public void vymazZakaznika(int idZakaznika);
     // public void updateZakaznika(Zakaznik zakaznik);
 
-    public void prichod(int idZakaznika, int idKluca);
+    public void prichod(int idZakaznika, Integer idKluca);
 
     public void odchod(int idZakaznika);
 }

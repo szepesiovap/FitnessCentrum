@@ -89,12 +89,13 @@ public class ZoznamForm extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void prichodButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_prichodButtonActionPerformed
-        int idZakaznika = (Integer) zakaznikTableModel.getValueAt(this.zoznamZakaznikovTable.getSelectedRow(), 7);
-        DaoFactory.INSTANCE.getMySQLZakaznikDao().prichod(idZakaznika, WIDTH);
+        int idZakaznika = (Integer) zakaznikTableModel.getValueAt(this.zoznamZakaznikovTable.getSelectedRow(), 5);
+        DaoFactory.INSTANCE.getMySQLZakaznikDao().prichod(idZakaznika, null);
         aktualizovatZoznamZakaznikov();
     }//GEN-LAST:event_prichodButtonActionPerformed
 
     private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
+        hlavneOkno.aktualizovatZoznamPritomnych();
         hlavneOkno.setEnabled(true);
     }//GEN-LAST:event_formWindowClosed
 

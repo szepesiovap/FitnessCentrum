@@ -43,7 +43,7 @@ public class ZoznamZakaznikov implements ZakaznikDao {
     }
 
     @Override
-    public void prichod(int idZakaznika, int idKluca) {
+    public void prichod(int idZakaznika, Integer idKluca) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 

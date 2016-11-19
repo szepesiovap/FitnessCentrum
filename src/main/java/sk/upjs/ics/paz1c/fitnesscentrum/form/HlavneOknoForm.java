@@ -4,11 +4,11 @@ import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import sk.upjs.ics.paz1c.fitnesscentrum.DaoFactory;
 import sk.upjs.ics.paz1c.fitnesscentrum.PritomniZakazniciTableModel;
-import sk.upjs.ics.paz1c.fitnesscentrum.dao.ZakaznikDao;
 
 public class HlavneOknoForm extends javax.swing.JFrame {
 
     private PritomniZakazniciTableModel pritomniZakazniciTableModel;
+    
     private static final int ID_COLUMN = 0;
 
     /**
@@ -42,7 +42,6 @@ public class HlavneOknoForm extends javax.swing.JFrame {
         odchodMenu = new javax.swing.JMenu();
         novyMenu = new javax.swing.JMenu();
         novyCashMenuItem = new javax.swing.JMenuItem();
-        novaMesacnaMenuItem = new javax.swing.JMenuItem();
         novaKreditnaMenuItem = new javax.swing.JMenuItem();
         dobiMenu = new javax.swing.JMenu();
         dobiKreditMenuItem = new javax.swing.JMenuItem();
@@ -82,14 +81,6 @@ public class HlavneOknoForm extends javax.swing.JFrame {
             }
         });
         novyMenu.add(novyCashMenuItem);
-
-        novaMesacnaMenuItem.setText("Mesačná permanentka");
-        novaMesacnaMenuItem.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                novaMesacnaMenuItemActionPerformed(evt);
-            }
-        });
-        novyMenu.add(novaMesacnaMenuItem);
 
         novaKreditnaMenuItem.setText("Kreditná permanentka");
         novyMenu.add(novaKreditnaMenuItem);
@@ -138,10 +129,6 @@ public class HlavneOknoForm extends javax.swing.JFrame {
     private void novyCashMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_novyCashMenuItemActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_novyCashMenuItemActionPerformed
-
-    private void novaMesacnaMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_novaMesacnaMenuItemActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_novaMesacnaMenuItemActionPerformed
 
     private void odhlasitMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_odhlasitMenuActionPerformed
         this.dispose();
@@ -210,7 +197,6 @@ public class HlavneOknoForm extends javax.swing.JFrame {
     private javax.swing.JMenuItem dobiMesacnuMenuItem;
     private javax.swing.JMenuBar hlavneOknoMenuBar;
     private javax.swing.JMenuItem novaKreditnaMenuItem;
-    private javax.swing.JMenuItem novaMesacnaMenuItem;
     private javax.swing.JMenuItem novyCashMenuItem;
     private javax.swing.JMenu novyMenu;
     private javax.swing.JMenu odchodMenu;

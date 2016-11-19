@@ -33,14 +33,6 @@
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="novyCashMenuItemActionPerformed"/>
               </Events>
             </MenuItem>
-            <MenuItem class="javax.swing.JMenuItem" name="novaMesacnaMenuItem">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="Mesa&#x10d;n&#xe1; permanentka"/>
-              </Properties>
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="novaMesacnaMenuItemActionPerformed"/>
-              </Events>
-            </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="novaKreditnaMenuItem">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Kreditn&#xe1; permanentka"/>
