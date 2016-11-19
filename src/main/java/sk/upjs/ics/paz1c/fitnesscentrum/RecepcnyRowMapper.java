@@ -17,6 +17,7 @@ public class RecepcnyRowMapper implements RowMapper<Recepcny> {
         recepcny.setMeno(rs.getString("meno_priezvisko"));
         recepcny.setLogin(rs.getString("login"));
         recepcny.setHeslo(rs.getString("heslo"));
+        recepcny.setSalt(rs.getString("salt"));
 
         return recepcny;
     }

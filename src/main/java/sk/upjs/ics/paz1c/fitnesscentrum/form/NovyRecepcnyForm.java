@@ -1,7 +1,10 @@
 package sk.upjs.ics.paz1c.fitnesscentrum.form;
 
+import java.util.UUID;
 import javax.swing.JOptionPane;
+import org.springframework.dao.DuplicateKeyException;
 import sk.upjs.ics.paz1c.fitnesscentrum.DaoFactory;
+import sk.upjs.ics.paz1c.fitnesscentrum.Hashovanie;
 import sk.upjs.ics.paz1c.fitnesscentrum.entity.Recepcny;
 
 public class NovyRecepcnyForm extends javax.swing.JFrame {
@@ -125,17 +128,27 @@ public class NovyRecepcnyForm extends javax.swing.JFrame {
     }//GEN-LAST:event_menoTextFieldActionPerformed
 
     private void ulozButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ulozButtonActionPerformed
+        
         Recepcny recepcny = new Recepcny();
+        
         recepcny.setMeno(menoTextField.getText());
         recepcny.setLogin(loginTextField.getText());
         if (hesloPasswordField.getText().equals(hesloZnovaPasswordField.getText())) {
-            recepcny.setHeslo(hesloPasswordField.getText());
+            String salt = UUID.randomUUID().toString();
+            recepcny.setSalt(salt);
+            recepcny.setHeslo(Hashovanie.zahesuj(salt, hesloPasswordField.getText()));
         } else {
-            JOptionPane.showMessageDialog(null, "Heslo sa nezhoduje");
+            JOptionPane.showMessageDialog(this, "Heslo sa nezhoduje");
             return;
         }
 
-        DaoFactory.INSTANCE.getRecepcnyDao().pridajRecepcneho(recepcny);
+        try {
+            DaoFactory.INSTANCE.getRecepcnyDao().pridajRecepcneho(recepcny);
+        } catch (DuplicateKeyException e) {
+            JOptionPane.showMessageDialog(this, "Zvolený login je už použitý");
+            return;
+        }
+        
         this.dispose();
     }//GEN-LAST:event_ulozButtonActionPerformed
 

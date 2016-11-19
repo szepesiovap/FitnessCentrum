@@ -104,22 +104,14 @@ public class ZoznamForm extends javax.swing.JFrame {
 
     private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
         hlavneOkno.aktualizovatZoznamPritomnych();
-        hlavneOkno.setEnabled(true);
     }//GEN-LAST:event_formWindowClosed
 
     private void zmazButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_zmazButtonActionPerformed
-        // TODO add your handling code here:
+         int idZakaznika = (Integer)zakaznikTableModel.getValueAt(this.zoznamZakaznikovTable.getSelectedRow(),ID_COLUMN);
+         DaoFactory.INSTANCE.getMySQLZakaznikDao().vymazZakaznika(idZakaznika);
+         aktualizovatZoznamZakaznikov();
     }//GEN-LAST:event_zmazButtonActionPerformed
 
-    /*//po kliknuti na riadok v tabulke sa zavola metoda valueChange v nasom ListSelectionListeneri
-    zoznamZakaznikovTable.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
-            @Override
-        public void valueChanged(ListSelectionEvent e) {
-            //tu moze byt aj toto nizsie ale v tom pripade tam bude zobrazeny stale ale nebude pristupny, az po kliknuti na zakaznika
-            //vymazZakaznikaButton.setEnabled(true);
-            zmazButton.setVisible(true);
-        }}
-        );}*/
     public void aktualizovatZoznamZakaznikov() {
         ZakaznikTableModel model = (ZakaznikTableModel) zoznamZakaznikovTable.getModel();
         model.aktualizovat();
@@ -132,7 +124,7 @@ public class ZoznamForm extends javax.swing.JFrame {
             public void valueChanged(ListSelectionEvent e) {
                 // ???
             }
-        });
+        }); 
     }
 
     /**

@@ -16,16 +16,14 @@ public class MySQLRecepcnyDao implements RecepcnyDao {
     }
 
     @Override
-    public Recepcny dajRecepcneho(String login, String heslo) {
-        Recepcny recepcny = new Recepcny();
-        String sql = "SELECT login, heslo FROM recepcny WHERE login = ? AND heslo = ?";
+    public Recepcny dajRecepcneho(String login) {
+        String sql = "SELECT * FROM recepcny WHERE login = ?";
 
         try {
-            jdbcTemplate.queryForObject(sql, new RecepcnyRowMapper(), login, heslo);
+            return jdbcTemplate.queryForObject(sql, new RecepcnyRowMapper(), login);
         } catch (Exception EmptyResultDataAccessException) {
             return null;
         }
-        return recepcny;
     }
 
     @Override

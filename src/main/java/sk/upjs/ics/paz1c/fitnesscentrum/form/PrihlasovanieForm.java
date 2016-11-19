@@ -136,13 +136,27 @@ public class PrihlasovanieForm extends javax.swing.JFrame {
         String heslo = hesloPasswordField.getText();
         String login = loginTextField.getText();
 
-        Recepcny recepcny = DaoFactory.INSTANCE.getRecepcnyDao().dajRecepcneho(login, heslo);
+        Recepcny recepcny = DaoFactory.INSTANCE.getRecepcnyDao().dajRecepcneho(login);
+        // funkcne prihlasovanie s databazou
+        /*if (recepcny != null && login.equals(recepcny.getLogin())) {
+            String hashovaneHeslo = Hashovanie.zahesuj(recepcny.getSalt(), hesloPasswordField.getText());
+            if (hashovaneHeslo.equals(recepcny.getHeslo())) {
+                new HlavneOknoForm().setVisible(true);
+                this.dispose();
+                return;
+            } else {
+                JOptionPane.showMessageDialog(this, "Nesprávne heslo");
+            }
+        }else{
+            JOptionPane.showMessageDialog(this, "Recepčný s daným loginom neexistuje");
+        }*/
+        
         //docasne!!!!!!!
         if ((recepcny != null) || (1 == 1)) {
             new HlavneOknoForm().setVisible(true);
             this.dispose();
         } else {
-            JOptionPane.showMessageDialog(null, "Nespravne prihlasovacie udaje");
+            JOptionPane.showMessageDialog(this, "Nespravne prihlasovacie udaje");
         }
 
     }//GEN-LAST:event_prihlasitButtonActionPerformed

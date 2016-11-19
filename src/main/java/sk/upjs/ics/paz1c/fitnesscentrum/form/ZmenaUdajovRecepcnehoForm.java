@@ -142,11 +142,11 @@ public class ZmenaUdajovRecepcnehoForm extends javax.swing.JFrame {
                     && noveHesloPasswordField.getText().equals(noveHesloZnovaPasswordField.getText())) {
                 recepcny.setHeslo(noveHesloPasswordField.getText());
             } else {
-                JOptionPane.showMessageDialog(null, "Nové heslá sa nezhodujú");
+                JOptionPane.showMessageDialog(this, "Nové heslá sa nezhodujú");
                 return;
             }
         } else {
-            JOptionPane.showMessageDialog(null, "Zadané staré heslo nie je správne");
+            JOptionPane.showMessageDialog(this, "Zadané staré heslo nie je správne");
             return;
         }
 

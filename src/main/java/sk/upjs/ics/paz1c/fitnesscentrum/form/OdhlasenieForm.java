@@ -90,6 +90,7 @@ public class OdhlasenieForm extends javax.swing.JFrame{
 
     private void zrusitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_zrusitButtonActionPerformed
         dispose();
+        hlavneOkno.setVisible(true);
     }//GEN-LAST:event_zrusitButtonActionPerformed
 
     private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed

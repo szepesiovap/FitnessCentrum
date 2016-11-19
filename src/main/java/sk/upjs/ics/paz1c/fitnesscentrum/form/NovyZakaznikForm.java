@@ -151,6 +151,7 @@ public class NovyZakaznikForm extends javax.swing.JFrame {
         DaoFactory.INSTANCE.getMySQLZakaznikDao().pridajZakaznika(zakaznik);
         hlavneOkno.aktualizovatZoznamPritomnych();
         this.dispose();
+        hlavneOkno.setVisible(true);
     }//GEN-LAST:event_ulozButtonActionPerformed
 
     private void zrusitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_zrusitButtonActionPerformed

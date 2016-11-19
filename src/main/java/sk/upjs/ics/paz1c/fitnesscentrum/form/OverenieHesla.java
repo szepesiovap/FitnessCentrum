@@ -1,18 +1,10 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package sk.upjs.ics.paz1c.fitnesscentrum.form;
 
 import javax.swing.JOptionPane;
 import sk.upjs.ics.paz1c.fitnesscentrum.DaoFactory;
+import sk.upjs.ics.paz1c.fitnesscentrum.Hashovanie;
 import sk.upjs.ics.paz1c.fitnesscentrum.entity.Recepcny;
 
-/**
- *
- * @author Marcela
- */
 public class OverenieHesla extends javax.swing.JFrame {
 
     /**
@@ -91,11 +83,14 @@ public class OverenieHesla extends javax.swing.JFrame {
 
     private void potvrdButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_potvrdButtonActionPerformed
         Recepcny recepcny = DaoFactory.INSTANCE.getRecepcnyDao().dajRecepcneho(0);
-        
-        if(hesloPasswordField.getText().equals(recepcny.getHeslo())){
+        String salt = recepcny.getSalt();
+        String heslo = hesloPasswordField.getText();
+        String hashHeslo = Hashovanie.zahesuj(salt, heslo);
+
+        if (hashHeslo.equals(recepcny.getHeslo())) {
             new NovyRecepcnyForm().setVisible(true);
             this.dispose();
-        }else{
+        } else {
             JOptionPane.showMessageDialog(null, "Zadané heslo nie je správne");
         }
     }//GEN-LAST:event_potvrdButtonActionPerformed
