@@ -2,8 +2,10 @@ package sk.upjs.ics.paz1c.fitnesscentrum;
 
 import com.mysql.cj.jdbc.MysqlDataSource;
 import org.springframework.jdbc.core.JdbcTemplate;
+import sk.upjs.ics.paz1c.fitnesscentrum.dao.KlucDao;
 import sk.upjs.ics.paz1c.fitnesscentrum.dao.RecepcnyDao;
 import sk.upjs.ics.paz1c.fitnesscentrum.dao.ZakaznikDao;
+import sk.upjs.ics.paz1c.fitnesscentrum.dao.impl.MySQLKlucDao;
 import sk.upjs.ics.paz1c.fitnesscentrum.dao.impl.MySQLRecepcnyDao;
 import sk.upjs.ics.paz1c.fitnesscentrum.dao.impl.MySQLZakaznikDao;
 
@@ -30,5 +32,9 @@ public enum DaoFactory {
 
     public RecepcnyDao getRecepcnyDao() {
         return new MySQLRecepcnyDao();
+    }
+    
+    public KlucDao getKlucDao() {
+        return new MySQLKlucDao();
     }
 }

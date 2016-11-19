@@ -1,6 +1,7 @@
-package sk.upjs.ics.paz1c.fitnesscentrum;
+package sk.upjs.ics.paz1c.fitnesscentrum.form;
 
 import javax.swing.JOptionPane;
+import sk.upjs.ics.paz1c.fitnesscentrum.DaoFactory;
 import sk.upjs.ics.paz1c.fitnesscentrum.entity.Recepcny;
 
 public class ZmenaUdajovRecepcnehoForm extends javax.swing.JFrame {

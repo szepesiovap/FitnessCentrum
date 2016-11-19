@@ -1,6 +1,7 @@
-package sk.upjs.ics.paz1c.fitnesscentrum;
+package sk.upjs.ics.paz1c.fitnesscentrum.form;
 
 import javax.swing.JOptionPane;
+import sk.upjs.ics.paz1c.fitnesscentrum.DaoFactory;
 import sk.upjs.ics.paz1c.fitnesscentrum.entity.Recepcny;
 
 public class NovyRecepcnyForm extends javax.swing.JFrame {
@@ -33,6 +34,7 @@ public class NovyRecepcnyForm extends javax.swing.JFrame {
         hesloZnovaLabel = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setResizable(false);
 
         menoLabel.setText("Meno:");
 
@@ -75,16 +77,15 @@ public class NovyRecepcnyForm extends javax.swing.JFrame {
                     .addComponent(hesloZnovaLabel))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(hesloZnovaPasswordField, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(hesloPasswordField, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(loginTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 102, Short.MAX_VALUE)
-                        .addComponent(menoTextField)))
-                .addContainerGap(84, Short.MAX_VALUE))
+                    .addComponent(menoTextField)
+                    .addComponent(loginTextField)
+                    .addComponent(hesloPasswordField)
+                    .addComponent(hesloZnovaPasswordField))
+                .addContainerGap())
             .addGroup(layout.createSequentialGroup()
                 .addGap(60, 60, 60)
-                .addComponent(ulozButton, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(ulozButton, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 55, Short.MAX_VALUE)
                 .addComponent(zrusitButton)
                 .addGap(57, 57, 57))
         );

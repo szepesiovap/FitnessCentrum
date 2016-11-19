@@ -4,15 +4,11 @@ import sk.upjs.ics.paz1c.fitnesscentrum.entity.Zakaznik;
 import javax.swing.table.AbstractTableModel;
 import sk.upjs.ics.paz1c.fitnesscentrum.dao.ZakaznikDao;
 
-/**
- *
- * @author patka
- */
 public class PritomniZakazniciTableModel extends AbstractTableModel {
 
     private ZakaznikDao zakaznikDao = DaoFactory.INSTANCE.getMySQLZakaznikDao();
 
-    private static final String[] NAZVY_STLPCOV = {"Kluc", "Meno", "Cas prichodu", "Typ platby"};
+    private static final String[] NAZVY_STLPCOV = {"ID",  "Meno", "Kluc", "Cas prichodu", "Typ platby"};
 
     private static final int POCET_STLPCOV = NAZVY_STLPCOV.length;
 
@@ -25,21 +21,22 @@ public class PritomniZakazniciTableModel extends AbstractTableModel {
     public int getColumnCount() {
         return POCET_STLPCOV;
     }
+   
 
     @Override
     public Object getValueAt(int rowIndex, int columnIndex) {
         Zakaznik zakaznik = zakaznikDao.dajPritomnychZakaznikov().get(rowIndex);
         switch (columnIndex) {
             case 0:
-                return "18M";
+                return zakaznik.getId();
             case 1:
                 return zakaznik.getMeno();
             case 2:
-                return zakaznik.getPoslednyPrichod();
+                return zakaznik.getIdKluca();
             case 3:
-                return "CASH";
+                return zakaznik.getPoslednyPrichod();
             case 4:
-                return zakaznik.getId();
+                return "CASH";
             default:
                 return "???";
         }
@@ -48,5 +45,9 @@ public class PritomniZakazniciTableModel extends AbstractTableModel {
     @Override
     public String getColumnName(int columnIndex) {
         return NAZVY_STLPCOV[columnIndex];
+    }
+
+    public void aktualizovat() {
+        fireTableDataChanged();
     }
 }

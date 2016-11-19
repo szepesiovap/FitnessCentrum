@@ -1,15 +1,19 @@
-package sk.upjs.ics.paz1c.fitnesscentrum;
+package sk.upjs.ics.paz1c.fitnesscentrum.form;
 
+import sk.upjs.ics.paz1c.fitnesscentrum.DaoFactory;
+import sk.upjs.ics.paz1c.fitnesscentrum.form.HlavneOknoForm;
 import sk.upjs.ics.paz1c.fitnesscentrum.entity.Zakaznik;
 
 public class NovyZakaznikForm extends javax.swing.JFrame {
 
-    private ZoznamZakaznikovForm zoznamZakaznikovForm;
+    private HlavneOknoForm zoznamZakaznikovForm;
+
     /**
      * Creates new form NovyZakaznikForm
+     *
      * @param zoznamZakaznikovForm
      */
-    public NovyZakaznikForm(ZoznamZakaznikovForm zoznamZakaznikovForm) {
+    public NovyZakaznikForm(HlavneOknoForm zoznamZakaznikovForm) {
         this.zoznamZakaznikovForm = zoznamZakaznikovForm;
         initComponents();
     }
@@ -112,13 +116,13 @@ public class NovyZakaznikForm extends javax.swing.JFrame {
     }//GEN-LAST:event_menoZakaznikaTextFieldActionPerformed
 
     private void ulozButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ulozButtonActionPerformed
-        String menoZakaznika = menoZakaznikaTextField.getText() +" "+ priezviskoZakaznikaTextField.getText();
-        
+        String menoZakaznika = menoZakaznikaTextField.getText() + " " + priezviskoZakaznikaTextField.getText();
+
         Zakaznik zakaznik = new Zakaznik();
         zakaznik.setMeno(menoZakaznika);
-        
-        DaoFactory.INSTANCE.getMySQLZakaznikDao().pridajZakaznika(zakaznik);        
-        this.zoznamZakaznikovForm.aktualizovatZoznamZakaznikov();
+
+        DaoFactory.INSTANCE.getMySQLZakaznikDao().pridajZakaznika(zakaznik);
+        this.zoznamZakaznikovForm.aktualizovatZoznamPritomnych();
         this.dispose();
     }//GEN-LAST:event_ulozButtonActionPerformed
 

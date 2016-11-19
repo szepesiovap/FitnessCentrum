@@ -1,10 +1,11 @@
-package sk.upjs.ics.paz1c.fitnesscentrum;
+package sk.upjs.ics.paz1c.fitnesscentrum.form;
 
 import javax.swing.JOptionPane;
+import sk.upjs.ics.paz1c.fitnesscentrum.DaoFactory;
 import sk.upjs.ics.paz1c.fitnesscentrum.entity.Recepcny;
 
 public class PrihlasovanieForm extends javax.swing.JFrame {
-    
+
     /**
      * Creates new form PrihlasovanieForm
      */
@@ -27,6 +28,9 @@ public class PrihlasovanieForm extends javax.swing.JFrame {
         hesloLabel = new javax.swing.JLabel();
         prihlasitButton = new javax.swing.JButton();
         hesloPasswordField = new javax.swing.JPasswordField();
+        prihlasovanieMenuBar = new javax.swing.JMenuBar();
+        novyRecepcny = new javax.swing.JMenu();
+        zmenaUdajovRecepcny = new javax.swing.JMenu();
 
         javax.swing.GroupLayout jFrame1Layout = new javax.swing.GroupLayout(jFrame1.getContentPane());
         jFrame1.getContentPane().setLayout(jFrame1Layout);
@@ -66,11 +70,34 @@ public class PrihlasovanieForm extends javax.swing.JFrame {
             }
         });
 
+        novyRecepcny.setText("Nový");
+        novyRecepcny.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                novyRecepcnyMousePressed(evt);
+            }
+        });
+        novyRecepcny.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                novyRecepcnyActionPerformed(evt);
+            }
+        });
+        prihlasovanieMenuBar.add(novyRecepcny);
+
+        zmenaUdajovRecepcny.setText("Zmena údajov");
+        zmenaUdajovRecepcny.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                zmenaUdajovRecepcnyMousePressed(evt);
+            }
+        });
+        prihlasovanieMenuBar.add(zmenaUdajovRecepcny);
+
+        setJMenuBar(prihlasovanieMenuBar);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(21, 21, 21)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(loginLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -86,20 +113,16 @@ public class PrihlasovanieForm extends javax.swing.JFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(33, 33, 33)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(loginLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(loginTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(11, 11, 11)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(hesloLabel)
-                            .addComponent(hesloPasswordField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(53, 53, 53)
-                        .addComponent(prihlasitButton)))
-                .addContainerGap(21, Short.MAX_VALUE))
+                .addGap(33, 33, 33)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(loginLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(loginTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(8, 8, 8)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(hesloLabel)
+                    .addComponent(hesloPasswordField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(prihlasitButton))
+                .addContainerGap(32, Short.MAX_VALUE))
         );
 
         pack();
@@ -116,7 +139,7 @@ public class PrihlasovanieForm extends javax.swing.JFrame {
         Recepcny recepcny = DaoFactory.INSTANCE.getRecepcnyDao().dajRecepcneho(login, heslo);
         //docasne!!!!!!!
         if ((recepcny != null) || (1 == 1)) {
-            new ZoznamZakaznikovForm().setVisible(true);
+            new HlavneOknoForm().setVisible(true);
             this.dispose();
         } else {
             JOptionPane.showMessageDialog(null, "Nespravne prihlasovacie udaje");
@@ -127,6 +150,18 @@ public class PrihlasovanieForm extends javax.swing.JFrame {
     private void hesloPasswordFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_hesloPasswordFieldActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_hesloPasswordFieldActionPerformed
+
+    private void novyRecepcnyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_novyRecepcnyActionPerformed
+        new NovyRecepcnyForm().setVisible(true);
+    }//GEN-LAST:event_novyRecepcnyActionPerformed
+
+    private void novyRecepcnyMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_novyRecepcnyMousePressed
+        new NovyRecepcnyForm().setVisible(true);
+    }//GEN-LAST:event_novyRecepcnyMousePressed
+
+    private void zmenaUdajovRecepcnyMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_zmenaUdajovRecepcnyMousePressed
+        new ZmenaUdajovRecepcnehoForm(1);
+    }//GEN-LAST:event_zmenaUdajovRecepcnyMousePressed
 
     /**
      * @param args the command line arguments
@@ -169,6 +204,9 @@ public class PrihlasovanieForm extends javax.swing.JFrame {
     private javax.swing.JFrame jFrame1;
     private javax.swing.JLabel loginLabel;
     private javax.swing.JTextField loginTextField;
+    private javax.swing.JMenu novyRecepcny;
     private javax.swing.JButton prihlasitButton;
+    private javax.swing.JMenuBar prihlasovanieMenuBar;
+    private javax.swing.JMenu zmenaUdajovRecepcny;
     // End of variables declaration//GEN-END:variables
 }
