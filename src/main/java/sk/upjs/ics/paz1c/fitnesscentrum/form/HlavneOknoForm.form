@@ -24,21 +24,9 @@
           <Properties>
             <Property name="text" type="java.lang.String" value="Nov&#xfd;"/>
           </Properties>
-          <SubComponents>
-            <MenuItem class="javax.swing.JMenuItem" name="novyCashMenuItem">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="Cash"/>
-              </Properties>
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="novyCashMenuItemActionPerformed"/>
-              </Events>
-            </MenuItem>
-            <MenuItem class="javax.swing.JMenuItem" name="novaKreditnaMenuItem">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="Kreditn&#xe1; permanentka"/>
-              </Properties>
-            </MenuItem>
-          </SubComponents>
+          <Events>
+            <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="novyMenuMousePressed"/>
+          </Events>
         </Menu>
         <Menu class="javax.swing.JMenu" name="dobiMenu">
           <Properties>

@@ -21,7 +21,8 @@ public class ZakaznikRowMapper implements RowMapper<Zakaznik> {
         if (timestampPoslednyPrichod != null) {
             zakaznik.setPoslednyPrichod(timestampPoslednyPrichod.toLocalDateTime());
         }
-        
+        zakaznik.setCisloPermanentky(rs.getString("cislo_permanentky"));
+        zakaznik.setKredit(rs.getDouble("kredit"));
         return zakaznik;
     }
     

@@ -1,21 +1,25 @@
 package sk.upjs.ics.paz1c.fitnesscentrum.form;
 
 import sk.upjs.ics.paz1c.fitnesscentrum.DaoFactory;
-import sk.upjs.ics.paz1c.fitnesscentrum.form.HlavneOknoForm;
 import sk.upjs.ics.paz1c.fitnesscentrum.entity.Zakaznik;
 
 public class NovyZakaznikForm extends javax.swing.JFrame {
-
-    private HlavneOknoForm zoznamZakaznikovForm;
+    
+    private static HlavneOknoForm hlavneOkno;
+    private static String[] KREDIT_MOZNOSTI = {"50 EUR", "100 EUR", "150 EUR", "200 EUR"};
+    private static Double[] KREDIT_SUMY = {50.0, 100.0, 150.0, 200.0};
 
     /**
      * Creates new form NovyZakaznikForm
      *
-     * @param zoznamZakaznikovForm
+     * @param hlavneOkno
      */
-    public NovyZakaznikForm(HlavneOknoForm zoznamZakaznikovForm) {
-        this.zoznamZakaznikovForm = zoznamZakaznikovForm;
+    public NovyZakaznikForm(HlavneOknoForm hlavneOkno) {
+        this.hlavneOkno = hlavneOkno;
+        hlavneOkno.setEnabled(false);
         initComponents();
+        inicializaciaZaciatocnehoStavu();
+        
     }
 
     /**
@@ -29,25 +33,24 @@ public class NovyZakaznikForm extends javax.swing.JFrame {
 
         menoZakaznikaTextField = new javax.swing.JTextField();
         menoZakaznikaLabel = new javax.swing.JLabel();
-        priezviskoZakaznikaLabel = new javax.swing.JLabel();
-        priezviskoZakaznikaTextField = new javax.swing.JTextField();
-        novyZakaznikLabel = new javax.swing.JLabel();
         ulozButton = new javax.swing.JButton();
         zrusitButton = new javax.swing.JButton();
+        cisloKartyLabel = new javax.swing.JLabel();
+        cisloKartyTextField = new javax.swing.JTextField();
+        kreditLabel = new javax.swing.JLabel();
+        kreditComboBox = new javax.swing.JComboBox<>();
+        permanentkaCheckBox = new javax.swing.JCheckBox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-
-        menoZakaznikaTextField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                menoZakaznikaTextFieldActionPerformed(evt);
+        setTitle("Nový zákazník");
+        setResizable(false);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosed(java.awt.event.WindowEvent evt) {
+                formWindowClosed(evt);
             }
         });
 
         menoZakaznikaLabel.setText("Meno: ");
-
-        priezviskoZakaznikaLabel.setText("Priezvisko:");
-
-        novyZakaznikLabel.setText("Nový zákazník");
 
         ulozButton.setText("Ulož");
         ulozButton.addActionListener(new java.awt.event.ActionListener() {
@@ -63,66 +66,89 @@ public class NovyZakaznikForm extends javax.swing.JFrame {
             }
         });
 
+        cisloKartyLabel.setText("Číslo karty");
+
+        cisloKartyTextField.setEnabled(false);
+
+        kreditLabel.setText("Kredit");
+
+        kreditComboBox.setEnabled(false);
+
+        permanentkaCheckBox.setText("Permanentka");
+        permanentkaCheckBox.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                permanentkaCheckBoxMousePressed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(35, 35, 35)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                             .addComponent(menoZakaznikaLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(priezviskoZakaznikaLabel))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(menoZakaznikaTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 110, Short.MAX_VALUE)
-                            .addComponent(priezviskoZakaznikaTextField)))
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                        .addGap(59, 59, 59)
-                        .addComponent(ulozButton, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(29, 29, 29)
-                        .addComponent(zrusitButton)))
-                .addContainerGap(35, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(98, Short.MAX_VALUE)
-                .addComponent(novyZakaznikLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(98, 98, 98))
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(menoZakaznikaTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(layout.createSequentialGroup()
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(cisloKartyLabel)
+                                .addComponent(kreditLabel))
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(kreditComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(cisloKartyTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGroup(layout.createSequentialGroup()
+                            .addComponent(ulozButton, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(87, 87, 87)
+                            .addComponent(zrusitButton)
+                            .addGap(24, 24, 24)))
+                    .addComponent(permanentkaCheckBox))
+                .addContainerGap(66, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(novyZakaznikLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(11, 11, 11)
+                .addGap(24, 24, 24)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(menoZakaznikaLabel)
+                    .addComponent(menoZakaznikaTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(12, 12, 12)
+                .addComponent(permanentkaCheckBox)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(menoZakaznikaTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(menoZakaznikaLabel))
-                .addGap(9, 9, 9)
+                    .addComponent(cisloKartyLabel)
+                    .addComponent(cisloKartyTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(priezviskoZakaznikaLabel)
-                    .addComponent(priezviskoZakaznikaTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 30, Short.MAX_VALUE)
+                    .addComponent(kreditLabel)
+                    .addComponent(kreditComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(zrusitButton)
-                    .addComponent(ulozButton))
-                .addContainerGap())
+                    .addComponent(ulozButton)
+                    .addComponent(zrusitButton))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void menoZakaznikaTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menoZakaznikaTextFieldActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_menoZakaznikaTextFieldActionPerformed
-
     private void ulozButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ulozButtonActionPerformed
-        String menoZakaznika = menoZakaznikaTextField.getText() + " " + priezviskoZakaznikaTextField.getText();
-
         Zakaznik zakaznik = new Zakaznik();
-        zakaznik.setMeno(menoZakaznika);
-
+        zakaznik.setMeno(menoZakaznikaTextField.getText());
+        if (permanentkaCheckBox.isSelected()) {
+            zakaznik.setCisloPermanentky(cisloKartyTextField.getText());
+            zakaznik.setKredit(KREDIT_SUMY[kreditComboBox.getSelectedIndex()]);
+            System.out.println(kreditComboBox.getSelectedIndex());
+            System.out.println(KREDIT_SUMY[kreditComboBox.getSelectedIndex()]);
+            
+        }
+        
         DaoFactory.INSTANCE.getMySQLZakaznikDao().pridajZakaznika(zakaznik);
-        this.zoznamZakaznikovForm.aktualizovatZoznamPritomnych();
+        hlavneOkno.aktualizovatZoznamPritomnych();
         this.dispose();
     }//GEN-LAST:event_ulozButtonActionPerformed
 
@@ -130,12 +156,68 @@ public class NovyZakaznikForm extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_zrusitButtonActionPerformed
 
+    private void permanentkaCheckBoxMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_permanentkaCheckBoxMousePressed
+        if (permanentkaCheckBox.isSelected()) {
+            cisloKartyTextField.setEnabled(false);
+            kreditComboBox.setEnabled(false);
+        } else {
+            cisloKartyTextField.setEnabled(true);
+            kreditComboBox.setEnabled(true);
+        }
+    }//GEN-LAST:event_permanentkaCheckBoxMousePressed
+
+    private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
+        hlavneOkno.setEnabled(true);
+    }//GEN-LAST:event_formWindowClosed
+    
+    private void inicializaciaZaciatocnehoStavu() {
+        kreditComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(KREDIT_MOZNOSTI));
+    }
+
+    /**
+     * @param args the command line arguments
+     */
+    public static void main(String args[]) {
+        /* Set the Nimbus look and feel */
+        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         */
+        try {
+            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+                if ("Nimbus".equals(info.getName())) {
+                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                    break;
+                }
+            }
+        } catch (ClassNotFoundException ex) {
+            java.util.logging.Logger.getLogger(PrichodForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            java.util.logging.Logger.getLogger(PrichodForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            java.util.logging.Logger.getLogger(PrichodForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+            java.util.logging.Logger.getLogger(PrichodForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        }
+        //</editor-fold>
+
+        /* Create and display the form */
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            @Override
+            public void run() {
+                new NovyZakaznikForm(hlavneOkno).setVisible(true);
+            }
+        });
+    }
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel cisloKartyLabel;
+    private javax.swing.JTextField cisloKartyTextField;
+    private javax.swing.JComboBox<String> kreditComboBox;
+    private javax.swing.JLabel kreditLabel;
     private javax.swing.JLabel menoZakaznikaLabel;
     private javax.swing.JTextField menoZakaznikaTextField;
-    private javax.swing.JLabel novyZakaznikLabel;
-    private javax.swing.JLabel priezviskoZakaznikaLabel;
-    private javax.swing.JTextField priezviskoZakaznikaTextField;
+    private javax.swing.JCheckBox permanentkaCheckBox;
     private javax.swing.JButton ulozButton;
     private javax.swing.JButton zrusitButton;
     // End of variables declaration//GEN-END:variables

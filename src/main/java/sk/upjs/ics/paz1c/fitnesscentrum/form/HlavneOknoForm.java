@@ -1,14 +1,12 @@
 package sk.upjs.ics.paz1c.fitnesscentrum.form;
 
-import javax.swing.event.ListSelectionEvent;
-import javax.swing.event.ListSelectionListener;
 import sk.upjs.ics.paz1c.fitnesscentrum.DaoFactory;
 import sk.upjs.ics.paz1c.fitnesscentrum.PritomniZakazniciTableModel;
 
 public class HlavneOknoForm extends javax.swing.JFrame {
 
-    private PritomniZakazniciTableModel pritomniZakazniciTableModel;
-    
+    private final PritomniZakazniciTableModel pritomniZakazniciTableModel;
+
     private static final int ID_COLUMN = 0;
 
     /**
@@ -41,8 +39,6 @@ public class HlavneOknoForm extends javax.swing.JFrame {
         zoznamMenu = new javax.swing.JMenu();
         odchodMenu = new javax.swing.JMenu();
         novyMenu = new javax.swing.JMenu();
-        novyCashMenuItem = new javax.swing.JMenuItem();
-        novaKreditnaMenuItem = new javax.swing.JMenuItem();
         dobiMenu = new javax.swing.JMenu();
         dobiKreditMenuItem = new javax.swing.JMenuItem();
         dobiMesacnuMenuItem = new javax.swing.JMenuItem();
@@ -73,18 +69,11 @@ public class HlavneOknoForm extends javax.swing.JFrame {
         hlavneOknoMenuBar.add(odchodMenu);
 
         novyMenu.setText("Nový");
-
-        novyCashMenuItem.setText("Cash");
-        novyCashMenuItem.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                novyCashMenuItemActionPerformed(evt);
+        novyMenu.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                novyMenuMousePressed(evt);
             }
         });
-        novyMenu.add(novyCashMenuItem);
-
-        novaKreditnaMenuItem.setText("Kreditná permanentka");
-        novyMenu.add(novaKreditnaMenuItem);
-
         hlavneOknoMenuBar.add(novyMenu);
 
         dobiMenu.setText("Dobi");
@@ -126,10 +115,6 @@ public class HlavneOknoForm extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void novyCashMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_novyCashMenuItemActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_novyCashMenuItemActionPerformed
-
     private void odhlasitMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_odhlasitMenuActionPerformed
         this.dispose();
         new PrihlasovanieForm().setVisible(true);
@@ -141,7 +126,6 @@ public class HlavneOknoForm extends javax.swing.JFrame {
 
     private void odhlasitMenuMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_odhlasitMenuMousePressed
         new OdhlasenieForm(this).setVisible(true);
-
     }//GEN-LAST:event_odhlasitMenuMousePressed
 
     private void odchodMenuMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_odchodMenuMousePressed
@@ -149,6 +133,10 @@ public class HlavneOknoForm extends javax.swing.JFrame {
         DaoFactory.INSTANCE.getMySQLZakaznikDao().odchod(idZakaznika);
         aktualizovatZoznamPritomnych();
     }//GEN-LAST:event_odchodMenuMousePressed
+
+    private void novyMenuMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_novyMenuMousePressed
+        new NovyZakaznikForm(this).setVisible(true);
+    }//GEN-LAST:event_novyMenuMousePressed
 
     /**
      * @param args the command line arguments
@@ -196,8 +184,6 @@ public class HlavneOknoForm extends javax.swing.JFrame {
     private javax.swing.JMenu dobiMenu;
     private javax.swing.JMenuItem dobiMesacnuMenuItem;
     private javax.swing.JMenuBar hlavneOknoMenuBar;
-    private javax.swing.JMenuItem novaKreditnaMenuItem;
-    private javax.swing.JMenuItem novyCashMenuItem;
     private javax.swing.JMenu novyMenu;
     private javax.swing.JMenu odchodMenu;
     private javax.swing.JMenu odhlasitMenu;
@@ -208,15 +194,5 @@ public class HlavneOknoForm extends javax.swing.JFrame {
 
     private void inicializaciaZaciatocnehoStavu() {
         pritomniTable.setModel(pritomniZakazniciTableModel);
-
-        pritomniTable.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
-            @Override
-            public void valueChanged(ListSelectionEvent e) {
-                // odchodButton.setVisible(true);
-            }
-
-        });
     }
-
-    //WindowListener listener = new WindowAdapter() {
 }

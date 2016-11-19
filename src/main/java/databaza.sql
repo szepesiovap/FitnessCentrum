@@ -119,7 +119,7 @@ CREATE TABLE IF NOT EXISTS `fitnesscentrum`.`zakaznik` (
   `posledny_prichod` TIMESTAMP NULL DEFAULT NULL,
   `pritomny` TINYINT(1) NULL DEFAULT NULL,
   `kredit` INT(11) NULL DEFAULT NULL,
-  `cislo_pernamentky` INT(11) NULL DEFAULT NULL,
+  `cislo_permanentky` VARCHAR(20) NULL DEFAULT NULL,
 	`id_kluca` INT(11) NULL DEFAULT NULL,
   PRIMARY KEY (`id`))
 ENGINE = InnoDB

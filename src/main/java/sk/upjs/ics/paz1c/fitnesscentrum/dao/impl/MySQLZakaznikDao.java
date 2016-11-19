@@ -1,5 +1,7 @@
 package sk.upjs.ics.paz1c.fitnesscentrum.dao.impl;
 
+import java.sql.Timestamp;
+import java.time.LocalDateTime;
 import java.util.List;
 import org.springframework.jdbc.core.JdbcTemplate;
 import sk.upjs.ics.paz1c.fitnesscentrum.DaoFactory;
@@ -29,20 +31,13 @@ public class MySQLZakaznikDao implements ZakaznikDao {
     public List<Zakaznik> dajPritomnychZakaznikov() {
         String sql = "SELECT *  FROM zakaznik WHERE pritomny=1";
         return jdbcTemplate.query(sql, zakaznikRowMapper);
-    }
-        
-    //zatial som napisala takuto verziu
-    @Override
-    public void pridajZakaznika(Zakaznik zakaznik) {
-        String sql = "INSERT INTO zakaznik (meno_priezvisko) VALUES (?)";
-        jdbcTemplate.update(sql, zakaznik.getMeno());
-    }
+    }  
 
-   /* @Override
+   @Override
     public void pridajZakaznika(Zakaznik zakaznik) {
-        String sql = "INSERT INTO zakaznik (meno_priezvisko,posledny_prichod,pritomny) VALUES (?,?,?)";
-        jdbcTemplate.update(sql, zakaznik.getMeno(), Timestamp.valueOf(LocalDateTime.now()), 1);
-    }*/
+        String sql = "INSERT INTO zakaznik (meno_priezvisko,posledny_prichod,pritomny,cislo_permanentky,kredit) VALUES (?,?,?,?,?)";
+        jdbcTemplate.update(sql, zakaznik.getMeno(), Timestamp.valueOf(LocalDateTime.now()), 0,zakaznik.getCisloPermanentky(),zakaznik.getKredit());
+    }
 
     @Override
     public void prichod(int idZakaznika, Integer idKluca) {

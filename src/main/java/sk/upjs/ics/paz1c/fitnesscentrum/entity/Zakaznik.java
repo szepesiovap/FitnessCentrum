@@ -1,7 +1,6 @@
 package sk.upjs.ics.paz1c.fitnesscentrum.entity;
 
 import java.time.LocalDateTime;
-import java.util.Date;
 
 public class Zakaznik {
 
@@ -10,7 +9,7 @@ public class Zakaznik {
     private LocalDateTime poslednyPrichod;
     private boolean pritomny;
     private double kredit;
-    private Integer cisloPermanentky;
+    private String cisloPermanentky;
     private Integer idKluca;
 
     public Integer getIdKluca() {
@@ -29,11 +28,11 @@ public class Zakaznik {
         this.kredit = kredit;
     }
 
-    public Integer getCisloPermanentky() {
+    public String getCisloPermanentky() {
         return cisloPermanentky;
     }
 
-    public void setCisloPermanentky(int cisloPermanentky) {
+    public void setCisloPermanentky(String cisloPermanentky) {
         this.cisloPermanentky = cisloPermanentky;
     }
 

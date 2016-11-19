@@ -8,10 +8,13 @@ import sk.upjs.ics.paz1c.fitnesscentrum.ZakaznikTableModel;
 public class ZoznamForm extends javax.swing.JFrame {
 
     private static HlavneOknoForm hlavneOkno;
-    private ZakaznikTableModel zakaznikTableModel;
+    private final ZakaznikTableModel zakaznikTableModel;
+    private static final int ID_COLUMN = 0;
 
     /**
      * Creates new form ZoznamForm
+     *
+     * @param hlavneOkno
      */
     public ZoznamForm(HlavneOknoForm hlavneOkno) {
         this.hlavneOkno = hlavneOkno;
@@ -89,7 +92,7 @@ public class ZoznamForm extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void prichodButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_prichodButtonActionPerformed
-        int idZakaznika = (Integer) zakaznikTableModel.getValueAt(this.zoznamZakaznikovTable.getSelectedRow(), 5);
+        int idZakaznika = (Integer) zakaznikTableModel.getValueAt(this.zoznamZakaznikovTable.getSelectedRow(), ID_COLUMN);
         DaoFactory.INSTANCE.getMySQLZakaznikDao().prichod(idZakaznika, null);
         aktualizovatZoznamZakaznikov();
     }//GEN-LAST:event_prichodButtonActionPerformed
