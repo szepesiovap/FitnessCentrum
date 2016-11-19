@@ -156,7 +156,7 @@ public class PrihlasovanieForm extends javax.swing.JFrame {
     }//GEN-LAST:event_novyRecepcnyActionPerformed
 
     private void novyRecepcnyMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_novyRecepcnyMousePressed
-        new NovyRecepcnyForm().setVisible(true);
+        new OverenieHesla().setVisible(true);
     }//GEN-LAST:event_novyRecepcnyMousePressed
 
     private void zmenaUdajovRecepcnyMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_zmenaUdajovRecepcnyMousePressed

@@ -56,4 +56,5 @@ public class MySQLRecepcnyDao implements RecepcnyDao {
         String sql = "UPDATE recepcny SET meno_priezvisko = ?, login = ?, heslo =? WHERE id=?";
         jdbcTemplate.update(sql, recepcny.getMeno(), recepcny.getLogin(), recepcny.getHeslo(), recepcny.getId());
     }
+
 }

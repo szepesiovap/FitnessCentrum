@@ -17,8 +17,8 @@ public enum DaoFactory {
         MysqlDataSource dataSource;
         dataSource = new MysqlDataSource();
         dataSource.setDatabaseName("fitnesscentrum");
-        dataSource.setUser("fitnesscentrum");
-        dataSource.setPassword("fitnesscentrum");
+        dataSource.setUser("root");
+        dataSource.setPassword("root");
         return new JdbcTemplate(dataSource);
     }
 

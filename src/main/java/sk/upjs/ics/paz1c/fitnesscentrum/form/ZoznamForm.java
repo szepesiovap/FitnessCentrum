@@ -61,6 +61,11 @@ public class ZoznamForm extends javax.swing.JFrame {
         upravButton.setText("Uprav");
 
         zmazButton.setText("Zmaž");
+        zmazButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                zmazButtonActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -101,6 +106,10 @@ public class ZoznamForm extends javax.swing.JFrame {
         hlavneOkno.aktualizovatZoznamPritomnych();
         hlavneOkno.setEnabled(true);
     }//GEN-LAST:event_formWindowClosed
+
+    private void zmazButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_zmazButtonActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_zmazButtonActionPerformed
 
     /*//po kliknuti na riadok v tabulke sa zavola metoda valueChange v nasom ListSelectionListeneri
     zoznamZakaznikovTable.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
