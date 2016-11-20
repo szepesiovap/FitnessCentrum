@@ -1,15 +1,14 @@
 package sk.upjs.ics.paz1c.fitnesscentrum.form;
 
-import javax.swing.event.ListSelectionEvent;
-import javax.swing.event.ListSelectionListener;
 import sk.upjs.ics.paz1c.fitnesscentrum.DaoFactory;
 import sk.upjs.ics.paz1c.fitnesscentrum.ZakaznikTableModel;
 
-public class ZoznamForm extends javax.swing.JFrame {
+public final class ZoznamForm extends javax.swing.JFrame {
 
     private static HlavneOknoForm hlavneOkno;
     private final ZakaznikTableModel zakaznikTableModel;
     private static final int ID_COLUMN = 0;
+    private static final int MENO_COLUMN = 1;
 
     /**
      * Creates new form ZoznamForm
@@ -17,11 +16,10 @@ public class ZoznamForm extends javax.swing.JFrame {
      * @param hlavneOkno
      */
     public ZoznamForm(HlavneOknoForm hlavneOkno) {
-        this.hlavneOkno = hlavneOkno;
+        ZoznamForm.hlavneOkno = hlavneOkno;
         hlavneOkno.setEnabled(false);
         zakaznikTableModel = new ZakaznikTableModel();
         initComponents();
-        inicializaciaZaciatocnehoStavu();
         aktualizovatZoznamZakaznikov();
     }
 
@@ -108,24 +106,18 @@ public class ZoznamForm extends javax.swing.JFrame {
     }//GEN-LAST:event_formWindowClosed
 
     private void zmazButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_zmazButtonActionPerformed
-         int idZakaznika = (Integer)zakaznikTableModel.getValueAt(this.zoznamZakaznikovTable.getSelectedRow(),ID_COLUMN);
-         DaoFactory.INSTANCE.getMySQLZakaznikDao().vymazZakaznika(idZakaznika);
-         aktualizovatZoznamZakaznikov();
+        try {
+            int idZakaznika = (Integer) zakaznikTableModel.getValueAt(this.zoznamZakaznikovTable.getSelectedRow(), ID_COLUMN);
+            String menoZakaznika = (String) zakaznikTableModel.getValueAt(this.zoznamZakaznikovTable.getSelectedRow(), MENO_COLUMN);
+            new ZmazZakaznikaForm(this, menoZakaznika, idZakaznika).setVisible(true);
+        } catch (Exception e) {
+            System.err.println("Vyber zákazníka na zmazanie.");
+        }
     }//GEN-LAST:event_zmazButtonActionPerformed
 
     public void aktualizovatZoznamZakaznikov() {
         ZakaznikTableModel model = (ZakaznikTableModel) zoznamZakaznikovTable.getModel();
         model.aktualizovat();
-    }
-
-    private void inicializaciaZaciatocnehoStavu() {
-        zoznamZakaznikovTable.setModel(zakaznikTableModel);
-        zoznamZakaznikovTable.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
-            @Override
-            public void valueChanged(ListSelectionEvent e) {
-                // ???
-            }
-        }); 
     }
 
     /**

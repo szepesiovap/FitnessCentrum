@@ -8,7 +8,7 @@ public class PritomniZakazniciTableModel extends AbstractTableModel {
 
     private ZakaznikDao zakaznikDao = DaoFactory.INSTANCE.getMySQLZakaznikDao();
 
-    private static final String[] NAZVY_STLPCOV = {"ID",  "Meno", "Kluc", "Cas prichodu", "Cislo karty"};
+    private static final String[] NAZVY_STLPCOV = {"ID",  "Meno", "Kľúč", "Čas príchodu", "Číslo karty"};
 
     private static final int POCET_STLPCOV = NAZVY_STLPCOV.length;
 
