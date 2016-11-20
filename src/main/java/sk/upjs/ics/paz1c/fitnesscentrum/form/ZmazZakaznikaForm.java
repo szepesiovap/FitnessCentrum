@@ -1,18 +1,26 @@
 package sk.upjs.ics.paz1c.fitnesscentrum.form;
 
-public class OdhlasenieForm extends javax.swing.JFrame {
+import sk.upjs.ics.paz1c.fitnesscentrum.DaoFactory;
 
-    private static HlavneOknoForm hlavneOkno;
+public class ZmazZakaznikaForm extends javax.swing.JFrame {
+
+    private static ZoznamForm zoznamForm;
+    private static String menoZakaznika;
+    private static int idZakaznika;
 
     /**
-     * Creates new form OdhlasenieForm
-     * @param hlavneOkno
+     * Creates new form ZmazZakaznikaForm
+     * @param zoznamForm
+     * @param menoZakaznika
+     * @param idZakaznika
      */
-    public OdhlasenieForm(HlavneOknoForm hlavneOkno) {
+    public ZmazZakaznikaForm(ZoznamForm zoznamForm, String menoZakaznika, int idZakaznika) {
+        ZmazZakaznikaForm.zoznamForm = zoznamForm;
+        zoznamForm.setEnabled(false);
+        ZmazZakaznikaForm.menoZakaznika = menoZakaznika;
+        ZmazZakaznikaForm.idZakaznika = idZakaznika;
         initComponents();
-        OdhlasenieForm.hlavneOkno = hlavneOkno;
-        this.setAlwaysOnTop(true);
-        hlavneOkno.setEnabled(false);
+        inicializaciaZaciatocnehoStavu();
     }
 
     /**
@@ -24,27 +32,23 @@ public class OdhlasenieForm extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        odhlasenieLabel = new javax.swing.JLabel();
-        odhlasitButton = new javax.swing.JButton();
+        zmazatLabel = new javax.swing.JLabel();
+        zmazatButton = new javax.swing.JButton();
         zrusitButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("Odhlásenie");
-        setAlwaysOnTop(true);
+        setTitle("Zmazať zákazníka");
         setPreferredSize(new java.awt.Dimension(350, 150));
-        setResizable(false);
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosed(java.awt.event.WindowEvent evt) {
                 formWindowClosed(evt);
             }
         });
 
-        odhlasenieLabel.setText("Odhlásiť aktuálneho používateľa?");
-
-        odhlasitButton.setText("Odhlásiť");
-        odhlasitButton.addActionListener(new java.awt.event.ActionListener() {
+        zmazatButton.setText("Zmazať");
+        zmazatButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                odhlasitButtonActionPerformed(evt);
+                zmazatButtonActionPerformed(evt);
             }
         });
 
@@ -60,45 +64,49 @@ public class OdhlasenieForm extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(48, 48, 48)
+                .addGap(41, 41, 41)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(odhlasenieLabel)
-                        .addContainerGap(61, Short.MAX_VALUE))
+                        .addComponent(zmazatLabel)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(odhlasitButton)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(zrusitButton, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(47, 47, 47))))
+                        .addComponent(zmazatButton, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 87, Short.MAX_VALUE)
+                        .addComponent(zrusitButton, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(42, 42, 42))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(41, 41, 41)
-                .addComponent(odhlasenieLabel)
-                .addGap(30, 30, 30)
+                .addGap(38, 38, 38)
+                .addComponent(zmazatLabel)
+                .addGap(34, 34, 34)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(zrusitButton)
-                    .addComponent(odhlasitButton))
-                .addContainerGap(39, Short.MAX_VALUE))
+                    .addComponent(zmazatButton)
+                    .addComponent(zrusitButton))
+                .addContainerGap(53, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void odhlasitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_odhlasitButtonActionPerformed
+    private void zmazatButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_zmazatButtonActionPerformed
+        DaoFactory.INSTANCE.getMySQLZakaznikDao().vymazZakaznika(idZakaznika);
+        zoznamForm.aktualizovatZoznamZakaznikov();
         dispose();
-        hlavneOkno.dispose();
-        new PrihlasovanieForm().setVisible(true);
-    }//GEN-LAST:event_odhlasitButtonActionPerformed
+    }//GEN-LAST:event_zmazatButtonActionPerformed
+
+    private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
+        zoznamForm.setEnabled(true);
+    }//GEN-LAST:event_formWindowClosed
 
     private void zrusitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_zrusitButtonActionPerformed
         dispose();
     }//GEN-LAST:event_zrusitButtonActionPerformed
 
-    private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
-        hlavneOkno.setEnabled(true);
-    }//GEN-LAST:event_formWindowClosed
+    private void inicializaciaZaciatocnehoStavu() {
+        zmazatLabel.setText("Ste si istý, že chcete zmazať zákazníka " + menoZakaznika + "?");
+    }
 
     /**
      * @param args the command line arguments
@@ -117,27 +125,27 @@ public class OdhlasenieForm extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(OdhlasenieForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ZmazZakaznikaForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(OdhlasenieForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ZmazZakaznikaForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(OdhlasenieForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ZmazZakaznikaForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(OdhlasenieForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ZmazZakaznikaForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new OdhlasenieForm(hlavneOkno).setVisible(true);
+                new ZmazZakaznikaForm(zoznamForm, menoZakaznika, idZakaznika).setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel odhlasenieLabel;
-    private javax.swing.JButton odhlasitButton;
+    private javax.swing.JButton zmazatButton;
+    private javax.swing.JLabel zmazatLabel;
     private javax.swing.JButton zrusitButton;
     // End of variables declaration//GEN-END:variables
 }

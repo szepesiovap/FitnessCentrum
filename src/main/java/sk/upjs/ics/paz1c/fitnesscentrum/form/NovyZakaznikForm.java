@@ -9,8 +9,8 @@ import sk.upjs.ics.paz1c.fitnesscentrum.entity.Zakaznik;
 public class NovyZakaznikForm extends javax.swing.JFrame {
     
     private static HlavneOknoForm hlavneOkno;
-    private static String[] KREDIT_MOZNOSTI = {"50 EUR", "100 EUR", "150 EUR", "200 EUR"};
-    private static Double[] KREDIT_SUMY = {50.0, 100.0, 150.0, 200.0};
+    private static final String[] KREDIT_MOZNOSTI = {"50 EUR", "100 EUR", "150 EUR", "200 EUR"};
+    private static final Double[] KREDIT_SUMY = {50.0, 100.0, 150.0, 200.0};
 
     /**
      * Creates new form NovyZakaznikForm
@@ -18,7 +18,7 @@ public class NovyZakaznikForm extends javax.swing.JFrame {
      * @param hlavneOkno
      */
     public NovyZakaznikForm(HlavneOknoForm hlavneOkno) {
-        this.hlavneOkno = hlavneOkno;
+        NovyZakaznikForm.hlavneOkno = hlavneOkno;
         hlavneOkno.setEnabled(false);
         initComponents();
         inicializaciaZaciatocnehoStavu();

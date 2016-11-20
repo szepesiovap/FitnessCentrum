@@ -6,7 +6,7 @@
       <SubComponents>
         <Menu class="javax.swing.JMenu" name="zoznamMenu">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Zoznam"/>
+            <Property name="text" type="java.lang.String" value="Zoznam "/>
           </Properties>
           <Events>
             <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="zoznamMenuMousePressed"/>
@@ -14,7 +14,7 @@
         </Menu>
         <Menu class="javax.swing.JMenu" name="odchodMenu">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Odchod"/>
+            <Property name="text" type="java.lang.String" value="Odchod "/>
           </Properties>
           <Events>
             <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="odchodMenuMousePressed"/>
@@ -22,7 +22,7 @@
         </Menu>
         <Menu class="javax.swing.JMenu" name="novyMenu">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Nov&#xfd;"/>
+            <Property name="text" type="java.lang.String" value="Nov&#xfd; "/>
           </Properties>
           <Events>
             <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="novyMenuMousePressed"/>
@@ -30,20 +30,11 @@
         </Menu>
         <Menu class="javax.swing.JMenu" name="dobiMenu">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Dobi"/>
+            <Property name="text" type="java.lang.String" value="Dobi&#x165; kredit "/>
           </Properties>
-          <SubComponents>
-            <MenuItem class="javax.swing.JMenuItem" name="dobiKreditMenuItem">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="Kredit"/>
-              </Properties>
-            </MenuItem>
-            <MenuItem class="javax.swing.JMenuItem" name="dobiMesacnuMenuItem">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="Mesa&#x10d;n&#xe1;"/>
-              </Properties>
-            </MenuItem>
-          </SubComponents>
+          <Events>
+            <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="dobiMenuMousePressed"/>
+          </Events>
         </Menu>
         <Menu class="javax.swing.JMenu" name="odhlasitMenu">
           <Properties>

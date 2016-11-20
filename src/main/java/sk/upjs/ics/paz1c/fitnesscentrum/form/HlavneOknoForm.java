@@ -3,7 +3,7 @@ package sk.upjs.ics.paz1c.fitnesscentrum.form;
 import sk.upjs.ics.paz1c.fitnesscentrum.DaoFactory;
 import sk.upjs.ics.paz1c.fitnesscentrum.PritomniZakazniciTableModel;
 
-public class HlavneOknoForm extends javax.swing.JFrame {
+public final class HlavneOknoForm extends javax.swing.JFrame {
 
     private final PritomniZakazniciTableModel pritomniZakazniciTableModel;
 
@@ -40,8 +40,6 @@ public class HlavneOknoForm extends javax.swing.JFrame {
         odchodMenu = new javax.swing.JMenu();
         novyMenu = new javax.swing.JMenu();
         dobiMenu = new javax.swing.JMenu();
-        dobiKreditMenuItem = new javax.swing.JMenuItem();
-        dobiMesacnuMenuItem = new javax.swing.JMenuItem();
         odhlasitMenu = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -52,7 +50,7 @@ public class HlavneOknoForm extends javax.swing.JFrame {
         );
         pritomniScrollPane.setViewportView(pritomniTable);
 
-        zoznamMenu.setText("Zoznam");
+        zoznamMenu.setText("Zoznam ");
         zoznamMenu.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 zoznamMenuMousePressed(evt);
@@ -60,7 +58,7 @@ public class HlavneOknoForm extends javax.swing.JFrame {
         });
         hlavneOknoMenuBar.add(zoznamMenu);
 
-        odchodMenu.setText("Odchod");
+        odchodMenu.setText("Odchod ");
         odchodMenu.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 odchodMenuMousePressed(evt);
@@ -68,7 +66,7 @@ public class HlavneOknoForm extends javax.swing.JFrame {
         });
         hlavneOknoMenuBar.add(odchodMenu);
 
-        novyMenu.setText("Nový");
+        novyMenu.setText("Nový ");
         novyMenu.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 novyMenuMousePressed(evt);
@@ -76,14 +74,12 @@ public class HlavneOknoForm extends javax.swing.JFrame {
         });
         hlavneOknoMenuBar.add(novyMenu);
 
-        dobiMenu.setText("Dobi");
-
-        dobiKreditMenuItem.setText("Kredit");
-        dobiMenu.add(dobiKreditMenuItem);
-
-        dobiMesacnuMenuItem.setText("Mesačná");
-        dobiMenu.add(dobiMesacnuMenuItem);
-
+        dobiMenu.setText("Dobiť kredit ");
+        dobiMenu.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                dobiMenuMousePressed(evt);
+            }
+        });
         hlavneOknoMenuBar.add(dobiMenu);
 
         odhlasitMenu.setText("Odhlásiť");
@@ -129,14 +125,22 @@ public class HlavneOknoForm extends javax.swing.JFrame {
     }//GEN-LAST:event_odhlasitMenuMousePressed
 
     private void odchodMenuMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_odchodMenuMousePressed
-        int idZakaznika = (Integer) pritomniTable.getValueAt(pritomniTable.getSelectedRow(), ID_COLUMN);
-        DaoFactory.INSTANCE.getMySQLZakaznikDao().odchod(idZakaznika);
-        aktualizovatZoznamPritomnych();
+        try {
+            int idZakaznika = (Integer) pritomniTable.getValueAt(pritomniTable.getSelectedRow(), ID_COLUMN);
+            DaoFactory.INSTANCE.getMySQLZakaznikDao().odchod(idZakaznika);
+            aktualizovatZoznamPritomnych();
+        } catch (Exception e) {
+            System.err.println("Nebol vybrany ziaden zakaznik");
+        }
     }//GEN-LAST:event_odchodMenuMousePressed
 
     private void novyMenuMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_novyMenuMousePressed
         new NovyZakaznikForm(this).setVisible(true);
     }//GEN-LAST:event_novyMenuMousePressed
+
+    private void dobiMenuMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_dobiMenuMousePressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_dobiMenuMousePressed
 
     /**
      * @param args the command line arguments
@@ -173,6 +177,7 @@ public class HlavneOknoForm extends javax.swing.JFrame {
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
+            @Override
             public void run() {
                 new PrihlasovanieForm().setVisible(true);
             }
@@ -180,9 +185,7 @@ public class HlavneOknoForm extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JMenuItem dobiKreditMenuItem;
     private javax.swing.JMenu dobiMenu;
-    private javax.swing.JMenuItem dobiMesacnuMenuItem;
     private javax.swing.JMenuBar hlavneOknoMenuBar;
     private javax.swing.JMenu novyMenu;
     private javax.swing.JMenu odchodMenu;
