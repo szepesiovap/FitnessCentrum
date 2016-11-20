@@ -23,6 +23,7 @@ public class ZakaznikRowMapper implements RowMapper<Zakaznik> {
         }
         zakaznik.setCisloPermanentky(rs.getString("cislo_permanentky"));
         zakaznik.setKredit(rs.getDouble("kredit"));
+        zakaznik.setIdKluca(rs.getInt("id_kluca"));
         return zakaznik;
     }
     

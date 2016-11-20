@@ -1,5 +1,6 @@
 package sk.upjs.ics.paz1c.fitnesscentrum.form;
 
+import javax.swing.JOptionPane;
 import sk.upjs.ics.paz1c.fitnesscentrum.DaoFactory;
 import sk.upjs.ics.paz1c.fitnesscentrum.ZakaznikTableModel;
 
@@ -18,7 +19,7 @@ public final class ZoznamForm extends javax.swing.JFrame {
         ZoznamForm.hlavneOkno = hlavneOkno;
         hlavneOkno.setEnabled(false);
         initComponents();
-        aktualizovatZoznamZakaznikov();   
+        aktualizovatZoznamZakaznikov();
     }
 
     /**
@@ -94,21 +95,21 @@ public final class ZoznamForm extends javax.swing.JFrame {
                         .addComponent(prichodButton)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(upravButton)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(zmazButton))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(zmazButton)
+                        .addGap(18, 18, 18))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(hladajPodlaMenaLabel)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(hladajPodlaMenaTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 314, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(hladajButton)
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addContainerGap())
+                        .addContainerGap(25, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -123,17 +124,25 @@ public final class ZoznamForm extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(prichodButton)
                     .addComponent(upravButton)
-                    .addComponent(zmazButton))
-                .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(zmazButton)))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void prichodButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_prichodButtonActionPerformed
-        int idZakaznika = (Integer) zoznamZakaznikovTable.getValueAt(this.zoznamZakaznikovTable.getSelectedRow(), ID_COLUMN);
-        DaoFactory.INSTANCE.getMySQLZakaznikDao().prichod(idZakaznika, null);
-        aktualizovatZoznamZakaznikov();
+        try {
+            int idZakaznika = (Integer) zoznamZakaznikovTable.getValueAt(this.zoznamZakaznikovTable.getSelectedRow(), ID_COLUMN);
+            if (!DaoFactory.INSTANCE.getMySQLZakaznikDao().dajZakaznikaSId(idZakaznika).isPritomny()) {
+
+                String menoZakaznika = (String) zoznamZakaznikovTable.getValueAt(this.zoznamZakaznikovTable.getSelectedRow(), MENO_COLUMN);
+                new PrichodForm(this, idZakaznika, menoZakaznika).setVisible(true);
+            } else {
+                JOptionPane.showMessageDialog(this, "Zákazník je už prítomný!");
+            }
+        } catch (Exception e) {
+            System.err.println("Vyber zákazníka na príchod.");
+        }
     }//GEN-LAST:event_prichodButtonActionPerformed
 
     private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
@@ -144,19 +153,24 @@ public final class ZoznamForm extends javax.swing.JFrame {
     private void zmazButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_zmazButtonActionPerformed
         try {
             int idZakaznika = (Integer) zoznamZakaznikovTable.getValueAt(this.zoznamZakaznikovTable.getSelectedRow(), ID_COLUMN);
-            String menoZakaznika = (String) zoznamZakaznikovTable.getValueAt(this.zoznamZakaznikovTable.getSelectedRow(), MENO_COLUMN);
-            new ZmazZakaznikaForm(this, menoZakaznika, idZakaznika).setVisible(true);
+            if (!DaoFactory.INSTANCE.getMySQLZakaznikDao().dajZakaznikaSId(idZakaznika).isPritomny()) {
+                String menoZakaznika = (String) zoznamZakaznikovTable.getValueAt(this.zoznamZakaznikovTable.getSelectedRow(), MENO_COLUMN);
+                new ZmazZakaznikaForm(this, menoZakaznika, idZakaznika).setVisible(true);
+
+            } else {
+                JOptionPane.showMessageDialog(this, "Nemožno vymazať prítomného zákazníka!");
+            }
         } catch (Exception e) {
             System.err.println("Vyber zákazníka na zmazanie.");
         }
     }//GEN-LAST:event_zmazButtonActionPerformed
 
     private void hladajPodlaMenaTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_hladajPodlaMenaTextFieldActionPerformed
-        
+
     }//GEN-LAST:event_hladajPodlaMenaTextFieldActionPerformed
 
     private void hladajButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_hladajButtonActionPerformed
-       zoznamZakaznikovTable.setModel(new ZakaznikTableModel(hladajPodlaMenaTextField.getText()));
+        zoznamZakaznikovTable.setModel(new ZakaznikTableModel(hladajPodlaMenaTextField.getText()));
     }//GEN-LAST:event_hladajButtonActionPerformed
 
     public void aktualizovatZoznamZakaznikov() {

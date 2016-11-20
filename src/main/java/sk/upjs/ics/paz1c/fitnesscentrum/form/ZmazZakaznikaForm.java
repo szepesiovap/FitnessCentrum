@@ -1,6 +1,7 @@
 package sk.upjs.ics.paz1c.fitnesscentrum.form;
 
 import sk.upjs.ics.paz1c.fitnesscentrum.DaoFactory;
+import sk.upjs.ics.paz1c.fitnesscentrum.dao.ZakaznikDao;
 
 public class ZmazZakaznikaForm extends javax.swing.JFrame {
 
@@ -91,7 +92,8 @@ public class ZmazZakaznikaForm extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void zmazatButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_zmazatButtonActionPerformed
-        DaoFactory.INSTANCE.getMySQLZakaznikDao().vymazZakaznika(idZakaznika);
+        ZakaznikDao zakaznikDao = DaoFactory.INSTANCE.getMySQLZakaznikDao();       
+        zakaznikDao.vymazZakaznika(idZakaznika);
         zoznamForm.aktualizovatZoznamZakaznikov();
         dispose();
     }//GEN-LAST:event_zmazatButtonActionPerformed

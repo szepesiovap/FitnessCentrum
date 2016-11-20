@@ -2,6 +2,8 @@ package sk.upjs.ics.paz1c.fitnesscentrum.form;
 
 import sk.upjs.ics.paz1c.fitnesscentrum.DaoFactory;
 import sk.upjs.ics.paz1c.fitnesscentrum.PritomniZakazniciTableModel;
+import sk.upjs.ics.paz1c.fitnesscentrum.dao.KlucDao;
+import sk.upjs.ics.paz1c.fitnesscentrum.dao.ZakaznikDao;
 
 public final class HlavneOknoForm extends javax.swing.JFrame {
     private static final int ID_COLUMN = 0;
@@ -121,7 +123,11 @@ public final class HlavneOknoForm extends javax.swing.JFrame {
     private void odchodMenuMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_odchodMenuMousePressed
         try {
             int idZakaznika = (Integer) pritomniTable.getValueAt(pritomniTable.getSelectedRow(), ID_COLUMN);
-            DaoFactory.INSTANCE.getMySQLZakaznikDao().odchod(idZakaznika);
+            ZakaznikDao zakaznikDao = DaoFactory.INSTANCE.getMySQLZakaznikDao();
+            KlucDao klucDao = DaoFactory.INSTANCE.getKlucDao();
+            klucDao.odoberZakaznika(zakaznikDao.dajZakaznikaSId(idZakaznika).getIdKluca());
+            zakaznikDao.odchod(idZakaznika);
+            
             aktualizovatZoznamPritomnych();
         } catch (Exception e) {
             System.err.println("Nebol vybrany ziaden zakaznik");

@@ -8,7 +8,7 @@ public class PritomniZakazniciTableModel extends AbstractTableModel {
 
     private ZakaznikDao zakaznikDao = DaoFactory.INSTANCE.getMySQLZakaznikDao();
 
-    private static final String[] NAZVY_STLPCOV = {"ID",  "Meno", "Kľúč", "Čas príchodu", "Číslo karty"};
+    private static final String[] NAZVY_STLPCOV = {"ID", "Meno", "Kľúč", "Čas príchodu", "Číslo karty"};
 
     private static final int POCET_STLPCOV = NAZVY_STLPCOV.length;
 
@@ -21,7 +21,6 @@ public class PritomniZakazniciTableModel extends AbstractTableModel {
     public int getColumnCount() {
         return POCET_STLPCOV;
     }
-   
 
     @Override
     public Object getValueAt(int rowIndex, int columnIndex) {
@@ -32,7 +31,7 @@ public class PritomniZakazniciTableModel extends AbstractTableModel {
             case 1:
                 return zakaznik.getMeno();
             case 2:
-                return zakaznik.getIdKluca();
+                return DaoFactory.INSTANCE.getKlucDao().dajMenoKlucaSId(zakaznik.getIdKluca());
             case 3:
                 return zakaznik.getPoslednyPrichod();
             case 4:

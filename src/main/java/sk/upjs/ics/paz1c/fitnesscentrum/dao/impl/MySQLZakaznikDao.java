@@ -2,7 +2,6 @@ package sk.upjs.ics.paz1c.fitnesscentrum.dao.impl;
 
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
-import java.util.Arrays;
 import java.util.List;
 import org.springframework.jdbc.core.JdbcTemplate;
 import sk.upjs.ics.paz1c.fitnesscentrum.DaoFactory;
