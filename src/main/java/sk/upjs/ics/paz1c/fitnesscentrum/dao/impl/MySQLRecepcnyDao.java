@@ -51,8 +51,8 @@ public class MySQLRecepcnyDao implements RecepcnyDao {
 
     @Override
     public void updateRecepcneho(Recepcny recepcny) {
-        String sql = "UPDATE recepcny SET meno_priezvisko = ?, login = ?, heslo =? WHERE id=?";
-        jdbcTemplate.update(sql, recepcny.getMeno(), recepcny.getLogin(), recepcny.getHeslo(), recepcny.getId());
+        String sql = "UPDATE recepcny SET heslo =? WHERE id=?";
+        jdbcTemplate.update(sql, recepcny.getHeslo(), recepcny.getId());
     }
 
 }

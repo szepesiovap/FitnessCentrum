@@ -83,7 +83,7 @@ public class PrihlasovanieForm extends javax.swing.JFrame {
         });
         prihlasovanieMenuBar.add(novyRecepcny);
 
-        zmenaUdajovRecepcny.setText("Zmena údajov");
+        zmenaUdajovRecepcny.setText("Zmena hesla");
         zmenaUdajovRecepcny.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 zmenaUdajovRecepcnyMousePressed(evt);
@@ -174,7 +174,7 @@ public class PrihlasovanieForm extends javax.swing.JFrame {
     }//GEN-LAST:event_novyRecepcnyMousePressed
 
     private void zmenaUdajovRecepcnyMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_zmenaUdajovRecepcnyMousePressed
-        new ZmenaUdajovRecepcnehoForm(1);
+        new ZmenaHeslaRecepcnehoForm().setVisible(true);
     }//GEN-LAST:event_zmenaUdajovRecepcnyMousePressed
 
     /**

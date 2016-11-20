@@ -30,7 +30,7 @@
         </Menu>
         <Menu class="javax.swing.JMenu" name="zmenaUdajovRecepcny">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Zmena &#xfa;dajov"/>
+            <Property name="text" type="java.lang.String" value="Zmena hesla"/>
           </Properties>
           <Events>
             <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="zmenaUdajovRecepcnyMousePressed"/>

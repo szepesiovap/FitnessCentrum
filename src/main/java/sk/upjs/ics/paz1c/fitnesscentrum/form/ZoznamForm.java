@@ -104,6 +104,7 @@ public class ZoznamForm extends javax.swing.JFrame {
 
     private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
         hlavneOkno.aktualizovatZoznamPritomnych();
+        hlavneOkno.setEnabled(true);
     }//GEN-LAST:event_formWindowClosed
 
     private void zmazButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_zmazButtonActionPerformed
