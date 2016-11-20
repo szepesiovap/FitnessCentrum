@@ -2,6 +2,7 @@ package sk.upjs.ics.paz1c.fitnesscentrum.dao.impl;
 
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
+import java.util.Arrays;
 import java.util.List;
 import org.springframework.jdbc.core.JdbcTemplate;
 import sk.upjs.ics.paz1c.fitnesscentrum.DaoFactory;
@@ -11,9 +12,8 @@ import sk.upjs.ics.paz1c.fitnesscentrum.entity.Zakaznik;
 
 public class MySQLZakaznikDao implements ZakaznikDao {
 
-    private JdbcTemplate jdbcTemplate;
-    
-    private ZakaznikRowMapper zakaznikRowMapper = new ZakaznikRowMapper();
+    private final JdbcTemplate jdbcTemplate;
+    private final ZakaznikRowMapper zakaznikRowMapper = new ZakaznikRowMapper();
 
     public MySQLZakaznikDao() {
         jdbcTemplate = DaoFactory.INSTANCE.getJdbcTemplate();
@@ -31,12 +31,12 @@ public class MySQLZakaznikDao implements ZakaznikDao {
     public List<Zakaznik> dajPritomnychZakaznikov() {
         String sql = "SELECT *  FROM zakaznik WHERE pritomny=1";
         return jdbcTemplate.query(sql, zakaznikRowMapper);
-    }  
+    }
 
-   @Override
+    @Override
     public void pridajZakaznika(Zakaznik zakaznik) {
         String sql = "INSERT INTO zakaznik (meno_priezvisko,posledny_prichod,pritomny,cislo_permanentky,kredit) VALUES (?,?,?,?,?)";
-        jdbcTemplate.update(sql, zakaznik.getMeno(), Timestamp.valueOf(LocalDateTime.now()), 0,zakaznik.getCisloPermanentky(),zakaznik.getKredit());
+        jdbcTemplate.update(sql, zakaznik.getMeno(), Timestamp.valueOf(LocalDateTime.now()), 0, zakaznik.getCisloPermanentky(), zakaznik.getKredit());
     }
 
     @Override
@@ -53,7 +53,25 @@ public class MySQLZakaznikDao implements ZakaznikDao {
 
     @Override
     public void vymazZakaznika(int idZakaznika) {
-       String sql = "DELETE FROM zakaznik WHERE id = ?";
-       jdbcTemplate.update(sql, idZakaznika);
+        String sql = "DELETE FROM zakaznik WHERE id = ?";
+        jdbcTemplate.update(sql, idZakaznika);
+    }
+
+    @Override
+    public Zakaznik dajZakaznikaSId(int idZakaznika) {
+        String sql = "SELECT *  FROM zakaznik WHERE id = " + idZakaznika;
+        return jdbcTemplate.query(sql, zakaznikRowMapper).get(0);
+    }
+
+    @Override
+    public Zakaznik dajZakaznikaSCislomPermanentky(String cisloPermanentky) {
+        String sql = "SELECT *  FROM zakaznik WHERE cislo_permanentky = " + cisloPermanentky;
+        return jdbcTemplate.query(sql, zakaznikRowMapper).get(0);
+    }
+
+    @Override
+    public List<Zakaznik> dajZakaznikovSoZhodouVMene(String vzorka) {
+        String sql = "SELECT *  FROM zakaznik WHERE meno_priezvisko LIKE "+"\'%"+vzorka+"%\'";
+        return jdbcTemplate.query(sql, zakaznikRowMapper);
     }
 }

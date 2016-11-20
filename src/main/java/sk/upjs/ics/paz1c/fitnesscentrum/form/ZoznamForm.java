@@ -6,7 +6,6 @@ import sk.upjs.ics.paz1c.fitnesscentrum.ZakaznikTableModel;
 public final class ZoznamForm extends javax.swing.JFrame {
 
     private static HlavneOknoForm hlavneOkno;
-    private final ZakaznikTableModel zakaznikTableModel;
     private static final int ID_COLUMN = 0;
     private static final int MENO_COLUMN = 1;
 
@@ -18,9 +17,8 @@ public final class ZoznamForm extends javax.swing.JFrame {
     public ZoznamForm(HlavneOknoForm hlavneOkno) {
         ZoznamForm.hlavneOkno = hlavneOkno;
         hlavneOkno.setEnabled(false);
-        zakaznikTableModel = new ZakaznikTableModel();
         initComponents();
-        aktualizovatZoznamZakaznikov();
+        aktualizovatZoznamZakaznikov();   
     }
 
     /**
@@ -37,6 +35,9 @@ public final class ZoznamForm extends javax.swing.JFrame {
         prichodButton = new javax.swing.JButton();
         upravButton = new javax.swing.JButton();
         zmazButton = new javax.swing.JButton();
+        hladajPodlaMenaLabel = new javax.swing.JLabel();
+        hladajPodlaMenaTextField = new javax.swing.JTextField();
+        hladajButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Zoznam Zákazníkov");
@@ -46,7 +47,8 @@ public final class ZoznamForm extends javax.swing.JFrame {
             }
         });
 
-        zoznamZakaznikovTable.setModel(new ZakaznikTableModel());
+        zoznamZakaznikovTable.setModel(new ZakaznikTableModel(""));
+        zoznamZakaznikovTable.setCellSelectionEnabled(true);
         zoznamZakaznikovScrollPane.setViewportView(zoznamZakaznikovTable);
 
         prichodButton.setText("Príchod");
@@ -65,37 +67,71 @@ public final class ZoznamForm extends javax.swing.JFrame {
             }
         });
 
+        hladajPodlaMenaLabel.setText("Hľadaj podľa mena: ");
+
+        hladajPodlaMenaTextField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                hladajPodlaMenaTextFieldActionPerformed(evt);
+            }
+        });
+
+        hladajButton.setText("Hľadaj");
+        hladajButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                hladajButtonActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(zoznamZakaznikovScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 572, Short.MAX_VALUE)
+            .addComponent(zoznamZakaznikovScrollPane)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(prichodButton)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(upravButton)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(zmazButton)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(prichodButton)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(upravButton)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(zmazButton))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(hladajPodlaMenaLabel)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(hladajPodlaMenaTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 314, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(hladajButton)
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(zoznamZakaznikovScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 402, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(hladajPodlaMenaLabel)
+                            .addComponent(hladajButton))
+                        .addGap(9, 9, 9))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(hladajPodlaMenaTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)))
+                .addComponent(zoznamZakaznikovScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 365, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(prichodButton)
                     .addComponent(upravButton)
                     .addComponent(zmazButton))
-                .addGap(0, 12, Short.MAX_VALUE))
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void prichodButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_prichodButtonActionPerformed
-        int idZakaznika = (Integer) zakaznikTableModel.getValueAt(this.zoznamZakaznikovTable.getSelectedRow(), ID_COLUMN);
+        int idZakaznika = (Integer) zoznamZakaznikovTable.getValueAt(this.zoznamZakaznikovTable.getSelectedRow(), ID_COLUMN);
         DaoFactory.INSTANCE.getMySQLZakaznikDao().prichod(idZakaznika, null);
         aktualizovatZoznamZakaznikov();
     }//GEN-LAST:event_prichodButtonActionPerformed
@@ -107,13 +143,21 @@ public final class ZoznamForm extends javax.swing.JFrame {
 
     private void zmazButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_zmazButtonActionPerformed
         try {
-            int idZakaznika = (Integer) zakaznikTableModel.getValueAt(this.zoznamZakaznikovTable.getSelectedRow(), ID_COLUMN);
-            String menoZakaznika = (String) zakaznikTableModel.getValueAt(this.zoznamZakaznikovTable.getSelectedRow(), MENO_COLUMN);
+            int idZakaznika = (Integer) zoznamZakaznikovTable.getValueAt(this.zoznamZakaznikovTable.getSelectedRow(), ID_COLUMN);
+            String menoZakaznika = (String) zoznamZakaznikovTable.getValueAt(this.zoznamZakaznikovTable.getSelectedRow(), MENO_COLUMN);
             new ZmazZakaznikaForm(this, menoZakaznika, idZakaznika).setVisible(true);
         } catch (Exception e) {
             System.err.println("Vyber zákazníka na zmazanie.");
         }
     }//GEN-LAST:event_zmazButtonActionPerformed
+
+    private void hladajPodlaMenaTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_hladajPodlaMenaTextFieldActionPerformed
+        
+    }//GEN-LAST:event_hladajPodlaMenaTextFieldActionPerformed
+
+    private void hladajButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_hladajButtonActionPerformed
+       zoznamZakaznikovTable.setModel(new ZakaznikTableModel(hladajPodlaMenaTextField.getText()));
+    }//GEN-LAST:event_hladajButtonActionPerformed
 
     public void aktualizovatZoznamZakaznikov() {
         ZakaznikTableModel model = (ZakaznikTableModel) zoznamZakaznikovTable.getModel();
@@ -124,29 +168,6 @@ public final class ZoznamForm extends javax.swing.JFrame {
      * @param args the command line arguments
      */
     public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(ZoznamForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(ZoznamForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(ZoznamForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(ZoznamForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
@@ -156,6 +177,9 @@ public final class ZoznamForm extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton hladajButton;
+    private javax.swing.JLabel hladajPodlaMenaLabel;
+    private javax.swing.JTextField hladajPodlaMenaTextField;
     private javax.swing.JButton prichodButton;
     private javax.swing.JButton upravButton;
     private javax.swing.JButton zmazButton;

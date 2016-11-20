@@ -35,7 +35,7 @@ public class ZmenaHeslaRecepcnehoForm extends javax.swing.JFrame {
         ulozZmenyButton = new javax.swing.JButton();
         zrusitButton = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Zmena hesla recepčného");
 
         loginjLabel.setText("Login:");
@@ -113,7 +113,7 @@ public class ZmenaHeslaRecepcnehoForm extends javax.swing.JFrame {
                     .addComponent(noveHesloZnovaPasswordField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(noveHesloZnovaLabel))
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(ulozZmenyButton)
                     .addComponent(zrusitButton))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))

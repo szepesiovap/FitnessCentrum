@@ -56,4 +56,19 @@ public class ZoznamZakaznikov implements ZakaznikDao {
     public void vymazZakaznika(int idZakaznika) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+
+    @Override
+    public Zakaznik dajZakaznikaSId(int idZakaznika) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public Zakaznik dajZakaznikaSCislomPermanentky(String cisloPermanentky) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public List<Zakaznik> dajZakaznikovSoZhodouVMene(String vzorka) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }

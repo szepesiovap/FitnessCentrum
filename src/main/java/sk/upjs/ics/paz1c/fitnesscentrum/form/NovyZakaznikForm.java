@@ -7,7 +7,7 @@ import sk.upjs.ics.paz1c.fitnesscentrum.DaoFactory;
 import sk.upjs.ics.paz1c.fitnesscentrum.entity.Zakaznik;
 
 public class NovyZakaznikForm extends javax.swing.JFrame {
-    
+
     private static HlavneOknoForm hlavneOkno;
     private static final String[] KREDIT_MOZNOSTI = {"50 EUR", "100 EUR", "150 EUR", "200 EUR"};
     private static final Double[] KREDIT_SUMY = {50.0, 100.0, 150.0, 200.0};
@@ -43,12 +43,18 @@ public class NovyZakaznikForm extends javax.swing.JFrame {
         kreditComboBox = new javax.swing.JComboBox<>();
         permanentkaCheckBox = new javax.swing.JCheckBox();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Nový zákazník");
         setResizable(false);
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosed(java.awt.event.WindowEvent evt) {
                 formWindowClosed(evt);
+            }
+        });
+
+        menoZakaznikaTextField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menoZakaznikaTextFieldActionPerformed(evt);
             }
         });
 
@@ -147,7 +153,7 @@ public class NovyZakaznikForm extends javax.swing.JFrame {
             System.out.println(kreditComboBox.getSelectedIndex());
             System.out.println(KREDIT_SUMY[kreditComboBox.getSelectedIndex()]);
         }
-        
+
         DaoFactory.INSTANCE.getMySQLZakaznikDao().pridajZakaznika(zakaznik);
         hlavneOkno.aktualizovatZoznamPritomnych();
         this.dispose();
@@ -171,7 +177,11 @@ public class NovyZakaznikForm extends javax.swing.JFrame {
     private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
         hlavneOkno.setEnabled(true);
     }//GEN-LAST:event_formWindowClosed
-    
+
+    private void menoZakaznikaTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menoZakaznikaTextFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_menoZakaznikaTextFieldActionPerformed
+
     private void inicializaciaZaciatocnehoStavu() {
         kreditComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(KREDIT_MOZNOSTI));
     }
@@ -185,24 +195,24 @@ public class NovyZakaznikForm extends javax.swing.JFrame {
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
          * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
          */
-        
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    try {
-                        javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                        break;
-                    } catch (ClassNotFoundException ex) {
-                        Logger.getLogger(NovyZakaznikForm.class.getName()).log(Level.SEVERE, null, ex);
-                    } catch (InstantiationException ex) {
-                        Logger.getLogger(NovyZakaznikForm.class.getName()).log(Level.SEVERE, null, ex);
-                    } catch (IllegalAccessException ex) {
-                        Logger.getLogger(NovyZakaznikForm.class.getName()).log(Level.SEVERE, null, ex);
-                    } catch (UnsupportedLookAndFeelException ex) {
-                        Logger.getLogger(NovyZakaznikForm.class.getName()).log(Level.SEVERE, null, ex);
-                    }
+
+        for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+            if ("Nimbus".equals(info.getName())) {
+                try {
+                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                    break;
+                } catch (ClassNotFoundException ex) {
+                    Logger.getLogger(NovyZakaznikForm.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (InstantiationException ex) {
+                    Logger.getLogger(NovyZakaznikForm.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (IllegalAccessException ex) {
+                    Logger.getLogger(NovyZakaznikForm.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (UnsupportedLookAndFeelException ex) {
+                    Logger.getLogger(NovyZakaznikForm.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
-        
+        }
+
         //</editor-fold>
 
         /* Create and display the form */

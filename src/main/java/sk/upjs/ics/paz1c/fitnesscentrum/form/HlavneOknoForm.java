@@ -4,18 +4,12 @@ import sk.upjs.ics.paz1c.fitnesscentrum.DaoFactory;
 import sk.upjs.ics.paz1c.fitnesscentrum.PritomniZakazniciTableModel;
 
 public final class HlavneOknoForm extends javax.swing.JFrame {
-
-    private final PritomniZakazniciTableModel pritomniZakazniciTableModel;
-
     private static final int ID_COLUMN = 0;
-
     /**
      * Creates new form ZoznamZakaznikovForm
      */
     public HlavneOknoForm() {
-        pritomniZakazniciTableModel = new PritomniZakazniciTableModel();
         initComponents();
-        inicializaciaZaciatocnehoStavu();
         aktualizovatZoznamPritomnych();
     }
 
@@ -139,7 +133,7 @@ public final class HlavneOknoForm extends javax.swing.JFrame {
     }//GEN-LAST:event_novyMenuMousePressed
 
     private void dobiMenuMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_dobiMenuMousePressed
-        // TODO add your handling code here:
+     //
     }//GEN-LAST:event_dobiMenuMousePressed
 
     /**
@@ -195,7 +189,4 @@ public final class HlavneOknoForm extends javax.swing.JFrame {
     private javax.swing.JMenu zoznamMenu;
     // End of variables declaration//GEN-END:variables
 
-    private void inicializaciaZaciatocnehoStavu() {
-        pritomniTable.setModel(pritomniZakazniciTableModel);
-    }
 }
