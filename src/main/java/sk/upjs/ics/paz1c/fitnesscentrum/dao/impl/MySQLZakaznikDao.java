@@ -39,25 +39,25 @@ public class MySQLZakaznikDao implements ZakaznikDao {
     }
 
     @Override
-    public void prichod(int idZakaznika, Integer idKluca) {
+    public void prichod(Long idZakaznika, Long idKluca) {
         String sql = "UPDATE zakaznik SET pritomny=1,id_kluca=?, posledny_prichod=timestamp(now()) where id = ?";
         jdbcTemplate.update(sql, idKluca, idZakaznika);
     }
 
     @Override
-    public void odchod(int idZakaznika) {
+    public void odchod(Long idZakaznika) {
         String sql = "UPDATE zakaznik set pritomny=0,id_kluca=NULL,posledny_prichod=timestamp(now()) where id = ?";
         jdbcTemplate.update(sql, idZakaznika);
     }
 
     @Override
-    public void vymazZakaznika(int idZakaznika) {
+    public void vymazZakaznika(Long idZakaznika) {
         String sql = "DELETE FROM zakaznik WHERE id = ?";
         jdbcTemplate.update(sql, idZakaznika);
     }
 
     @Override
-    public Zakaznik dajZakaznikaSId(int idZakaznika) {
+    public Zakaznik dajZakaznikaSId(Long idZakaznika) {
         String sql = "SELECT *  FROM zakaznik WHERE id = " + idZakaznika;
         return jdbcTemplate.query(sql, zakaznikRowMapper).get(0);
     }
@@ -70,7 +70,7 @@ public class MySQLZakaznikDao implements ZakaznikDao {
 
     @Override
     public List<Zakaznik> dajZakaznikovSoZhodouVMene(String vzorka) {
-        String sql = "SELECT *  FROM zakaznik WHERE meno_priezvisko LIKE "+"\'%"+vzorka+"%\'";
+        String sql = "SELECT *  FROM zakaznik WHERE meno_priezvisko LIKE " + "\'%" + vzorka + "%\'";
         return jdbcTemplate.query(sql, zakaznikRowMapper);
     }
 }

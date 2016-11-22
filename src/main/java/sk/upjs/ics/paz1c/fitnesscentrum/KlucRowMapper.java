@@ -10,9 +10,9 @@ public class KlucRowMapper implements RowMapper<Kluc> {
     @Override
     public Kluc mapRow(ResultSet rs, int i) throws SQLException {
         Kluc kluc = new Kluc();
-        kluc.setIdKluca(rs.getInt("id_kluca"));
+        kluc.setIdKluca(rs.getLong("id_kluca"));
         kluc.setMenoKluca(rs.getString("meno_kluca"));
-        kluc.setIdZakaznika(rs.getInt("id_zakaznika"));
+        kluc.setIdZakaznika(rs.getLong("id_zakaznika"));
         return kluc;
     }
 }

@@ -134,7 +134,7 @@ public final class ZoznamForm extends javax.swing.JFrame {
 
     private void prichodButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_prichodButtonActionPerformed
         try {
-            int idZakaznika = (Integer) zoznamZakaznikovTable.getValueAt(this.zoznamZakaznikovTable.getSelectedRow(), ID_COLUMN);
+            Long idZakaznika = (Long) zoznamZakaznikovTable.getValueAt(this.zoznamZakaznikovTable.getSelectedRow(), ID_COLUMN);
             Zakaznik zakaznik = zakaznikDao.dajZakaznikaSId(idZakaznika);
             if (!zakaznik.isPritomny()) {
                 new PrichodZakaznikaForm(this, true, zakaznik).setVisible(true);
@@ -154,7 +154,7 @@ public final class ZoznamForm extends javax.swing.JFrame {
 
     private void zmazButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_zmazButtonActionPerformed
         try {
-            int idZakaznika = (Integer) zoznamZakaznikovTable.getValueAt(this.zoznamZakaznikovTable.getSelectedRow(), ID_COLUMN);
+            Long idZakaznika = (Long) zoznamZakaznikovTable.getValueAt(this.zoznamZakaznikovTable.getSelectedRow(), ID_COLUMN);
             Zakaznik zakaznik = zakaznikDao.dajZakaznikaSId(idZakaznika);
             if (!zakaznik.isPritomny()) {
                 new ZmazatZakaznikaForm(this, true, zakaznik).setVisible(true);

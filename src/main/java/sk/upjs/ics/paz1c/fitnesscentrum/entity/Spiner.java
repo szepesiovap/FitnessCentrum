@@ -2,14 +2,14 @@
 package sk.upjs.ics.paz1c.fitnesscentrum.entity;
 
 public class Spiner {
-    private int id;
+    private Long id;
     private String meno; 
 
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

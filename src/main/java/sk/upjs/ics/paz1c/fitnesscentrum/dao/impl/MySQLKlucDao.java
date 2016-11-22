@@ -29,7 +29,7 @@ public class MySQLKlucDao implements KlucDao {
 
 
     @Override
-    public Kluc dajKlucSId(Integer idKluca) {
+    public Kluc dajKlucSId(Long idKluca) {
         try {
             String sql = "SELECT *  FROM kluc WHERE id_kluca = " + idKluca;
             return jdbcTemplate.query(sql, new KlucRowMapper()).get(0);
@@ -41,13 +41,13 @@ public class MySQLKlucDao implements KlucDao {
 
 
     @Override
-    public void priradZakaznika(int idKluca, int idZakaznika) {
+    public void priradZakaznika(Long idKluca, Long idZakaznika) {
         String sql = "UPDATE kluc SET id_zakaznika= ? where id_kluca = ?";
         jdbcTemplate.update(sql, idZakaznika, idKluca);
     }
 
     @Override
-    public void odoberZakaznika(int idKluca) {
+    public void odoberZakaznika(Long idKluca) {
         String sql = "UPDATE kluc SET id_zakaznika= NULL where id_kluca = ?";
         jdbcTemplate.update(sql, idKluca);
     }

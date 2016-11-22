@@ -122,7 +122,7 @@ public final class HlavneOknoForm extends javax.swing.JFrame {
 
     private void odchodMenuMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_odchodMenuMousePressed
         try {
-            int idZakaznika = (Integer) pritomniTable.getValueAt(pritomniTable.getSelectedRow(), ID_COLUMN);
+            Long idZakaznika = (Long) pritomniTable.getValueAt(pritomniTable.getSelectedRow(), ID_COLUMN);
             ZakaznikDao zakaznikDao = DaoFactory.INSTANCE.getMySQLZakaznikDao();
             KlucDao klucDao = DaoFactory.INSTANCE.getKlucDao();
             klucDao.odoberZakaznika(zakaznikDao.dajZakaznikaSId(idZakaznika).getIdKluca());

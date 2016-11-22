@@ -4,19 +4,19 @@ import java.time.LocalDateTime;
 
 public class Zakaznik {
 
-    private Integer id;
+    private Long id;
     private String meno;
     private LocalDateTime poslednyPrichod;
     private boolean pritomny;
     private double kredit;
     private String cisloPermanentky;
-    private Integer idKluca;
+    private Long idKluca;
 
-    public Integer getIdKluca() {
+    public Long getIdKluca() {
         return idKluca;
     }
 
-    public void setIdKluca(Integer idKluca) {
+    public void setIdKluca(Long idKluca) {
         this.idKluca = idKluca;
     }
 
@@ -36,11 +36,11 @@ public class Zakaznik {
         this.cisloPermanentky = cisloPermanentky;
     }
 
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

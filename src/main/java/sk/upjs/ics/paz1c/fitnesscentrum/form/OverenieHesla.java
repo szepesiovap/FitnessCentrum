@@ -82,7 +82,7 @@ public class OverenieHesla extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void potvrdButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_potvrdButtonActionPerformed
-        Recepcny recepcny = DaoFactory.INSTANCE.getRecepcnyDao().dajRecepcneho(0);
+        Recepcny recepcny = DaoFactory.INSTANCE.getRecepcnyDao().dajRecepcneho(0L);
         String salt = recepcny.getSalt();
         String heslo = hesloPasswordField.getText();
         String hashHeslo = Hashovanie.zahesuj(salt, heslo);

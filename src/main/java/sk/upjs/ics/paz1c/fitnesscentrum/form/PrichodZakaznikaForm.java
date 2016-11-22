@@ -48,11 +48,6 @@ public class PrichodZakaznikaForm extends javax.swing.JDialog {
         jLabel1.setText("Kľúč: ");
 
         klucComboBox.setModel(new KlucComboBoxModel());
-        klucComboBox.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                klucComboBoxActionPerformed(evt);
-            }
-        });
 
         prichodButton.setText("Príchod");
         prichodButton.addActionListener(new java.awt.event.ActionListener() {
@@ -99,12 +94,8 @@ public class PrichodZakaznikaForm extends javax.swing.JDialog {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void klucComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_klucComboBoxActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_klucComboBoxActionPerformed
-
     private void prichodButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_prichodButtonActionPerformed
-        int idKluca = ((Kluc) klucComboBox.getSelectedItem()).getIdKluca();
+        Long idKluca = ((Kluc) klucComboBox.getSelectedItem()).getIdKluca();
         DaoFactory.INSTANCE.getMySQLZakaznikDao().prichod(zakaznik.getId(), idKluca);
         DaoFactory.INSTANCE.getKlucDao().priradZakaznika(idKluca, zakaznik.getId());
         dispose();

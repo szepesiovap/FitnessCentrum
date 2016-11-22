@@ -13,7 +13,7 @@ public class RecepcnyRowMapper implements RowMapper<Recepcny> {
     @Override
     public Recepcny mapRow(ResultSet rs, int i) throws SQLException {
         Recepcny recepcny = new Recepcny();
-        recepcny.setId(rs.getInt("id"));
+        recepcny.setId(rs.getLong("id"));
         recepcny.setMeno(rs.getString("meno_priezvisko"));
         recepcny.setLogin(rs.getString("login"));
         recepcny.setHeslo(rs.getString("heslo"));

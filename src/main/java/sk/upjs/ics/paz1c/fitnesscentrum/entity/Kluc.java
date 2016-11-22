@@ -2,9 +2,9 @@ package sk.upjs.ics.paz1c.fitnesscentrum.entity;
 
 public class Kluc {
 
-    private Integer idKluca;
+    private Long idKluca;
     private String menoKluca;
-    private Integer idZakaznika;
+    private Long idZakaznika;
 
     public String getMenoKluca() {
         return menoKluca;
@@ -14,19 +14,19 @@ public class Kluc {
         this.menoKluca = menoKluca;
     }
 
-    public Integer getIdZakaznika() {
+    public Long getIdZakaznika() {
         return idZakaznika;
     }
 
-    public void setIdZakaznika(Integer idZakaznika) {
+    public void setIdZakaznika(Long idZakaznika) {
         this.idZakaznika = idZakaznika;
     }
 
-    public Integer getIdKluca() {
+    public Long getIdKluca() {
         return idKluca;
     }
 
-    public void setIdKluca(Integer idKluca) {
+    public void setIdKluca(Long idKluca) {
         this.idKluca = idKluca;
     }
 

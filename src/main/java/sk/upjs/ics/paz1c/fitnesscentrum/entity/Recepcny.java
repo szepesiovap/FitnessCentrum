@@ -2,17 +2,17 @@ package sk.upjs.ics.paz1c.fitnesscentrum.entity;
 
 public class Recepcny {
 
-    private int id;
+    private Long id;
     private String meno;
     private String login;
     private String heslo;
     private String salt;
 
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

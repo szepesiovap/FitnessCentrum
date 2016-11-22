@@ -7,7 +7,7 @@ public interface RecepcnyDao {
 
     public Recepcny dajRecepcneho(String login);
 
-    public Recepcny dajRecepcneho(int idRecepcneho);
+    public Recepcny dajRecepcneho(Long idRecepcneho);
 
     public List<Recepcny> dajVsetkychRecepcnych();
 

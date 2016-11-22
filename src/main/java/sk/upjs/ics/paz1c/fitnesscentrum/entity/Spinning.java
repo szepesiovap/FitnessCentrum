@@ -4,20 +4,20 @@ import java.util.Date;
 
 
 public class Spinning {
-    private int id;
+    private Long id;
     private Date datum;
     private Date cas;
     private int kapacita;
     private int volne;
-    private int idSpinera;
+    private Long idSpinera;
     
     //TODO : dorobit zoznam prihlasenych
 
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -53,11 +53,11 @@ public class Spinning {
         this.volne = volne;
     }
 
-    public int getIdSpinera() {
+    public Long getIdSpinera() {
         return idSpinera;
     }
 
-    public void setIdSpinera(int idSpinera) {
+    public void setIdSpinera(Long idSpinera) {
         this.idSpinera = idSpinera;
     }
 }

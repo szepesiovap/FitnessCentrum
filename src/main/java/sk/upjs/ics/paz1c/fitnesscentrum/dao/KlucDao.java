@@ -9,10 +9,10 @@ public interface KlucDao {
 
     public List<Kluc> dajVolneKluce();
 
-    public void priradZakaznika(int idKluca, int idZakaznika);
+    public void priradZakaznika(Long idKluca, Long idZakaznika);
 
-    public void odoberZakaznika(int idKluca);
+    public void odoberZakaznika(Long idKluca);
 
-    public Kluc dajKlucSId(Integer idKluca);
+    public Kluc dajKlucSId(Long idKluca);
 
 }

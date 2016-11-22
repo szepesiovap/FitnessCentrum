@@ -44,7 +44,7 @@ public class MySQLRecepcnyDao implements RecepcnyDao {
     }
 
     @Override
-    public Recepcny dajRecepcneho(int idRecepcneho) {
+    public Recepcny dajRecepcneho(Long idRecepcneho) {
         String sql = "SELECT * FROM recepcny WHERE id=?";
         return jdbcTemplate.queryForObject(sql, new RecepcnyRowMapper(), idRecepcneho);
     }
