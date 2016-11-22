@@ -3,12 +3,14 @@ package sk.upjs.ics.paz1c.fitnesscentrum.form;
 import javax.swing.JOptionPane;
 import sk.upjs.ics.paz1c.fitnesscentrum.DaoFactory;
 import sk.upjs.ics.paz1c.fitnesscentrum.ZakaznikTableModel;
+import sk.upjs.ics.paz1c.fitnesscentrum.dao.ZakaznikDao;
+import sk.upjs.ics.paz1c.fitnesscentrum.entity.Zakaznik;
 
 public final class ZoznamForm extends javax.swing.JFrame {
 
     private static HlavneOknoForm hlavneOkno;
+    private ZakaznikDao zakaznikDao;
     private static final int ID_COLUMN = 0;
-    private static final int MENO_COLUMN = 1;
 
     /**
      * Creates new form ZoznamForm
@@ -16,6 +18,7 @@ public final class ZoznamForm extends javax.swing.JFrame {
      * @param hlavneOkno
      */
     public ZoznamForm(HlavneOknoForm hlavneOkno) {
+        zakaznikDao = DaoFactory.INSTANCE.getMySQLZakaznikDao();
         ZoznamForm.hlavneOkno = hlavneOkno;
         hlavneOkno.setEnabled(false);
         initComponents();
@@ -49,7 +52,6 @@ public final class ZoznamForm extends javax.swing.JFrame {
         });
 
         zoznamZakaznikovTable.setModel(new ZakaznikTableModel(""));
-        zoznamZakaznikovTable.setCellSelectionEnabled(true);
         zoznamZakaznikovScrollPane.setViewportView(zoznamZakaznikovTable);
 
         prichodButton.setText("Príchod");
@@ -133,10 +135,10 @@ public final class ZoznamForm extends javax.swing.JFrame {
     private void prichodButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_prichodButtonActionPerformed
         try {
             int idZakaznika = (Integer) zoznamZakaznikovTable.getValueAt(this.zoznamZakaznikovTable.getSelectedRow(), ID_COLUMN);
-            if (!DaoFactory.INSTANCE.getMySQLZakaznikDao().dajZakaznikaSId(idZakaznika).isPritomny()) {
-
-                String menoZakaznika = (String) zoznamZakaznikovTable.getValueAt(this.zoznamZakaznikovTable.getSelectedRow(), MENO_COLUMN);
-                new PrichodForm(this, idZakaznika, menoZakaznika).setVisible(true);
+            Zakaznik zakaznik = zakaznikDao.dajZakaznikaSId(idZakaznika);
+            if (!zakaznik.isPritomny()) {
+                new PrichodZakaznikaForm(this, true, zakaznik).setVisible(true);
+                aktualizovatZoznamZakaznikov();
             } else {
                 JOptionPane.showMessageDialog(this, "Zákazník je už prítomný!");
             }
@@ -153,10 +155,10 @@ public final class ZoznamForm extends javax.swing.JFrame {
     private void zmazButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_zmazButtonActionPerformed
         try {
             int idZakaznika = (Integer) zoznamZakaznikovTable.getValueAt(this.zoznamZakaznikovTable.getSelectedRow(), ID_COLUMN);
-            if (!DaoFactory.INSTANCE.getMySQLZakaznikDao().dajZakaznikaSId(idZakaznika).isPritomny()) {
-                String menoZakaznika = (String) zoznamZakaznikovTable.getValueAt(this.zoznamZakaznikovTable.getSelectedRow(), MENO_COLUMN);
-                new ZmazZakaznikaForm(this, menoZakaznika, idZakaznika).setVisible(true);
-
+            Zakaznik zakaznik = zakaznikDao.dajZakaznikaSId(idZakaznika);
+            if (!zakaznik.isPritomny()) {
+                new ZmazatZakaznikaForm(this, true, zakaznik).setVisible(true);
+                aktualizovatZoznamZakaznikov();
             } else {
                 JOptionPane.showMessageDialog(this, "Nemožno vymazať prítomného zákazníka!");
             }

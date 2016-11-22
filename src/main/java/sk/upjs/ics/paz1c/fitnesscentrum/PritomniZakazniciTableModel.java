@@ -31,7 +31,7 @@ public class PritomniZakazniciTableModel extends AbstractTableModel {
             case 1:
                 return zakaznik.getMeno();
             case 2:
-                return DaoFactory.INSTANCE.getKlucDao().dajMenoKlucaSId(zakaznik.getIdKluca());
+                return DaoFactory.INSTANCE.getKlucDao().dajKlucSId(zakaznik.getIdKluca()).getMenoKluca();
             case 3:
                 return zakaznik.getPoslednyPrichod();
             case 4:

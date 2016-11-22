@@ -30,4 +30,11 @@ public class Kluc {
         this.idKluca = idKluca;
     }
 
+    @Override
+    public String toString() {
+        return menoKluca;
+    }
+    
+    
+
 }

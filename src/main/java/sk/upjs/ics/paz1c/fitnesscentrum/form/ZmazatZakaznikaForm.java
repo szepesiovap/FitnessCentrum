@@ -1,27 +1,31 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package sk.upjs.ics.paz1c.fitnesscentrum.form;
 
 import sk.upjs.ics.paz1c.fitnesscentrum.DaoFactory;
 import sk.upjs.ics.paz1c.fitnesscentrum.dao.ZakaznikDao;
+import sk.upjs.ics.paz1c.fitnesscentrum.entity.Zakaznik;
 
-public class ZmazZakaznikaForm extends javax.swing.JFrame {
+/**
+ *
+ * @author patka
+ */
+public class ZmazatZakaznikaForm extends javax.swing.JDialog {
 
-    private static ZoznamForm zoznamForm;
-    private static String menoZakaznika;
-    private static int idZakaznika;
+    private static Zakaznik zakaznik;
 
     /**
      * Creates new form ZmazZakaznikaForm
-     * @param zoznamForm
-     * @param menoZakaznika
-     * @param idZakaznika
      */
-    public ZmazZakaznikaForm(ZoznamForm zoznamForm, String menoZakaznika, int idZakaznika) {
-        ZmazZakaznikaForm.zoznamForm = zoznamForm;
-        zoznamForm.setEnabled(false);
-        ZmazZakaznikaForm.menoZakaznika = menoZakaznika;
-        ZmazZakaznikaForm.idZakaznika = idZakaznika;
+    public ZmazatZakaznikaForm(java.awt.Frame parent, boolean modal, Zakaznik zakaznik) {
+        super(parent, modal);
+        this.zakaznik = zakaznik;
         initComponents();
         inicializaciaZaciatocnehoStavu();
+
     }
 
     /**
@@ -33,18 +37,12 @@ public class ZmazZakaznikaForm extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        zmazatLabel = new javax.swing.JLabel();
         zmazatButton = new javax.swing.JButton();
         zrusitButton = new javax.swing.JButton();
+        zmazatLabel = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Zmazať zákazníka");
-        setPreferredSize(new java.awt.Dimension(350, 150));
-        addWindowListener(new java.awt.event.WindowAdapter() {
-            public void windowClosed(java.awt.event.WindowEvent evt) {
-                formWindowClosed(evt);
-            }
-        });
 
         zmazatButton.setText("Zmazať");
         zmazatButton.addActionListener(new java.awt.event.ActionListener() {
@@ -65,49 +63,42 @@ public class ZmazZakaznikaForm extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(41, 41, 41)
+                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(zmazatLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 398, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(zmazatLabel)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(zmazatButton, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 87, Short.MAX_VALUE)
-                        .addComponent(zrusitButton, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(42, 42, 42))))
+                        .addGap(62, 62, 62)
+                        .addComponent(zmazatButton)
+                        .addGap(79, 79, 79)
+                        .addComponent(zrusitButton, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(38, 38, 38)
-                .addComponent(zmazatLabel)
-                .addGap(34, 34, 34)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(zmazatLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(zmazatButton)
                     .addComponent(zrusitButton))
-                .addContainerGap(53, Short.MAX_VALUE))
+                .addContainerGap(21, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void zmazatButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_zmazatButtonActionPerformed
-        ZakaznikDao zakaznikDao = DaoFactory.INSTANCE.getMySQLZakaznikDao();       
-        zakaznikDao.vymazZakaznika(idZakaznika);
-        zoznamForm.aktualizovatZoznamZakaznikov();
-        dispose();
-    }//GEN-LAST:event_zmazatButtonActionPerformed
-
-    private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
-        zoznamForm.setEnabled(true);
-    }//GEN-LAST:event_formWindowClosed
+        ZakaznikDao zakaznikDao = DaoFactory.INSTANCE.getMySQLZakaznikDao();
+        zakaznikDao.vymazZakaznika(zakaznik.getId());
+        dispose();    }//GEN-LAST:event_zmazatButtonActionPerformed
 
     private void zrusitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_zrusitButtonActionPerformed
         dispose();
     }//GEN-LAST:event_zrusitButtonActionPerformed
 
     private void inicializaciaZaciatocnehoStavu() {
-        zmazatLabel.setText("Ste si istý, že chcete zmazať zákazníka " + menoZakaznika + "?");
+        zmazatLabel.setText("Ste si istý, že chcete zmazať zákazníka " + zakaznik.getMeno() + "?");
     }
 
     /**
@@ -127,20 +118,27 @@ public class ZmazZakaznikaForm extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(ZmazZakaznikaForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ZmazatZakaznikaForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(ZmazZakaznikaForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ZmazatZakaznikaForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(ZmazZakaznikaForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ZmazatZakaznikaForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(ZmazZakaznikaForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ZmazatZakaznikaForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
-        /* Create and display the form */
+        /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new ZmazZakaznikaForm(zoznamForm, menoZakaznika, idZakaznika).setVisible(true);
+                ZmazatZakaznikaForm dialog = new ZmazatZakaznikaForm(new javax.swing.JFrame(), true, zakaznik);
+                dialog.addWindowListener(new java.awt.event.WindowAdapter() {
+                    @Override
+                    public void windowClosing(java.awt.event.WindowEvent e) {
+                        System.exit(0);
+                    }
+                });
+                dialog.setVisible(true);
             }
         });
     }

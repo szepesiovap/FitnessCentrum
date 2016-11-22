@@ -27,25 +27,6 @@ public class MySQLKlucDao implements KlucDao {
         return jdbcTemplate.query(sql, new KlucRowMapper());
     }
 
-    @Override
-    public String[] dajMenaVolnychKlucov() {
-        List<Kluc> volneKluce = dajVolneKluce();
-        String[] menaVolnychKlucov = new String[volneKluce.size()];
-        for (int i = 0; i < volneKluce.size(); i++) {
-            menaVolnychKlucov[i] = volneKluce.get(i).getMenoKluca();
-        }
-        return menaVolnychKlucov;
-    }
-
-    @Override
-    public int[] dajIdVolnychKlucov() {
-        List<Kluc> volneKluce = dajVolneKluce();
-        int[] idVolnychKlucov = new int[volneKluce.size()];
-        for (int i = 0; i < volneKluce.size(); i++) {
-            idVolnychKlucov[i] = volneKluce.get(i).getIdKluca();
-        }
-        return idVolnychKlucov;
-    }
 
     @Override
     public Kluc dajKlucSId(Integer idKluca) {
@@ -56,19 +37,8 @@ public class MySQLKlucDao implements KlucDao {
             System.err.println("Chyba");
             return null;
         }
-
     }
 
-    @Override
-    public String dajMenoKlucaSId(Integer idKluca) {
-        try {
-            String sql = "SELECT *  FROM kluc WHERE id_kluca = " + idKluca;
-            return jdbcTemplate.query(sql, new KlucRowMapper()).get(0).getMenoKluca();
-        } catch (Exception e) {
-            System.err.println("Chyba");
-            return null;
-        }
-    }
 
     @Override
     public void priradZakaznika(int idKluca, int idZakaznika) {

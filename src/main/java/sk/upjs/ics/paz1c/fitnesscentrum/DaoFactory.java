@@ -12,29 +12,41 @@ import sk.upjs.ics.paz1c.fitnesscentrum.dao.impl.MySQLZakaznikDao;
 public enum DaoFactory {
 
     INSTANCE;
+    JdbcTemplate jdbcTemplate;
+    ZakaznikDao zakaznikDao;
+    KlucDao klucDao;
+    RecepcnyDao recepcnyDao;
 
     public JdbcTemplate getJdbcTemplate() {
-        MysqlDataSource dataSource;
-        dataSource = new MysqlDataSource();
-        dataSource.setDatabaseName("fitnesscentrum");
-        dataSource.setUser("fitnesscentrum");
-        dataSource.setPassword("fitnesscentrum");
-        return new JdbcTemplate(dataSource);
+        if (jdbcTemplate == null) {
+            MysqlDataSource dataSource;
+            dataSource = new MysqlDataSource();
+            dataSource.setDatabaseName("fitnesscentrum");
+            dataSource.setUser("fitnesscentrum");
+            dataSource.setPassword("fitnesscentrum");
+            jdbcTemplate = new JdbcTemplate(dataSource);
+        }
+        return jdbcTemplate;
     }
 
-    public ZakaznikDao getZakaznikDao() {
-        return new ZoznamZakaznikov();
-    }
-
-    public MySQLZakaznikDao getMySQLZakaznikDao() {
-        return new MySQLZakaznikDao();
+    public ZakaznikDao getMySQLZakaznikDao() {
+        if (zakaznikDao== null){
+            zakaznikDao = new MySQLZakaznikDao();
+        }
+        return zakaznikDao;
     }
 
     public RecepcnyDao getRecepcnyDao() {
-        return new MySQLRecepcnyDao();
+       if (recepcnyDao== null){
+            recepcnyDao = new MySQLRecepcnyDao();
+        }
+        return recepcnyDao;
     }
-    
+
     public KlucDao getKlucDao() {
-        return new MySQLKlucDao();
+        if (klucDao== null){
+            klucDao = new MySQLKlucDao();
+        }
+        return klucDao;
     }
 }
