@@ -34,8 +34,6 @@
                   <Group type="102" attributes="0">
                       <Component id="prichodButton" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="32767" attributes="0"/>
-                      <Component id="upravButton" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
                       <Component id="zmazButton" min="-2" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
                   </Group>
@@ -72,7 +70,6 @@
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="prichodButton" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="upravButton" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="zmazButton" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
           </Group>
@@ -100,11 +97,6 @@
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="prichodButtonActionPerformed"/>
       </Events>
-    </Component>
-    <Component class="javax.swing.JButton" name="upravButton">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Uprav"/>
-      </Properties>
     </Component>
     <Component class="javax.swing.JButton" name="zmazButton">
       <Properties>

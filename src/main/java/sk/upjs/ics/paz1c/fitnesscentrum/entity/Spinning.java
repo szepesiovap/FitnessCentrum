@@ -1,6 +1,7 @@
 package sk.upjs.ics.paz1c.fitnesscentrum.entity;
 
 import java.time.LocalDateTime;
+import sk.upjs.ics.paz1c.fitnesscentrum.DaoFactory;
 
 public class Spinning {
 
@@ -49,4 +50,10 @@ public class Spinning {
     public void setIdInstruktora(Long idInstruktora) {
         this.idInstruktora = idInstruktora;
     }
+
+    @Override
+    public String toString() {
+        return getDatum() + " " + DaoFactory.INSTANCE.getInstruktorDao().dajInstruktoraSId(idInstruktora).getMeno();
+    }
+
 }

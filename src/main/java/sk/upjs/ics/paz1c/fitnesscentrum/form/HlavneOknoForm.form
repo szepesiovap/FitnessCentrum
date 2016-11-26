@@ -36,6 +36,14 @@
             <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="dobiMenuMousePressed"/>
           </Events>
         </Menu>
+        <Menu class="javax.swing.JMenu" name="spinningMenu">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Spinning"/>
+          </Properties>
+          <Events>
+            <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="spinningMenuMousePressed"/>
+          </Events>
+        </Menu>
         <Menu class="javax.swing.JMenu" name="odhlasitMenu">
           <Properties>
             <Property name="text" type="java.lang.String" value="Odhl&#xe1;si&#x165;"/>

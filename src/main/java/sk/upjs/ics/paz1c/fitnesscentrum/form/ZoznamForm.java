@@ -37,7 +37,6 @@ public final class ZoznamForm extends javax.swing.JFrame {
         zoznamZakaznikovScrollPane = new javax.swing.JScrollPane();
         zoznamZakaznikovTable = new javax.swing.JTable();
         prichodButton = new javax.swing.JButton();
-        upravButton = new javax.swing.JButton();
         zmazButton = new javax.swing.JButton();
         hladajPodlaMenaLabel = new javax.swing.JLabel();
         hladajPodlaMenaTextField = new javax.swing.JTextField();
@@ -60,8 +59,6 @@ public final class ZoznamForm extends javax.swing.JFrame {
                 prichodButtonActionPerformed(evt);
             }
         });
-
-        upravButton.setText("Uprav");
 
         zmazButton.setText("Zmaž");
         zmazButton.addActionListener(new java.awt.event.ActionListener() {
@@ -96,8 +93,6 @@ public final class ZoznamForm extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(prichodButton)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(upravButton)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(zmazButton)
                         .addGap(18, 18, 18))
                     .addGroup(layout.createSequentialGroup()
@@ -125,7 +120,6 @@ public final class ZoznamForm extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(prichodButton)
-                    .addComponent(upravButton)
                     .addComponent(zmazButton)))
         );
 
@@ -197,7 +191,6 @@ public final class ZoznamForm extends javax.swing.JFrame {
     private javax.swing.JLabel hladajPodlaMenaLabel;
     private javax.swing.JTextField hladajPodlaMenaTextField;
     private javax.swing.JButton prichodButton;
-    private javax.swing.JButton upravButton;
     private javax.swing.JButton zmazButton;
     private javax.swing.JScrollPane zoznamZakaznikovScrollPane;
     private javax.swing.JTable zoznamZakaznikovTable;

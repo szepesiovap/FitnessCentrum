@@ -6,7 +6,9 @@ import sk.upjs.ics.paz1c.fitnesscentrum.dao.KlucDao;
 import sk.upjs.ics.paz1c.fitnesscentrum.dao.ZakaznikDao;
 
 public final class HlavneOknoForm extends javax.swing.JFrame {
+
     private static final int ID_COLUMN = 0;
+
     /**
      * Creates new form ZoznamZakaznikovForm
      */
@@ -14,7 +16,7 @@ public final class HlavneOknoForm extends javax.swing.JFrame {
         initComponents();
         aktualizovatZoznamPritomnych();
     }
-
+    
     public void aktualizovatZoznamPritomnych() {
         PritomniZakazniciTableModel model = (PritomniZakazniciTableModel) pritomniTable.getModel();
         model.aktualizovat();
@@ -36,6 +38,7 @@ public final class HlavneOknoForm extends javax.swing.JFrame {
         odchodMenu = new javax.swing.JMenu();
         novyMenu = new javax.swing.JMenu();
         dobiMenu = new javax.swing.JMenu();
+        spinningMenu = new javax.swing.JMenu();
         odhlasitMenu = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -77,6 +80,14 @@ public final class HlavneOknoForm extends javax.swing.JFrame {
             }
         });
         hlavneOknoMenuBar.add(dobiMenu);
+
+        spinningMenu.setText("Spinning");
+        spinningMenu.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                spinningMenuMousePressed(evt);
+            }
+        });
+        hlavneOknoMenuBar.add(spinningMenu);
 
         odhlasitMenu.setText("Odhlásiť");
         odhlasitMenu.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -139,8 +150,12 @@ public final class HlavneOknoForm extends javax.swing.JFrame {
     }//GEN-LAST:event_novyMenuMousePressed
 
     private void dobiMenuMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_dobiMenuMousePressed
-     //
+
     }//GEN-LAST:event_dobiMenuMousePressed
+
+    private void spinningMenuMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_spinningMenuMousePressed
+        new SpinningForm(this, true).setVisible(true);
+    }//GEN-LAST:event_spinningMenuMousePressed
 
     /**
      * @param args the command line arguments
@@ -156,7 +171,7 @@ public final class HlavneOknoForm extends javax.swing.JFrame {
                 if ("Nimbus".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
-
+                    
                 }
             }
         } catch (ClassNotFoundException ex) {
@@ -192,6 +207,7 @@ public final class HlavneOknoForm extends javax.swing.JFrame {
     private javax.swing.JMenu odhlasitMenu;
     private javax.swing.JScrollPane pritomniScrollPane;
     private javax.swing.JTable pritomniTable;
+    private javax.swing.JMenu spinningMenu;
     private javax.swing.JMenu zoznamMenu;
     // End of variables declaration//GEN-END:variables
 
