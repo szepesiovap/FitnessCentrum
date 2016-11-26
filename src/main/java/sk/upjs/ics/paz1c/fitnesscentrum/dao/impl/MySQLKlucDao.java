@@ -5,38 +5,35 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import sk.upjs.ics.paz1c.fitnesscentrum.DaoFactory;
 import sk.upjs.ics.paz1c.fitnesscentrum.dao.KlucDao;
 import sk.upjs.ics.paz1c.fitnesscentrum.entity.Kluc;
-import sk.upjs.ics.paz1c.fitnesscentrum.KlucRowMapper;
+import sk.upjs.ics.paz1c.fitnesscentrum.rowmapper.KlucRowMapper;
 
 public class MySQLKlucDao implements KlucDao {
 
-    private JdbcTemplate jdbcTemplate;
+    private final JdbcTemplate jdbcTemplate;
+    private final KlucRowMapper klucRowMapper;
 
     public MySQLKlucDao() {
         jdbcTemplate = DaoFactory.INSTANCE.getJdbcTemplate();
+        klucRowMapper = new KlucRowMapper();
     }
 
     @Override
     public List<Kluc> dajVsetkyKluce() {
         String sql = "SELECT *  FROM kluc";
-        return jdbcTemplate.query(sql, new KlucRowMapper());
+        return jdbcTemplate.query(sql, klucRowMapper);
     }
 
     @Override
     public List<Kluc> dajVolneKluce() {
         String sql = "SELECT *  FROM kluc WHERE id_zakaznika is null";
-        return jdbcTemplate.query(sql, new KlucRowMapper());
+        return jdbcTemplate.query(sql, klucRowMapper);
     }
 
 
     @Override
     public Kluc dajKlucSId(Long idKluca) {
-        try {
-            String sql = "SELECT *  FROM kluc WHERE id_kluca = " + idKluca;
-            return jdbcTemplate.query(sql, new KlucRowMapper()).get(0);
-        } catch (Exception e) {
-            System.err.println("Chyba");
-            return null;
-        }
+            String sql = "SELECT *  FROM kluc WHERE id_kluca = ?";
+            return jdbcTemplate.queryForObject(sql, klucRowMapper, idKluca);
     }
 
 

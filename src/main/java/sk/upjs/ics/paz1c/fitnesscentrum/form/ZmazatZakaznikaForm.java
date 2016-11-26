@@ -1,18 +1,9 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package sk.upjs.ics.paz1c.fitnesscentrum.form;
 
 import sk.upjs.ics.paz1c.fitnesscentrum.DaoFactory;
 import sk.upjs.ics.paz1c.fitnesscentrum.dao.ZakaznikDao;
 import sk.upjs.ics.paz1c.fitnesscentrum.entity.Zakaznik;
 
-/**
- *
- * @author patka
- */
 public class ZmazatZakaznikaForm extends javax.swing.JDialog {
 
     private static Zakaznik zakaznik;

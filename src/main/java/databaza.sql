@@ -31,11 +31,24 @@ ENGINE = InnoDB
 AUTO_INCREMENT = 1
 DEFAULT CHARACTER SET = utf8;
 
+-- -----------------------------------------------------
+-- Table `fitnesscentrum`.`rezervacia`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `fitnesscentrum`.`rezervacia` (
+  `id_rezervacia` INT(11) NOT NULL AUTO_INCREMENT,
+  `id_spinning` INT(11),
+  `id_zakaznik` INT(11),
+  `cas_rezervacie` TIMESTAMP NULL DEFAULT NULL,
+  PRIMARY KEY (`id_rezervacia`))
+ENGINE = InnoDB
+AUTO_INCREMENT = 1
+DEFAULT CHARACTER SET = utf8;
+
 
 -- -----------------------------------------------------
--- Table `fitnesscentrum`.`spiner`
+-- Table `fitnesscentrum`.`instruktor`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `fitnesscentrum`.`spiner` (
+CREATE TABLE IF NOT EXISTS `fitnesscentrum`.`instruktor` (
   `id` INT(11) NOT NULL AUTO_INCREMENT,
   `meno_priezvisko` VARCHAR(60) NULL DEFAULT NULL,
   PRIMARY KEY (`id`))
@@ -49,16 +62,15 @@ DEFAULT CHARACTER SET = utf8;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `fitnesscentrum`.`spinning` (
   `id` INT(11) NOT NULL AUTO_INCREMENT,
-  `datum` DATE NULL DEFAULT NULL,
-  `cas` TIME NULL DEFAULT NULL,
+  `datum` TIMESTAMP NULL DEFAULT NULL,
   `kapacita` INT(11) NULL DEFAULT NULL,
   `volne` INT(11) NULL DEFAULT NULL,
-  `idTrener` INT(11) NULL DEFAULT NULL,
+  `id_instruktora` INT(11) NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
-  INDEX `idTrenera_idx` (`idTrener` ASC),
+  INDEX `id_instruktora_idx` (`id_instruktora` ASC),
   CONSTRAINT `idTrenera`
-    FOREIGN KEY (`idTrener`)
-    REFERENCES `fitnesscentrum`.`spiner` (`id`)
+    FOREIGN KEY (`id_instruktora`)
+    REFERENCES `fitnesscentrum`.`instruktor` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB
@@ -127,7 +139,7 @@ AUTO_INCREMENT = 1
 DEFAULT CHARACTER SET = utf8;
 
 INSERT INTO `fitnesscentrum`.`zakaznik` (`meno_priezvisko`,`pritomny`) VALUES ('Patka',0);
-INSERT INTO `fitnesscentrum`.`zakaznik` (`meno_priezvisko`,`pritomny`) VALUES ('Lucka',1);
+INSERT INTO `fitnesscentrum`.`zakaznik` (`meno_priezvisko`,`pritomny`) VALUES ('Lucka',0);
 
 
 SET SQL_MODE=@OLD_SQL_MODE;

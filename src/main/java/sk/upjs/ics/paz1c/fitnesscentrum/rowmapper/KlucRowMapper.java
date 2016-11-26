@@ -1,4 +1,4 @@
-package sk.upjs.ics.paz1c.fitnesscentrum;
+package sk.upjs.ics.paz1c.fitnesscentrum.rowmapper;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;

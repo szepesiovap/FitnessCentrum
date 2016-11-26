@@ -1,7 +1,7 @@
 
 package sk.upjs.ics.paz1c.fitnesscentrum.entity;
 
-public class Spiner {
+public class Instruktor {
     private Long id;
     private String meno; 
 

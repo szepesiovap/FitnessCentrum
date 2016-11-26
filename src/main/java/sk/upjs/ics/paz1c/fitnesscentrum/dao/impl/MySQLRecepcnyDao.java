@@ -3,16 +3,18 @@ package sk.upjs.ics.paz1c.fitnesscentrum.dao.impl;
 import java.util.List;
 import org.springframework.jdbc.core.JdbcTemplate;
 import sk.upjs.ics.paz1c.fitnesscentrum.DaoFactory;
-import sk.upjs.ics.paz1c.fitnesscentrum.RecepcnyRowMapper;
+import sk.upjs.ics.paz1c.fitnesscentrum.rowmapper.RecepcnyRowMapper;
 import sk.upjs.ics.paz1c.fitnesscentrum.dao.RecepcnyDao;
 import sk.upjs.ics.paz1c.fitnesscentrum.entity.Recepcny;
 
 public class MySQLRecepcnyDao implements RecepcnyDao {
 
-    private JdbcTemplate jdbcTemplate;
+    private final JdbcTemplate jdbcTemplate;
+    private final RecepcnyRowMapper recepcnyRowMapper;
 
     public MySQLRecepcnyDao() {
         jdbcTemplate = DaoFactory.INSTANCE.getJdbcTemplate();
+        recepcnyRowMapper = new RecepcnyRowMapper();
     }
 
     @Override
@@ -20,7 +22,7 @@ public class MySQLRecepcnyDao implements RecepcnyDao {
         String sql = "SELECT * FROM recepcny WHERE login = ?";
 
         try {
-            return jdbcTemplate.queryForObject(sql, new RecepcnyRowMapper(), login);
+            return jdbcTemplate.queryForObject(sql, recepcnyRowMapper, login);
         } catch (Exception EmptyResultDataAccessException) {
             return null;
         }
@@ -29,7 +31,7 @@ public class MySQLRecepcnyDao implements RecepcnyDao {
     @Override
     public List<Recepcny> dajVsetkychRecepcnych() {
         String sgl = "SELECT * FROM recepcny";
-        return jdbcTemplate.query(sgl, new RecepcnyRowMapper());
+        return jdbcTemplate.query(sgl, recepcnyRowMapper);
     }
 
     @Override
@@ -46,7 +48,7 @@ public class MySQLRecepcnyDao implements RecepcnyDao {
     @Override
     public Recepcny dajRecepcneho(Long idRecepcneho) {
         String sql = "SELECT * FROM recepcny WHERE id=?";
-        return jdbcTemplate.queryForObject(sql, new RecepcnyRowMapper(), idRecepcneho);
+        return jdbcTemplate.queryForObject(sql, recepcnyRowMapper, idRecepcneho);
     }
 
     @Override

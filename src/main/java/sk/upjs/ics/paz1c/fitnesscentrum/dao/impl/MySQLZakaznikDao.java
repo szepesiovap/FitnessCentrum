@@ -5,19 +5,18 @@ import java.time.LocalDateTime;
 import java.util.List;
 import org.springframework.jdbc.core.JdbcTemplate;
 import sk.upjs.ics.paz1c.fitnesscentrum.DaoFactory;
-import sk.upjs.ics.paz1c.fitnesscentrum.ZakaznikRowMapper;
+import sk.upjs.ics.paz1c.fitnesscentrum.rowmapper.ZakaznikRowMapper;
 import sk.upjs.ics.paz1c.fitnesscentrum.dao.ZakaznikDao;
 import sk.upjs.ics.paz1c.fitnesscentrum.entity.Zakaznik;
 
 public class MySQLZakaznikDao implements ZakaznikDao {
 
     private final JdbcTemplate jdbcTemplate;
-    private final ZakaznikRowMapper zakaznikRowMapper = new ZakaznikRowMapper();
+    private final ZakaznikRowMapper zakaznikRowMapper;
 
     public MySQLZakaznikDao() {
         jdbcTemplate = DaoFactory.INSTANCE.getJdbcTemplate();
-
-        //prichod(2, 5);
+        zakaznikRowMapper = new ZakaznikRowMapper();
     }
 
     @Override
@@ -58,19 +57,20 @@ public class MySQLZakaznikDao implements ZakaznikDao {
 
     @Override
     public Zakaznik dajZakaznikaSId(Long idZakaznika) {
-        String sql = "SELECT *  FROM zakaznik WHERE id = " + idZakaznika;
-        return jdbcTemplate.query(sql, zakaznikRowMapper).get(0);
+        String sql = "SELECT *  FROM zakaznik WHERE id = ?";
+        return jdbcTemplate.queryForObject(sql, zakaznikRowMapper, idZakaznika);
     }
 
     @Override
     public Zakaznik dajZakaznikaSCislomPermanentky(String cisloPermanentky) {
-        String sql = "SELECT *  FROM zakaznik WHERE cislo_permanentky = " + cisloPermanentky;
-        return jdbcTemplate.query(sql, zakaznikRowMapper).get(0);
+        String sql = "SELECT *  FROM zakaznik WHERE cislo_permanentky = ?";
+        return jdbcTemplate.queryForObject(sql, zakaznikRowMapper, cisloPermanentky);
     }
 
     @Override
     public List<Zakaznik> dajZakaznikovSoZhodouVMene(String vzorka) {
-        String sql = "SELECT *  FROM zakaznik WHERE meno_priezvisko LIKE " + "\'%" + vzorka + "%\'";
-        return jdbcTemplate.query(sql, zakaznikRowMapper);
+        vzorka = "\'%" + vzorka + "%\'";
+        String sql = "SELECT *  FROM zakaznik WHERE meno_priezvisko LIKE ?";
+        return jdbcTemplate.query(sql, zakaznikRowMapper, vzorka);
     }
 }

@@ -1,17 +1,14 @@
 package sk.upjs.ics.paz1c.fitnesscentrum.entity;
 
-import java.util.Date;
-
+import java.time.LocalDateTime;
 
 public class Spinning {
+
     private Long id;
-    private Date datum;
-    private Date cas;
+    private LocalDateTime datum;
     private int kapacita;
     private int volne;
-    private Long idSpinera;
-    
-    //TODO : dorobit zoznam prihlasenych
+    private Long idInstruktora;
 
     public Long getId() {
         return id;
@@ -21,20 +18,12 @@ public class Spinning {
         this.id = id;
     }
 
-    public Date getDatum() {
+    public LocalDateTime getDatum() {
         return datum;
     }
 
-    public void setDatum(Date datum) {
+    public void setDatum(LocalDateTime datum) {
         this.datum = datum;
-    }
-
-    public Date getCas() {
-        return cas;
-    }
-
-    public void setCas(Date cas) {
-        this.cas = cas;
     }
 
     public int getKapacita() {
@@ -53,11 +42,11 @@ public class Spinning {
         this.volne = volne;
     }
 
-    public Long getIdSpinera() {
-        return idSpinera;
+    public Long getIdInstruktora() {
+        return idInstruktora;
     }
 
-    public void setIdSpinera(Long idSpinera) {
-        this.idSpinera = idSpinera;
+    public void setIdInstruktora(Long idInstruktora) {
+        this.idInstruktora = idInstruktora;
     }
 }
