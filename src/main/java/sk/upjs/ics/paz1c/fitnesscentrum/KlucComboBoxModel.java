@@ -7,10 +7,11 @@ import sk.upjs.ics.paz1c.fitnesscentrum.entity.Kluc;
 
 public class KlucComboBoxModel extends DefaultComboBoxModel<Kluc> {
 
-    private KlucDao klucDao = DaoFactory.INSTANCE.getKlucDao();
+    private final KlucDao klucDao;
     private List<Kluc> volneKluce;
 
     public KlucComboBoxModel() {
+        klucDao = DaoFactory.INSTANCE.getKlucDao();
         aktualizuj();
     }
 

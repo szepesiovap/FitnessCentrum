@@ -1,6 +1,7 @@
 package sk.upjs.ics.paz1c.fitnesscentrum.form;
 
 import sk.upjs.ics.paz1c.fitnesscentrum.RezervaciaTableModel;
+import sk.upjs.ics.paz1c.fitnesscentrum.SpinningComboBoxModel;
 import sk.upjs.ics.paz1c.fitnesscentrum.entity.Spinning;
 
 public class SpinningForm extends javax.swing.JDialog {
@@ -39,6 +40,8 @@ public class SpinningForm extends javax.swing.JDialog {
 
         rezervacieTable.setModel(new RezervaciaTableModel(null));
         rezervacieScrollPane.setViewportView(rezervacieTable);
+
+        spinningComboBox.setModel(new SpinningComboBoxModel());
 
         zobrazButton.setText("Zobraz");
         zobrazButton.addActionListener(new java.awt.event.ActionListener() {
@@ -112,7 +115,8 @@ public class SpinningForm extends javax.swing.JDialog {
     }//GEN-LAST:event_zobrazButtonActionPerformed
 
     private void pridajSpinningMenuMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pridajSpinningMenuMousePressed
-        // TODO add your handling code here:
+        new PridajSpinningForm(this, true).setVisible(true);
+        ((SpinningComboBoxModel) spinningComboBox.getModel()).aktualizuj();
     }//GEN-LAST:event_pridajSpinningMenuMousePressed
 
     private void pridajInstruktoraMenuMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pridajInstruktoraMenuMousePressed

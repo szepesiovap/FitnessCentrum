@@ -1,9 +1,9 @@
-
 package sk.upjs.ics.paz1c.fitnesscentrum.entity;
 
 public class Instruktor {
+
     private Long id;
-    private String meno; 
+    private String meno;
 
     public Long getId() {
         return id;
@@ -20,4 +20,10 @@ public class Instruktor {
     public void setMeno(String meno) {
         this.meno = meno;
     }
+
+    @Override
+    public String toString() {
+        return getMeno();
+    }
+
 }
