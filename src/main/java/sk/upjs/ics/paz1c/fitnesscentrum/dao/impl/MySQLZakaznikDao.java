@@ -67,10 +67,10 @@ public class MySQLZakaznikDao implements ZakaznikDao {
         return jdbcTemplate.queryForObject(sql, zakaznikRowMapper, cisloPermanentky);
     }
 
+    // treba prerobit 
     @Override
     public List<Zakaznik> dajZakaznikovSoZhodouVMene(String vzorka) {
-        vzorka = "\'%" + vzorka + "%\'";
-        String sql = "SELECT *  FROM zakaznik WHERE meno_priezvisko LIKE ?";
-        return jdbcTemplate.query(sql, zakaznikRowMapper, vzorka);
+        String sql = "SELECT *  FROM zakaznik WHERE meno_priezvisko LIKE \'%"+vzorka+"%\'";
+        return jdbcTemplate.query(sql, zakaznikRowMapper);
     }
 }
