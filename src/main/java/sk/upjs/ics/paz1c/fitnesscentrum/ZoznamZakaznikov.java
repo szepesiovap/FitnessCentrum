@@ -71,4 +71,14 @@ public class ZoznamZakaznikov implements ZakaznikDao {
     public Zakaznik dajZakaznikaSId(Long idZakaznika) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+
+    @Override
+    public void stiahniKreditZakaznikovi(Long idZakaznika, double suma) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void dobiKreditZakaznikovi(Long idZakaznika, double suma) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }

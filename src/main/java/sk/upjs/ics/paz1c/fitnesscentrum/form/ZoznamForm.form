@@ -112,9 +112,6 @@
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="hladajPodlaMenaTextField">
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="hladajPodlaMenaTextFieldActionPerformed"/>
-      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="hladajButton">
       <Properties>

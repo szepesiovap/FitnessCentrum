@@ -18,7 +18,7 @@ public final class ZoznamForm extends javax.swing.JFrame {
      * @param hlavneOkno
      */
     public ZoznamForm(HlavneOknoForm hlavneOkno) {
-        zakaznikDao = DaoFactory.INSTANCE.getMySQLZakaznikDao();
+        zakaznikDao = DaoFactory.INSTANCE.getZakaznikDao();
         ZoznamForm.hlavneOkno = hlavneOkno;
         hlavneOkno.setEnabled(false);
         initComponents();
@@ -68,12 +68,6 @@ public final class ZoznamForm extends javax.swing.JFrame {
         });
 
         hladajPodlaMenaLabel.setText("Hľadaj podľa mena: ");
-
-        hladajPodlaMenaTextField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                hladajPodlaMenaTextFieldActionPerformed(evt);
-            }
-        });
 
         hladajButton.setText("Hľadaj");
         hladajButton.addActionListener(new java.awt.event.ActionListener() {
@@ -160,10 +154,6 @@ public final class ZoznamForm extends javax.swing.JFrame {
             System.err.println("Vyber zákazníka na zmazanie.");
         }
     }//GEN-LAST:event_zmazButtonActionPerformed
-
-    private void hladajPodlaMenaTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_hladajPodlaMenaTextFieldActionPerformed
-
-    }//GEN-LAST:event_hladajPodlaMenaTextFieldActionPerformed
 
     private void hladajButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_hladajButtonActionPerformed
         zoznamZakaznikovTable.setModel(new ZakaznikTableModel(hladajPodlaMenaTextField.getText()));

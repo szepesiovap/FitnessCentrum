@@ -70,7 +70,23 @@ public class MySQLZakaznikDao implements ZakaznikDao {
     // treba prerobit 
     @Override
     public List<Zakaznik> dajZakaznikovSoZhodouVMene(String vzorka) {
-        String sql = "SELECT *  FROM zakaznik WHERE meno_priezvisko LIKE \'%"+vzorka+"%\'";
+        String sql = "SELECT *  FROM zakaznik WHERE meno_priezvisko LIKE \'%" + vzorka + "%\'";
         return jdbcTemplate.query(sql, zakaznikRowMapper);
+    }
+
+    @Override
+    public void stiahniKreditZakaznikovi(Long idZakaznika, double suma) {
+        double aktualnyKredit = dajZakaznikaSId(idZakaznika).getKredit();
+        aktualnyKredit -= suma;
+        String sql = "UPDATE zakaznik SET kredit=? where id = ?";
+        jdbcTemplate.update(sql, aktualnyKredit, idZakaznika);
+    }
+
+    @Override
+    public void dobiKreditZakaznikovi(Long idZakaznika, double suma) {
+        double aktualnyKredit = dajZakaznikaSId(idZakaznika).getKredit();
+        aktualnyKredit += suma;
+        String sql = "UPDATE zakaznik SET kredit=? where id = ?";
+        jdbcTemplate.update(sql, aktualnyKredit, idZakaznika);
     }
 }

@@ -2,18 +2,24 @@ package sk.upjs.ics.paz1c.fitnesscentrum.form;
 
 import sk.upjs.ics.paz1c.fitnesscentrum.DaoFactory;
 import sk.upjs.ics.paz1c.fitnesscentrum.KlucComboBoxModel;
+import sk.upjs.ics.paz1c.fitnesscentrum.dao.KlucDao;
+import sk.upjs.ics.paz1c.fitnesscentrum.dao.ZakaznikDao;
 import sk.upjs.ics.paz1c.fitnesscentrum.entity.Kluc;
 import sk.upjs.ics.paz1c.fitnesscentrum.entity.Zakaznik;
 
 public class PrichodZakaznikaForm extends javax.swing.JDialog {
 
     private static Zakaznik zakaznik;
+    private final ZakaznikDao zakaznikDao;
+    private final KlucDao klucDao;
 
     /**
      * Creates new form PrichodZakaznikaForm
      */
     public PrichodZakaznikaForm(java.awt.Frame parent, boolean modal, Zakaznik zakaznik) {
         super(parent, modal);
+        klucDao = DaoFactory.INSTANCE.getKlucDao();
+        zakaznikDao = DaoFactory.INSTANCE.getZakaznikDao();
         this.zakaznik = zakaznik;
         initComponents();
         zobrazMenoLabel.setText(zakaznik.getMeno());
@@ -83,7 +89,7 @@ public class PrichodZakaznikaForm extends javax.swing.JDialog {
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(klucComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(prichodButton)))
-                .addContainerGap(24, Short.MAX_VALUE))
+                .addContainerGap(29, Short.MAX_VALUE))
         );
 
         pack();
@@ -91,8 +97,8 @@ public class PrichodZakaznikaForm extends javax.swing.JDialog {
 
     private void prichodButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_prichodButtonActionPerformed
         Long idKluca = ((Kluc) klucComboBox.getSelectedItem()).getIdKluca();
-        DaoFactory.INSTANCE.getMySQLZakaznikDao().prichod(zakaznik.getId(), idKluca);
-        DaoFactory.INSTANCE.getKlucDao().priradZakaznika(idKluca, zakaznik.getId());
+        zakaznikDao.prichod(zakaznik.getId(), idKluca);
+        klucDao.priradZakaznika(idKluca, zakaznik.getId());
         dispose();
     }//GEN-LAST:event_prichodButtonActionPerformed
 

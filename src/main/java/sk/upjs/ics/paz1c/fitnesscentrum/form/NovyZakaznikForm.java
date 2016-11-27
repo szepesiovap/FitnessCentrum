@@ -154,7 +154,7 @@ public class NovyZakaznikForm extends javax.swing.JFrame {
             System.out.println(KREDIT_SUMY[kreditComboBox.getSelectedIndex()]);
         }
 
-        DaoFactory.INSTANCE.getMySQLZakaznikDao().pridajZakaznika(zakaznik);
+        DaoFactory.INSTANCE.getZakaznikDao().pridajZakaznika(zakaznik);
         hlavneOkno.aktualizovatZoznamPritomnych();
         this.dispose();
         hlavneOkno.setVisible(true);

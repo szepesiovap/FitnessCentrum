@@ -4,13 +4,28 @@
   <NonVisualComponents>
     <Menu class="javax.swing.JMenuBar" name="hlavneOknoMenuBar">
       <SubComponents>
-        <Menu class="javax.swing.JMenu" name="zoznamMenu">
+        <Menu class="javax.swing.JMenu" name="prichodMenu">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Zoznam "/>
+            <Property name="text" type="java.lang.String" value="Pr&#xed;chod"/>
           </Properties>
-          <Events>
-            <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="zoznamMenuMousePressed"/>
-          </Events>
+          <SubComponents>
+            <MenuItem class="javax.swing.JMenuItem" name="jednorazovyPrichodMenuItem">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Jednor&#xe1;zov&#xfd;"/>
+              </Properties>
+              <Events>
+                <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jednorazovyPrichodMenuItemMousePressed"/>
+              </Events>
+            </MenuItem>
+            <MenuItem class="javax.swing.JMenuItem" name="prichodKartouMenuItem">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Kartou"/>
+              </Properties>
+              <Events>
+                <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="prichodKartouMenuItemMousePressed"/>
+              </Events>
+            </MenuItem>
+          </SubComponents>
         </Menu>
         <Menu class="javax.swing.JMenu" name="odchodMenu">
           <Properties>
@@ -86,7 +101,7 @@
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Component id="pritomniScrollPane" alignment="0" pref="415" max="32767" attributes="0"/>
+          <Component id="pritomniScrollPane" alignment="0" pref="417" max="32767" attributes="0"/>
       </Group>
     </DimensionLayout>
   </Layout>

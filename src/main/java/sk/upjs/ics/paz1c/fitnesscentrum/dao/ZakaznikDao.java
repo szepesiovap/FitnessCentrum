@@ -14,5 +14,8 @@ public interface ZakaznikDao {
     public void odchod(Long idZakaznika);
     public Zakaznik dajZakaznikaSId(Long idZakaznika);
     public Zakaznik dajZakaznikaSCislomPermanentky(String cisloPermanentky);
+    public void stiahniKreditZakaznikovi(Long idZakaznika, double suma);
+    public void dobiKreditZakaznikovi(Long idZakaznika, double suma);
+
     
 }

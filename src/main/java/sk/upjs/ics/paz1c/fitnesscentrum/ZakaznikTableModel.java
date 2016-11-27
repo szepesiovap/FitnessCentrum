@@ -5,7 +5,7 @@ import javax.swing.table.AbstractTableModel;
 import sk.upjs.ics.paz1c.fitnesscentrum.dao.ZakaznikDao;
 
 public class ZakaznikTableModel extends AbstractTableModel {
-    private ZakaznikDao zakaznikDao = DaoFactory.INSTANCE.getMySQLZakaznikDao();
+    private ZakaznikDao zakaznikDao = DaoFactory.INSTANCE.getZakaznikDao();
     private static final String[] NAZVY_STLPCOV = {"ID", "Meno", "Pritomny", "Posledny prichod", "Kredit", "Cislo permanentky"};
     private static final int POCET_STLPCOV = NAZVY_STLPCOV.length;
     private String vzorka;

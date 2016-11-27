@@ -16,7 +16,7 @@ public final class HlavneOknoForm extends javax.swing.JFrame {
         initComponents();
         aktualizovatZoznamPritomnych();
     }
-    
+
     public void aktualizovatZoznamPritomnych() {
         PritomniZakazniciTableModel model = (PritomniZakazniciTableModel) pritomniTable.getModel();
         model.aktualizovat();
@@ -34,7 +34,9 @@ public final class HlavneOknoForm extends javax.swing.JFrame {
         pritomniScrollPane = new javax.swing.JScrollPane();
         pritomniTable = new javax.swing.JTable();
         hlavneOknoMenuBar = new javax.swing.JMenuBar();
-        zoznamMenu = new javax.swing.JMenu();
+        prichodMenu = new javax.swing.JMenu();
+        jednorazovyPrichodMenuItem = new javax.swing.JMenuItem();
+        prichodKartouMenuItem = new javax.swing.JMenuItem();
         odchodMenu = new javax.swing.JMenu();
         novyMenu = new javax.swing.JMenu();
         dobiMenu = new javax.swing.JMenu();
@@ -49,13 +51,25 @@ public final class HlavneOknoForm extends javax.swing.JFrame {
         );
         pritomniScrollPane.setViewportView(pritomniTable);
 
-        zoznamMenu.setText("Zoznam ");
-        zoznamMenu.addMouseListener(new java.awt.event.MouseAdapter() {
+        prichodMenu.setText("Príchod");
+
+        jednorazovyPrichodMenuItem.setText("Jednorázový");
+        jednorazovyPrichodMenuItem.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
-                zoznamMenuMousePressed(evt);
+                jednorazovyPrichodMenuItemMousePressed(evt);
             }
         });
-        hlavneOknoMenuBar.add(zoznamMenu);
+        prichodMenu.add(jednorazovyPrichodMenuItem);
+
+        prichodKartouMenuItem.setText("Kartou");
+        prichodKartouMenuItem.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                prichodKartouMenuItemMousePressed(evt);
+            }
+        });
+        prichodMenu.add(prichodKartouMenuItem);
+
+        hlavneOknoMenuBar.add(prichodMenu);
 
         odchodMenu.setText("Odchod ");
         odchodMenu.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -112,7 +126,7 @@ public final class HlavneOknoForm extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(pritomniScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 415, Short.MAX_VALUE)
+            .addComponent(pritomniScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 417, Short.MAX_VALUE)
         );
 
         pack();
@@ -123,10 +137,6 @@ public final class HlavneOknoForm extends javax.swing.JFrame {
         new PrihlasovanieForm().setVisible(true);
     }//GEN-LAST:event_odhlasitMenuActionPerformed
 
-    private void zoznamMenuMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_zoznamMenuMousePressed
-        new ZoznamForm(this).setVisible(true);
-    }//GEN-LAST:event_zoznamMenuMousePressed
-
     private void odhlasitMenuMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_odhlasitMenuMousePressed
         new OdhlasenieForm(this).setVisible(true);
     }//GEN-LAST:event_odhlasitMenuMousePressed
@@ -134,11 +144,11 @@ public final class HlavneOknoForm extends javax.swing.JFrame {
     private void odchodMenuMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_odchodMenuMousePressed
         try {
             Long idZakaznika = (Long) pritomniTable.getValueAt(pritomniTable.getSelectedRow(), ID_COLUMN);
-            ZakaznikDao zakaznikDao = DaoFactory.INSTANCE.getMySQLZakaznikDao();
+            ZakaznikDao zakaznikDao = DaoFactory.INSTANCE.getZakaznikDao();
             KlucDao klucDao = DaoFactory.INSTANCE.getKlucDao();
             klucDao.odoberZakaznika(zakaznikDao.dajZakaznikaSId(idZakaznika).getIdKluca());
             zakaznikDao.odchod(idZakaznika);
-            
+
             aktualizovatZoznamPritomnych();
         } catch (Exception e) {
             System.err.println("Nebol vybrany ziaden zakaznik");
@@ -157,6 +167,16 @@ public final class HlavneOknoForm extends javax.swing.JFrame {
         new SpinningForm(this, true).setVisible(true);
     }//GEN-LAST:event_spinningMenuMousePressed
 
+    private void jednorazovyPrichodMenuItemMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jednorazovyPrichodMenuItemMousePressed
+        new ZoznamForm(this).setVisible(true);
+        aktualizovatZoznamPritomnych();
+    }//GEN-LAST:event_jednorazovyPrichodMenuItemMousePressed
+
+    private void prichodKartouMenuItemMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_prichodKartouMenuItemMousePressed
+        new PrichodKartouForm(this, true).setVisible(true);
+        aktualizovatZoznamPritomnych();
+    }//GEN-LAST:event_prichodKartouMenuItemMousePressed
+
     /**
      * @param args the command line arguments
      */
@@ -171,7 +191,7 @@ public final class HlavneOknoForm extends javax.swing.JFrame {
                 if ("Nimbus".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
-                    
+
                 }
             }
         } catch (ClassNotFoundException ex) {
@@ -202,13 +222,15 @@ public final class HlavneOknoForm extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenu dobiMenu;
     private javax.swing.JMenuBar hlavneOknoMenuBar;
+    private javax.swing.JMenuItem jednorazovyPrichodMenuItem;
     private javax.swing.JMenu novyMenu;
     private javax.swing.JMenu odchodMenu;
     private javax.swing.JMenu odhlasitMenu;
+    private javax.swing.JMenuItem prichodKartouMenuItem;
+    private javax.swing.JMenu prichodMenu;
     private javax.swing.JScrollPane pritomniScrollPane;
     private javax.swing.JTable pritomniTable;
     private javax.swing.JMenu spinningMenu;
-    private javax.swing.JMenu zoznamMenu;
     // End of variables declaration//GEN-END:variables
 
 }

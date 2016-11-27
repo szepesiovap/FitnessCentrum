@@ -17,7 +17,7 @@ public class RezervaciaTableModel extends AbstractTableModel {
 
     public RezervaciaTableModel(Spinning spinning) {
         rezervaciaDao = DaoFactory.INSTANCE.getRezervaciaDao();
-        zakaznikDao = DaoFactory.INSTANCE.getMySQLZakaznikDao();
+        zakaznikDao = DaoFactory.INSTANCE.getZakaznikDao();
         this.spinning = spinning;
     }
 
