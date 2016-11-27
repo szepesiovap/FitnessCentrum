@@ -52,12 +52,6 @@ public class NovyZakaznikForm extends javax.swing.JFrame {
             }
         });
 
-        menoZakaznikaTextField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                menoZakaznikaTextFieldActionPerformed(evt);
-            }
-        });
-
         menoZakaznikaLabel.setText("Meno: ");
 
         ulozButton.setText("Ulož");
@@ -177,10 +171,6 @@ public class NovyZakaznikForm extends javax.swing.JFrame {
     private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
         hlavneOkno.setEnabled(true);
     }//GEN-LAST:event_formWindowClosed
-
-    private void menoZakaznikaTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menoZakaznikaTextFieldActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_menoZakaznikaTextFieldActionPerformed
 
     private void inicializaciaZaciatocnehoStavu() {
         kreditComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(KREDIT_MOZNOSTI));

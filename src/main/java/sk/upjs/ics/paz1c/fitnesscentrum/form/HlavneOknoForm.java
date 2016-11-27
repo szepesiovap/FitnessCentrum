@@ -6,7 +6,7 @@ import sk.upjs.ics.paz1c.fitnesscentrum.dao.KlucDao;
 import sk.upjs.ics.paz1c.fitnesscentrum.dao.ZakaznikDao;
 
 public final class HlavneOknoForm extends javax.swing.JFrame {
-
+    
     private static final int ID_COLUMN = 0;
 
     /**
@@ -16,7 +16,7 @@ public final class HlavneOknoForm extends javax.swing.JFrame {
         initComponents();
         aktualizovatZoznamPritomnych();
     }
-
+    
     public void aktualizovatZoznamPritomnych() {
         PritomniZakazniciTableModel model = (PritomniZakazniciTableModel) pritomniTable.getModel();
         model.aktualizovat();
@@ -148,7 +148,7 @@ public final class HlavneOknoForm extends javax.swing.JFrame {
             KlucDao klucDao = DaoFactory.INSTANCE.getKlucDao();
             klucDao.odoberZakaznika(zakaznikDao.dajZakaznikaSId(idZakaznika).getIdKluca());
             zakaznikDao.odchod(idZakaznika);
-
+            
             aktualizovatZoznamPritomnych();
         } catch (Exception e) {
             System.err.println("Nebol vybrany ziaden zakaznik");
@@ -160,7 +160,7 @@ public final class HlavneOknoForm extends javax.swing.JFrame {
     }//GEN-LAST:event_novyMenuMousePressed
 
     private void dobiMenuMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_dobiMenuMousePressed
-
+        new DobitKreditForm(this, true).setVisible(true);
     }//GEN-LAST:event_dobiMenuMousePressed
 
     private void spinningMenuMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_spinningMenuMousePressed
@@ -191,7 +191,7 @@ public final class HlavneOknoForm extends javax.swing.JFrame {
                 if ("Nimbus".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
-
+                    
                 }
             }
         } catch (ClassNotFoundException ex) {

@@ -46,7 +46,7 @@ public class PrichodKartouForm extends javax.swing.JDialog {
         zobrazCisloKartyLabel = new javax.swing.JLabel();
         zobrazKreditLabel = new javax.swing.JLabel();
         cisloKartyTextField = new javax.swing.JTextField();
-        jLabel1 = new javax.swing.JLabel();
+        zadajCisloLabel = new javax.swing.JLabel();
         nacitajButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -70,7 +70,7 @@ public class PrichodKartouForm extends javax.swing.JDialog {
 
         cisloKartyLabel.setText("Číslo karty: ");
 
-        jLabel1.setText("Zadaj číslo: ");
+        zadajCisloLabel.setText("Zadaj číslo: ");
 
         nacitajButton.setText("Načítaj");
         nacitajButton.addActionListener(new java.awt.event.ActionListener() {
@@ -93,7 +93,7 @@ public class PrichodKartouForm extends javax.swing.JDialog {
                             .addComponent(kreditLabel)
                             .addComponent(menoLabel)
                             .addComponent(cisloKartyLabel)
-                            .addComponent(jLabel1))
+                            .addComponent(zadajCisloLabel))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(zobrazMenoLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -112,13 +112,13 @@ public class PrichodKartouForm extends javax.swing.JDialog {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(cisloKartyTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel1))
+                    .addComponent(zadajCisloLabel))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(nacitajButton)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(menoLabel)
-                    .addComponent(zobrazMenoLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(menoLabel, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(zobrazMenoLabel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(zobrazCisloKartyLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -219,13 +219,13 @@ public class PrichodKartouForm extends javax.swing.JDialog {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel cisloKartyLabel;
     private javax.swing.JTextField cisloKartyTextField;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JComboBox<Kluc> klucComboBox;
     private javax.swing.JLabel klucLabel;
     private javax.swing.JLabel kreditLabel;
     private javax.swing.JLabel menoLabel;
     private javax.swing.JButton nacitajButton;
     private javax.swing.JButton prichodButton;
+    private javax.swing.JLabel zadajCisloLabel;
     private javax.swing.JLabel zobrazCisloKartyLabel;
     private javax.swing.JLabel zobrazKreditLabel;
     private javax.swing.JLabel zobrazMenoLabel;

@@ -93,9 +93,6 @@
   </Layout>
   <SubComponents>
     <Component class="javax.swing.JTextField" name="menoZakaznikaTextField">
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="menoZakaznikaTextFieldActionPerformed"/>
-      </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="menoZakaznikaLabel">
       <Properties>

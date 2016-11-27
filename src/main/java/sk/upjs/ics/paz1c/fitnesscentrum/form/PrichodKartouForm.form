@@ -33,7 +33,7 @@
                           <Component id="kreditLabel" min="-2" max="-2" attributes="0"/>
                           <Component id="menoLabel" min="-2" max="-2" attributes="0"/>
                           <Component id="cisloKartyLabel" min="-2" max="-2" attributes="0"/>
-                          <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
+                          <Component id="zadajCisloLabel" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
@@ -59,12 +59,12 @@
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="cisloKartyTextField" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="jLabel1" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="zadajCisloLabel" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
               <Component id="nacitajButton" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="32767" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
+              <Group type="103" groupAlignment="0" attributes="0">
                   <Component id="menoLabel" alignment="1" min="-2" max="-2" attributes="0"/>
                   <Component id="zobrazMenoLabel" alignment="1" min="-2" pref="15" max="-2" attributes="0"/>
               </Group>
@@ -138,7 +138,7 @@
     </Component>
     <Component class="javax.swing.JTextField" name="cisloKartyTextField">
     </Component>
-    <Component class="javax.swing.JLabel" name="jLabel1">
+    <Component class="javax.swing.JLabel" name="zadajCisloLabel">
       <Properties>
         <Property name="text" type="java.lang.String" value="Zadaj &#x10d;&#xed;slo: "/>
       </Properties>
