@@ -158,7 +158,6 @@ public class PrihlasovanieForm extends javax.swing.JFrame {
         } else {
             JOptionPane.showMessageDialog(this, "Nespravne prihlasovacie udaje");
         }
-
     }//GEN-LAST:event_prihlasitButtonActionPerformed
 
     private void hesloPasswordFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_hesloPasswordFieldActionPerformed
@@ -166,15 +165,15 @@ public class PrihlasovanieForm extends javax.swing.JFrame {
     }//GEN-LAST:event_hesloPasswordFieldActionPerformed
 
     private void novyRecepcnyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_novyRecepcnyActionPerformed
-        new NovyRecepcnyForm().setVisible(true);
+        new NovyRecepcnyForm(this, true).setVisible(true);
     }//GEN-LAST:event_novyRecepcnyActionPerformed
 
     private void novyRecepcnyMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_novyRecepcnyMousePressed
-        new OverenieHesla().setVisible(true);
+        new OverenieHeslaForm(this, true).setVisible(true);
     }//GEN-LAST:event_novyRecepcnyMousePressed
 
     private void zmenaUdajovRecepcnyMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_zmenaUdajovRecepcnyMousePressed
-        new ZmenaHeslaRecepcnehoForm().setVisible(true);
+        new ZmenaHeslaRecepcnehoForm(this, true).setVisible(true);
     }//GEN-LAST:event_zmenaUdajovRecepcnyMousePressed
 
     /**

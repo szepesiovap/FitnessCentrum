@@ -3,14 +3,20 @@ package sk.upjs.ics.paz1c.fitnesscentrum.form;
 import javax.swing.JOptionPane;
 import sk.upjs.ics.paz1c.fitnesscentrum.DaoFactory;
 import sk.upjs.ics.paz1c.fitnesscentrum.Hashovanie;
+import sk.upjs.ics.paz1c.fitnesscentrum.dao.RecepcnyDao;
 import sk.upjs.ics.paz1c.fitnesscentrum.entity.Recepcny;
 
-public class OverenieHesla extends javax.swing.JFrame {
-
+public class OverenieHeslaForm extends javax.swing.JDialog {
+    
+    private Recepcny recepcny;
+    private final RecepcnyDao recepcnyDao;
+    
     /**
-     * Creates new form OverenieHesla
+     * Creates new form OverenieHeslaJDialog
      */
-    public OverenieHesla() {
+    public OverenieHeslaForm(java.awt.Frame parent, boolean modal) {
+        super(parent, modal);
+        recepcnyDao = DaoFactory.INSTANCE.getRecepcnyDao();
         initComponents();
     }
 
@@ -23,12 +29,12 @@ public class OverenieHesla extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        hesloPasswordField = new javax.swing.JPasswordField();
         potvrdButton = new javax.swing.JButton();
         zrusitButton = new javax.swing.JButton();
         zadajteHesloLabel = new javax.swing.JLabel();
+        hesloPasswordField = new javax.swing.JPasswordField();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         potvrdButton.setText("Potvrď");
         potvrdButton.addActionListener(new java.awt.event.ActionListener() {
@@ -53,7 +59,7 @@ public class OverenieHesla extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(41, 41, 41)
                 .addComponent(zadajteHesloLabel)
-                .addContainerGap(37, Short.MAX_VALUE))
+                .addContainerGap(41, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
                 .addGap(26, 26, 26)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -82,14 +88,14 @@ public class OverenieHesla extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void potvrdButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_potvrdButtonActionPerformed
-        Recepcny recepcny = DaoFactory.INSTANCE.getRecepcnyDao().dajRecepcneho(0L);
+        recepcny = recepcnyDao.dajRecepcneho(0L);
         String salt = recepcny.getSalt();
         String heslo = hesloPasswordField.getText();
         String hashHeslo = Hashovanie.zahesuj(salt, heslo);
 
         if (hashHeslo.equals(recepcny.getHeslo())) {
-            new NovyRecepcnyForm().setVisible(true);
             this.dispose();
+            new NovyRecepcnyForm(new javax.swing.JFrame(), true).setVisible(true);
         } else {
             JOptionPane.showMessageDialog(null, "Zadané heslo nie je správne");
         }
@@ -116,20 +122,28 @@ public class OverenieHesla extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(OverenieHesla.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(OverenieHeslaForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(OverenieHesla.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(OverenieHeslaForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(OverenieHesla.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(OverenieHeslaForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(OverenieHesla.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(OverenieHeslaForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
+        //</editor-fold>
 
-        /* Create and display the form */
+        /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new OverenieHesla().setVisible(true);
+                OverenieHeslaForm dialog = new OverenieHeslaForm(new javax.swing.JFrame(), true);
+                dialog.addWindowListener(new java.awt.event.WindowAdapter() {
+                    @Override
+                    public void windowClosing(java.awt.event.WindowEvent e) {
+                        System.exit(0);
+                    }
+                });
+                dialog.setVisible(true);
             }
         });
     }
