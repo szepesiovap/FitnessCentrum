@@ -4,6 +4,7 @@
   <Properties>
     <Property name="defaultCloseOperation" type="int" value="2"/>
     <Property name="title" type="java.lang.String" value="Nov&#xfd; recep&#x10d;n&#xfd;"/>
+    <Property name="resizable" type="boolean" value="false"/>
   </Properties>
   <SyntheticProperties>
     <SyntheticProperty name="formSizePolicy" type="int" value="1"/>
@@ -24,27 +25,30 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Group type="102" alignment="1" attributes="0">
-              <EmptySpace min="-2" pref="58" max="-2" attributes="0"/>
-              <Component id="ulozButton" min="-2" pref="69" max="-2" attributes="0"/>
-              <EmptySpace max="32767" attributes="0"/>
-              <Component id="zrusitButton" min="-2" pref="69" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="58" max="-2" attributes="0"/>
-          </Group>
-          <Group type="102" alignment="0" attributes="0">
+          <Group type="102" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="hesloLabel" alignment="0" min="-2" max="-2" attributes="0"/>
-                  <Component id="hesloZnovaLabel" alignment="0" min="-2" max="-2" attributes="0"/>
-                  <Component id="loginLabel" alignment="0" min="-2" max="-2" attributes="0"/>
-                  <Component id="menoLabel" alignment="0" min="-2" max="-2" attributes="0"/>
-              </Group>
-              <EmptySpace type="separate" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="hesloPasswordField" min="-2" pref="178" max="-2" attributes="0"/>
-                  <Component id="hesloZnovaPasswordField" min="-2" pref="178" max="-2" attributes="0"/>
-                  <Component id="loginTextField" alignment="0" min="-2" pref="178" max="-2" attributes="0"/>
-                  <Component id="menoTextField" min="-2" pref="178" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                  <Group type="102" alignment="1" attributes="0">
+                      <EmptySpace min="-2" pref="38" max="-2" attributes="0"/>
+                      <Component id="ulozButton" min="-2" pref="69" max="-2" attributes="0"/>
+                      <EmptySpace max="32767" attributes="0"/>
+                      <Component id="zrusitButton" min="-2" pref="69" max="-2" attributes="0"/>
+                  </Group>
+                  <Group type="102" attributes="0">
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="hesloLabel" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="hesloZnovaLabel" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="loginLabel" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="menoLabel" alignment="0" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="hesloPasswordField" min="-2" pref="178" max="-2" attributes="0"/>
+                          <Component id="hesloZnovaPasswordField" min="-2" pref="178" max="-2" attributes="0"/>
+                          <Component id="loginTextField" alignment="0" min="-2" pref="178" max="-2" attributes="0"/>
+                          <Component id="menoTextField" min="-2" pref="178" max="-2" attributes="0"/>
+                      </Group>
+                  </Group>
               </Group>
               <EmptySpace pref="34" max="32767" attributes="0"/>
           </Group>
@@ -67,7 +71,7 @@
                       <Component id="loginLabel" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
               </Group>
-              <EmptySpace type="separate" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="hesloPasswordField" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="hesloLabel" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -77,12 +81,12 @@
                   <Component id="hesloZnovaPasswordField" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="hesloZnovaLabel" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace pref="41" max="32767" attributes="0"/>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="ulozButton" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="zrusitButton" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="ulozButton" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace max="-2" attributes="0"/>
+              <EmptySpace max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>

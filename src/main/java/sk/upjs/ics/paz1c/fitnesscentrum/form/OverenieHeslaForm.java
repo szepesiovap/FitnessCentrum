@@ -30,11 +30,13 @@ public class OverenieHeslaForm extends javax.swing.JDialog {
     private void initComponents() {
 
         potvrdButton = new javax.swing.JButton();
-        zrusitButton = new javax.swing.JButton();
+        zrusButton = new javax.swing.JButton();
         zadajteHesloLabel = new javax.swing.JLabel();
         hesloPasswordField = new javax.swing.JPasswordField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Overenie admina");
+        setResizable(false);
 
         potvrdButton.setText("Potvrď");
         potvrdButton.addActionListener(new java.awt.event.ActionListener() {
@@ -43,10 +45,10 @@ public class OverenieHeslaForm extends javax.swing.JDialog {
             }
         });
 
-        zrusitButton.setText("Zrušiť");
-        zrusitButton.addActionListener(new java.awt.event.ActionListener() {
+        zrusButton.setText("Zruš");
+        zrusButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                zrusitButtonActionPerformed(evt);
+                zrusButtonActionPerformed(evt);
             }
         });
 
@@ -57,30 +59,29 @@ public class OverenieHeslaForm extends javax.swing.JDialog {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(41, 41, 41)
-                .addComponent(zadajteHesloLabel)
-                .addContainerGap(41, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(hesloPasswordField, javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(zadajteHesloLabel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
-                .addGap(26, 26, 26)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(hesloPasswordField)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(potvrdButton)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(zrusitButton)))
-                .addGap(24, 24, 24))
+                .addContainerGap()
+                .addComponent(potvrdButton, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 15, Short.MAX_VALUE)
+                .addComponent(zrusButton, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(19, 19, 19)
-                .addComponent(zadajteHesloLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGap(18, 18, 18)
+                .addContainerGap()
+                .addComponent(zadajteHesloLabel)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(hesloPasswordField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 17, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(potvrdButton)
-                    .addComponent(zrusitButton))
+                    .addComponent(zrusButton))
                 .addContainerGap())
         );
 
@@ -101,9 +102,9 @@ public class OverenieHeslaForm extends javax.swing.JDialog {
         }
     }//GEN-LAST:event_potvrdButtonActionPerformed
 
-    private void zrusitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_zrusitButtonActionPerformed
+    private void zrusButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_zrusButtonActionPerformed
         this.dispose();
-    }//GEN-LAST:event_zrusitButtonActionPerformed
+    }//GEN-LAST:event_zrusButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -152,6 +153,6 @@ public class OverenieHeslaForm extends javax.swing.JDialog {
     private javax.swing.JPasswordField hesloPasswordField;
     private javax.swing.JButton potvrdButton;
     private javax.swing.JLabel zadajteHesloLabel;
-    private javax.swing.JButton zrusitButton;
+    private javax.swing.JButton zrusButton;
     // End of variables declaration//GEN-END:variables
 }

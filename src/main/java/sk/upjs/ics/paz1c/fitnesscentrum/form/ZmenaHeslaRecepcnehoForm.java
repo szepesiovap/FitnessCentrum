@@ -10,6 +10,7 @@ public class ZmenaHeslaRecepcnehoForm extends javax.swing.JDialog {
 
     private Recepcny recepcny;
     private final RecepcnyDao recepcnyDao;
+
     /**
      * Creates new form ZmenaHeslaRecepcnehoJDialog
      */
@@ -33,7 +34,7 @@ public class ZmenaHeslaRecepcnehoForm extends javax.swing.JDialog {
         noveHesloPasswordField = new javax.swing.JPasswordField();
         noveHesloZnovaPasswordField = new javax.swing.JPasswordField();
         loginTextField = new javax.swing.JTextField();
-        ulozZmenyButton2 = new javax.swing.JButton();
+        ulozZmenyButton = new javax.swing.JButton();
         zrusitButton = new javax.swing.JButton();
         loginjLabel = new javax.swing.JLabel();
         stareHesloLabel = new javax.swing.JLabel();
@@ -44,10 +45,10 @@ public class ZmenaHeslaRecepcnehoForm extends javax.swing.JDialog {
 
         noveHesloZnovaLabel.setText("Nové heslo znova:");
 
-        ulozZmenyButton2.setText("Ulož zmeny");
-        ulozZmenyButton2.addActionListener(new java.awt.event.ActionListener() {
+        ulozZmenyButton.setText("Ulož zmeny");
+        ulozZmenyButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                ulozZmenyButton2ActionPerformed(evt);
+                ulozZmenyButtonActionPerformed(evt);
             }
         });
 
@@ -69,30 +70,30 @@ public class ZmenaHeslaRecepcnehoForm extends javax.swing.JDialog {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(loginjLabel)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(stareHesloLabel)
-                            .addComponent(noveHesloLabel))
-                        .addGap(49, 49, 49)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(noveHesloPasswordField, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(stareHesloPasswordField, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(loginTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(ulozZmenyButton2)
-                            .addComponent(noveHesloZnovaLabel))
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addContainerGap()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(loginjLabel)
                             .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(stareHesloLabel)
+                                    .addComponent(noveHesloLabel))
+                                .addGap(49, 49, 49)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(stareHesloPasswordField, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(loginTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(noveHesloPasswordField, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(noveHesloZnovaLabel)
                                 .addGap(18, 18, 18)
-                                .addComponent(noveHesloZnovaPasswordField, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(55, 55, 55)
-                                .addComponent(zrusitButton, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addComponent(noveHesloZnovaPasswordField))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(20, 20, 20)
+                        .addComponent(ulozZmenyButton)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(zrusitButton, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(18, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -115,7 +116,7 @@ public class ZmenaHeslaRecepcnehoForm extends javax.swing.JDialog {
                     .addComponent(noveHesloZnovaLabel))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(ulozZmenyButton2)
+                    .addComponent(ulozZmenyButton)
                     .addComponent(zrusitButton))
                 .addContainerGap())
         );
@@ -123,7 +124,7 @@ public class ZmenaHeslaRecepcnehoForm extends javax.swing.JDialog {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void ulozZmenyButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ulozZmenyButton2ActionPerformed
+    private void ulozZmenyButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ulozZmenyButtonActionPerformed
         String login = loginTextField.getText();
         String heslo = stareHesloPasswordField.getText();
         recepcny = recepcnyDao.dajRecepcneho(login);
@@ -141,7 +142,7 @@ public class ZmenaHeslaRecepcnehoForm extends javax.swing.JDialog {
                     if (noveHashovaneHeslo.equals(noveHashovaneHesloZnova)) {
                         recepcny.setHeslo(noveHashovaneHeslo);
                         DaoFactory.INSTANCE.getRecepcnyDao().updateRecepcneho(recepcny);
-                        JOptionPane.showMessageDialog(this, "Heslo recepčného s loginom " + recepcny.getLogin()+ " bolo zmenené!");
+                        JOptionPane.showMessageDialog(this, "Heslo recepčného s loginom " + recepcny.getLogin() + " bolo zmenené!");
                         this.dispose();
                     } else {
                         JOptionPane.showMessageDialog(this, "Nové heslo sa nezhoduje.");
@@ -155,7 +156,7 @@ public class ZmenaHeslaRecepcnehoForm extends javax.swing.JDialog {
         } else {
             JOptionPane.showMessageDialog(this, "Recepčný s daným loginom neexistuje");
         }
-    }//GEN-LAST:event_ulozZmenyButton2ActionPerformed
+    }//GEN-LAST:event_ulozZmenyButtonActionPerformed
 
     private void zrusitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_zrusitButtonActionPerformed
         this.dispose();
@@ -187,9 +188,6 @@ public class ZmenaHeslaRecepcnehoForm extends javax.swing.JDialog {
             java.util.logging.Logger.getLogger(ZmenaHeslaRecepcnehoForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
 
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
@@ -206,6 +204,7 @@ public class ZmenaHeslaRecepcnehoForm extends javax.swing.JDialog {
         });
     }
 
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField loginTextField;
     private javax.swing.JLabel loginjLabel;
@@ -216,8 +215,6 @@ public class ZmenaHeslaRecepcnehoForm extends javax.swing.JDialog {
     private javax.swing.JLabel stareHesloLabel;
     private javax.swing.JPasswordField stareHesloPasswordField;
     private javax.swing.JButton ulozZmenyButton;
-    private javax.swing.JButton ulozZmenyButton1;
-    private javax.swing.JButton ulozZmenyButton2;
     private javax.swing.JButton zrusitButton;
     // End of variables declaration//GEN-END:variables
 }
