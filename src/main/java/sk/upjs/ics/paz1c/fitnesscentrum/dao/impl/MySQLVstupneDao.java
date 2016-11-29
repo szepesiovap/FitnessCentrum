@@ -1,6 +1,5 @@
 package sk.upjs.ics.paz1c.fitnesscentrum.dao.impl;
 
-import java.util.List;
 import org.springframework.jdbc.core.JdbcTemplate;
 import sk.upjs.ics.paz1c.fitnesscentrum.DaoFactory;
 import sk.upjs.ics.paz1c.fitnesscentrum.dao.VstupneDao;
@@ -11,7 +10,7 @@ public class MySQLVstupneDao implements VstupneDao {
 
     private final JdbcTemplate jdbcTemplate;
     private final VstupneRowMapper vstupneRowMapper;
-    private static int ID = 1;
+    private static final int ID = 1;
 
     public MySQLVstupneDao() {
         jdbcTemplate = DaoFactory.INSTANCE.getJdbcTemplate();
@@ -35,5 +34,4 @@ public class MySQLVstupneDao implements VstupneDao {
         String sql = "SELECT * FROM vstupne";
         return jdbcTemplate.query(sql, vstupneRowMapper).get(0);
     }
-
 }

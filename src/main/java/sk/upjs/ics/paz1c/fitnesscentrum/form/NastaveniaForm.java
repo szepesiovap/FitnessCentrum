@@ -1,17 +1,29 @@
 package sk.upjs.ics.paz1c.fitnesscentrum.form;
 
+import javax.swing.JOptionPane;
 import sk.upjs.ics.paz1c.fitnesscentrum.DaoFactory;
+import sk.upjs.ics.paz1c.fitnesscentrum.KreditTableModel;
+import sk.upjs.ics.paz1c.fitnesscentrum.dao.KreditDao;
 import sk.upjs.ics.paz1c.fitnesscentrum.dao.VstupneDao;
+import sk.upjs.ics.paz1c.fitnesscentrum.entity.Kredit;
+import sk.upjs.ics.paz1c.fitnesscentrum.entity.Zakaznik;
 
 public class NastaveniaForm extends javax.swing.JDialog {
 
-    private VstupneDao vstupneDao;
+    private final VstupneDao vstupneDao;
+    private final KreditDao kreditDao;
+    private static final int ID_COLUMN = 0;
+
     /**
      * Creates new form NastaveniaForm
+     *
+     * @param parent
+     * @param modal
      */
     public NastaveniaForm(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         vstupneDao = DaoFactory.INSTANCE.getVstupneDao();
+        kreditDao = DaoFactory.INSTANCE.getKreditDao();
         initComponents();
         aktualizuj();
     }
@@ -30,6 +42,11 @@ public class NastaveniaForm extends javax.swing.JDialog {
         jLabel1 = new javax.swing.JLabel();
         cenaSpinninguTextField = new javax.swing.JTextField();
         zmenVstupneButton = new javax.swing.JButton();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        kreditTable = new javax.swing.JTable();
+        pridajKreditButton = new javax.swing.JButton();
+        zmazKreditButton = new javax.swing.JButton();
+        zoznamRecepcnychButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Nastavenia");
@@ -45,57 +62,124 @@ public class NastaveniaForm extends javax.swing.JDialog {
             }
         });
 
+        kreditTable.setModel(new KreditTableModel());
+        jScrollPane2.setViewportView(kreditTable);
+
+        pridajKreditButton.setText("Pridaj kredit ...");
+        pridajKreditButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                pridajKreditButtonActionPerformed(evt);
+            }
+        });
+
+        zmazKreditButton.setText("Zmaž kredit");
+        zmazKreditButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                zmazKreditButtonActionPerformed(evt);
+            }
+        });
+
+        zoznamRecepcnychButton.setText("Zoznam recepčných ...");
+        zoznamRecepcnychButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                zoznamRecepcnychButtonActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(16, 16, 16)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(cenaVstupnehoLabel)
-                    .addComponent(jLabel1))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(cenaVstupnehoTexttField, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cenaSpinninguTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 49, Short.MAX_VALUE)
-                .addComponent(zmenVstupneButton)
-                .addGap(1, 1, 1))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(16, 16, 16)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(cenaVstupnehoLabel)
+                            .addComponent(jLabel1))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(cenaSpinninguTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(cenaVstupnehoTexttField, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(zmenVstupneButton)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(zoznamRecepcnychButton))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 306, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(zmazKreditButton, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(pridajKreditButton, javax.swing.GroupLayout.Alignment.TRAILING))))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(cenaVstupnehoTexttField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cenaVstupnehoLabel)
+                    .addComponent(zmenVstupneButton)
+                    .addComponent(zoznamRecepcnychButton))
+                .addGap(12, 12, 12)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(cenaSpinninguTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(cenaVstupnehoTexttField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(cenaVstupnehoLabel))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel1)
-                            .addComponent(cenaSpinninguTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(23, 23, 23)
-                        .addComponent(zmenVstupneButton)))
-                .addContainerGap(177, Short.MAX_VALUE))
+                        .addComponent(pridajKreditButton)
+                        .addGap(18, 18, 18)
+                        .addComponent(zmazKreditButton)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void zmenVstupneButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_zmenVstupneButtonActionPerformed
-       
-        //TODO upravit ak zadam 0,5 hadze to chybu 0.5 je ok
-        if (!("").equals(cenaVstupnehoTexttField.getText())){
-            vstupneDao.updateCenaVstupneho(Double.parseDouble(cenaVstupnehoTexttField.getText()));
+        try {
+            if (!("").equals(cenaVstupnehoTexttField.getText())) {
+                vstupneDao.updateCenaVstupneho(Double.parseDouble(cenaVstupnehoTexttField.getText()));
+            }
+
+            if (!("").equals(cenaSpinninguTextField.getText())) {
+                vstupneDao.updateCenaSpinningu(Double.parseDouble(cenaSpinninguTextField.getText()));
+            }
+
+        } catch (NumberFormatException e ) {
+            JOptionPane.showMessageDialog(this, "Zlý format ceny.");
         }
-        
-        if (!("").equals(cenaSpinninguTextField.getText())){
-            vstupneDao.updateCenaSpinningu(Double.parseDouble(cenaSpinninguTextField.getText()));
-        }
-        aktualizuj();     
+
+        aktualizuj();
     }//GEN-LAST:event_zmenVstupneButtonActionPerformed
+
+    private void pridajKreditButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pridajKreditButtonActionPerformed
+        new PridatKreditForm(new javax.swing.JFrame(), true).setVisible(true);
+        aktualizujKreditTable();
+    }//GEN-LAST:event_pridajKreditButtonActionPerformed
+
+    private void zmazKreditButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_zmazKreditButtonActionPerformed
+        try {
+            Long idKredit = (Long) kreditTable.getValueAt(this.kreditTable.getSelectedRow(), ID_COLUMN);
+            Kredit kredit = kreditDao.dajKreditSId(idKredit);
+            if (kredit != null) {
+                kreditDao.vymazKredit(idKredit);
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Nie je vybraný žiaden kredit.");
+        }
+
+        aktualizujKreditTable();
+    }//GEN-LAST:event_zmazKreditButtonActionPerformed
+
+    private void zoznamRecepcnychButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_zoznamRecepcnychButtonActionPerformed
+        new ZoznamRecepcnych(new javax.swing.JFrame(), true).setVisible(true);
+    }//GEN-LAST:event_zoznamRecepcnychButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -139,18 +223,32 @@ public class NastaveniaForm extends javax.swing.JDialog {
         });
     }
 
-    // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTextField cenaSpinninguTextField;
-    private javax.swing.JLabel cenaVstupnehoLabel;
-    private javax.swing.JTextField cenaVstupnehoTexttField;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JButton zmenVstupneButton;
-    // End of variables declaration//GEN-END:variables
-
     private void aktualizuj() {
         double vstup = vstupneDao.dajCeny().getCenaVstupneho();
         double spinning = vstupneDao.dajCeny().getCenaSpinnigu();
         cenaVstupnehoTexttField.setText("" + vstup);
         cenaSpinninguTextField.setText("" + spinning);
+
+        aktualizujKreditTable();
+
     }
+
+    private void aktualizujKreditTable() {
+        KreditTableModel model = (KreditTableModel) kreditTable.getModel();
+        model.aktualizovat();
+    }
+
+
+    // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTextField cenaSpinninguTextField;
+    private javax.swing.JLabel cenaVstupnehoLabel;
+    private javax.swing.JTextField cenaVstupnehoTexttField;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JTable kreditTable;
+    private javax.swing.JButton pridajKreditButton;
+    private javax.swing.JButton zmazKreditButton;
+    private javax.swing.JButton zmenVstupneButton;
+    private javax.swing.JButton zoznamRecepcnychButton;
+    // End of variables declaration//GEN-END:variables
 }

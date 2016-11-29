@@ -4,6 +4,7 @@ import com.mysql.cj.jdbc.MysqlDataSource;
 import org.springframework.jdbc.core.JdbcTemplate;
 import sk.upjs.ics.paz1c.fitnesscentrum.dao.InstruktorDao;
 import sk.upjs.ics.paz1c.fitnesscentrum.dao.KlucDao;
+import sk.upjs.ics.paz1c.fitnesscentrum.dao.KreditDao;
 import sk.upjs.ics.paz1c.fitnesscentrum.dao.RecepcnyDao;
 import sk.upjs.ics.paz1c.fitnesscentrum.dao.RezervaciaDao;
 import sk.upjs.ics.paz1c.fitnesscentrum.dao.SpinningDao;
@@ -11,6 +12,7 @@ import sk.upjs.ics.paz1c.fitnesscentrum.dao.VstupneDao;
 import sk.upjs.ics.paz1c.fitnesscentrum.dao.ZakaznikDao;
 import sk.upjs.ics.paz1c.fitnesscentrum.dao.impl.MySQLInstruktorDao;
 import sk.upjs.ics.paz1c.fitnesscentrum.dao.impl.MySQLKlucDao;
+import sk.upjs.ics.paz1c.fitnesscentrum.dao.impl.MySQLKreditDao;
 import sk.upjs.ics.paz1c.fitnesscentrum.dao.impl.MySQLRecepcnyDao;
 import sk.upjs.ics.paz1c.fitnesscentrum.dao.impl.MySQLRezervaciaDao;
 import sk.upjs.ics.paz1c.fitnesscentrum.dao.impl.MySQLSpinningDao;
@@ -28,6 +30,7 @@ public enum DaoFactory {
     private InstruktorDao instruktorDao;
     private RezervaciaDao rezervaciaDao;
     private VstupneDao vstupneDao;
+    private KreditDao kreditDao;
 
     public JdbcTemplate getJdbcTemplate() {
         if (jdbcTemplate == null) {
@@ -67,7 +70,6 @@ public enum DaoFactory {
             spinningDao = new MySQLSpinningDao();
         }
         return spinningDao;
-
     }
 
     public InstruktorDao getInstruktorDao() {
@@ -89,5 +91,12 @@ public enum DaoFactory {
             vstupneDao = new MySQLVstupneDao();
         }
         return vstupneDao;
+    }
+
+    public KreditDao getKreditDao() {
+        if (kreditDao == null) {
+            kreditDao = new MySQLKreditDao();
+        }
+        return kreditDao;
     }
 }

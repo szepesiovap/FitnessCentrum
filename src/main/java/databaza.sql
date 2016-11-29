@@ -85,7 +85,6 @@ CREATE TABLE IF NOT EXISTS `fitnesscentrum`.`recepcny` (
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8;
 
--- admin tam bude stale
 INSERT INTO `fitnesscentrum`.`recepcny` (`meno_priezvisko`, `login`, `heslo`, `salt`)
 VALUES ('admin','admin','CE6736FEFE7C7F09E83206EDF1756C182D81824EF987542EBBA1244202F0319E', 'd19d6534-e083-4f93-96b9-8499c09dc811');
 
@@ -154,6 +153,20 @@ DEFAULT CHARACTER SET = utf8;
 
 -- opatrenie, aby tam nikdy nebolo null
 INSERT INTO `fitnesscentrum`.`vstupne` (`cena_vstupneho`, `cena_spinningu`) VALUES ('3','5');
+
+
+
+-- -----------------------------------------------------
+-- Table `fitnesscentrum`.`kredit`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `fitnesscentrum`.`kredit` (
+  `id` INT(11) NOT NULL AUTO_INCREMENT,
+  `cena` DOUBLE NULL DEFAULT NULL,
+  `nazov` VARCHAR(20) NULL DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE INDEX `cena_UNIQUE` (`cena` ASC))
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8;
 
 
 SET SQL_MODE=@OLD_SQL_MODE;
