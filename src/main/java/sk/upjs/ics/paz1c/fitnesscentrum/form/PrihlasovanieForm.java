@@ -30,7 +30,8 @@ public class PrihlasovanieForm extends javax.swing.JFrame {
         hesloPasswordField = new javax.swing.JPasswordField();
         prihlasovanieMenuBar = new javax.swing.JMenuBar();
         novyRecepcny = new javax.swing.JMenu();
-        zmenaUdajovRecepcny = new javax.swing.JMenu();
+        zmenaHeslaRecepcny = new javax.swing.JMenu();
+        nastavenia = new javax.swing.JMenu();
 
         javax.swing.GroupLayout jFrame1Layout = new javax.swing.GroupLayout(jFrame1.getContentPane());
         jFrame1.getContentPane().setLayout(jFrame1Layout);
@@ -83,13 +84,21 @@ public class PrihlasovanieForm extends javax.swing.JFrame {
         });
         prihlasovanieMenuBar.add(novyRecepcny);
 
-        zmenaUdajovRecepcny.setText("Zmena hesla");
-        zmenaUdajovRecepcny.addMouseListener(new java.awt.event.MouseAdapter() {
+        zmenaHeslaRecepcny.setText("Zmena hesla");
+        zmenaHeslaRecepcny.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
-                zmenaUdajovRecepcnyMousePressed(evt);
+                zmenaHeslaRecepcnyMousePressed(evt);
             }
         });
-        prihlasovanieMenuBar.add(zmenaUdajovRecepcny);
+        prihlasovanieMenuBar.add(zmenaHeslaRecepcny);
+
+        nastavenia.setText("Nastavenia");
+        nastavenia.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                nastaveniaMousePressed(evt);
+            }
+        });
+        prihlasovanieMenuBar.add(nastavenia);
 
         setJMenuBar(prihlasovanieMenuBar);
 
@@ -172,9 +181,13 @@ public class PrihlasovanieForm extends javax.swing.JFrame {
         new OverenieHeslaForm(this, true).setVisible(true);
     }//GEN-LAST:event_novyRecepcnyMousePressed
 
-    private void zmenaUdajovRecepcnyMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_zmenaUdajovRecepcnyMousePressed
+    private void zmenaHeslaRecepcnyMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_zmenaHeslaRecepcnyMousePressed
         new ZmenaHeslaRecepcnehoForm(this, true).setVisible(true);
-    }//GEN-LAST:event_zmenaUdajovRecepcnyMousePressed
+    }//GEN-LAST:event_zmenaHeslaRecepcnyMousePressed
+
+    private void nastaveniaMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_nastaveniaMousePressed
+        new OverenieHeslaForm2(this, true).setVisible(true);
+    }//GEN-LAST:event_nastaveniaMousePressed
 
     /**
      * @param args the command line arguments
@@ -217,9 +230,10 @@ public class PrihlasovanieForm extends javax.swing.JFrame {
     private javax.swing.JFrame jFrame1;
     private javax.swing.JLabel loginLabel;
     private javax.swing.JTextField loginTextField;
+    private javax.swing.JMenu nastavenia;
     private javax.swing.JMenu novyRecepcny;
     private javax.swing.JButton prihlasitButton;
     private javax.swing.JMenuBar prihlasovanieMenuBar;
-    private javax.swing.JMenu zmenaUdajovRecepcny;
+    private javax.swing.JMenu zmenaHeslaRecepcny;
     // End of variables declaration//GEN-END:variables
 }

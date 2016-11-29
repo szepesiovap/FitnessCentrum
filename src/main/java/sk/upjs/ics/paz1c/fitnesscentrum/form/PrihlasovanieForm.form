@@ -28,12 +28,20 @@
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="novyRecepcnyActionPerformed"/>
           </Events>
         </Menu>
-        <Menu class="javax.swing.JMenu" name="zmenaUdajovRecepcny">
+        <Menu class="javax.swing.JMenu" name="zmenaHeslaRecepcny">
           <Properties>
             <Property name="text" type="java.lang.String" value="Zmena hesla"/>
           </Properties>
           <Events>
-            <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="zmenaUdajovRecepcnyMousePressed"/>
+            <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="zmenaHeslaRecepcnyMousePressed"/>
+          </Events>
+        </Menu>
+        <Menu class="javax.swing.JMenu" name="nastavenia">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Nastavenia"/>
+          </Properties>
+          <Events>
+            <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="nastaveniaMousePressed"/>
           </Events>
         </Menu>
       </SubComponents>

@@ -7,12 +7,14 @@ import sk.upjs.ics.paz1c.fitnesscentrum.dao.KlucDao;
 import sk.upjs.ics.paz1c.fitnesscentrum.dao.RecepcnyDao;
 import sk.upjs.ics.paz1c.fitnesscentrum.dao.RezervaciaDao;
 import sk.upjs.ics.paz1c.fitnesscentrum.dao.SpinningDao;
+import sk.upjs.ics.paz1c.fitnesscentrum.dao.VstupneDao;
 import sk.upjs.ics.paz1c.fitnesscentrum.dao.ZakaznikDao;
 import sk.upjs.ics.paz1c.fitnesscentrum.dao.impl.MySQLInstruktorDao;
 import sk.upjs.ics.paz1c.fitnesscentrum.dao.impl.MySQLKlucDao;
 import sk.upjs.ics.paz1c.fitnesscentrum.dao.impl.MySQLRecepcnyDao;
 import sk.upjs.ics.paz1c.fitnesscentrum.dao.impl.MySQLRezervaciaDao;
 import sk.upjs.ics.paz1c.fitnesscentrum.dao.impl.MySQLSpinningDao;
+import sk.upjs.ics.paz1c.fitnesscentrum.dao.impl.MySQLVstupneDao;
 import sk.upjs.ics.paz1c.fitnesscentrum.dao.impl.MySQLZakaznikDao;
 
 public enum DaoFactory {
@@ -25,6 +27,7 @@ public enum DaoFactory {
     private SpinningDao spinningDao;
     private InstruktorDao instruktorDao;
     private RezervaciaDao rezervaciaDao;
+    private VstupneDao vstupneDao;
 
     public JdbcTemplate getJdbcTemplate() {
         if (jdbcTemplate == null) {
@@ -79,5 +82,12 @@ public enum DaoFactory {
             rezervaciaDao = new MySQLRezervaciaDao();
         }
         return rezervaciaDao;
+    }
+
+    public VstupneDao getVstupneDao() {
+        if (vstupneDao == null) {
+            vstupneDao = new MySQLVstupneDao();
+        }
+        return vstupneDao;
     }
 }

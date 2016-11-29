@@ -1,0 +1,39 @@
+package sk.upjs.ics.paz1c.fitnesscentrum.dao.impl;
+
+import java.util.List;
+import org.springframework.jdbc.core.JdbcTemplate;
+import sk.upjs.ics.paz1c.fitnesscentrum.DaoFactory;
+import sk.upjs.ics.paz1c.fitnesscentrum.dao.VstupneDao;
+import sk.upjs.ics.paz1c.fitnesscentrum.entity.Vstupne;
+import sk.upjs.ics.paz1c.fitnesscentrum.rowmapper.VstupneRowMapper;
+
+public class MySQLVstupneDao implements VstupneDao {
+
+    private final JdbcTemplate jdbcTemplate;
+    private final VstupneRowMapper vstupneRowMapper;
+    private static int ID = 1;
+
+    public MySQLVstupneDao() {
+        jdbcTemplate = DaoFactory.INSTANCE.getJdbcTemplate();
+        vstupneRowMapper = new VstupneRowMapper();
+    }
+
+    @Override
+    public void updateCenaVstupneho(double cena) {
+        String sql = "UPDATE vstupne SET cena_vstupneho=? WHERE id=?";
+        jdbcTemplate.update(sql, cena, ID);
+    }
+
+    @Override
+    public void updateCenaSpinningu(double cena) {
+        String sql = "UPDATE vstupne SET cena_spinningu=? WHERE id=?";
+        jdbcTemplate.update(sql, cena, ID);
+    }
+
+    @Override
+    public Vstupne dajCeny() {
+        String sql = "SELECT * FROM vstupne";
+        return jdbcTemplate.query(sql, vstupneRowMapper).get(0);
+    }
+
+}
