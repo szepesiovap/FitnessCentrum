@@ -11,6 +11,7 @@ public class MySQLRecepcnyDao implements RecepcnyDao {
 
     private final JdbcTemplate jdbcTemplate;
     private final RecepcnyRowMapper recepcnyRowMapper;
+    private final static int ID_ADMINA = 0;
 
     public MySQLRecepcnyDao() {
         jdbcTemplate = DaoFactory.INSTANCE.getJdbcTemplate();
@@ -30,8 +31,8 @@ public class MySQLRecepcnyDao implements RecepcnyDao {
 
     @Override
     public List<Recepcny> dajVsetkychRecepcnych() {
-        String sgl = "SELECT * FROM recepcny";
-        return jdbcTemplate.query(sgl, recepcnyRowMapper);
+        String sgl = "SELECT * FROM recepcny WHERE id > ?";
+        return jdbcTemplate.query(sgl, recepcnyRowMapper, ID_ADMINA);
     }
 
     @Override
@@ -41,8 +42,9 @@ public class MySQLRecepcnyDao implements RecepcnyDao {
     }
 
     @Override
-    public void vymazRecepcneho(Recepcny recepcny) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void vymazRecepcneho(Long idRecepcny) {
+        String sql = "DELETE FROM recepcny WHERE id=?";
+        jdbcTemplate.update(sql, idRecepcny);
     }
 
     @Override

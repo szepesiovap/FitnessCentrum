@@ -178,7 +178,7 @@ public class PrihlasovanieForm extends javax.swing.JFrame {
     }//GEN-LAST:event_novyRecepcnyActionPerformed
 
     private void novyRecepcnyMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_novyRecepcnyMousePressed
-        new OverenieHeslaForm(this, true).setVisible(true);
+        new OverenieHeslaForm(this, true, "novyRecepcny").setVisible(true);
     }//GEN-LAST:event_novyRecepcnyMousePressed
 
     private void zmenaHeslaRecepcnyMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_zmenaHeslaRecepcnyMousePressed
@@ -186,7 +186,7 @@ public class PrihlasovanieForm extends javax.swing.JFrame {
     }//GEN-LAST:event_zmenaHeslaRecepcnyMousePressed
 
     private void nastaveniaMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_nastaveniaMousePressed
-        new OverenieHeslaForm2(this, true).setVisible(true);
+        new OverenieHeslaForm(this, true, "nastavenia").setVisible(true);
     }//GEN-LAST:event_nastaveniaMousePressed
 
     /**

@@ -10,13 +10,15 @@ public class OverenieHeslaForm extends javax.swing.JDialog {
     
     private Recepcny recepcny;
     private final RecepcnyDao recepcnyDao;
+    private final String akcia;
     
     /**
      * Creates new form OverenieHeslaJDialog
      */
-    public OverenieHeslaForm(java.awt.Frame parent, boolean modal) {
+    public OverenieHeslaForm(java.awt.Frame parent, boolean modal, String akcia) {
         super(parent, modal);
         recepcnyDao = DaoFactory.INSTANCE.getRecepcnyDao();
+        this.akcia = akcia;
         initComponents();
     }
 
@@ -96,7 +98,11 @@ public class OverenieHeslaForm extends javax.swing.JDialog {
 
         if (hashHeslo.equals(recepcny.getHeslo())) {
             this.dispose();
-            new NovyRecepcnyForm(new javax.swing.JFrame(), true).setVisible(true);
+            if("nastavenia".equals(akcia)){
+                 new NastaveniaForm(new javax.swing.JFrame(), true).setVisible(true);
+            } else {
+                new NovyRecepcnyForm(new javax.swing.JFrame(), true).setVisible(true);
+            }
         } else {
             JOptionPane.showMessageDialog(null, "Zadané heslo nie je správne");
         }
@@ -137,7 +143,7 @@ public class OverenieHeslaForm extends javax.swing.JDialog {
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                OverenieHeslaForm dialog = new OverenieHeslaForm(new javax.swing.JFrame(), true);
+                OverenieHeslaForm dialog = new OverenieHeslaForm(new javax.swing.JFrame(), true, "nastavenia");
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {

@@ -15,5 +15,5 @@ public interface RecepcnyDao {
 
     public void updateRecepcneho(Recepcny recepcny);
 
-    public void vymazRecepcneho(Recepcny recepcny);
+    public void vymazRecepcneho(Long idRecepcny);
 }
