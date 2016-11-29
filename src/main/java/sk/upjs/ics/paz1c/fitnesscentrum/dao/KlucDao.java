@@ -15,5 +15,7 @@ public interface KlucDao {
     public void odoberZakaznika(Kluc kluc);
 
     public Kluc dajKlucSId(Long idKluca);
+    
+    public void vymazKluc(Long idKluca);
 
 }

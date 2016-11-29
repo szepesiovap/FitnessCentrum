@@ -55,8 +55,8 @@ public class MySQLKlucDao implements KlucDao {
                 + "kluc.meno_kluca AS kluc_meno, "
                 + "zakaznik.id AS z_id, "
                 + "zakaznik.meno_priezvisko AS z_meno, "
-                + "zakaznik.posledny_prichod AS z_posledny_prichod"
-                + ", zakaznik.pritomny as z_pritomny, "
+                + "zakaznik.posledny_prichod AS z_posledny_prichod,"
+                + "zakaznik.pritomny as z_pritomny,"
                 + "zakaznik.kredit as z_kredit, "
                 + "zakaznik.cislo_permanentky as z_cislo_permanentky "
                 + "FROM kluc LEFT JOIN zakaznik ON zakaznik.id = kluc.id_zakaznika WHERE kluc.id_kluca = ?";
@@ -73,6 +73,12 @@ public class MySQLKlucDao implements KlucDao {
     public void odoberZakaznika(Kluc kluc) {
         String sql = "UPDATE kluc SET id_zakaznika= NULL where id_kluca = ?";
         jdbcTemplate.update(sql, kluc.getId());
+    }
+
+    @Override
+    public void vymazKluc(Long idkluca) {
+        String sql = "DELETE FROM kluc WHERE id_kluca=?";
+        jdbcTemplate.update(sql, idkluca);
     }
 
 }
