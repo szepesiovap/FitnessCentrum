@@ -96,9 +96,9 @@ public class PrichodZakaznikaForm extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void prichodButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_prichodButtonActionPerformed
-        Long idKluca = ((Kluc) klucComboBox.getSelectedItem()).getIdKluca();
-        zakaznikDao.prichod(zakaznik.getId(), idKluca);
-        klucDao.priradZakaznika(idKluca, zakaznik.getId());
+        Kluc kluc = ((Kluc) klucComboBox.getSelectedItem());
+        zakaznikDao.prichod(zakaznik, kluc);
+        klucDao.priradZakaznika(kluc, zakaznik);
         dispose();
     }//GEN-LAST:event_prichodButtonActionPerformed
 

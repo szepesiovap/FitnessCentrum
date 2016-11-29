@@ -4,33 +4,33 @@ import java.time.LocalDateTime;
 
 public class Rezervacia {
 
-    private Long idRezervacie;
-    private Long idSpinningu;
-    private Long idZakaznika;
+    private Long id;
+    private Spinning spinning;
+    private Zakaznik zakaznik;
     private LocalDateTime casRezervacie;
 
-    public Long getIdRezervacie() {
-        return idRezervacie;
+    public Long getId() {
+        return id;
     }
 
-    public void setIdRezervacie(Long idRezervacie) {
-        this.idRezervacie = idRezervacie;
+    public void setId(Long id) {
+        this.id = id;
     }
 
-    public Long getIdSpinningu() {
-        return idSpinningu;
+    public Spinning getSpinning() {
+        return spinning;
     }
 
-    public void setIdSpinningu(Long idSpinningu) {
-        this.idSpinningu = idSpinningu;
+    public void setSpinning(Spinning spinning) {
+        this.spinning = spinning;
     }
 
-    public Long getIdZakaznika() {
-        return idZakaznika;
+    public Zakaznik getZakaznik() {
+        return zakaznik;
     }
 
-    public void setIdZakaznika(Long idZakaznika) {
-        this.idZakaznika = idZakaznika;
+    public void setZakaznik(Zakaznik zakaznik) {
+        this.zakaznik = zakaznik;
     }
 
     public LocalDateTime getCasRezervacie() {

@@ -9,7 +9,7 @@ public class Spinning {
     private LocalDateTime datum;
     private int kapacita;
     private int volne;
-    private Long idInstruktora;
+    private Instruktor instruktor;
 
     public Long getId() {
         return id;
@@ -43,17 +43,17 @@ public class Spinning {
         this.volne = volne;
     }
 
-    public Long getIdInstruktora() {
-        return idInstruktora;
+    public Instruktor getInstruktor() {
+        return instruktor;
     }
 
-    public void setIdInstruktora(Long idInstruktora) {
-        this.idInstruktora = idInstruktora;
+    public void setInstruktor(Instruktor instruktor) {
+        this.instruktor = instruktor;
     }
 
     @Override
     public String toString() {
-        return getDatum() + " " + DaoFactory.INSTANCE.getInstruktorDao().dajInstruktoraSId(idInstruktora).getMeno();
+        return getDatum() + " " + instruktor.getMeno();
     }
 
 }

@@ -26,7 +26,7 @@ public class RezervaciaTableModel extends AbstractTableModel {
         if (spinning == null) {
             return 0;
         }
-        return rezervaciaDao.dajRezervacieSpinningu(spinning.getId()).size();
+        return rezervaciaDao.dajRezervacieSpinningu(spinning).size();
     }
 
     @Override
@@ -36,10 +36,10 @@ public class RezervaciaTableModel extends AbstractTableModel {
 
     @Override
     public Object getValueAt(int rowIndex, int columnIndex) {
-        Rezervacia rezervacia = rezervaciaDao.dajRezervacieSpinningu(spinning.getId()).get(rowIndex);
+        Rezervacia rezervacia = rezervaciaDao.dajRezervacieSpinningu(spinning).get(rowIndex);
         switch (columnIndex) {
             case 0:
-                return zakaznikDao.dajZakaznikaSId(rezervacia.getIdZakaznika()).getMeno();
+                return rezervacia.getZakaznik().getMeno();
             case 1:
                 return rezervacia.getCasRezervacie();
             default:

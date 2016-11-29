@@ -10,14 +10,14 @@ public class Zakaznik {
     private boolean pritomny;
     private double kredit;
     private String cisloPermanentky;
-    private Long idKluca;
+    private Kluc kluc;
 
-    public Long getIdKluca() {
-        return idKluca;
+    public Kluc getKluc() {
+        return kluc;
     }
 
-    public void setIdKluca(Long idKluca) {
-        this.idKluca = idKluca;
+    public void setKluc(Kluc kluc) {
+        this.kluc = kluc;
     }
 
     public double getKredit() {

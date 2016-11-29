@@ -81,7 +81,7 @@ public class ZmazatZakaznikaForm extends javax.swing.JDialog {
 
     private void zmazatButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_zmazatButtonActionPerformed
         ZakaznikDao zakaznikDao = DaoFactory.INSTANCE.getZakaznikDao();
-        zakaznikDao.vymazZakaznika(zakaznik.getId());
+        zakaznikDao.vymazZakaznika(zakaznik);
         dispose();    }//GEN-LAST:event_zmazatButtonActionPerformed
 
     private void zrusitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_zrusitButtonActionPerformed

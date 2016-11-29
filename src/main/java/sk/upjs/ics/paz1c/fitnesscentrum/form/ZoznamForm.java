@@ -130,7 +130,7 @@ public final class ZoznamForm extends javax.swing.JFrame {
             } else {
                 JOptionPane.showMessageDialog(this, "Zákazník je už prítomný!");
             }
-        } catch (Exception e) {
+        } catch (ArrayIndexOutOfBoundsException e) {
             System.err.println("Vyber zákazníka na príchod.");
         }
     }//GEN-LAST:event_prichodButtonActionPerformed

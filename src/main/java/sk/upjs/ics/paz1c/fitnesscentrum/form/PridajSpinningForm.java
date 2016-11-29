@@ -152,7 +152,7 @@ public class PridajSpinningForm extends javax.swing.JDialog {
 
             Spinning spinning = new Spinning();
             spinning.setDatum(datum);
-            spinning.setIdInstruktora(((Instruktor) instruktorComboBox.getSelectedItem()).getId());
+            spinning.setInstruktor((Instruktor) instruktorComboBox.getSelectedItem());
             //TODO kapacita a volne
             spinning.setKapacita(20);
             spinning.setVolne(20);

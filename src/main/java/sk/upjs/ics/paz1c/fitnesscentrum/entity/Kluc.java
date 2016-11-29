@@ -2,39 +2,37 @@ package sk.upjs.ics.paz1c.fitnesscentrum.entity;
 
 public class Kluc {
 
-    private Long idKluca;
-    private String menoKluca;
-    private Long idZakaznika;
+    private Long id;
+    private String meno;
+    private Zakaznik zakaznik;
 
-    public String getMenoKluca() {
-        return menoKluca;
+    public String getMeno() {
+        return meno;
     }
 
-    public void setMenoKluca(String menoKluca) {
-        this.menoKluca = menoKluca;
+    public void setMeno(String menoKluca) {
+        this.meno = menoKluca;
     }
 
-    public Long getIdZakaznika() {
-        return idZakaznika;
+    public Zakaznik getZakaznik() {
+        return zakaznik;
     }
 
-    public void setIdZakaznika(Long idZakaznika) {
-        this.idZakaznika = idZakaznika;
+    public void setZakaznik(Zakaznik zakaznik) {
+        this.zakaznik = zakaznik;
     }
 
-    public Long getIdKluca() {
-        return idKluca;
+    public Long getId() {
+        return id;
     }
 
-    public void setIdKluca(Long idKluca) {
-        this.idKluca = idKluca;
+    public void setId(Long id) {
+        this.id = id;
     }
 
     @Override
     public String toString() {
-        return menoKluca;
+        return meno;
     }
-    
-    
 
 }

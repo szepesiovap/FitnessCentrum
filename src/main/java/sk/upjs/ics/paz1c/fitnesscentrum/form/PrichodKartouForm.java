@@ -144,10 +144,10 @@ public class PrichodKartouForm extends javax.swing.JDialog {
         } else if (zakaznik.getKredit() <= SUMA) {
             JOptionPane.showMessageDialog(this, "Nedostatočný kredit!");
         } else {
-            Long idKluca = ((Kluc) klucComboBox.getSelectedItem()).getIdKluca();
-            zakaznikDao.stiahniKreditZakaznikovi(zakaznik.getId(), SUMA);
-            zakaznikDao.prichod(zakaznik.getId(), idKluca);
-            klucDao.priradZakaznika(idKluca, zakaznik.getId());
+            Kluc kluc = (Kluc) klucComboBox.getSelectedItem();
+            zakaznikDao.stiahniKreditZakaznikovi(zakaznik, SUMA);
+            zakaznikDao.prichod(zakaznik, kluc);
+            klucDao.priradZakaznika(kluc, zakaznik);
             dispose();
         }
 
@@ -156,7 +156,7 @@ public class PrichodKartouForm extends javax.swing.JDialog {
     private void nacitajButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nacitajButtonActionPerformed
         try {
             zakaznik = zakaznikDao.dajZakaznikaSCislomPermanentky(cisloKartyTextField.getText());
-        } catch (EmptyResultDataAccessException e) { 
+        } catch (EmptyResultDataAccessException e) {
             zakaznik = null;
         }
         if (zakaznik == null) {

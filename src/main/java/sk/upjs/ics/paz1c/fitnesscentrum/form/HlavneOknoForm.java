@@ -4,9 +4,11 @@ import sk.upjs.ics.paz1c.fitnesscentrum.DaoFactory;
 import sk.upjs.ics.paz1c.fitnesscentrum.PritomniZakazniciTableModel;
 import sk.upjs.ics.paz1c.fitnesscentrum.dao.KlucDao;
 import sk.upjs.ics.paz1c.fitnesscentrum.dao.ZakaznikDao;
+import sk.upjs.ics.paz1c.fitnesscentrum.entity.Kluc;
+import sk.upjs.ics.paz1c.fitnesscentrum.entity.Zakaznik;
 
 public final class HlavneOknoForm extends javax.swing.JFrame {
-    
+
     private static final int ID_COLUMN = 0;
 
     /**
@@ -16,7 +18,7 @@ public final class HlavneOknoForm extends javax.swing.JFrame {
         initComponents();
         aktualizovatZoznamPritomnych();
     }
-    
+
     public void aktualizovatZoznamPritomnych() {
         PritomniZakazniciTableModel model = (PritomniZakazniciTableModel) pritomniTable.getModel();
         model.aktualizovat();
@@ -146,11 +148,13 @@ public final class HlavneOknoForm extends javax.swing.JFrame {
             Long idZakaznika = (Long) pritomniTable.getValueAt(pritomniTable.getSelectedRow(), ID_COLUMN);
             ZakaznikDao zakaznikDao = DaoFactory.INSTANCE.getZakaznikDao();
             KlucDao klucDao = DaoFactory.INSTANCE.getKlucDao();
-            klucDao.odoberZakaznika(zakaznikDao.dajZakaznikaSId(idZakaznika).getIdKluca());
-            zakaznikDao.odchod(idZakaznika);
-            
+            Zakaznik zakaznik = zakaznikDao.dajZakaznikaSId(idZakaznika);
+            Kluc kluc = klucDao.dajKlucSId(zakaznik.getKluc().getId());
+            klucDao.odoberZakaznika(kluc);
+            zakaznikDao.odchod(zakaznik);
+
             aktualizovatZoznamPritomnych();
-        } catch (Exception e) {
+        } catch (ArrayIndexOutOfBoundsException e) {
             System.err.println("Nebol vybrany ziaden zakaznik");
         }
     }//GEN-LAST:event_odchodMenuMousePressed
@@ -191,7 +195,7 @@ public final class HlavneOknoForm extends javax.swing.JFrame {
                 if ("Nimbus".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
-                    
+
                 }
             }
         } catch (ClassNotFoundException ex) {

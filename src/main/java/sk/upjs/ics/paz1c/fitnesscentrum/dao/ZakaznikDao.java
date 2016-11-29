@@ -2,6 +2,7 @@ package sk.upjs.ics.paz1c.fitnesscentrum.dao;
 
 import sk.upjs.ics.paz1c.fitnesscentrum.entity.Zakaznik;
 import java.util.List;
+import sk.upjs.ics.paz1c.fitnesscentrum.entity.Kluc;
 
 public interface ZakaznikDao {
 
@@ -9,13 +10,13 @@ public interface ZakaznikDao {
     public List<Zakaznik> dajPritomnychZakaznikov();
     public List<Zakaznik> dajZakaznikovSoZhodouVMene(String vzorka);
     public void pridajZakaznika(Zakaznik zakaznik);
-    public void vymazZakaznika(Long idZakaznika);
-    public void prichod(Long idZakaznika, Long idKluca);
-    public void odchod(Long idZakaznika);
+    public void vymazZakaznika(Zakaznik zakaznik);
+    public void prichod(Zakaznik zakaznik,Kluc kluc);
+    public void odchod(Zakaznik zakaznik);
     public Zakaznik dajZakaznikaSId(Long idZakaznika);
     public Zakaznik dajZakaznikaSCislomPermanentky(String cisloPermanentky);
-    public void stiahniKreditZakaznikovi(Long idZakaznika, double suma);
-    public void dobiKreditZakaznikovi(Long idZakaznika, double suma);
+    public void stiahniKreditZakaznikovi(Zakaznik zakaznik, double suma);
+    public void dobiKreditZakaznikovi(Zakaznik zakaznik, double suma);
 
     
 }

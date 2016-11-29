@@ -5,6 +5,7 @@ import sk.upjs.ics.paz1c.fitnesscentrum.entity.Zakaznik;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import sk.upjs.ics.paz1c.fitnesscentrum.entity.Kluc;
 
 public class ZoznamZakaznikov implements ZakaznikDao {
 
@@ -53,17 +54,17 @@ public class ZoznamZakaznikov implements ZakaznikDao {
     }
 
     @Override
-    public void vymazZakaznika(Long idZakaznika) {
+    public void vymazZakaznika(Zakaznik zakaznik) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public void prichod(Long idZakaznika, Long idKluca) {
+    public void prichod(Zakaznik zakaznik, Kluc kluc) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public void odchod(Long idZakaznika) {
+    public void odchod(Zakaznik zakaznik) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
@@ -73,12 +74,13 @@ public class ZoznamZakaznikov implements ZakaznikDao {
     }
 
     @Override
-    public void stiahniKreditZakaznikovi(Long idZakaznika, double suma) {
+    public void stiahniKreditZakaznikovi(Zakaznik zakaznik, double suma) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public void dobiKreditZakaznikovi(Long idZakaznika, double suma) {
+    public void dobiKreditZakaznikovi(Zakaznik zakaznik, double suma) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+
 }

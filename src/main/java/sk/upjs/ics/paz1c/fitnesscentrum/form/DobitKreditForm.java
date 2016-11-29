@@ -146,7 +146,7 @@ public class DobitKreditForm extends javax.swing.JDialog {
 
     private void dobiButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dobiButtonActionPerformed
         double kredit = KREDIT_SUMY[kreditComboBox.getSelectedIndex()];
-        zakaznikDao.dobiKreditZakaznikovi(zakaznik.getId(), kredit);
+        zakaznikDao.dobiKreditZakaznikovi(zakaznik, kredit);
         dispose();
     }//GEN-LAST:event_dobiButtonActionPerformed
 

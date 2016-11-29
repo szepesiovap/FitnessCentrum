@@ -6,6 +6,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import sk.upjs.ics.paz1c.fitnesscentrum.DaoFactory;
 import sk.upjs.ics.paz1c.fitnesscentrum.dao.RezervaciaDao;
 import sk.upjs.ics.paz1c.fitnesscentrum.entity.Rezervacia;
+import sk.upjs.ics.paz1c.fitnesscentrum.entity.Spinning;
 import sk.upjs.ics.paz1c.fitnesscentrum.rowmapper.RezervaciaRowMapper;
 
 public class MySQLRezervaciaDao implements RezervaciaDao {
@@ -25,9 +26,9 @@ public class MySQLRezervaciaDao implements RezervaciaDao {
     }
 
     @Override
-    public List<Rezervacia> dajRezervacieSpinningu(Long idSpinningu) {
+    public List<Rezervacia> dajRezervacieSpinningu(Spinning spinning) {
         String sql = "SELECT *  FROM rezervacia WHERE id_spinning = ?";
-        return jdbcTemplate.query(sql, rezervaciaRowMapper, idSpinningu);
+        return jdbcTemplate.query(sql, rezervaciaRowMapper, spinning.getId());
     }
 
     @Override
@@ -39,7 +40,7 @@ public class MySQLRezervaciaDao implements RezervaciaDao {
     @Override
     public void pridajRezervaciu(Rezervacia rezervacia) {
         String sql = "INSERT INTO rezervacia (id_spinning,id_zakaznik,cas_rezervacie) VALUES (?,?,?)";
-        jdbcTemplate.update(sql, rezervacia.getIdSpinningu(), rezervacia.getIdZakaznika(), Timestamp.valueOf(rezervacia.getCasRezervacie()));
+        jdbcTemplate.update(sql, rezervacia.getSpinning().getId(), rezervacia.getZakaznik().getId(), Timestamp.valueOf(rezervacia.getCasRezervacie()));
     }
 
 }
