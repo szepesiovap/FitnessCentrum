@@ -35,7 +35,8 @@ CREATE TABLE IF NOT EXISTS `fitnesscentrum`.`kluc` (
   `id_kluca` INT(11) NOT NULL AUTO_INCREMENT,
   `meno_kluca` VARCHAR(45) NOT NULL,
   `id_zakaznika` INT(11) NULL DEFAULT NULL,
-  PRIMARY KEY (`id_kluca`))
+  PRIMARY KEY (`id_kluca`),
+  UNIQUE INDEX `meno_kluca_UNIQUE` (`meno_kluca` ASC))
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8;
 

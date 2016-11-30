@@ -81,4 +81,10 @@ public class MySQLKlucDao implements KlucDao {
         jdbcTemplate.update(sql, idkluca);
     }
 
+    @Override
+    public void pridajKluc(Kluc kluc) {
+        String sql = "INSERT INTO kluc (meno_kluca) VALUES (?)";
+        jdbcTemplate.update(sql, kluc.getMeno());
+    }
+
 }

@@ -16,6 +16,8 @@ public interface KlucDao {
 
     public Kluc dajKlucSId(Long idKluca);
     
+    public void pridajKluc(Kluc kluc);
+    
     public void vymazKluc(Long idKluca);
 
 }
