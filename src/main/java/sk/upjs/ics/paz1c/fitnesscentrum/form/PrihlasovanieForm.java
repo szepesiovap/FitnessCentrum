@@ -1,6 +1,5 @@
 package sk.upjs.ics.paz1c.fitnesscentrum.form;
 
-import java.awt.Font;
 import javax.swing.JOptionPane;
 import javax.swing.UIManager;
 import sk.upjs.ics.paz1c.fitnesscentrum.DaoFactory;

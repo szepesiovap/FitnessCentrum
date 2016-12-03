@@ -13,4 +13,6 @@ public interface SpinningDao {
     public Spinning dajSpinningSId(Long idSpinningu);
 
     public void pridajSpinning(Spinning spinning);
+
+    public void rezervujSpinning(Spinning spinning);
 }

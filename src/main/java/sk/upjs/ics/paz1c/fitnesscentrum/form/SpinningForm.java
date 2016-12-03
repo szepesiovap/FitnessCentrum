@@ -127,8 +127,12 @@ public class SpinningForm extends javax.swing.JDialog {
     private void kartouMenuItemMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_kartouMenuItemMousePressed
         try {
             Spinning spinning = (Spinning) spinningComboBox.getSelectedItem();
-            new RezervaciaKartouForm(this, true, spinning).setVisible(true);
-            zobrazRezervacie();
+            if (spinning.getVolne() > 0) {
+                new RezervaciaKartouForm(this, true, spinning).setVisible(true);
+                zobrazRezervacie();
+            } else {
+                JOptionPane.showMessageDialog(this, "Tento spinning je plne obsadený!");
+            }
         } catch (NullPointerException e) {
             JOptionPane.showMessageDialog(this, "Vyber spinning!");
         }
@@ -137,8 +141,12 @@ public class SpinningForm extends javax.swing.JDialog {
     private void jednorazovyMenuItemMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jednorazovyMenuItemMousePressed
         try {
             Spinning spinning = (Spinning) spinningComboBox.getSelectedItem();
-            new RezervaciaForm(this, true, spinning).setVisible(true);
-            zobrazRezervacie();
+            if (spinning.getVolne() > 0) {
+                new RezervaciaForm(this, true, spinning).setVisible(true);
+                zobrazRezervacie();
+            } else {
+                JOptionPane.showMessageDialog(this, "Tento spinning je plne obsadený!");
+            }
         } catch (NullPointerException e) {
             JOptionPane.showMessageDialog(this, "Vyber spinning!");
         }    }//GEN-LAST:event_jednorazovyMenuItemMousePressed
@@ -155,6 +163,7 @@ public class SpinningForm extends javax.swing.JDialog {
             JOptionPane.showMessageDialog(this, "Vyber spinning!");
         }
     }
+
     /**
      * @param args the command line arguments
      */

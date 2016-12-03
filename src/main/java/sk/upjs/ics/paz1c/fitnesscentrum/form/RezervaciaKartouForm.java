@@ -5,6 +5,7 @@ import javax.swing.JOptionPane;
 import org.springframework.dao.EmptyResultDataAccessException;
 import sk.upjs.ics.paz1c.fitnesscentrum.DaoFactory;
 import sk.upjs.ics.paz1c.fitnesscentrum.dao.RezervaciaDao;
+import sk.upjs.ics.paz1c.fitnesscentrum.dao.SpinningDao;
 import sk.upjs.ics.paz1c.fitnesscentrum.dao.ZakaznikDao;
 import sk.upjs.ics.paz1c.fitnesscentrum.entity.Rezervacia;
 import sk.upjs.ics.paz1c.fitnesscentrum.entity.Spinning;
@@ -16,6 +17,7 @@ public class RezervaciaKartouForm extends javax.swing.JDialog {
     private static Spinning spinning;
     private final RezervaciaDao rezervaciaDao;
     private final ZakaznikDao zakaznikDao;
+    private final SpinningDao spinningDao;
     private Zakaznik zakaznik;
 
     /**
@@ -24,6 +26,7 @@ public class RezervaciaKartouForm extends javax.swing.JDialog {
     public RezervaciaKartouForm(java.awt.Dialog parent, boolean modal, Spinning spinning) {
         super(parent, modal);
         this.spinning = spinning;
+        spinningDao = DaoFactory.INSTANCE.getSpinningDao();
         zakaznikDao = DaoFactory.INSTANCE.getZakaznikDao();
         rezervaciaDao = DaoFactory.INSTANCE.getRezervaciaDao();
         initComponents();
@@ -168,6 +171,7 @@ public class RezervaciaKartouForm extends javax.swing.JDialog {
             rezervacia.setSpinning(spinning);
             rezervacia.setZakaznik(zakaznik);
             rezervacia.setCasRezervacie(LocalDateTime.now());
+            spinningDao.rezervujSpinning(spinning);
             zakaznikDao.stiahniKreditZakaznikovi(zakaznik, SUMA);
             rezervaciaDao.pridajRezervaciu(rezervacia);
             dispose();

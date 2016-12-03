@@ -52,7 +52,7 @@ public class Spinning {
 
     @Override
     public String toString() {
-        return getDatum().toLocalDate() + " " + getDatum().toLocalTime() + " " + instruktor.getMeno();
+        return getDatum().toLocalDate() + " " + getDatum().toLocalTime() + " " + instruktor.getMeno() + " --Voľných " + volne + " miest.";
     }
 
 }

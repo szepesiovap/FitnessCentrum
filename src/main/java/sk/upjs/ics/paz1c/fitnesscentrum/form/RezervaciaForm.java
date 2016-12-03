@@ -5,6 +5,7 @@ import javax.swing.JOptionPane;
 import sk.upjs.ics.paz1c.fitnesscentrum.DaoFactory;
 import sk.upjs.ics.paz1c.fitnesscentrum.ZakaznikTableModel;
 import sk.upjs.ics.paz1c.fitnesscentrum.dao.RezervaciaDao;
+import sk.upjs.ics.paz1c.fitnesscentrum.dao.SpinningDao;
 import sk.upjs.ics.paz1c.fitnesscentrum.dao.ZakaznikDao;
 import sk.upjs.ics.paz1c.fitnesscentrum.entity.Rezervacia;
 import sk.upjs.ics.paz1c.fitnesscentrum.entity.Spinning;
@@ -16,6 +17,7 @@ public class RezervaciaForm extends javax.swing.JDialog {
     private static Spinning spinning;
     private final RezervaciaDao rezervaciaDao;
     private final ZakaznikDao zakaznikDao;
+    private final SpinningDao spinningDao;
     private Zakaznik zakaznik;
 
     /**
@@ -24,6 +26,7 @@ public class RezervaciaForm extends javax.swing.JDialog {
     public RezervaciaForm(java.awt.Dialog parent, boolean modal, Spinning spinning) {
         super(parent, modal);
         this.spinning = spinning;
+        spinningDao = DaoFactory.INSTANCE.getSpinningDao();
         zakaznikDao = DaoFactory.INSTANCE.getZakaznikDao();
         rezervaciaDao = DaoFactory.INSTANCE.getRezervaciaDao();
         initComponents();
@@ -129,9 +132,10 @@ public class RezervaciaForm extends javax.swing.JDialog {
             rezervacia.setSpinning(spinning);
             rezervacia.setZakaznik(zakaznik);
             rezervacia.setCasRezervacie(LocalDateTime.now());
-            int reply = JOptionPane.showConfirmDialog(this, "Rezervovať miesto na spinningu pre zákazníka" + zakaznik.getMeno(), "Potvrdiť rezerváciu", JOptionPane.YES_NO_OPTION);
+            int reply = JOptionPane.showConfirmDialog(this, "Rezervovať miesto na spinningu pre zákazníka " + zakaznik.getMeno() + "?", "Potvrdiť rezerváciu", JOptionPane.YES_NO_OPTION);
             if (reply == JOptionPane.YES_OPTION) {
                 rezervaciaDao.pridajRezervaciu(rezervacia);
+                spinningDao.rezervujSpinning(spinning);
             }
             dispose();
         } catch (ArrayIndexOutOfBoundsException e) {
