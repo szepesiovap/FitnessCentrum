@@ -35,13 +35,22 @@ public class RezervaciaTableModel extends AbstractTableModel {
     }
 
     @Override
+    public String getColumnName(int columnIndex) {
+        return NAZVY_STLPCOV[columnIndex];
+    }
+
+    public void aktualizovat() {
+        fireTableDataChanged();
+    }
+
+    @Override
     public Object getValueAt(int rowIndex, int columnIndex) {
         Rezervacia rezervacia = rezervaciaDao.dajRezervacieSpinningu(spinning).get(rowIndex);
         switch (columnIndex) {
             case 0:
                 return rezervacia.getZakaznik().getMeno();
             case 1:
-                return rezervacia.getCasRezervacie();
+                return rezervacia.getCasRezervacie().toLocalDate() + " " + rezervacia.getCasRezervacie().toLocalTime();
             default:
                 return "???";
         }

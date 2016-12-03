@@ -5,15 +5,16 @@ import javax.swing.table.AbstractTableModel;
 import sk.upjs.ics.paz1c.fitnesscentrum.dao.ZakaznikDao;
 
 public class ZakaznikTableModel extends AbstractTableModel {
+
     private ZakaznikDao zakaznikDao = DaoFactory.INSTANCE.getZakaznikDao();
     private static final String[] NAZVY_STLPCOV = {"ID", "Meno", "Pritomny", "Posledny prichod", "Kredit", "Cislo permanentky"};
     private static final int POCET_STLPCOV = NAZVY_STLPCOV.length;
     private String vzorka;
-    
+
     public ZakaznikTableModel(String vzorka) {
-      this.vzorka = vzorka;  
+        this.vzorka = vzorka;
     }
-    
+
     @Override
     public int getRowCount() {
         return zakaznikDao.dajZakaznikovSoZhodouVMene(vzorka).size();
@@ -35,7 +36,7 @@ public class ZakaznikTableModel extends AbstractTableModel {
             case 2:
                 return zakaznik.isPritomny();
             case 3:
-                return zakaznik.getPoslednyPrichod();
+                return zakaznik.getPoslednyPrichod().toLocalDate() + " " + zakaznik.getPoslednyPrichod().toLocalTime();
             case 4:
                 return zakaznik.getKredit();
             case 5:

@@ -1,5 +1,6 @@
 package sk.upjs.ics.paz1c.fitnesscentrum.form;
 
+import javax.swing.JOptionPane;
 import sk.upjs.ics.paz1c.fitnesscentrum.RezervaciaTableModel;
 import sk.upjs.ics.paz1c.fitnesscentrum.SpinningComboBoxModel;
 import sk.upjs.ics.paz1c.fitnesscentrum.entity.Spinning;
@@ -12,6 +13,7 @@ public class SpinningForm extends javax.swing.JDialog {
     public SpinningForm(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        zobrazRezervacie();
     }
 
     /**
@@ -26,7 +28,6 @@ public class SpinningForm extends javax.swing.JDialog {
         rezervacieScrollPane = new javax.swing.JScrollPane();
         rezervacieTable = new javax.swing.JTable();
         spinningComboBox = new javax.swing.JComboBox<>();
-        zobrazButton = new javax.swing.JButton();
         spinningLabel = new javax.swing.JLabel();
         spinningMenuBar = new javax.swing.JMenuBar();
         rezervujMenu = new javax.swing.JMenu();
@@ -42,11 +43,9 @@ public class SpinningForm extends javax.swing.JDialog {
         rezervacieScrollPane.setViewportView(rezervacieTable);
 
         spinningComboBox.setModel(new SpinningComboBoxModel());
-
-        zobrazButton.setText("Zobraz");
-        zobrazButton.addActionListener(new java.awt.event.ActionListener() {
+        spinningComboBox.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                zobrazButtonActionPerformed(evt);
+                spinningComboBoxActionPerformed(evt);
             }
         });
 
@@ -55,9 +54,19 @@ public class SpinningForm extends javax.swing.JDialog {
         rezervujMenu.setText("Rezervuj");
 
         jednorazovyMenuItem.setText("Jednorázový");
+        jednorazovyMenuItem.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jednorazovyMenuItemMousePressed(evt);
+            }
+        });
         rezervujMenu.add(jednorazovyMenuItem);
 
         kartouMenuItem.setText("Kartou");
+        kartouMenuItem.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                kartouMenuItemMousePressed(evt);
+            }
+        });
         rezervujMenu.add(kartouMenuItem);
 
         spinningMenuBar.add(rezervujMenu);
@@ -84,15 +93,13 @@ public class SpinningForm extends javax.swing.JDialog {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(rezervacieScrollPane)
+            .addComponent(rezervacieScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 663, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(spinningLabel)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(spinningComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 412, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(zobrazButton, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(spinningComboBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -100,19 +107,13 @@ public class SpinningForm extends javax.swing.JDialog {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(spinningComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(spinningLabel)
-                    .addComponent(zobrazButton, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(spinningLabel))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(rezervacieScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 319, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void zobrazButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_zobrazButtonActionPerformed
-        Spinning spinning = null;
-        rezervacieTable.setModel(new RezervaciaTableModel(spinning));
-    }//GEN-LAST:event_zobrazButtonActionPerformed
 
     private void pridajSpinningMenuMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pridajSpinningMenuMousePressed
         new PridajSpinningForm(this, true).setVisible(true);
@@ -123,6 +124,37 @@ public class SpinningForm extends javax.swing.JDialog {
         new PridajInstruktoraForm(this, true).setVisible(true);
     }//GEN-LAST:event_pridajInstruktoraMenuMousePressed
 
+    private void kartouMenuItemMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_kartouMenuItemMousePressed
+        try {
+            Spinning spinning = (Spinning) spinningComboBox.getSelectedItem();
+            new RezervaciaKartouForm(this, true, spinning).setVisible(true);
+            zobrazRezervacie();
+        } catch (NullPointerException e) {
+            JOptionPane.showMessageDialog(this, "Vyber spinning!");
+        }
+    }//GEN-LAST:event_kartouMenuItemMousePressed
+
+    private void jednorazovyMenuItemMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jednorazovyMenuItemMousePressed
+        try {
+            Spinning spinning = (Spinning) spinningComboBox.getSelectedItem();
+            new RezervaciaForm(this, true, spinning).setVisible(true);
+            zobrazRezervacie();
+        } catch (NullPointerException e) {
+            JOptionPane.showMessageDialog(this, "Vyber spinning!");
+        }    }//GEN-LAST:event_jednorazovyMenuItemMousePressed
+
+    private void spinningComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_spinningComboBoxActionPerformed
+        zobrazRezervacie();
+    }//GEN-LAST:event_spinningComboBoxActionPerformed
+
+    private void zobrazRezervacie() {
+        try {
+            Spinning spinning = (Spinning) spinningComboBox.getSelectedItem();
+            rezervacieTable.setModel(new RezervaciaTableModel(spinning));
+        } catch (NullPointerException e) {
+            JOptionPane.showMessageDialog(this, "Vyber spinning!");
+        }
+    }
     /**
      * @param args the command line arguments
      */
@@ -176,6 +208,5 @@ public class SpinningForm extends javax.swing.JDialog {
     private javax.swing.JComboBox<Spinning> spinningComboBox;
     private javax.swing.JLabel spinningLabel;
     private javax.swing.JMenuBar spinningMenuBar;
-    private javax.swing.JButton zobrazButton;
     // End of variables declaration//GEN-END:variables
 }

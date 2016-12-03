@@ -1,7 +1,6 @@
 package sk.upjs.ics.paz1c.fitnesscentrum.entity;
 
 import java.time.LocalDateTime;
-import sk.upjs.ics.paz1c.fitnesscentrum.DaoFactory;
 
 public class Spinning {
 
@@ -53,7 +52,7 @@ public class Spinning {
 
     @Override
     public String toString() {
-        return getDatum() + " " + instruktor.getMeno();
+        return getDatum().toLocalDate() + " " + getDatum().toLocalTime() + " " + instruktor.getMeno();
     }
 
 }

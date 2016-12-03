@@ -1,8 +1,5 @@
 package sk.upjs.ics.paz1c.fitnesscentrum;
 
-import sk.upjs.ics.paz1c.fitnesscentrum.entity.Zakaznik;
-import java.time.LocalDateTime;
-import java.time.Month;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -10,10 +7,6 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
-/**
- *
- * @author patka
- */
 public class ZoznamZakaznikovTest {
 
     public ZoznamZakaznikovTest() {

@@ -13,11 +13,17 @@
               <Properties>
                 <Property name="text" type="java.lang.String" value="Jednor&#xe1;zov&#xfd;"/>
               </Properties>
+              <Events>
+                <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jednorazovyMenuItemMousePressed"/>
+              </Events>
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="kartouMenuItem">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Kartou"/>
               </Properties>
+              <Events>
+                <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="kartouMenuItemMousePressed"/>
+              </Events>
             </MenuItem>
           </SubComponents>
         </Menu>
@@ -64,15 +70,13 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Component id="rezervacieScrollPane" alignment="0" max="32767" attributes="0"/>
+          <Component id="rezervacieScrollPane" alignment="0" pref="663" max="32767" attributes="0"/>
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
               <Component id="spinningLabel" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="spinningComboBox" min="-2" pref="412" max="-2" attributes="0"/>
-              <EmptySpace type="separate" max="-2" attributes="0"/>
-              <Component id="zobrazButton" min="-2" pref="122" max="-2" attributes="0"/>
-              <EmptySpace max="32767" attributes="0"/>
+              <Component id="spinningComboBox" max="32767" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -83,7 +87,6 @@
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="spinningComboBox" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="spinningLabel" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="zobrazButton" alignment="3" min="-2" pref="24" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
               <Component id="rezervacieScrollPane" pref="319" max="32767" attributes="0"/>
@@ -111,17 +114,12 @@
           <Connection code="new SpinningComboBoxModel()" type="code"/>
         </Property>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="spinningComboBoxActionPerformed"/>
+      </Events>
       <AuxValues>
         <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;Spinning&gt;"/>
       </AuxValues>
-    </Component>
-    <Component class="javax.swing.JButton" name="zobrazButton">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Zobraz"/>
-      </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="zobrazButtonActionPerformed"/>
-      </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="spinningLabel">
       <Properties>

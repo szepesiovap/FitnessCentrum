@@ -107,13 +107,19 @@ public class MySQLZakaznikDao implements ZakaznikDao {
     // treba prerobit 
     @Override
     public List<Zakaznik> dajZakaznikovSoZhodouVMene(String vzorka) {
-        String sql = "SELECT zakaznik.id AS z_id, zakaznik.meno_priezvisko AS z_meno, \n"
-                + "zakaznik.posledny_prichod AS z_posledny_prichod, zakaznik.pritomny as z_pritomny, \n"
-                + "	zakaznik.kredit as z_kredit, \n"
-                + "	zakaznik.cislo_permanentky as z_cislo_permanentky, \n"
-                + "		zakaznik.id_kluca AS kluc_id, \n"
-                + "	kluc.meno_kluca AS kluc_meno \n"
-                + "		FROM zakaznik LEFT JOIN kluc ON (zakaznik.id_kluca = kluc.id_kluca) WHERE zakaznik.meno_priezvisko LIKE \'%" + vzorka + "%\'";
+        if (vzorka.equals("")) {
+            return dajVsetkychZakaznikov();
+        }
+        String sql = "SELECT "
+                + "zakaznik.id AS z_id, "
+                + "zakaznik.meno_priezvisko AS z_meno, "
+                + "zakaznik.posledny_prichod AS z_posledny_prichod"
+                + ", zakaznik.pritomny as z_pritomny, "
+                + "zakaznik.kredit as z_kredit, "
+                + "zakaznik.cislo_permanentky as z_cislo_permanentky, "
+                + "zakaznik.id_kluca AS kluc_id, "
+                + "kluc.meno_kluca AS kluc_meno "
+                + "FROM zakaznik LEFT JOIN kluc ON zakaznik.id_kluca = kluc.id_kluca WHERE zakaznik.meno_priezvisko LIKE \'%" + vzorka + "%\' ";
         return jdbcTemplate.query(sql, zakaznikRowMapper);
     }
 

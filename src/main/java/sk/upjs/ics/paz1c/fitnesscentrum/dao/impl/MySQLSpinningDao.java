@@ -50,4 +50,18 @@ public class MySQLSpinningDao implements SpinningDao {
         jdbcTemplate.update(sql, Timestamp.valueOf(spinning.getDatum()), spinning.getKapacita(), spinning.getVolne(), spinning.getInstruktor().getId());
     }
 
+    @Override
+    public List<Spinning> dajSpinningyOdDatumu(Timestamp datum) {
+        String sql = "SELECT "
+                + "spinning.id AS spinning_id, "
+                + "spinning.datum AS spinning_datum, "
+                + "spinning.kapacita AS spinning_kapacita, "
+                + "spinning.volne AS spinning_volne, "
+                + "spinning.id_instruktora AS instruktor_id, "
+                + "instruktor.meno_priezvisko AS instruktor_meno "
+                + "FROM spinning LEFT JOIN instruktor ON spinning.id_instruktora = instruktor.id "
+                + "WHERE spinning.datum> ?";
+        return jdbcTemplate.query(sql, spinningRowMapper, datum);
+    }
+
 }

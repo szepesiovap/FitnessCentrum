@@ -33,7 +33,7 @@ public class PritomniZakazniciTableModel extends AbstractTableModel {
             case 2:
                 return zakaznik.getKluc();
             case 3:
-                return zakaznik.getPoslednyPrichod();
+                return zakaznik.getPoslednyPrichod().toLocalDate() + " " + zakaznik.getPoslednyPrichod().toLocalTime();
             case 4:
                 return zakaznik.getCisloPermanentky();
             default:

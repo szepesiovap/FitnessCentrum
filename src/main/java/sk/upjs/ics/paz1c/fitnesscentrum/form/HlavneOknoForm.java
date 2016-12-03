@@ -8,7 +8,7 @@ import sk.upjs.ics.paz1c.fitnesscentrum.entity.Kluc;
 import sk.upjs.ics.paz1c.fitnesscentrum.entity.Zakaznik;
 
 public final class HlavneOknoForm extends javax.swing.JFrame {
-
+    
     private static final int ID_COLUMN = 0;
 
     /**
@@ -18,7 +18,7 @@ public final class HlavneOknoForm extends javax.swing.JFrame {
         initComponents();
         aktualizovatZoznamPritomnych();
     }
-
+    
     public void aktualizovatZoznamPritomnych() {
         PritomniZakazniciTableModel model = (PritomniZakazniciTableModel) pritomniTable.getModel();
         model.aktualizovat();
@@ -40,6 +40,7 @@ public final class HlavneOknoForm extends javax.swing.JFrame {
         jednorazovyPrichodMenuItem = new javax.swing.JMenuItem();
         prichodKartouMenuItem = new javax.swing.JMenuItem();
         odchodMenu = new javax.swing.JMenu();
+        zoznamMenu = new javax.swing.JMenu();
         novyMenu = new javax.swing.JMenu();
         dobiMenu = new javax.swing.JMenu();
         spinningMenu = new javax.swing.JMenu();
@@ -80,6 +81,14 @@ public final class HlavneOknoForm extends javax.swing.JFrame {
             }
         });
         hlavneOknoMenuBar.add(odchodMenu);
+
+        zoznamMenu.setText("Zoznam ");
+        zoznamMenu.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                zoznamMenuMousePressed(evt);
+            }
+        });
+        hlavneOknoMenuBar.add(zoznamMenu);
 
         novyMenu.setText("Nový ");
         novyMenu.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -152,7 +161,7 @@ public final class HlavneOknoForm extends javax.swing.JFrame {
             Kluc kluc = klucDao.dajKlucSId(zakaznik.getKluc().getId());
             klucDao.odoberZakaznika(kluc);
             zakaznikDao.odchod(zakaznik);
-
+            
             aktualizovatZoznamPritomnych();
         } catch (ArrayIndexOutOfBoundsException e) {
             System.err.println("Nebol vybrany ziaden zakaznik");
@@ -172,7 +181,7 @@ public final class HlavneOknoForm extends javax.swing.JFrame {
     }//GEN-LAST:event_spinningMenuMousePressed
 
     private void jednorazovyPrichodMenuItemMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jednorazovyPrichodMenuItemMousePressed
-        new ZoznamForm(this).setVisible(true);
+        new PrichodJednorazovyForm(this, true).setVisible(true);
         aktualizovatZoznamPritomnych();
     }//GEN-LAST:event_jednorazovyPrichodMenuItemMousePressed
 
@@ -180,6 +189,10 @@ public final class HlavneOknoForm extends javax.swing.JFrame {
         new PrichodKartouForm(this, true).setVisible(true);
         aktualizovatZoznamPritomnych();
     }//GEN-LAST:event_prichodKartouMenuItemMousePressed
+
+    private void zoznamMenuMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_zoznamMenuMousePressed
+        new ZoznamForm(this).setVisible(true);
+    }//GEN-LAST:event_zoznamMenuMousePressed
 
     /**
      * @param args the command line arguments
@@ -195,7 +208,7 @@ public final class HlavneOknoForm extends javax.swing.JFrame {
                 if ("Nimbus".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
-
+                    
                 }
             }
         } catch (ClassNotFoundException ex) {
@@ -235,6 +248,7 @@ public final class HlavneOknoForm extends javax.swing.JFrame {
     private javax.swing.JScrollPane pritomniScrollPane;
     private javax.swing.JTable pritomniTable;
     private javax.swing.JMenu spinningMenu;
+    private javax.swing.JMenu zoznamMenu;
     // End of variables declaration//GEN-END:variables
 
 }

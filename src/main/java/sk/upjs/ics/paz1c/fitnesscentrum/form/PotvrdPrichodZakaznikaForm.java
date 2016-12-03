@@ -7,7 +7,7 @@ import sk.upjs.ics.paz1c.fitnesscentrum.dao.ZakaznikDao;
 import sk.upjs.ics.paz1c.fitnesscentrum.entity.Kluc;
 import sk.upjs.ics.paz1c.fitnesscentrum.entity.Zakaznik;
 
-public class PrichodZakaznikaForm extends javax.swing.JDialog {
+public class PotvrdPrichodZakaznikaForm extends javax.swing.JDialog {
 
     private static Zakaznik zakaznik;
     private final ZakaznikDao zakaznikDao;
@@ -16,7 +16,7 @@ public class PrichodZakaznikaForm extends javax.swing.JDialog {
     /**
      * Creates new form PrichodZakaznikaForm
      */
-    public PrichodZakaznikaForm(java.awt.Frame parent, boolean modal, Zakaznik zakaznik) {
+    public PotvrdPrichodZakaznikaForm(java.awt.Dialog parent, boolean modal, Zakaznik zakaznik) {
         super(parent, modal);
         klucDao = DaoFactory.INSTANCE.getKlucDao();
         zakaznikDao = DaoFactory.INSTANCE.getZakaznikDao();
@@ -119,20 +119,21 @@ public class PrichodZakaznikaForm extends javax.swing.JDialog {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(PrichodZakaznikaForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(PotvrdPrichodZakaznikaForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(PrichodZakaznikaForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(PotvrdPrichodZakaznikaForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(PrichodZakaznikaForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(PotvrdPrichodZakaznikaForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(PrichodZakaznikaForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(PotvrdPrichodZakaznikaForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                PrichodZakaznikaForm dialog = new PrichodZakaznikaForm(new javax.swing.JFrame(), true, zakaznik);
+                PotvrdPrichodZakaznikaForm dialog = new PotvrdPrichodZakaznikaForm(new javax.swing.JDialog(), true, zakaznik);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {

@@ -36,7 +36,6 @@ public final class ZoznamForm extends javax.swing.JFrame {
 
         zoznamZakaznikovScrollPane = new javax.swing.JScrollPane();
         zoznamZakaznikovTable = new javax.swing.JTable();
-        prichodButton = new javax.swing.JButton();
         zmazButton = new javax.swing.JButton();
         hladajPodlaMenaLabel = new javax.swing.JLabel();
         hladajPodlaMenaTextField = new javax.swing.JTextField();
@@ -44,6 +43,7 @@ public final class ZoznamForm extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Zoznam Zákazníkov");
+        setResizable(false);
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosed(java.awt.event.WindowEvent evt) {
                 formWindowClosed(evt);
@@ -52,13 +52,6 @@ public final class ZoznamForm extends javax.swing.JFrame {
 
         zoznamZakaznikovTable.setModel(new ZakaznikTableModel(""));
         zoznamZakaznikovScrollPane.setViewportView(zoznamZakaznikovTable);
-
-        prichodButton.setText("Príchod");
-        prichodButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                prichodButtonActionPerformed(evt);
-            }
-        });
 
         zmazButton.setText("Zmaž");
         zmazButton.addActionListener(new java.awt.event.ActionListener() {
@@ -80,22 +73,19 @@ public final class ZoznamForm extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(zoznamZakaznikovScrollPane)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(prichodButton)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(zmazButton)
-                        .addGap(18, 18, 18))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(hladajPodlaMenaLabel)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(hladajPodlaMenaTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 314, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(hladajButton)
-                        .addContainerGap(25, Short.MAX_VALUE))))
+                .addComponent(hladajPodlaMenaLabel)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(hladajPodlaMenaTextField)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(hladajButton, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(zmazButton, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(zoznamZakaznikovScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 773, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -105,35 +95,17 @@ public final class ZoznamForm extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(hladajPodlaMenaLabel)
-                            .addComponent(hladajButton))
-                        .addGap(9, 9, 9))
+                            .addComponent(hladajButton)
+                            .addComponent(zmazButton))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(hladajPodlaMenaTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)))
-                .addComponent(zoznamZakaznikovScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 365, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(prichodButton)
-                    .addComponent(zmazButton)))
+                        .addGap(12, 12, 12)))
+                .addComponent(zoznamZakaznikovScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 408, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void prichodButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_prichodButtonActionPerformed
-        try {
-            Long idZakaznika = (Long) zoznamZakaznikovTable.getValueAt(this.zoznamZakaznikovTable.getSelectedRow(), ID_COLUMN);
-            Zakaznik zakaznik = zakaznikDao.dajZakaznikaSId(idZakaznika);
-            if (!zakaznik.isPritomny()) {
-                new PrichodZakaznikaForm(this, true, zakaznik).setVisible(true);
-                aktualizovatZoznamZakaznikov();
-            } else {
-                JOptionPane.showMessageDialog(this, "Zákazník je už prítomný!");
-            }
-        } catch (ArrayIndexOutOfBoundsException e) {
-            System.err.println("Vyber zákazníka na príchod.");
-        }
-    }//GEN-LAST:event_prichodButtonActionPerformed
 
     private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
         hlavneOkno.aktualizovatZoznamPritomnych();
@@ -156,7 +128,9 @@ public final class ZoznamForm extends javax.swing.JFrame {
     }//GEN-LAST:event_zmazButtonActionPerformed
 
     private void hladajButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_hladajButtonActionPerformed
+        System.out.println(hladajPodlaMenaTextField.getText());
         zoznamZakaznikovTable.setModel(new ZakaznikTableModel(hladajPodlaMenaTextField.getText()));
+        aktualizovatZoznamZakaznikov();
     }//GEN-LAST:event_hladajButtonActionPerformed
 
     public void aktualizovatZoznamZakaznikov() {
@@ -180,7 +154,6 @@ public final class ZoznamForm extends javax.swing.JFrame {
     private javax.swing.JButton hladajButton;
     private javax.swing.JLabel hladajPodlaMenaLabel;
     private javax.swing.JTextField hladajPodlaMenaTextField;
-    private javax.swing.JButton prichodButton;
     private javax.swing.JButton zmazButton;
     private javax.swing.JScrollPane zoznamZakaznikovScrollPane;
     private javax.swing.JTable zoznamZakaznikovTable;

@@ -35,6 +35,14 @@
             <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="odchodMenuMousePressed"/>
           </Events>
         </Menu>
+        <Menu class="javax.swing.JMenu" name="zoznamMenu">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Zoznam "/>
+          </Properties>
+          <Events>
+            <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="zoznamMenuMousePressed"/>
+          </Events>
+        </Menu>
         <Menu class="javax.swing.JMenu" name="novyMenu">
           <Properties>
             <Property name="text" type="java.lang.String" value="Nov&#xfd; "/>
