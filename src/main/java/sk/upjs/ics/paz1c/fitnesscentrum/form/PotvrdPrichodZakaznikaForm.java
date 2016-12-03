@@ -36,7 +36,7 @@ public class PotvrdPrichodZakaznikaForm extends javax.swing.JDialog {
 
         menoLabel = new javax.swing.JLabel();
         zobrazMenoLabel = new javax.swing.JLabel();
-        jLabel1 = new javax.swing.JLabel();
+        klucLabel = new javax.swing.JLabel();
         klucComboBox = new javax.swing.JComboBox<>();
         prichodButton = new javax.swing.JButton();
 
@@ -46,7 +46,7 @@ public class PotvrdPrichodZakaznikaForm extends javax.swing.JDialog {
 
         menoLabel.setText("Meno: ");
 
-        jLabel1.setText("Kľúč: ");
+        klucLabel.setText("Kľúč: ");
 
         klucComboBox.setModel(new KlucComboBoxModel());
 
@@ -64,7 +64,7 @@ public class PotvrdPrichodZakaznikaForm extends javax.swing.JDialog {
             .addGroup(layout.createSequentialGroup()
                 .addGap(25, 25, 25)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel1)
+                    .addComponent(klucLabel)
                     .addComponent(menoLabel))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -85,7 +85,7 @@ public class PotvrdPrichodZakaznikaForm extends javax.swing.JDialog {
                     .addComponent(zobrazMenoLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1)
+                    .addComponent(klucLabel)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(klucComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(prichodButton)))
@@ -146,8 +146,8 @@ public class PotvrdPrichodZakaznikaForm extends javax.swing.JDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JComboBox<Kluc> klucComboBox;
+    private javax.swing.JLabel klucLabel;
     private javax.swing.JLabel menoLabel;
     private javax.swing.JButton prichodButton;
     private javax.swing.JLabel zobrazMenoLabel;

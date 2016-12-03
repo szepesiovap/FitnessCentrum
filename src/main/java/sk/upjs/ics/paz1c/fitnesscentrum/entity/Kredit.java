@@ -29,4 +29,10 @@ public class Kredit {
     public void setNazov(String nazov) {
         this.nazov = nazov;
     }
+
+    @Override
+    public String toString() {
+        return cena + " €";
+    }
+    
 }

@@ -6,13 +6,13 @@ import javax.swing.JOptionPane;
 import javax.swing.UnsupportedLookAndFeelException;
 import org.springframework.dao.DuplicateKeyException;
 import sk.upjs.ics.paz1c.fitnesscentrum.DaoFactory;
+import sk.upjs.ics.paz1c.fitnesscentrum.KreditComboBoxModel;
+import sk.upjs.ics.paz1c.fitnesscentrum.entity.Kredit;
 import sk.upjs.ics.paz1c.fitnesscentrum.entity.Zakaznik;
 
 public class NovyZakaznikForm extends javax.swing.JFrame {
 
     private static HlavneOknoForm hlavneOkno;
-    private static final String[] KREDIT_MOZNOSTI = {"50 EUR", "100 EUR", "150 EUR", "200 EUR"};
-    private static final Double[] KREDIT_SUMY = {50.0, 100.0, 150.0, 200.0};
 
     /**
      * Creates new form NovyZakaznikForm
@@ -23,7 +23,7 @@ public class NovyZakaznikForm extends javax.swing.JFrame {
         NovyZakaznikForm.hlavneOkno = hlavneOkno;
         hlavneOkno.setEnabled(false);
         initComponents();
-        inicializaciaZaciatocnehoStavu();
+        //inicializaciaZaciatocnehoStavu();
     }
 
     /**
@@ -76,6 +76,7 @@ public class NovyZakaznikForm extends javax.swing.JFrame {
 
         kreditLabel.setText("Kredit");
 
+        kreditComboBox.setModel(new KreditComboBoxModel());
         kreditComboBox.setEnabled(false);
 
         permanentkaCheckBox.setText("Permanentka");
@@ -145,9 +146,8 @@ public class NovyZakaznikForm extends javax.swing.JFrame {
         zakaznik.setMeno(menoZakaznikaTextField.getText());
         if (permanentkaCheckBox.isSelected()) {
             zakaznik.setCisloPermanentky(cisloKartyTextField.getText());
-            zakaznik.setKredit(KREDIT_SUMY[kreditComboBox.getSelectedIndex()]);
+            zakaznik.setKredit(((Kredit)kreditComboBox.getSelectedItem()).getCena());
             System.out.println(kreditComboBox.getSelectedIndex());
-            System.out.println(KREDIT_SUMY[kreditComboBox.getSelectedIndex()]);
         }
         try {
             DaoFactory.INSTANCE.getZakaznikDao().pridajZakaznika(zakaznik);
@@ -179,9 +179,9 @@ public class NovyZakaznikForm extends javax.swing.JFrame {
         hlavneOkno.setEnabled(true);
     }//GEN-LAST:event_formWindowClosed
 
-    private void inicializaciaZaciatocnehoStavu() {
-        kreditComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(KREDIT_MOZNOSTI));
-    }
+    //private void inicializaciaZaciatocnehoStavu() {
+    //    kreditComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(KREDIT_MOZNOSTI));
+    //}
 
     /**
      * @param args the command line arguments
@@ -224,7 +224,7 @@ public class NovyZakaznikForm extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel cisloKartyLabel;
     private javax.swing.JTextField cisloKartyTextField;
-    private javax.swing.JComboBox<String> kreditComboBox;
+    private javax.swing.JComboBox<Kredit> kreditComboBox;
     private javax.swing.JLabel kreditLabel;
     private javax.swing.JLabel menoZakaznikaLabel;
     private javax.swing.JTextField menoZakaznikaTextField;

@@ -3,14 +3,13 @@ package sk.upjs.ics.paz1c.fitnesscentrum.form;
 import javax.swing.JOptionPane;
 import org.springframework.dao.EmptyResultDataAccessException;
 import sk.upjs.ics.paz1c.fitnesscentrum.DaoFactory;
+import sk.upjs.ics.paz1c.fitnesscentrum.KreditComboBoxModel;
 import sk.upjs.ics.paz1c.fitnesscentrum.dao.ZakaznikDao;
+import sk.upjs.ics.paz1c.fitnesscentrum.entity.Kredit;
 import sk.upjs.ics.paz1c.fitnesscentrum.entity.Zakaznik;
 
 public class DobitKreditForm extends javax.swing.JDialog {
 
-    //TODO spravit nacitavanie moznosti sum (z txt?)
-    private static final String[] KREDIT_MOZNOSTI = {"50 EUR", "100 EUR", "150 EUR", "200 EUR"};
-    private static final Double[] KREDIT_SUMY = {50.0, 100.0, 150.0, 200.0};
     private final ZakaznikDao zakaznikDao;
     private Zakaznik zakaznik;
 
@@ -21,7 +20,7 @@ public class DobitKreditForm extends javax.swing.JDialog {
         super(parent, modal);
         zakaznikDao = DaoFactory.INSTANCE.getZakaznikDao();
         initComponents();
-        inicializuj();
+        //inicializuj();
     }
 
     /**
@@ -67,6 +66,7 @@ public class DobitKreditForm extends javax.swing.JDialog {
 
         dobiKreditLabel.setText("Dobi kredit: ");
 
+        kreditComboBox.setModel(new KreditComboBoxModel());
         kreditComboBox.setEnabled(false);
 
         dobiButton.setText("Dobi");
@@ -145,8 +145,8 @@ public class DobitKreditForm extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void dobiButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dobiButtonActionPerformed
-        double kredit = KREDIT_SUMY[kreditComboBox.getSelectedIndex()];
-        zakaznikDao.dobiKreditZakaznikovi(zakaznik, kredit);
+        double vybranyKredit = ((Kredit) kreditComboBox.getSelectedItem()).getCena();
+        zakaznikDao.dobiKreditZakaznikovi(zakaznik, vybranyKredit);
         dispose();
     }//GEN-LAST:event_dobiButtonActionPerformed
 
@@ -171,9 +171,9 @@ public class DobitKreditForm extends javax.swing.JDialog {
             zobrazCisloKartyLabel.setText(zakaznik.getCisloPermanentky());
         }    }//GEN-LAST:event_nacitajButtonActionPerformed
 
-    public void inicializuj() {
-        kreditComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(KREDIT_MOZNOSTI));
-    }
+   // public void inicializuj() {
+   //     kreditComboBox.setModel(new KreditComboBoxModel());
+   // }
 
     /**
      * @param args the command line arguments
@@ -222,7 +222,7 @@ public class DobitKreditForm extends javax.swing.JDialog {
     private javax.swing.JTextField cisloPermanentkyTextField;
     private javax.swing.JButton dobiButton;
     private javax.swing.JLabel dobiKreditLabel;
-    private javax.swing.JComboBox<String> kreditComboBox;
+    private javax.swing.JComboBox<Kredit> kreditComboBox;
     private javax.swing.JLabel kreditLabel;
     private javax.swing.JLabel menoLabel;
     private javax.swing.JButton nacitajButton;
