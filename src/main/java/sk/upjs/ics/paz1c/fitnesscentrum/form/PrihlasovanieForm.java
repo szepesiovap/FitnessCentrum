@@ -1,6 +1,8 @@
 package sk.upjs.ics.paz1c.fitnesscentrum.form;
 
+import java.awt.Font;
 import javax.swing.JOptionPane;
+import javax.swing.UIManager;
 import sk.upjs.ics.paz1c.fitnesscentrum.DaoFactory;
 import sk.upjs.ics.paz1c.fitnesscentrum.entity.Recepcny;
 
@@ -159,7 +161,7 @@ public class PrihlasovanieForm extends javax.swing.JFrame {
         }else{
             JOptionPane.showMessageDialog(this, "Recepčný s daným loginom neexistuje");
         }*/
-        
+
         //docasne!!!!!!!
         if ((recepcny != null) || (1 == 1)) {
             new HlavneOknoForm().setVisible(true);
@@ -215,10 +217,16 @@ public class PrihlasovanieForm extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(PrihlasovanieForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
+        try {
+            UIManager.setLookAndFeel("com.jtattoo.plaf.hifi.HiFiLookAndFeel");
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
+
                 new PrihlasovanieForm().setVisible(true);
             }
         });

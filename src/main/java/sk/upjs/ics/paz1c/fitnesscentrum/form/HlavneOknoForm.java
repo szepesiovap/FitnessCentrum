@@ -1,5 +1,6 @@
 package sk.upjs.ics.paz1c.fitnesscentrum.form;
 
+import javax.swing.UIManager;
 import sk.upjs.ics.paz1c.fitnesscentrum.DaoFactory;
 import sk.upjs.ics.paz1c.fitnesscentrum.PritomniZakazniciTableModel;
 import sk.upjs.ics.paz1c.fitnesscentrum.dao.KlucDao;
@@ -8,17 +9,18 @@ import sk.upjs.ics.paz1c.fitnesscentrum.entity.Kluc;
 import sk.upjs.ics.paz1c.fitnesscentrum.entity.Zakaznik;
 
 public final class HlavneOknoForm extends javax.swing.JFrame {
-    
+
     private static final int ID_COLUMN = 0;
 
     /**
      * Creates new form ZoznamZakaznikovForm
      */
     public HlavneOknoForm() {
+
         initComponents();
         aktualizovatZoznamPritomnych();
     }
-    
+
     public void aktualizovatZoznamPritomnych() {
         PritomniZakazniciTableModel model = (PritomniZakazniciTableModel) pritomniTable.getModel();
         model.aktualizovat();
@@ -133,11 +135,15 @@ public final class HlavneOknoForm extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(pritomniScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 685, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(pritomniScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 925, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(pritomniScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 417, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(pritomniScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 639, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         pack();
@@ -161,7 +167,7 @@ public final class HlavneOknoForm extends javax.swing.JFrame {
             Kluc kluc = klucDao.dajKlucSId(zakaznik.getKluc().getId());
             klucDao.odoberZakaznika(kluc);
             zakaznikDao.odchod(zakaznik);
-            
+
             aktualizovatZoznamPritomnych();
         } catch (ArrayIndexOutOfBoundsException e) {
             System.err.println("Nebol vybrany ziaden zakaznik");
@@ -208,7 +214,7 @@ public final class HlavneOknoForm extends javax.swing.JFrame {
                 if ("Nimbus".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
-                    
+
                 }
             }
         } catch (ClassNotFoundException ex) {
