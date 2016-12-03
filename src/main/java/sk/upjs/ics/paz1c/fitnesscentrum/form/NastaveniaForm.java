@@ -184,8 +184,7 @@ public class NastaveniaForm extends javax.swing.JDialog {
 
         vstupneTabbedPane.addTab("Recepčný", jPanel4);
 
-        kluceTable.setModel(new KlucTableModel()
-        );
+        kluceTable.setModel(new KlucTableModel());
         jScrollPane3.setViewportView(kluceTable);
 
         zmazKlucButton.setText("Zmaž");
