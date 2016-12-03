@@ -103,4 +103,10 @@ public class MySQLRezervaciaDao implements RezervaciaDao {
         jdbcTemplate.update(sql, rezervacia.getSpinning().getId(), rezervacia.getZakaznik().getId(), Timestamp.valueOf(rezervacia.getCasRezervacie()));
     }
 
+    @Override
+    public void odstranRezervacia(Long idRezervacie) {
+       String sql = "DELETE FROM rezervacia WHERE id_rezervacia = ?";
+       jdbcTemplate.update(sql, idRezervacie);
+    }
+
 }

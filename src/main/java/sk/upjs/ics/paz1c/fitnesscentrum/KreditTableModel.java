@@ -9,7 +9,7 @@ import sk.upjs.ics.paz1c.fitnesscentrum.entity.Kredit;
 public class KreditTableModel extends AbstractTableModel {
 
     private final KreditDao kreditDao = DaoFactory.INSTANCE.getKreditDao();
-    private static final String[] NAZVY_STLPCOV = {"ID", "Cena", "Názov"};
+    private static final String[] NAZVY_STLPCOV = {"Cena", "Názov"};
     private static final int POCET_STLPCOV = NAZVY_STLPCOV.length;
     private List<Kredit> listKreditov = new ArrayList<>();
 
@@ -32,11 +32,11 @@ public class KreditTableModel extends AbstractTableModel {
         Kredit kredit = listKreditov.get(rowIndex);
         switch (columnIndex) {
             case 0:
-                return kredit.getId();
-            case 1:
                 return kredit.getCena();
-            case 2:
+            case 1:
                 return kredit.getNazov();
+            case 2:
+                return kredit.getId();
             default:
                 return "???";
         }

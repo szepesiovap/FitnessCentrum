@@ -22,7 +22,9 @@ public class NastaveniaForm extends javax.swing.JDialog {
     private final KlucDao klucDao;
     private final VstupneDao vstupneDao;
     private final KreditDao kreditDao;
-    private static final int ID_COLUMN = 0;
+    private static final int ID_COLUMN = 2;
+    private static final int ID_COLUMN_KLUC = 0;
+    
     private Kredit kredit;
 
     /**
@@ -314,7 +316,7 @@ public class NastaveniaForm extends javax.swing.JDialog {
 
     private void zmazKreditButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_zmazKreditButtonActionPerformed
         try {
-            Long idKredit = (Long) kreditTable.getValueAt(this.kreditTable.getSelectedRow(), ID_COLUMN);
+            Long idKredit = (Long) kreditTable.getModel().getValueAt(this.kreditTable.getSelectedRow(), ID_COLUMN);
             kredit = kreditDao.dajKreditSId(idKredit);
             if (kredit != null) {
                 Object[] options = {"Zmazať", "Zrušiť"};
@@ -334,7 +336,7 @@ public class NastaveniaForm extends javax.swing.JDialog {
 
     private void zmazRecepcnehoButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_zmazRecepcnehoButtonActionPerformed
         try {
-            Long idRecepcny = (Long) zoznamRecepcnychTable.getValueAt(this.zoznamRecepcnychTable.getSelectedRow(), ID_COLUMN);
+            Long idRecepcny = (Long) zoznamRecepcnychTable.getModel().getValueAt(this.zoznamRecepcnychTable.getSelectedRow(), ID_COLUMN);
             recepcny = recepcnyDao.dajRecepcneho(idRecepcny);
 
             Object[] options = {"Zmazať", "Zrušiť"};
@@ -360,7 +362,7 @@ public class NastaveniaForm extends javax.swing.JDialog {
 
     private void zmazKlucButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_zmazKlucButtonActionPerformed
         try {
-            Long idKluca = (Long) kluceTable.getValueAt(this.kluceTable.getSelectedRow(), ID_COLUMN);
+            Long idKluca = (Long) kluceTable.getModel().getValueAt(this.kluceTable.getSelectedRow(), ID_COLUMN_KLUC);
             kluc = klucDao.dajKlucSId(idKluca);
 
             if (kluc.getZakaznik() == null) {
@@ -400,8 +402,8 @@ public class NastaveniaForm extends javax.swing.JDialog {
             JOptionPane.showMessageDialog(this, "Zvolený kredit už existuje.");
             return;
         }
-        JOptionPane.showMessageDialog(this, "Kredit " + kredit.getNazov() + " bol pridaný.");
         aktualizujKreditTable();
+        JOptionPane.showMessageDialog(this, "Kredit " + kredit.getNazov() + " bol pridaný.");
     }//GEN-LAST:event_ulozKreditButtonActionPerformed
 
     private void ulozKlucButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ulozKlucButtonActionPerformed
@@ -422,8 +424,8 @@ public class NastaveniaForm extends javax.swing.JDialog {
             return;
 
         }
-        JOptionPane.showMessageDialog(this, "Kľúč " + kluc.getMeno() + " bol pridaný.");
         aktualizujKlucTable();
+        JOptionPane.showMessageDialog(this, "Kľúč " + kluc.getMeno() + " bol pridaný.");
     }//GEN-LAST:event_ulozKlucButtonActionPerformed
 
     private void aktualizujVstupneTabbedPane() {

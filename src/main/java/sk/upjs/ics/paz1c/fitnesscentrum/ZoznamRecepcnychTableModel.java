@@ -9,7 +9,7 @@ import sk.upjs.ics.paz1c.fitnesscentrum.entity.Recepcny;
 public class ZoznamRecepcnychTableModel extends AbstractTableModel {
 
     private final RecepcnyDao recepcnyDao = DaoFactory.INSTANCE.getRecepcnyDao();
-    private static final String[] NAZVY_STLPCOV = {"ID", "Meno a priezvisko", "Login"};
+    private static final String[] NAZVY_STLPCOV = {"Meno a priezvisko", "Login"};
     private static final int POCET_STLPCOV = NAZVY_STLPCOV.length;
     private List<Recepcny> listRecepcnych = new ArrayList<>();
 
@@ -33,11 +33,11 @@ public class ZoznamRecepcnychTableModel extends AbstractTableModel {
         Recepcny recepcny = listRecepcnych.get(rowIndex);
         switch (columnIndex) {
             case 0:
-                return recepcny.getId();
-            case 1:
                 return recepcny.getMeno();
-            case 2:
+            case 1:
                 return recepcny.getLogin();
+            case 2:
+                return recepcny.getId();
             default:
                 return "???";
         }

@@ -43,6 +43,14 @@
             <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="pridajInstruktoraMenuMousePressed"/>
           </Events>
         </Menu>
+        <Menu class="javax.swing.JMenu" name="odhlasZoSpinninguMenu">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Odhlas zo spinningu"/>
+          </Properties>
+          <Events>
+            <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="odhlasZoSpinninguMenuMousePressed"/>
+          </Events>
+        </Menu>
       </SubComponents>
     </Menu>
   </NonVisualComponents>

@@ -1,12 +1,18 @@
 package sk.upjs.ics.paz1c.fitnesscentrum.form;
 
 import javax.swing.JOptionPane;
+import sk.upjs.ics.paz1c.fitnesscentrum.DaoFactory;
 import sk.upjs.ics.paz1c.fitnesscentrum.RezervaciaTableModel;
 import sk.upjs.ics.paz1c.fitnesscentrum.SpinningComboBoxModel;
+import sk.upjs.ics.paz1c.fitnesscentrum.dao.RezervaciaDao;
+import sk.upjs.ics.paz1c.fitnesscentrum.entity.Rezervacia;
 import sk.upjs.ics.paz1c.fitnesscentrum.entity.Spinning;
 
 public class SpinningForm extends javax.swing.JDialog {
 
+    private static final int ID_COLUMN = 2;
+    private final RezervaciaDao rezervaciaDao = DaoFactory.INSTANCE.getRezervaciaDao();
+    private Rezervacia rezervacia;
     /**
      * Creates new form SpinningForm
      */
@@ -35,6 +41,7 @@ public class SpinningForm extends javax.swing.JDialog {
         kartouMenuItem = new javax.swing.JMenuItem();
         pridajSpinningMenu = new javax.swing.JMenu();
         pridajInstruktoraMenu = new javax.swing.JMenu();
+        odhlasZoSpinninguMenu = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Rezervácie na spinning");
@@ -86,6 +93,14 @@ public class SpinningForm extends javax.swing.JDialog {
             }
         });
         spinningMenuBar.add(pridajInstruktoraMenu);
+
+        odhlasZoSpinninguMenu.setText("Odhlas zo spinningu");
+        odhlasZoSpinninguMenu.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                odhlasZoSpinninguMenuMousePressed(evt);
+            }
+        });
+        spinningMenuBar.add(odhlasZoSpinninguMenu);
 
         setJMenuBar(spinningMenuBar);
 
@@ -155,6 +170,18 @@ public class SpinningForm extends javax.swing.JDialog {
         zobrazRezervacie();
     }//GEN-LAST:event_spinningComboBoxActionPerformed
 
+    private void odhlasZoSpinninguMenuMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_odhlasZoSpinninguMenuMousePressed
+        try {
+            Long idRezervacie = (Long) rezervacieTable.getModel().getValueAt(this.rezervacieTable.getSelectedRow(), ID_COLUMN);
+            
+            rezervaciaDao.odstranRezervacia(idRezervacie);
+            ((RezervaciaTableModel)rezervacieTable.getModel()).aktualizovat();
+            
+        } catch (ArrayIndexOutOfBoundsException e) {
+            JOptionPane.showMessageDialog(null, "Vyber zákazníka na odhlásenie zo spinningu.");
+        }
+    }//GEN-LAST:event_odhlasZoSpinninguMenuMousePressed
+
     private void zobrazRezervacie() {
         try {
             Spinning spinning = (Spinning) spinningComboBox.getSelectedItem();
@@ -209,6 +236,7 @@ public class SpinningForm extends javax.swing.JDialog {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuItem jednorazovyMenuItem;
     private javax.swing.JMenuItem kartouMenuItem;
+    private javax.swing.JMenu odhlasZoSpinninguMenu;
     private javax.swing.JMenu pridajInstruktoraMenu;
     private javax.swing.JMenu pridajSpinningMenu;
     private javax.swing.JScrollPane rezervacieScrollPane;

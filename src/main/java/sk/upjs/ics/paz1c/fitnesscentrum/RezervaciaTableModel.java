@@ -57,6 +57,8 @@ public class RezervaciaTableModel extends AbstractTableModel {
                 return rezervacia.getZakaznik().getMeno();
             case 1:
                 return rezervacia.getCasRezervacie().toLocalDate() + " " + rezervacia.getCasRezervacie().toLocalTime();
+            case 2:
+                return rezervacia.getId();
             default:
                 return "???";
         }
