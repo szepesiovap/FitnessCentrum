@@ -391,8 +391,8 @@ public class NastaveniaForm extends javax.swing.JDialog {
 
         } catch (NumberFormatException e) {
             JOptionPane.showMessageDialog(this, "Nesprávny formát sumy.");
-            return;
-        }
+                return;
+            }
 
         kredit.setNazov(novyKreditTextField.getText() + " eur");
 
