@@ -13,10 +13,9 @@ import sk.upjs.ics.paz1c.fitnesscentrum.dao.VstupneDao;
 import sk.upjs.ics.paz1c.fitnesscentrum.entity.Kluc;
 import sk.upjs.ics.paz1c.fitnesscentrum.entity.Kredit;
 import sk.upjs.ics.paz1c.fitnesscentrum.entity.Recepcny;
-import sk.upjs.ics.paz1c.fitnesscentrum.entity.Zakaznik;
 
 public class NastaveniaForm extends javax.swing.JDialog {
-    
+
     private final RecepcnyDao recepcnyDao;
     private Recepcny recepcny;
     private Kluc kluc;
@@ -304,19 +303,14 @@ public class NastaveniaForm extends javax.swing.JDialog {
 
     private void ulozitZmenyButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ulozitZmenyButtonActionPerformed
         try {
-            if (!("").equals(cenaVstupnehoTexttField.getText())) {
-                vstupneDao.updateCenaVstupneho(Double.parseDouble(cenaVstupnehoTexttField.getText()));
-            }
-            
-            if (!("").equals(cenaSpinninguTextField.getText())) {
-                vstupneDao.updateCenaSpinningu(Double.parseDouble(cenaSpinninguTextField.getText()));
-            }
-            
+            vstupneDao.updateCenaVstupneho(Double.parseDouble(cenaVstupnehoTexttField.getText()));
+            vstupneDao.updateCenaSpinningu(Double.parseDouble(cenaSpinninguTextField.getText()));
+            JOptionPane.showMessageDialog(this, "Cena bola zmenená.");
+            aktualizujVstupneTabbedPane();
         } catch (NumberFormatException e) {
             JOptionPane.showMessageDialog(this, "Zlý format ceny.");
         }
-        JOptionPane.showMessageDialog(this, "Cena bola zmenená.");
-        aktualizujVstupneTabbedPane();
+
     }//GEN-LAST:event_ulozitZmenyButtonActionPerformed
 
     private void zmazKreditButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_zmazKreditButtonActionPerformed
@@ -324,12 +318,19 @@ public class NastaveniaForm extends javax.swing.JDialog {
             Long idKredit = (Long) kreditTable.getValueAt(this.kreditTable.getSelectedRow(), ID_COLUMN);
             kredit = kreditDao.dajKreditSId(idKredit);
             if (kredit != null) {
+                Object[] options = {"Zmazať", "Zrušiť"};
+                if (JOptionPane.showOptionDialog(this, "Naozaj chcete zmazať kredit " + kredit.getNazov() + "?",
+                        "Zmaž kredit",
+                        JOptionPane.DEFAULT_OPTION, JOptionPane.PLAIN_MESSAGE, null,
+                        options, options[1]) == 1) {
+                    return;
+                }
                 kreditDao.vymazKredit(idKredit);
             }
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, "Nie je vybraný žiaden kredit.");
         }
-        
+
         aktualizujKreditTable();
     }//GEN-LAST:event_zmazKreditButtonActionPerformed
 
@@ -337,11 +338,20 @@ public class NastaveniaForm extends javax.swing.JDialog {
         try {
             Long idRecepcny = (Long) zoznamRecepcnychTable.getValueAt(this.zoznamRecepcnychTable.getSelectedRow(), ID_COLUMN);
             recepcny = recepcnyDao.dajRecepcneho(idRecepcny);
+
+            Object[] options = {"Zmazať", "Zrušiť"};
+            if (JOptionPane.showOptionDialog(this, "Naozaj chcete zmazať recepčného " + recepcny.getMeno() + "?",
+                    "Zmaž recepčného",
+                    JOptionPane.DEFAULT_OPTION, JOptionPane.PLAIN_MESSAGE, null,
+                    options, options[1]) == 1) {
+                return;
+            }
+
             recepcnyDao.vymazRecepcneho(idRecepcny);
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, "Nie je vybraný žiaden recepčný.");
         }
-        
+
         aktualizujZoznamRecepcnychTable();
     }//GEN-LAST:event_zmazRecepcnehoButtonActionPerformed
 
@@ -354,11 +364,19 @@ public class NastaveniaForm extends javax.swing.JDialog {
         try {
             Long idKluca = (Long) kluceTable.getValueAt(this.kluceTable.getSelectedRow(), ID_COLUMN);
             kluc = klucDao.dajKlucSId(idKluca);
-            
+
             if (kluc.getZakaznik() == null) {
+                Object[] options = {"Zmazať", "Zrušiť"};
+                if (JOptionPane.showOptionDialog(this, "Naozaj chcete zmazať kľúč " + kluc.getMeno() + "?",
+                        "Zmaž kľúč",
+                        JOptionPane.DEFAULT_OPTION, JOptionPane.PLAIN_MESSAGE, null,
+                        options, options[1]) == 1) {
+                    return;
+                }
                 klucDao.vymazKluc(idKluca);
             } else {
                 JOptionPane.showMessageDialog(this, "Vybraný kľúč je priradený zákazníkovi, nemožno zmazať priradený kľúč.");
+                return;
             }
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, "Nie je vybraný žiaden kľúč.");
@@ -370,14 +388,14 @@ public class NastaveniaForm extends javax.swing.JDialog {
         kredit = new Kredit();
         try {
             kredit.setCena(Double.parseDouble(novyKreditTextField.getText()));
-            
+
         } catch (NumberFormatException e) {
             JOptionPane.showMessageDialog(this, "Nesprávny formát sumy.");
             return;
         }
-        
+
         kredit.setNazov(novyKreditTextField.getText() + " eur");
-        
+
         try {
             kreditDao.pridajKredit(kredit);
         } catch (DuplicateKeyException e) {
@@ -385,48 +403,48 @@ public class NastaveniaForm extends javax.swing.JDialog {
             return;
         }
         JOptionPane.showMessageDialog(this, "Kredit " + kredit.getNazov() + " bol pridaný.");
-        aktualizujKreditTable();
     }//GEN-LAST:event_ulozKreditButtonActionPerformed
 
     private void ulozKlucButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ulozKlucButtonActionPerformed
         kluc = new Kluc();
-        
+
         if (!("").equals(novyKlucTextField.getText())) {
             kluc.setMeno(novyKlucTextField.getText());
             kluc.setZakaznik(null);
         } else {
             JOptionPane.showMessageDialog(this, "Zadaj meno kľúča.");
+            return;
         }
-        
+
         try {
             klucDao.pridajKluc(kluc);
         } catch (DuplicateKeyException e) {
             JOptionPane.showMessageDialog(this, "Zvolený kľúč už existuje.");
             return;
-            
+
         }
         JOptionPane.showMessageDialog(this, "Kľúč " + kluc.getMeno() + " bol pridaný.");
         aktualizujKlucTable();
     }//GEN-LAST:event_ulozKlucButtonActionPerformed
-    
+
     private void aktualizujVstupneTabbedPane() {
         double vstup = vstupneDao.dajCeny().getCenaVstupneho();
         double spinning = vstupneDao.dajCeny().getCenaSpinnigu();
         cenaVstupnehoTexttField.setText("" + vstup);
         cenaSpinninguTextField.setText("" + spinning);
     }
-    
+
     private void aktualizujKreditTable() {
         KreditTableModel model = (KreditTableModel) kreditTable.getModel();
         model.aktualizovat();
         novyKreditTextField.setText("");
     }
-    
+
     private void aktualizujZoznamRecepcnychTable() {
         ZoznamRecepcnychTableModel model = (ZoznamRecepcnychTableModel) zoznamRecepcnychTable.getModel();
         model.aktualizovat();
     }
-    
+
     private void aktualizujKlucTable() {
         KlucTableModel model = (KlucTableModel) kluceTable.getModel();
         model.aktualizovat();
