@@ -1,5 +1,7 @@
 package sk.upjs.ics.paz1c.fitnesscentrum;
 
+import java.util.ArrayList;
+import java.util.List;
 import sk.upjs.ics.paz1c.fitnesscentrum.entity.Zakaznik;
 import javax.swing.table.AbstractTableModel;
 import sk.upjs.ics.paz1c.fitnesscentrum.dao.ZakaznikDao;
@@ -7,14 +9,17 @@ import sk.upjs.ics.paz1c.fitnesscentrum.dao.ZakaznikDao;
 public class PritomniZakazniciTableModel extends AbstractTableModel {
 
     private ZakaznikDao zakaznikDao = DaoFactory.INSTANCE.getZakaznikDao();
-
     private static final String[] NAZVY_STLPCOV = {"ID", "Meno", "Kľúč", "Čas príchodu", "Číslo karty"};
-
     private static final int POCET_STLPCOV = NAZVY_STLPCOV.length;
+    private List<Zakaznik> listPritomnychZakaznikov = new ArrayList<>();
 
+    public PritomniZakazniciTableModel() {
+        aktualizovat();
+    }
+    
     @Override
     public int getRowCount() {
-        return zakaznikDao.dajPritomnychZakaznikov().size();
+        return listPritomnychZakaznikov.size();
     }
 
     @Override
@@ -24,7 +29,7 @@ public class PritomniZakazniciTableModel extends AbstractTableModel {
 
     @Override
     public Object getValueAt(int rowIndex, int columnIndex) {
-        Zakaznik zakaznik = zakaznikDao.dajPritomnychZakaznikov().get(rowIndex);
+        Zakaznik zakaznik = listPritomnychZakaznikov.get(rowIndex);
         switch (columnIndex) {
             case 0:
                 return zakaznik.getId();
@@ -47,6 +52,7 @@ public class PritomniZakazniciTableModel extends AbstractTableModel {
     }
 
     public void aktualizovat() {
+        listPritomnychZakaznikov = zakaznikDao.dajPritomnychZakaznikov();
         fireTableDataChanged();
     }
 }

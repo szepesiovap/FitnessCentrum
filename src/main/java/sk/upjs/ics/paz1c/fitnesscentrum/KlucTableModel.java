@@ -1,5 +1,6 @@
 package sk.upjs.ics.paz1c.fitnesscentrum;
 
+import java.util.ArrayList;
 import java.util.List;
 import javax.swing.table.AbstractTableModel;
 import sk.upjs.ics.paz1c.fitnesscentrum.dao.KlucDao;
@@ -10,7 +11,11 @@ public class KlucTableModel extends AbstractTableModel {
     private final KlucDao klucDao = DaoFactory.INSTANCE.getKlucDao();
     private static final String[] NAZVY_STLPCOV = {"ID", "Meno kľúča"};
     private static final int POCET_STLPCOV = NAZVY_STLPCOV.length;
-    private List<Kluc> listKlucov = klucDao.dajVsetkyKluce();
+    private List<Kluc> listKlucov = new ArrayList<>();
+
+    public KlucTableModel() {
+        aktualizovat();
+    }
 
     @Override
     public int getRowCount() {

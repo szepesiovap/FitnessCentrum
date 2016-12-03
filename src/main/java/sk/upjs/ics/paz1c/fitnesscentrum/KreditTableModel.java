@@ -1,5 +1,7 @@
 package sk.upjs.ics.paz1c.fitnesscentrum;
 
+import java.util.ArrayList;
+import java.util.List;
 import javax.swing.table.AbstractTableModel;
 import sk.upjs.ics.paz1c.fitnesscentrum.dao.KreditDao;
 import sk.upjs.ics.paz1c.fitnesscentrum.entity.Kredit;
@@ -9,10 +11,15 @@ public class KreditTableModel extends AbstractTableModel {
     private final KreditDao kreditDao = DaoFactory.INSTANCE.getKreditDao();
     private static final String[] NAZVY_STLPCOV = {"ID", "Cena", "Názov"};
     private static final int POCET_STLPCOV = NAZVY_STLPCOV.length;
+    private List<Kredit> listKreditov = new ArrayList<>();
+
+    public KreditTableModel() {
+        aktualizovat();
+    }
 
     @Override
     public int getRowCount() {
-        return kreditDao.dajVsetkyKredity().size();
+        return listKreditov.size();
     }
 
     @Override
@@ -22,7 +29,7 @@ public class KreditTableModel extends AbstractTableModel {
 
     @Override
     public Object getValueAt(int rowIndex, int columnIndex) {
-        Kredit kredit = kreditDao.dajVsetkyKredity().get(rowIndex);
+        Kredit kredit = listKreditov.get(rowIndex);
         switch (columnIndex) {
             case 0:
                 return kredit.getId();
@@ -41,6 +48,7 @@ public class KreditTableModel extends AbstractTableModel {
     }
 
     public void aktualizovat() {
+        listKreditov = kreditDao.dajVsetkyKredity();
         fireTableDataChanged();
     }
 

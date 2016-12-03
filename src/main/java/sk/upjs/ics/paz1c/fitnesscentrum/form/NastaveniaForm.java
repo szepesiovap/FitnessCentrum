@@ -329,7 +329,6 @@ public class NastaveniaForm extends javax.swing.JDialog {
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, "Nie je vybraný žiaden kredit.");
         }
-
         aktualizujKreditTable();
     }//GEN-LAST:event_zmazKreditButtonActionPerformed
 
@@ -390,8 +389,8 @@ public class NastaveniaForm extends javax.swing.JDialog {
 
         } catch (NumberFormatException e) {
             JOptionPane.showMessageDialog(this, "Nesprávny formát sumy.");
-                return;
-            }
+            return;
+        }
 
         kredit.setNazov(novyKreditTextField.getText() + " eur");
 
@@ -402,6 +401,7 @@ public class NastaveniaForm extends javax.swing.JDialog {
             return;
         }
         JOptionPane.showMessageDialog(this, "Kredit " + kredit.getNazov() + " bol pridaný.");
+        aktualizujKreditTable();
     }//GEN-LAST:event_ulozKreditButtonActionPerformed
 
     private void ulozKlucButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ulozKlucButtonActionPerformed

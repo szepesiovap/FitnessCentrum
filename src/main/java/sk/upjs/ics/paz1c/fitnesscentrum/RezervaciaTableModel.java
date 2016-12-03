@@ -1,5 +1,7 @@
 package sk.upjs.ics.paz1c.fitnesscentrum;
 
+import java.util.Collections;
+import java.util.List;
 import javax.swing.table.AbstractTableModel;
 import sk.upjs.ics.paz1c.fitnesscentrum.dao.RezervaciaDao;
 import sk.upjs.ics.paz1c.fitnesscentrum.dao.ZakaznikDao;
@@ -8,17 +10,16 @@ import sk.upjs.ics.paz1c.fitnesscentrum.entity.Spinning;
 
 public class RezervaciaTableModel extends AbstractTableModel {
 
-    private final RezervaciaDao rezervaciaDao;
-    private final ZakaznikDao zakaznikDao;
+    private final RezervaciaDao rezervaciaDao = DaoFactory.INSTANCE.getRezervaciaDao();
 
     private static final String[] NAZVY_STLPCOV = {"Meno zákazníka", "Dátum rezervácie"};
     private static final int POCET_STLPCOV = NAZVY_STLPCOV.length;
     private Spinning spinning;
+    private List<Rezervacia> listRezervacii;
 
     public RezervaciaTableModel(Spinning spinning) {
-        rezervaciaDao = DaoFactory.INSTANCE.getRezervaciaDao();
-        zakaznikDao = DaoFactory.INSTANCE.getZakaznikDao();
         this.spinning = spinning;
+        aktualizovat();
     }
 
     @Override
@@ -26,7 +27,7 @@ public class RezervaciaTableModel extends AbstractTableModel {
         if (spinning == null) {
             return 0;
         }
-        return rezervaciaDao.dajRezervacieSpinningu(spinning).size();
+        return listRezervacii.size();
     }
 
     @Override
@@ -40,12 +41,17 @@ public class RezervaciaTableModel extends AbstractTableModel {
     }
 
     public void aktualizovat() {
+        if (spinning == null) {
+            listRezervacii = Collections.emptyList();
+        } else {
+            listRezervacii = rezervaciaDao.dajRezervacieSpinningu(spinning);
+        }
         fireTableDataChanged();
     }
 
     @Override
     public Object getValueAt(int rowIndex, int columnIndex) {
-        Rezervacia rezervacia = rezervaciaDao.dajRezervacieSpinningu(spinning).get(rowIndex);
+        Rezervacia rezervacia = listRezervacii.get(rowIndex);
         switch (columnIndex) {
             case 0:
                 return rezervacia.getZakaznik().getMeno();

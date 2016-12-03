@@ -1,5 +1,7 @@
 package sk.upjs.ics.paz1c.fitnesscentrum;
 
+import java.util.ArrayList;
+import java.util.List;
 import sk.upjs.ics.paz1c.fitnesscentrum.entity.Zakaznik;
 import javax.swing.table.AbstractTableModel;
 import sk.upjs.ics.paz1c.fitnesscentrum.dao.ZakaznikDao;
@@ -10,14 +12,16 @@ public class ZakaznikTableModel extends AbstractTableModel {
     private static final String[] NAZVY_STLPCOV = {"ID", "Meno", "Pritomny", "Posledny prichod", "Kredit", "Cislo permanentky"};
     private static final int POCET_STLPCOV = NAZVY_STLPCOV.length;
     private String vzorka;
-
+    private List<Zakaznik> listZakaznikovSoVzorkou = new ArrayList<>();
+       
     public ZakaznikTableModel(String vzorka) {
         this.vzorka = vzorka;
+        aktualizovat();
     }
 
     @Override
     public int getRowCount() {
-        return zakaznikDao.dajZakaznikovSoZhodouVMene(vzorka).size();
+        return listZakaznikovSoVzorkou.size();
     }
 
     @Override
@@ -27,7 +31,7 @@ public class ZakaznikTableModel extends AbstractTableModel {
 
     @Override
     public Object getValueAt(int rowIndex, int columnIndex) {
-        Zakaznik zakaznik = zakaznikDao.dajZakaznikovSoZhodouVMene(vzorka).get(rowIndex);
+        Zakaznik zakaznik = listZakaznikovSoVzorkou.get(rowIndex);
         switch (columnIndex) {
             case 0:
                 return zakaznik.getId();
@@ -60,6 +64,7 @@ public class ZakaznikTableModel extends AbstractTableModel {
     }
 
     public void aktualizovat() {
+        listZakaznikovSoVzorkou = zakaznikDao.dajZakaznikovSoZhodouVMene(vzorka);
         fireTableDataChanged();
     }
 }

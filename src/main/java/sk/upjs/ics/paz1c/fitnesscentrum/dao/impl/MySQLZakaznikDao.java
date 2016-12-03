@@ -119,8 +119,8 @@ public class MySQLZakaznikDao implements ZakaznikDao {
                 + "zakaznik.cislo_permanentky as z_cislo_permanentky, "
                 + "zakaznik.id_kluca AS kluc_id, "
                 + "kluc.meno_kluca AS kluc_meno "
-                + "FROM zakaznik LEFT JOIN kluc ON zakaznik.id_kluca = kluc.id_kluca WHERE zakaznik.meno_priezvisko LIKE \'%" + vzorka + "%\' ";
-        return jdbcTemplate.query(sql, zakaznikRowMapper);
+                + "FROM zakaznik LEFT JOIN kluc ON zakaznik.id_kluca = kluc.id_kluca WHERE zakaznik.meno_priezvisko LIKE ? ";
+        return jdbcTemplate.query(sql, zakaznikRowMapper, "%" + vzorka + "%");
     }
 
     @Override

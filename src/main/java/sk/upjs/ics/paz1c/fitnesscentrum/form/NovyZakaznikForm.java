@@ -2,7 +2,9 @@ package sk.upjs.ics.paz1c.fitnesscentrum.form;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import javax.swing.UnsupportedLookAndFeelException;
+import org.springframework.dao.DuplicateKeyException;
 import sk.upjs.ics.paz1c.fitnesscentrum.DaoFactory;
 import sk.upjs.ics.paz1c.fitnesscentrum.entity.Zakaznik;
 
@@ -147,8 +149,13 @@ public class NovyZakaznikForm extends javax.swing.JFrame {
             System.out.println(kreditComboBox.getSelectedIndex());
             System.out.println(KREDIT_SUMY[kreditComboBox.getSelectedIndex()]);
         }
+        try {
+            DaoFactory.INSTANCE.getZakaznikDao().pridajZakaznika(zakaznik);
+        } catch (DuplicateKeyException e) {
+            JOptionPane.showMessageDialog(this, "Číslo karty už je priradené inému zákazníkovi.");
+            return;
+        }
 
-        DaoFactory.INSTANCE.getZakaznikDao().pridajZakaznika(zakaznik);
         hlavneOkno.aktualizovatZoznamPritomnych();
         this.dispose();
         hlavneOkno.setVisible(true);
