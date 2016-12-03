@@ -35,6 +35,14 @@
             <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="pridajSpinningMenuMousePressed"/>
           </Events>
         </Menu>
+        <Menu class="javax.swing.JMenu" name="zrusSpinnigMenu">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Zru&#x161; spinning"/>
+          </Properties>
+          <Events>
+            <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="zrusSpinnigMenuMousePressed"/>
+          </Events>
+        </Menu>
         <Menu class="javax.swing.JMenu" name="pridajInstruktoraMenu">
           <Properties>
             <Property name="text" type="java.lang.String" value="Pridaj in&#x161;truktora"/>

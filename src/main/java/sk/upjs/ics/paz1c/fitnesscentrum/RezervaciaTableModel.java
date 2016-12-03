@@ -4,7 +4,6 @@ import java.util.Collections;
 import java.util.List;
 import javax.swing.table.AbstractTableModel;
 import sk.upjs.ics.paz1c.fitnesscentrum.dao.RezervaciaDao;
-import sk.upjs.ics.paz1c.fitnesscentrum.dao.ZakaznikDao;
 import sk.upjs.ics.paz1c.fitnesscentrum.entity.Rezervacia;
 import sk.upjs.ics.paz1c.fitnesscentrum.entity.Spinning;
 
@@ -63,5 +62,4 @@ public class RezervaciaTableModel extends AbstractTableModel {
                 return "???";
         }
     }
-
 }

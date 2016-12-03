@@ -5,19 +5,18 @@ import sk.upjs.ics.paz1c.fitnesscentrum.DaoFactory;
 import sk.upjs.ics.paz1c.fitnesscentrum.RezervaciaTableModel;
 import sk.upjs.ics.paz1c.fitnesscentrum.SpinningComboBoxModel;
 import sk.upjs.ics.paz1c.fitnesscentrum.dao.RezervaciaDao;
-import sk.upjs.ics.paz1c.fitnesscentrum.entity.Rezervacia;
 import sk.upjs.ics.paz1c.fitnesscentrum.entity.Spinning;
 
 public class SpinningForm extends javax.swing.JDialog {
 
     private static final int ID_COLUMN = 2;
-    private final RezervaciaDao rezervaciaDao = DaoFactory.INSTANCE.getRezervaciaDao();
-    private Rezervacia rezervacia;
+    private final RezervaciaDao rezervaciaDao;
     /**
      * Creates new form SpinningForm
      */
     public SpinningForm(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
+        rezervaciaDao = DaoFactory.INSTANCE.getRezervaciaDao();
         initComponents();
         zobrazRezervacie();
     }
@@ -40,6 +39,7 @@ public class SpinningForm extends javax.swing.JDialog {
         jednorazovyMenuItem = new javax.swing.JMenuItem();
         kartouMenuItem = new javax.swing.JMenuItem();
         pridajSpinningMenu = new javax.swing.JMenu();
+        zrusSpinnigMenu = new javax.swing.JMenu();
         pridajInstruktoraMenu = new javax.swing.JMenu();
         odhlasZoSpinninguMenu = new javax.swing.JMenu();
 
@@ -85,6 +85,14 @@ public class SpinningForm extends javax.swing.JDialog {
             }
         });
         spinningMenuBar.add(pridajSpinningMenu);
+
+        zrusSpinnigMenu.setText("Zruš spinning");
+        zrusSpinnigMenu.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                zrusSpinnigMenuMousePressed(evt);
+            }
+        });
+        spinningMenuBar.add(zrusSpinnigMenu);
 
         pridajInstruktoraMenu.setText("Pridaj inštruktora");
         pridajInstruktoraMenu.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -182,6 +190,10 @@ public class SpinningForm extends javax.swing.JDialog {
         }
     }//GEN-LAST:event_odhlasZoSpinninguMenuMousePressed
 
+    private void zrusSpinnigMenuMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_zrusSpinnigMenuMousePressed
+        new ZrusSpinningForm(new javax.swing.JFrame(), true).setVisible(true);
+    }//GEN-LAST:event_zrusSpinnigMenuMousePressed
+
     private void zobrazRezervacie() {
         try {
             Spinning spinning = (Spinning) spinningComboBox.getSelectedItem();
@@ -245,5 +257,6 @@ public class SpinningForm extends javax.swing.JDialog {
     private javax.swing.JComboBox<Spinning> spinningComboBox;
     private javax.swing.JLabel spinningLabel;
     private javax.swing.JMenuBar spinningMenuBar;
+    private javax.swing.JMenu zrusSpinnigMenu;
     // End of variables declaration//GEN-END:variables
 }

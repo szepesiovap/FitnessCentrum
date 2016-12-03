@@ -72,4 +72,9 @@ public class MySQLSpinningDao implements SpinningDao {
         jdbcTemplate.update(sql, volne, spinning.getId());
     }
 
+    @Override
+    public void vymazSpinning(Long idSpinningu) {
+        String sql = "DELETE FROM spinning WHERE id = ?";
+        jdbcTemplate.update(sql, idSpinningu);
+    }
 }
