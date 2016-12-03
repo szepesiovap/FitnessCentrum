@@ -514,7 +514,6 @@ public class NastaveniaForm extends javax.swing.JDialog {
 
         }
         JOptionPane.showMessageDialog(this, "Kľúč " + kluc.getMeno() + " bol pridaný.");
-        aktualizujKlucTable();
         aktualizujKlucTabbedPane();
 
     }//GEN-LAST:event_ulozKlucButtonActionPerformed
@@ -548,6 +547,8 @@ public class NastaveniaForm extends javax.swing.JDialog {
     }
 
     private void aktualizujKlucTabbedPane() {
+        aktualizujKlucTable();
+        
         novyKlucLabel.setVisible(false);
         novyKlucTextField.setVisible(false);
         ulozKlucButton.setVisible(false);
