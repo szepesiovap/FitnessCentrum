@@ -44,6 +44,10 @@ public enum DaoFactory {
         return jdbcTemplate;
     }
 
+    public void setJdbcTemplate(JdbcTemplate jdbcTemplate) {
+        this.jdbcTemplate = jdbcTemplate;
+    }
+
     public ZakaznikDao getZakaznikDao() {
         if (zakaznikDao == null) {
             zakaznikDao = new MySQLZakaznikDao();

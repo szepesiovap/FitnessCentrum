@@ -1,6 +1,7 @@
 package sk.upjs.ics.paz1c.fitnesscentrum.dao.impl;
 
 import java.util.List;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import sk.upjs.ics.paz1c.fitnesscentrum.DaoFactory;
 import sk.upjs.ics.paz1c.fitnesscentrum.dao.InstruktorDao;
@@ -26,7 +27,11 @@ public class MySQLInstruktorDao implements InstruktorDao {
     @Override
     public Instruktor dajInstruktoraSId(Long idInstruktora) {
         String sql = "SELECT *  FROM instruktor WHERE id = ?";
-        return jdbcTemplate.queryForObject(sql, instruktorRowMapper, idInstruktora);
+        try {
+            return jdbcTemplate.queryForObject(sql, instruktorRowMapper, idInstruktora);
+        } catch (EmptyResultDataAccessException e) {
+            return null;
+        }
     }
 
     @Override
