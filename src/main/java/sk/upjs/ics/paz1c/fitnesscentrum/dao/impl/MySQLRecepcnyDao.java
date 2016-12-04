@@ -1,6 +1,7 @@
 package sk.upjs.ics.paz1c.fitnesscentrum.dao.impl;
 
 import java.util.List;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import sk.upjs.ics.paz1c.fitnesscentrum.DaoFactory;
 import sk.upjs.ics.paz1c.fitnesscentrum.rowmapper.RecepcnyRowMapper;
@@ -24,7 +25,7 @@ public class MySQLRecepcnyDao implements RecepcnyDao {
 
         try {
             return jdbcTemplate.queryForObject(sql, recepcnyRowMapper, login);
-        } catch (Exception EmptyResultDataAccessException) {
+        } catch (EmptyResultDataAccessException e) {
             return null;
         }
     }
@@ -50,7 +51,12 @@ public class MySQLRecepcnyDao implements RecepcnyDao {
     @Override
     public Recepcny dajRecepcneho(Long idRecepcneho) {
         String sql = "SELECT * FROM recepcny WHERE id=?";
-        return jdbcTemplate.queryForObject(sql, recepcnyRowMapper, idRecepcneho);
+        
+        try {
+            return jdbcTemplate.queryForObject(sql, recepcnyRowMapper, idRecepcneho);
+        } catch (EmptyResultDataAccessException e) {
+            return null;
+        }
     }
 
     @Override

@@ -9,7 +9,8 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.Statement;
-import org.junit.AfterClass;
+import org.junit.After;
+import org.junit.Before;
 import org.junit.BeforeClass;
 import org.springframework.jdbc.core.JdbcTemplate;
 import sk.upjs.ics.paz1c.fitnesscentrum.DaoFactory;
@@ -25,10 +26,10 @@ public class PripravaNaTestovanie {
     private static Connection connection;
 
     @BeforeClass
-    public static void setUpClass() throws ClassNotFoundException, SQLException, IOException {
+    public static void setUpClass() throws ClassNotFoundException, SQLException {
 
         Class.forName(JDBC_DRIVER);
-        connection = DriverManager.getConnection("jdbc:mysql://localhost/?user=root&password=root");
+        connection = DriverManager.getConnection("jdbc:mysql://localhost/?user=fitnesscentrum&password=fitnesscentrum");
         Statement s = connection.createStatement();
 
         s.executeUpdate("CREATE DATABASE " + DB_MENO);
@@ -37,14 +38,17 @@ public class PripravaNaTestovanie {
         dataSource.setDatabaseName(DB_MENO);
         dataSource.setUser(DB_USER);
         dataSource.setPassword(DB_PASSWORD);
-        DaoFactory.INSTANCE.setJdbcTemplate(new JdbcTemplate(dataSource));
-
+        DaoFactory.INSTANCE.setJdbcTemplate(new JdbcTemplate(dataSource));        
+    }
+    
+    @Before
+    public void setUp() throws  IOException, SQLException{
         ScriptRunner runner = new ScriptRunner(connection, false, true);
         runner.runScript(new BufferedReader(new FileReader(DB_MENO_SUBORU)));
     }
 
-    @AfterClass
-    public static void tearDownClass() throws SQLException {
+    @After
+    public void tearDownClass() throws SQLException {
         Statement s = connection.createStatement();
         s.executeUpdate("DROP DATABASE " + DB_MENO);
     }

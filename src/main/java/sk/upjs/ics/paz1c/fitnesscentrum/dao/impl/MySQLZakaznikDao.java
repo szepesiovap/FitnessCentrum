@@ -104,7 +104,6 @@ public class MySQLZakaznikDao implements ZakaznikDao {
         return jdbcTemplate.queryForObject(sql, zakaznikRowMapper, cisloPermanentky);
     }
 
-    // treba prerobit 
     @Override
     public List<Zakaznik> dajZakaznikovSoZhodouVMene(String vzorka) {
         if (vzorka.equals("")) {

@@ -16,7 +16,7 @@ public class MySQLInstruktorDaoTest extends PripravaNaTestovanie {
      */
     @Test
     public void testDajVsetychInstruktorov() {
-        List<Instruktor> result = instruktorDao.dajVsetychInstruktorov();
+        List<Instruktor> result = DaoFactory.INSTANCE.getInstruktorDao().dajVsetychInstruktorov();
         assertEquals(1, result.size());
     }
 
@@ -44,6 +44,7 @@ public class MySQLInstruktorDaoTest extends PripravaNaTestovanie {
         for (Instruktor i : listInstruktorov){
             if (i.getMeno().equals(meno)) {
                 jePridany = true;
+                break;
             }
         }
         assertTrue(jePridany);

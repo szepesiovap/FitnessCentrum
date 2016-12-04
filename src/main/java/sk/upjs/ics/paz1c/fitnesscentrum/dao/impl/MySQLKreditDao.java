@@ -1,6 +1,7 @@
 package sk.upjs.ics.paz1c.fitnesscentrum.dao.impl;
 
 import java.util.List;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import sk.upjs.ics.paz1c.fitnesscentrum.DaoFactory;
 import sk.upjs.ics.paz1c.fitnesscentrum.dao.KreditDao;
@@ -38,7 +39,11 @@ public class MySQLKreditDao implements KreditDao {
     @Override
     public Kredit dajKreditSId(Long idKredit) {
         String sql = "SELECT * FROM kredit WHERE id = ?";
-        return jdbcTemplate.queryForObject(sql, kreditRowMapper, idKredit);
+        try {
+            return jdbcTemplate.queryForObject(sql, kreditRowMapper, idKredit);
+        } catch (EmptyResultDataAccessException e) {
+            return null;
+        }
     }
 
 }

@@ -1,6 +1,7 @@
 package sk.upjs.ics.paz1c.fitnesscentrum.dao.impl;
 
 import java.util.List;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import sk.upjs.ics.paz1c.fitnesscentrum.DaoFactory;
 import sk.upjs.ics.paz1c.fitnesscentrum.dao.KlucDao;
@@ -60,9 +61,15 @@ public class MySQLKlucDao implements KlucDao {
                 + "zakaznik.kredit as z_kredit, "
                 + "zakaznik.cislo_permanentky as z_cislo_permanentky "
                 + "FROM kluc LEFT JOIN zakaznik ON zakaznik.id = kluc.id_zakaznika WHERE kluc.id_kluca = ?";
-        return jdbcTemplate.queryForObject(sql, klucRowMapper, idKluca);
+        
+        try {
+            return jdbcTemplate.queryForObject(sql, klucRowMapper, idKluca);
+        } catch (EmptyResultDataAccessException e) {
+            return null;
+        }
     }
 
+    //TODO: ? nebolo by lepsie mat v parametroch idkluca a zakaznika? Neviem ci sa to takto moze??
     @Override
     public void priradZakaznika(Kluc kluc, Zakaznik zakaznik) {
         String sql = "UPDATE kluc SET id_zakaznika= ? where id_kluca = ?";
