@@ -16,15 +16,14 @@ import sk.upjs.ics.paz1c.fitnesscentrum.entity.Recepcny;
 
 public class NastaveniaForm extends javax.swing.JDialog {
 
-    private final RecepcnyDao recepcnyDao;
-    private Recepcny recepcny;
-    private Kluc kluc;
-    private final KlucDao klucDao;
-    private final VstupneDao vstupneDao;
-    private final KreditDao kreditDao;
+    private final RecepcnyDao recepcnyDao = DaoFactory.INSTANCE.getRecepcnyDao();
+    private final KlucDao klucDao = DaoFactory.INSTANCE.getKlucDao();
+    private final VstupneDao vstupneDao = DaoFactory.INSTANCE.getVstupneDao();
+    private final KreditDao kreditDao = DaoFactory.INSTANCE.getKreditDao();
     private static final int ID_COLUMN = 2;
     private static final int ID_COLUMN_KLUC = 0;
-    
+    private Recepcny recepcny;
+    private Kluc kluc;
     private Kredit kredit;
 
     /**
@@ -35,12 +34,8 @@ public class NastaveniaForm extends javax.swing.JDialog {
      */
     public NastaveniaForm(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
-        recepcnyDao = DaoFactory.INSTANCE.getRecepcnyDao();
-        klucDao = DaoFactory.INSTANCE.getKlucDao();
-        vstupneDao = DaoFactory.INSTANCE.getVstupneDao();
-        kreditDao = DaoFactory.INSTANCE.getKreditDao();
         initComponents();
-        aktualizujVstupneTabbedPane();
+        aktualizovatVstupneTabbedPane();
     }
 
     /**
@@ -64,22 +59,22 @@ public class NastaveniaForm extends javax.swing.JDialog {
         recepcnyPanel = new javax.swing.JPanel();
         zoznamRecepcnychScrollPane = new javax.swing.JScrollPane();
         zoznamRecepcnychTable = new javax.swing.JTable();
-        zmazRecepcnehoButton = new javax.swing.JButton();
+        zmazatRecepcnehoButton = new javax.swing.JButton();
         novyRecepcnyjButton = new javax.swing.JButton();
         klucPanel = new javax.swing.JPanel();
         zoznamKlucovScrollPane = new javax.swing.JScrollPane();
         zoznamKlucovTable = new javax.swing.JTable();
-        zmazKlucButton = new javax.swing.JButton();
+        zmazatKlucButton = new javax.swing.JButton();
         novyKlucLabel = new javax.swing.JLabel();
         novyKlucTextField = new javax.swing.JTextField();
-        ulozKlucButton = new javax.swing.JButton();
+        ulozitKlucButton = new javax.swing.JButton();
         kreditPanel = new javax.swing.JPanel();
         zoznamKreditovScrollPane = new javax.swing.JScrollPane();
         zoznamKreditovTable = new javax.swing.JTable();
-        zmazKreditButton = new javax.swing.JButton();
+        zmazatKreditButton = new javax.swing.JButton();
         novyKreditLabel = new javax.swing.JLabel();
         novyKreditTextField = new javax.swing.JTextField();
-        ulozKreditButton = new javax.swing.JButton();
+        ulozitKreditButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Nastavenia");
@@ -137,7 +132,7 @@ public class NastaveniaForm extends javax.swing.JDialog {
                     .addComponent(cenaSpinninguLabel)
                     .addComponent(cenaSpinninguTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(eurLabel))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 287, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 284, Short.MAX_VALUE)
                 .addComponent(ulozitZmenyButton)
                 .addGap(24, 24, 24))
         );
@@ -148,10 +143,10 @@ public class NastaveniaForm extends javax.swing.JDialog {
         );
         zoznamRecepcnychScrollPane.setViewportView(zoznamRecepcnychTable);
 
-        zmazRecepcnehoButton.setText("Zmaž");
-        zmazRecepcnehoButton.addActionListener(new java.awt.event.ActionListener() {
+        zmazatRecepcnehoButton.setText("Zmazať");
+        zmazatRecepcnehoButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                zmazRecepcnehoButtonActionPerformed(evt);
+                zmazatRecepcnehoButtonActionPerformed(evt);
             }
         });
 
@@ -167,10 +162,10 @@ public class NastaveniaForm extends javax.swing.JDialog {
         recepcnyPanelLayout.setHorizontalGroup(
             recepcnyPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(recepcnyPanelLayout.createSequentialGroup()
-                .addContainerGap(292, Short.MAX_VALUE)
+                .addContainerGap(304, Short.MAX_VALUE)
                 .addComponent(novyRecepcnyjButton, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(zmazRecepcnehoButton, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(zmazatRecepcnehoButton, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
             .addComponent(zoznamRecepcnychScrollPane, javax.swing.GroupLayout.Alignment.TRAILING)
         );
@@ -179,7 +174,7 @@ public class NastaveniaForm extends javax.swing.JDialog {
             .addGroup(recepcnyPanelLayout.createSequentialGroup()
                 .addGroup(recepcnyPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(novyRecepcnyjButton)
-                    .addComponent(zmazRecepcnehoButton))
+                    .addComponent(zmazatRecepcnehoButton))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(zoznamRecepcnychScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 378, Short.MAX_VALUE))
         );
@@ -189,19 +184,19 @@ public class NastaveniaForm extends javax.swing.JDialog {
         zoznamKlucovTable.setModel(new KlucTableModel());
         zoznamKlucovScrollPane.setViewportView(zoznamKlucovTable);
 
-        zmazKlucButton.setText("Zmaž");
-        zmazKlucButton.addActionListener(new java.awt.event.ActionListener() {
+        zmazatKlucButton.setText("Zmazať");
+        zmazatKlucButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                zmazKlucButtonActionPerformed(evt);
+                zmazatKlucButtonActionPerformed(evt);
             }
         });
 
         novyKlucLabel.setText("Nový kľúč:");
 
-        ulozKlucButton.setText("Ulož kľúč");
-        ulozKlucButton.addActionListener(new java.awt.event.ActionListener() {
+        ulozitKlucButton.setText("Uložiť kľúč");
+        ulozitKlucButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                ulozKlucButtonActionPerformed(evt);
+                ulozitKlucButtonActionPerformed(evt);
             }
         });
 
@@ -215,19 +210,19 @@ public class NastaveniaForm extends javax.swing.JDialog {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(novyKlucTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(ulozKlucButton, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(ulozitKlucButton, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(zmazKlucButton, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(zmazatKlucButton, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
-            .addComponent(zoznamKlucovScrollPane, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 564, Short.MAX_VALUE)
+            .addComponent(zoznamKlucovScrollPane, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 576, Short.MAX_VALUE)
         );
         klucPanelLayout.setVerticalGroup(
             klucPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(klucPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(klucPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(zmazKlucButton)
-                    .addComponent(ulozKlucButton)
+                    .addComponent(zmazatKlucButton)
+                    .addComponent(ulozitKlucButton)
                     .addComponent(novyKlucTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(novyKlucLabel))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -239,20 +234,20 @@ public class NastaveniaForm extends javax.swing.JDialog {
         zoznamKreditovTable.setModel(new KreditTableModel());
         zoznamKreditovScrollPane.setViewportView(zoznamKreditovTable);
 
-        zmazKreditButton.setText("Zmaž");
-        zmazKreditButton.setPreferredSize(new java.awt.Dimension(105, 25));
-        zmazKreditButton.addActionListener(new java.awt.event.ActionListener() {
+        zmazatKreditButton.setText("Zmazať");
+        zmazatKreditButton.setPreferredSize(new java.awt.Dimension(105, 25));
+        zmazatKreditButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                zmazKreditButtonActionPerformed(evt);
+                zmazatKreditButtonActionPerformed(evt);
             }
         });
 
         novyKreditLabel.setText("Nový kredit :");
 
-        ulozKreditButton.setText("Ulož kredit");
-        ulozKreditButton.addActionListener(new java.awt.event.ActionListener() {
+        ulozitKreditButton.setText("Uložiť kredit");
+        ulozitKreditButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                ulozKreditButtonActionPerformed(evt);
+                ulozitKreditButtonActionPerformed(evt);
             }
         });
 
@@ -266,10 +261,10 @@ public class NastaveniaForm extends javax.swing.JDialog {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(novyKreditTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(ulozKreditButton, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(ulozitKreditButton, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(zmazKreditButton, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(zmazatKreditButton, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
             .addComponent(zoznamKreditovScrollPane)
         );
         kreditPanelLayout.setVerticalGroup(
@@ -278,8 +273,8 @@ public class NastaveniaForm extends javax.swing.JDialog {
                 .addContainerGap()
                 .addGroup(kreditPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(kreditPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE, false)
-                        .addComponent(ulozKreditButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(zmazKreditButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(ulozitKreditButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(zmazatKreditButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(novyKreditLabel))
                     .addComponent(novyKreditTextField))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -292,7 +287,9 @@ public class NastaveniaForm extends javax.swing.JDialog {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(vstupneTabbedPane)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addComponent(vstupneTabbedPane)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -300,6 +297,7 @@ public class NastaveniaForm extends javax.swing.JDialog {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void ulozitZmenyButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ulozitZmenyButtonActionPerformed
@@ -307,14 +305,14 @@ public class NastaveniaForm extends javax.swing.JDialog {
             vstupneDao.updateCenaVstupneho(Double.parseDouble(cenaVstupnehoTexttField.getText()));
             vstupneDao.updateCenaSpinningu(Double.parseDouble(cenaSpinninguTextField.getText()));
             JOptionPane.showMessageDialog(this, "Cena bola zmenená.");
-            aktualizujVstupneTabbedPane();
+            aktualizovatVstupneTabbedPane();
         } catch (NumberFormatException e) {
             JOptionPane.showMessageDialog(this, "Zlý format ceny.");
         }
 
     }//GEN-LAST:event_ulozitZmenyButtonActionPerformed
 
-    private void zmazKreditButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_zmazKreditButtonActionPerformed
+    private void zmazatKreditButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_zmazatKreditButtonActionPerformed
         try {
             Long idKredit = (Long) zoznamKreditovTable.getModel().getValueAt(this.zoznamKreditovTable.getSelectedRow(), ID_COLUMN);
             kredit = kreditDao.dajKreditSId(idKredit);
@@ -331,10 +329,10 @@ public class NastaveniaForm extends javax.swing.JDialog {
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, "Nie je vybraný žiaden kredit.");
         }
-        aktualizujKreditTable();
-    }//GEN-LAST:event_zmazKreditButtonActionPerformed
+        aktualizovatKreditTable();
+    }//GEN-LAST:event_zmazatKreditButtonActionPerformed
 
-    private void zmazRecepcnehoButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_zmazRecepcnehoButtonActionPerformed
+    private void zmazatRecepcnehoButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_zmazatRecepcnehoButtonActionPerformed
         try {
             Long idRecepcny = (Long) zoznamRecepcnychTable.getModel().getValueAt(this.zoznamRecepcnychTable.getSelectedRow(), ID_COLUMN);
             recepcny = recepcnyDao.dajRecepcneho(idRecepcny);
@@ -352,15 +350,15 @@ public class NastaveniaForm extends javax.swing.JDialog {
             JOptionPane.showMessageDialog(this, "Nie je vybraný žiaden recepčný.");
         }
 
-        aktualizujZoznamRecepcnychTable();
-    }//GEN-LAST:event_zmazRecepcnehoButtonActionPerformed
+        aktualizovatZoznamRecepcnychTable();
+    }//GEN-LAST:event_zmazatRecepcnehoButtonActionPerformed
 
     private void novyRecepcnyjButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_novyRecepcnyjButtonActionPerformed
         new NovyRecepcnyForm(new javax.swing.JFrame(), true).setVisible(true);
-        aktualizujZoznamRecepcnychTable();
+        aktualizovatZoznamRecepcnychTable();
     }//GEN-LAST:event_novyRecepcnyjButtonActionPerformed
 
-    private void zmazKlucButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_zmazKlucButtonActionPerformed
+    private void zmazatKlucButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_zmazatKlucButtonActionPerformed
         try {
             Long idKluca = (Long) zoznamKlucovTable.getModel().getValueAt(this.zoznamKlucovTable.getSelectedRow(), ID_COLUMN_KLUC);
             kluc = klucDao.dajKlucSId(idKluca);
@@ -381,10 +379,10 @@ public class NastaveniaForm extends javax.swing.JDialog {
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, "Nie je vybraný žiaden kľúč.");
         }
-        aktualizujKlucTable();
-    }//GEN-LAST:event_zmazKlucButtonActionPerformed
+        aktualizovatKlucTable();
+    }//GEN-LAST:event_zmazatKlucButtonActionPerformed
 
-    private void ulozKreditButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ulozKreditButtonActionPerformed
+    private void ulozitKreditButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ulozitKreditButtonActionPerformed
         kredit = new Kredit();
         try {
             kredit.setCena(Double.parseDouble(novyKreditTextField.getText()));
@@ -402,11 +400,11 @@ public class NastaveniaForm extends javax.swing.JDialog {
             JOptionPane.showMessageDialog(this, "Zvolený kredit už existuje.");
             return;
         }
-        aktualizujKreditTable();
+        aktualizovatKreditTable();
         JOptionPane.showMessageDialog(this, "Kredit " + kredit.getNazov() + " bol pridaný.");
-    }//GEN-LAST:event_ulozKreditButtonActionPerformed
+    }//GEN-LAST:event_ulozitKreditButtonActionPerformed
 
-    private void ulozKlucButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ulozKlucButtonActionPerformed
+    private void ulozitKlucButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ulozitKlucButtonActionPerformed
         kluc = new Kluc();
 
         if (!("").equals(novyKlucTextField.getText())) {
@@ -424,29 +422,29 @@ public class NastaveniaForm extends javax.swing.JDialog {
             return;
 
         }
-        aktualizujKlucTable();
+        aktualizovatKlucTable();
         JOptionPane.showMessageDialog(this, "Kľúč " + kluc.getMeno() + " bol pridaný.");
-    }//GEN-LAST:event_ulozKlucButtonActionPerformed
+    }//GEN-LAST:event_ulozitKlucButtonActionPerformed
 
-    private void aktualizujVstupneTabbedPane() {
+    private void aktualizovatVstupneTabbedPane() {
         double vstup = vstupneDao.dajCeny().getCenaVstupneho();
         double spinning = vstupneDao.dajCeny().getCenaSpinnigu();
         cenaVstupnehoTexttField.setText("" + vstup);
         cenaSpinninguTextField.setText("" + spinning);
     }
 
-    private void aktualizujKreditTable() {
+    private void aktualizovatKreditTable() {
         KreditTableModel model = (KreditTableModel) zoznamKreditovTable.getModel();
         model.aktualizovat();
         novyKreditTextField.setText("");
     }
 
-    private void aktualizujZoznamRecepcnychTable() {
+    private void aktualizovatZoznamRecepcnychTable() {
         ZoznamRecepcnychTableModel model = (ZoznamRecepcnychTableModel) zoznamRecepcnychTable.getModel();
         model.aktualizovat();
     }
 
-    private void aktualizujKlucTable() {
+    private void aktualizovatKlucTable() {
         KlucTableModel model = (KlucTableModel) zoznamKlucovTable.getModel();
         model.aktualizovat();
         novyKlucTextField.setText("");
@@ -509,14 +507,14 @@ public class NastaveniaForm extends javax.swing.JDialog {
     private javax.swing.JTextField novyKreditTextField;
     private javax.swing.JButton novyRecepcnyjButton;
     private javax.swing.JPanel recepcnyPanel;
-    private javax.swing.JButton ulozKlucButton;
-    private javax.swing.JButton ulozKreditButton;
+    private javax.swing.JButton ulozitKlucButton;
+    private javax.swing.JButton ulozitKreditButton;
     private javax.swing.JButton ulozitZmenyButton;
     private javax.swing.JPanel vstupnePanel;
     private javax.swing.JTabbedPane vstupneTabbedPane;
-    private javax.swing.JButton zmazKlucButton;
-    private javax.swing.JButton zmazKreditButton;
-    private javax.swing.JButton zmazRecepcnehoButton;
+    private javax.swing.JButton zmazatKlucButton;
+    private javax.swing.JButton zmazatKreditButton;
+    private javax.swing.JButton zmazatRecepcnehoButton;
     private javax.swing.JScrollPane zoznamKlucovScrollPane;
     private javax.swing.JTable zoznamKlucovTable;
     private javax.swing.JScrollPane zoznamKreditovScrollPane;

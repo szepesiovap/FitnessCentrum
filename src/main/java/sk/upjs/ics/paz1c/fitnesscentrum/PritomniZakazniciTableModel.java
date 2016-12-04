@@ -9,7 +9,7 @@ import sk.upjs.ics.paz1c.fitnesscentrum.dao.ZakaznikDao;
 public class PritomniZakazniciTableModel extends AbstractTableModel {
 
     private ZakaznikDao zakaznikDao = DaoFactory.INSTANCE.getZakaznikDao();
-    private static final String[] NAZVY_STLPCOV = {"ID", "Meno", "Kľúč", "Čas príchodu", "Číslo karty"};
+    private static final String[] NAZVY_STLPCOV = {"Meno", "Kľúč", "Čas príchodu", "Číslo karty"};
     private static final int POCET_STLPCOV = NAZVY_STLPCOV.length;
     private List<Zakaznik> listPritomnychZakaznikov = new ArrayList<>();
 
@@ -32,15 +32,15 @@ public class PritomniZakazniciTableModel extends AbstractTableModel {
         Zakaznik zakaznik = listPritomnychZakaznikov.get(rowIndex);
         switch (columnIndex) {
             case 0:
-                return zakaznik.getId();
-            case 1:
                 return zakaznik.getMeno();
-            case 2:
+            case 1:
                 return zakaznik.getKluc();
-            case 3:
+            case 2:
                 return zakaznik.getPoslednyPrichod().toLocalDate() + " " + zakaznik.getPoslednyPrichod().toLocalTime();
-            case 4:
+            case 3:
                 return zakaznik.getCisloPermanentky();
+            case 4:
+                return zakaznik.getId();
             default:
                 return "???";
         }

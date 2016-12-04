@@ -7,17 +7,20 @@ import sk.upjs.ics.paz1c.fitnesscentrum.dao.RecepcnyDao;
 import sk.upjs.ics.paz1c.fitnesscentrum.entity.Recepcny;
 
 public class OverenieHeslaForm extends javax.swing.JDialog {
-    
+
     private Recepcny recepcny;
-    private final RecepcnyDao recepcnyDao;
+    private final RecepcnyDao recepcnyDao = DaoFactory.INSTANCE.getRecepcnyDao();
     private final String akcia;
-    
+
     /**
      * Creates new form OverenieHeslaJDialog
+     *
+     * @param parent
+     * @param modal
+     * @param akcia
      */
     public OverenieHeslaForm(java.awt.Frame parent, boolean modal, String akcia) {
         super(parent, modal);
-        recepcnyDao = DaoFactory.INSTANCE.getRecepcnyDao();
         this.akcia = akcia;
         initComponents();
     }
@@ -31,8 +34,8 @@ public class OverenieHeslaForm extends javax.swing.JDialog {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        potvrdButton = new javax.swing.JButton();
-        zrusButton = new javax.swing.JButton();
+        potvrditButton = new javax.swing.JButton();
+        zrusitButton = new javax.swing.JButton();
         zadajteHesloLabel = new javax.swing.JLabel();
         hesloPasswordField = new javax.swing.JPasswordField();
 
@@ -40,17 +43,17 @@ public class OverenieHeslaForm extends javax.swing.JDialog {
         setTitle("Overenie admina");
         setResizable(false);
 
-        potvrdButton.setText("Potvrď");
-        potvrdButton.addActionListener(new java.awt.event.ActionListener() {
+        potvrditButton.setText("Potvrdiť");
+        potvrditButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                potvrdButtonActionPerformed(evt);
+                potvrditButtonActionPerformed(evt);
             }
         });
 
-        zrusButton.setText("Zruš");
-        zrusButton.addActionListener(new java.awt.event.ActionListener() {
+        zrusitButton.setText("Zrušiť");
+        zrusitButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                zrusButtonActionPerformed(evt);
+                zrusitButtonActionPerformed(evt);
             }
         });
 
@@ -61,36 +64,38 @@ public class OverenieHeslaForm extends javax.swing.JDialog {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(hesloPasswordField, javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(zadajteHesloLabel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(potvrdButton, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 15, Short.MAX_VALUE)
-                .addComponent(zrusButton, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(potvrditButton, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(zrusitButton, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(hesloPasswordField))
                 .addContainerGap())
+            .addGroup(layout.createSequentialGroup()
+                .addGap(36, 36, 36)
+                .addComponent(zadajteHesloLabel)
+                .addContainerGap(40, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(zadajteHesloLabel)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(hesloPasswordField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 17, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(hesloPasswordField, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(potvrdButton)
-                    .addComponent(zrusButton))
-                .addContainerGap())
+                    .addComponent(potvrditButton)
+                    .addComponent(zrusitButton))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void potvrdButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_potvrdButtonActionPerformed
+    private void potvrditButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_potvrditButtonActionPerformed
         recepcny = recepcnyDao.dajRecepcneho(0L);
         String salt = recepcny.getSalt();
         String heslo = hesloPasswordField.getText();
@@ -98,19 +103,19 @@ public class OverenieHeslaForm extends javax.swing.JDialog {
 
         if (hashHeslo.equals(recepcny.getHeslo())) {
             this.dispose();
-            if("nastavenia".equals(akcia)){
-                 new NastaveniaForm(new javax.swing.JFrame(), true).setVisible(true);
+            if ("nastavenia".equals(akcia)) {
+                new NastaveniaForm(new javax.swing.JFrame(), true).setVisible(true);
             } else {
                 new NovyRecepcnyForm(new javax.swing.JFrame(), true).setVisible(true);
             }
         } else {
             JOptionPane.showMessageDialog(null, "Zadané heslo nie je správne");
         }
-    }//GEN-LAST:event_potvrdButtonActionPerformed
+    }//GEN-LAST:event_potvrditButtonActionPerformed
 
-    private void zrusButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_zrusButtonActionPerformed
+    private void zrusitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_zrusitButtonActionPerformed
         this.dispose();
-    }//GEN-LAST:event_zrusButtonActionPerformed
+    }//GEN-LAST:event_zrusitButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -143,7 +148,7 @@ public class OverenieHeslaForm extends javax.swing.JDialog {
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                OverenieHeslaForm dialog = new OverenieHeslaForm(new javax.swing.JFrame(), true, "nastavenia");
+                OverenieHeslaForm dialog = new OverenieHeslaForm(new javax.swing.JFrame(), true, "Nastavenia");
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {
@@ -157,8 +162,8 @@ public class OverenieHeslaForm extends javax.swing.JDialog {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPasswordField hesloPasswordField;
-    private javax.swing.JButton potvrdButton;
+    private javax.swing.JButton potvrditButton;
     private javax.swing.JLabel zadajteHesloLabel;
-    private javax.swing.JButton zrusButton;
+    private javax.swing.JButton zrusitButton;
     // End of variables declaration//GEN-END:variables
 }

@@ -1,6 +1,5 @@
 package sk.upjs.ics.paz1c.fitnesscentrum.form;
 
-import javax.swing.UIManager;
 import sk.upjs.ics.paz1c.fitnesscentrum.DaoFactory;
 import sk.upjs.ics.paz1c.fitnesscentrum.PritomniZakazniciTableModel;
 import sk.upjs.ics.paz1c.fitnesscentrum.dao.KlucDao;
@@ -10,7 +9,9 @@ import sk.upjs.ics.paz1c.fitnesscentrum.entity.Zakaznik;
 
 public final class HlavneOknoForm extends javax.swing.JFrame {
 
-    private static final int ID_COLUMN = 0;
+    private final ZakaznikDao zakaznikDao = DaoFactory.INSTANCE.getZakaznikDao();
+    private final KlucDao klucDao = DaoFactory.INSTANCE.getKlucDao();
+    private static final int ID_COLUMN = 4;
 
     /**
      * Creates new form ZoznamZakaznikovForm
@@ -147,6 +148,7 @@ public final class HlavneOknoForm extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void odhlasitMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_odhlasitMenuActionPerformed
@@ -160,14 +162,11 @@ public final class HlavneOknoForm extends javax.swing.JFrame {
 
     private void odchodMenuMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_odchodMenuMousePressed
         try {
-            Long idZakaznika = (Long) pritomniTable.getValueAt(pritomniTable.getSelectedRow(), ID_COLUMN);
-            ZakaznikDao zakaznikDao = DaoFactory.INSTANCE.getZakaznikDao();
-            KlucDao klucDao = DaoFactory.INSTANCE.getKlucDao();
+            Long idZakaznika = (Long) pritomniTable.getModel().getValueAt(pritomniTable.getSelectedRow(), ID_COLUMN);
             Zakaznik zakaznik = zakaznikDao.dajZakaznikaSId(idZakaznika);
             Kluc kluc = klucDao.dajKlucSId(zakaznik.getKluc().getId());
             klucDao.odoberZakaznika(kluc);
             zakaznikDao.odchod(zakaznik);
-
             aktualizovatZoznamPritomnych();
         } catch (ArrayIndexOutOfBoundsException e) {
             System.err.println("Nebol vybrany ziaden zakaznik");

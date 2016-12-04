@@ -13,22 +13,22 @@ import sk.upjs.ics.paz1c.fitnesscentrum.entity.Zakaznik;
 
 public class RezervaciaForm extends javax.swing.JDialog {
 
-    private static final int ID_COLUMN = 0;
+    private static final int ID_COLUMN = 5;
     private static Spinning spinning;
-    private final RezervaciaDao rezervaciaDao;
-    private final ZakaznikDao zakaznikDao;
-    private final SpinningDao spinningDao;
-    private Zakaznik zakaznik;
+    private final RezervaciaDao rezervaciaDao = DaoFactory.INSTANCE.getRezervaciaDao();
+    private final ZakaznikDao zakaznikDao = DaoFactory.INSTANCE.getZakaznikDao();
+    private final SpinningDao spinningDao = DaoFactory.INSTANCE.getSpinningDao();
 
     /**
      * Creates new form RezervaciaForm
+     *
+     * @param parent
+     * @param modal
+     * @param spinning
      */
     public RezervaciaForm(java.awt.Dialog parent, boolean modal, Spinning spinning) {
         super(parent, modal);
         this.spinning = spinning;
-        spinningDao = DaoFactory.INSTANCE.getSpinningDao();
-        zakaznikDao = DaoFactory.INSTANCE.getZakaznikDao();
-        rezervaciaDao = DaoFactory.INSTANCE.getRezervaciaDao();
         initComponents();
         zobrazSpinningLabel.setText(spinning.toString());
     }
@@ -46,31 +46,32 @@ public class RezervaciaForm extends javax.swing.JDialog {
         zobrazSpinningLabel = new javax.swing.JLabel();
         zoznamZakaznikovScrollPane = new javax.swing.JScrollPane();
         zoznamZakaznikovTable = new javax.swing.JTable();
-        hladajPodlaMenaLabel = new javax.swing.JLabel();
-        hladajPodlaMenaTextField = new javax.swing.JTextField();
-        hladajButton = new javax.swing.JButton();
-        rezervujButton = new javax.swing.JButton();
+        hladatPodlaMenaLabel = new javax.swing.JLabel();
+        hladatPodlaMenaTextField = new javax.swing.JTextField();
+        hladatButton = new javax.swing.JButton();
+        rezervovatButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Rezervácia Spinningu");
 
         spinningLabel.setText("Spinning: ");
 
         zoznamZakaznikovTable.setModel(new ZakaznikTableModel(""));
         zoznamZakaznikovScrollPane.setViewportView(zoznamZakaznikovTable);
 
-        hladajPodlaMenaLabel.setText("Hľadaj podľa mena: ");
+        hladatPodlaMenaLabel.setText("Hľadať podľa mena: ");
 
-        hladajButton.setText("Hľadaj");
-        hladajButton.addActionListener(new java.awt.event.ActionListener() {
+        hladatButton.setText("Hľadať");
+        hladatButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                hladajButtonActionPerformed(evt);
+                hladatButtonActionPerformed(evt);
             }
         });
 
-        rezervujButton.setText("Rezervuj");
-        rezervujButton.addActionListener(new java.awt.event.ActionListener() {
+        rezervovatButton.setText("Rezervovať");
+        rezervovatButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                rezervujButtonActionPerformed(evt);
+                rezervovatButtonActionPerformed(evt);
             }
         });
 
@@ -82,19 +83,20 @@ public class RezervaciaForm extends javax.swing.JDialog {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(hladajPodlaMenaLabel)
+                    .addComponent(hladatPodlaMenaLabel)
                     .addComponent(spinningLabel))
-                .addGap(49, 49, 49)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
+                        .addGap(49, 49, 49)
                         .addComponent(zobrazSpinningLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGap(217, 217, 217))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(hladajPodlaMenaTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 316, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(hladajButton, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 17, Short.MAX_VALUE)
-                        .addComponent(rezervujButton)
+                        .addComponent(hladatPodlaMenaTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 329, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(hladatButton, javax.swing.GroupLayout.DEFAULT_SIZE, 116, Short.MAX_VALUE)
+                        .addGap(18, 18, 18)
+                        .addComponent(rezervovatButton)
                         .addContainerGap())))
         );
         layout.setVerticalGroup(
@@ -108,25 +110,26 @@ public class RezervaciaForm extends javax.swing.JDialog {
                         .addComponent(spinningLabel)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(hladajPodlaMenaLabel)
-                    .addComponent(hladajPodlaMenaTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(hladajButton)
-                    .addComponent(rezervujButton))
+                    .addComponent(hladatPodlaMenaLabel)
+                    .addComponent(hladatPodlaMenaTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(hladatButton)
+                    .addComponent(rezervovatButton))
                 .addGap(16, 16, 16)
                 .addComponent(zoznamZakaznikovScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 338, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void hladajButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_hladajButtonActionPerformed
-        zoznamZakaznikovTable.setModel(new ZakaznikTableModel(hladajPodlaMenaTextField.getText()));
-    }//GEN-LAST:event_hladajButtonActionPerformed
+    private void hladatButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_hladatButtonActionPerformed
+        zoznamZakaznikovTable.setModel(new ZakaznikTableModel(hladatPodlaMenaTextField.getText()));
+    }//GEN-LAST:event_hladatButtonActionPerformed
 
-    private void rezervujButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rezervujButtonActionPerformed
+    private void rezervovatButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rezervovatButtonActionPerformed
 
         try {
-            Long idZakaznika = (Long) zoznamZakaznikovTable.getValueAt(this.zoznamZakaznikovTable.getSelectedRow(), ID_COLUMN);
+            Long idZakaznika = (Long) zoznamZakaznikovTable.getModel().getValueAt(this.zoznamZakaznikovTable.getSelectedRow(), ID_COLUMN);
             Zakaznik zakaznik = zakaznikDao.dajZakaznikaSId(idZakaznika);
             Rezervacia rezervacia = new Rezervacia();
             rezervacia.setSpinning(spinning);
@@ -141,7 +144,7 @@ public class RezervaciaForm extends javax.swing.JDialog {
         } catch (ArrayIndexOutOfBoundsException e) {
             JOptionPane.showMessageDialog(null, "Vyber zákazníka na rezerváciu.");
         }
-     }//GEN-LAST:event_rezervujButtonActionPerformed
+     }//GEN-LAST:event_rezervovatButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -186,10 +189,10 @@ public class RezervaciaForm extends javax.swing.JDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton hladajButton;
-    private javax.swing.JLabel hladajPodlaMenaLabel;
-    private javax.swing.JTextField hladajPodlaMenaTextField;
-    private javax.swing.JButton rezervujButton;
+    private javax.swing.JButton hladatButton;
+    private javax.swing.JLabel hladatPodlaMenaLabel;
+    private javax.swing.JTextField hladatPodlaMenaTextField;
+    private javax.swing.JButton rezervovatButton;
     private javax.swing.JLabel spinningLabel;
     private javax.swing.JLabel zobrazSpinningLabel;
     private javax.swing.JScrollPane zoznamZakaznikovScrollPane;

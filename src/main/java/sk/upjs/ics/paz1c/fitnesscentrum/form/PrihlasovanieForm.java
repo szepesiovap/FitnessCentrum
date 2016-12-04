@@ -3,9 +3,12 @@ package sk.upjs.ics.paz1c.fitnesscentrum.form;
 import javax.swing.JOptionPane;
 import javax.swing.UIManager;
 import sk.upjs.ics.paz1c.fitnesscentrum.DaoFactory;
+import sk.upjs.ics.paz1c.fitnesscentrum.dao.RecepcnyDao;
 import sk.upjs.ics.paz1c.fitnesscentrum.entity.Recepcny;
 
 public class PrihlasovanieForm extends javax.swing.JFrame {
+
+    private final RecepcnyDao recepcnyDao = DaoFactory.INSTANCE.getRecepcnyDao();
 
     /**
      * Creates new form PrihlasovanieForm
@@ -63,12 +66,6 @@ public class PrihlasovanieForm extends javax.swing.JFrame {
         prihlasitButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 prihlasitButtonActionPerformed(evt);
-            }
-        });
-
-        hesloPasswordField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                hesloPasswordFieldActionPerformed(evt);
             }
         });
 
@@ -136,6 +133,7 @@ public class PrihlasovanieForm extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void loginTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginTextFieldActionPerformed
@@ -146,7 +144,7 @@ public class PrihlasovanieForm extends javax.swing.JFrame {
         String heslo = hesloPasswordField.getText();
         String login = loginTextField.getText();
 
-        Recepcny recepcny = DaoFactory.INSTANCE.getRecepcnyDao().dajRecepcneho(login);
+        Recepcny recepcny = recepcnyDao.dajRecepcneho(login);
         // funkcne prihlasovanie s databazou
         /*if (recepcny != null && login.equals(recepcny.getLogin())) {
             String hashovaneHeslo = Hashovanie.zahesuj(recepcny.getSalt(), hesloPasswordField.getText());
@@ -169,10 +167,6 @@ public class PrihlasovanieForm extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Nespravne prihlasovacie udaje");
         }
     }//GEN-LAST:event_prihlasitButtonActionPerformed
-
-    private void hesloPasswordFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_hesloPasswordFieldActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_hesloPasswordFieldActionPerformed
 
     private void novyRecepcnyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_novyRecepcnyActionPerformed
         new NovyRecepcnyForm(this, true).setVisible(true);

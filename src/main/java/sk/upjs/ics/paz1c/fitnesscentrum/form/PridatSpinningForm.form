@@ -7,7 +7,7 @@
   </Properties>
   <SyntheticProperties>
     <SyntheticProperty name="formSizePolicy" type="int" value="1"/>
-    <SyntheticProperty name="generateCenter" type="boolean" value="false"/>
+    <SyntheticProperty name="generateCenter" type="boolean" value="true"/>
   </SyntheticProperties>
   <AuxValues>
     <AuxValue name="FormSettings_autoResourcing" type="java.lang.Integer" value="0"/>
@@ -28,9 +28,9 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" attributes="0">
                       <EmptySpace min="-2" pref="105" max="-2" attributes="0"/>
-                      <Component id="zrusButton" min="-2" pref="82" max="-2" attributes="0"/>
+                      <Component id="zrusitButton" min="-2" pref="82" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
-                      <Component id="pridajButton" min="-2" pref="88" max="-2" attributes="0"/>
+                      <Component id="pridatButton" min="-2" pref="88" max="-2" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace min="-2" pref="22" max="-2" attributes="0"/>
@@ -105,8 +105,8 @@
                   </Group>
               </Group>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="pridajButton" min="-2" max="-2" attributes="0"/>
-                  <Component id="zrusButton" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Component id="pridatButton" min="-2" max="-2" attributes="0"/>
+                  <Component id="zrusitButton" alignment="0" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace pref="32" max="32767" attributes="0"/>
           </Group>
@@ -169,20 +169,20 @@
         <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;Instruktor&gt;"/>
       </AuxValues>
     </Component>
-    <Component class="javax.swing.JButton" name="zrusButton">
+    <Component class="javax.swing.JButton" name="zrusitButton">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Zru&#x161;"/>
+        <Property name="text" type="java.lang.String" value="Zru&#x161;i&#x165;"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="zrusButtonActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="zrusitButtonActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JButton" name="pridajButton">
+    <Component class="javax.swing.JButton" name="pridatButton">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Pridaj"/>
+        <Property name="text" type="java.lang.String" value="Prida&#x165;"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="pridajButtonActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="pridatButtonActionPerformed"/>
       </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="kapacitaLabel">

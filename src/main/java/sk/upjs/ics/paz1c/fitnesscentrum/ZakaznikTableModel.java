@@ -9,11 +9,11 @@ import sk.upjs.ics.paz1c.fitnesscentrum.dao.ZakaznikDao;
 public class ZakaznikTableModel extends AbstractTableModel {
 
     private ZakaznikDao zakaznikDao = DaoFactory.INSTANCE.getZakaznikDao();
-    private static final String[] NAZVY_STLPCOV = {"ID", "Meno", "Pritomny", "Posledny prichod", "Kredit", "Cislo permanentky"};
+    private static final String[] NAZVY_STLPCOV = {"Meno", "Pritomny", "Posledny prichod", "Kredit", "Cislo permanentky"};
     private static final int POCET_STLPCOV = NAZVY_STLPCOV.length;
     private String vzorka;
     private List<Zakaznik> listZakaznikovSoVzorkou = new ArrayList<>();
-       
+
     public ZakaznikTableModel(String vzorka) {
         this.vzorka = vzorka;
         aktualizovat();
@@ -34,17 +34,17 @@ public class ZakaznikTableModel extends AbstractTableModel {
         Zakaznik zakaznik = listZakaznikovSoVzorkou.get(rowIndex);
         switch (columnIndex) {
             case 0:
-                return zakaznik.getId();
-            case 1:
                 return zakaznik.getMeno();
-            case 2:
+            case 1:
                 return zakaznik.isPritomny();
-            case 3:
+            case 2:
                 return zakaznik.getPoslednyPrichod().toLocalDate() + " " + zakaznik.getPoslednyPrichod().toLocalTime();
-            case 4:
+            case 3:
                 return zakaznik.getKredit();
-            case 5:
+            case 4:
                 return zakaznik.getCisloPermanentky();
+            case 5:
+                return zakaznik.getId();
             default:
                 return "???";
         }
@@ -52,7 +52,7 @@ public class ZakaznikTableModel extends AbstractTableModel {
 
     @Override
     public Class<?> getColumnClass(int columnIndex) {
-        if (columnIndex == 2) {
+        if (columnIndex == 1) {
             return Boolean.class;
         }
         return super.getColumnClass(columnIndex);

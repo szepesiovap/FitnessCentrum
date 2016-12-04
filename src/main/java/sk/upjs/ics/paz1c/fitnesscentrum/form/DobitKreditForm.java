@@ -10,17 +10,18 @@ import sk.upjs.ics.paz1c.fitnesscentrum.entity.Zakaznik;
 
 public class DobitKreditForm extends javax.swing.JDialog {
 
-    private final ZakaznikDao zakaznikDao;
+    private final ZakaznikDao zakaznikDao = DaoFactory.INSTANCE.getZakaznikDao();
     private Zakaznik zakaznik;
 
     /**
      * Creates new form DobitKreditForm
+     *
+     * @param parent
+     * @param modal
      */
     public DobitKreditForm(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
-        zakaznikDao = DaoFactory.INSTANCE.getZakaznikDao();
         initComponents();
-        //inicializuj();
     }
 
     /**
@@ -40,10 +41,10 @@ public class DobitKreditForm extends javax.swing.JDialog {
         zobrazMenoLabel = new javax.swing.JLabel();
         zobrazCisloKartyLabel = new javax.swing.JLabel();
         zobrazKreditLabel = new javax.swing.JLabel();
-        nacitajButton = new javax.swing.JButton();
+        nacitatButton = new javax.swing.JButton();
         dobiKreditLabel = new javax.swing.JLabel();
         kreditComboBox = new javax.swing.JComboBox<>();
-        dobiButton = new javax.swing.JButton();
+        dobitButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Dobiť kredit");
@@ -57,10 +58,10 @@ public class DobitKreditForm extends javax.swing.JDialog {
 
         kreditLabel.setText("Kredit: ");
 
-        nacitajButton.setText("Načítaj");
-        nacitajButton.addActionListener(new java.awt.event.ActionListener() {
+        nacitatButton.setText("Načítať");
+        nacitatButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                nacitajButtonActionPerformed(evt);
+                nacitatButtonActionPerformed(evt);
             }
         });
 
@@ -69,11 +70,11 @@ public class DobitKreditForm extends javax.swing.JDialog {
         kreditComboBox.setModel(new KreditComboBoxModel());
         kreditComboBox.setEnabled(false);
 
-        dobiButton.setText("Dobi");
-        dobiButton.setEnabled(false);
-        dobiButton.addActionListener(new java.awt.event.ActionListener() {
+        dobitButton.setText("Dobiť");
+        dobitButton.setEnabled(false);
+        dobitButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                dobiButtonActionPerformed(evt);
+                dobitButtonActionPerformed(evt);
             }
         });
 
@@ -103,12 +104,12 @@ public class DobitKreditForm extends javax.swing.JDialog {
                                     .addGroup(layout.createSequentialGroup()
                                         .addComponent(kreditComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(dobiButton, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+                                        .addComponent(dobitButton, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE))))))
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(cisloPermanentkyTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(nacitajButton, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(nacitatButton, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(27, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -119,7 +120,7 @@ public class DobitKreditForm extends javax.swing.JDialog {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(cisloPermanentkyTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(nacitajButton))
+                    .addComponent(nacitatButton))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(menoLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -137,20 +138,21 @@ public class DobitKreditForm extends javax.swing.JDialog {
                     .addComponent(dobiKreditLabel)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(kreditComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(dobiButton)))
+                        .addComponent(dobitButton)))
                 .addContainerGap(33, Short.MAX_VALUE))
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void dobiButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dobiButtonActionPerformed
+    private void dobitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dobitButtonActionPerformed
         double vybranyKredit = ((Kredit) kreditComboBox.getSelectedItem()).getCena();
         zakaznikDao.dobiKreditZakaznikovi(zakaznik, vybranyKredit);
         dispose();
-    }//GEN-LAST:event_dobiButtonActionPerformed
+    }//GEN-LAST:event_dobitButtonActionPerformed
 
-    private void nacitajButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nacitajButtonActionPerformed
+    private void nacitatButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nacitatButtonActionPerformed
         try {
             zakaznik = zakaznikDao.dajZakaznikaSCislomPermanentky(cisloPermanentkyTextField.getText());
         } catch (EmptyResultDataAccessException e) {
@@ -158,22 +160,18 @@ public class DobitKreditForm extends javax.swing.JDialog {
         }
         if (zakaznik == null) {
             kreditComboBox.setEnabled(false);
-            dobiButton.setEnabled(false);
+            dobitButton.setEnabled(false);
             zobrazMenoLabel.setText("");
             zobrazKreditLabel.setText("");
             zobrazCisloKartyLabel.setText("");
             JOptionPane.showMessageDialog(null, "Neplatné číslo permanentky!");
         } else {
-            dobiButton.setEnabled(true);
+            dobitButton.setEnabled(true);
             kreditComboBox.setEnabled(true);
             zobrazMenoLabel.setText(zakaznik.getMeno());
             zobrazKreditLabel.setText("" + zakaznik.getKredit());
             zobrazCisloKartyLabel.setText(zakaznik.getCisloPermanentky());
-        }    }//GEN-LAST:event_nacitajButtonActionPerformed
-
-   // public void inicializuj() {
-   //     kreditComboBox.setModel(new KreditComboBoxModel());
-   // }
+        }    }//GEN-LAST:event_nacitatButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -220,12 +218,12 @@ public class DobitKreditForm extends javax.swing.JDialog {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel cisloKartyLabel;
     private javax.swing.JTextField cisloPermanentkyTextField;
-    private javax.swing.JButton dobiButton;
     private javax.swing.JLabel dobiKreditLabel;
+    private javax.swing.JButton dobitButton;
     private javax.swing.JComboBox<Kredit> kreditComboBox;
     private javax.swing.JLabel kreditLabel;
     private javax.swing.JLabel menoLabel;
-    private javax.swing.JButton nacitajButton;
+    private javax.swing.JButton nacitatButton;
     private javax.swing.JLabel zadajCisloLabel;
     private javax.swing.JLabel zobrazCisloKartyLabel;
     private javax.swing.JLabel zobrazKreditLabel;

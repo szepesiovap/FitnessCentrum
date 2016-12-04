@@ -4,9 +4,9 @@
   <NonVisualComponents>
     <Menu class="javax.swing.JMenuBar" name="spinningMenuBar">
       <SubComponents>
-        <Menu class="javax.swing.JMenu" name="rezervujMenu">
+        <Menu class="javax.swing.JMenu" name="rezervovatMenu">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Rezervuj"/>
+            <Property name="text" type="java.lang.String" value="Rezervova&#x165;"/>
           </Properties>
           <SubComponents>
             <MenuItem class="javax.swing.JMenuItem" name="jednorazovyMenuItem">
@@ -27,36 +27,36 @@
             </MenuItem>
           </SubComponents>
         </Menu>
-        <Menu class="javax.swing.JMenu" name="pridajSpinningMenu">
+        <Menu class="javax.swing.JMenu" name="pridatSpinningMenu">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Pridaj spinning"/>
+            <Property name="text" type="java.lang.String" value="Prida&#x165; spinning"/>
           </Properties>
           <Events>
-            <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="pridajSpinningMenuMousePressed"/>
+            <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="pridatSpinningMenuMousePressed"/>
           </Events>
         </Menu>
-        <Menu class="javax.swing.JMenu" name="zrusSpinnigMenu">
+        <Menu class="javax.swing.JMenu" name="zrusitSpinnigMenu">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Zru&#x161; spinning"/>
+            <Property name="text" type="java.lang.String" value="Zru&#x161;i&#x165; spinning"/>
           </Properties>
           <Events>
-            <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="zrusSpinnigMenuMousePressed"/>
+            <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="zrusitSpinnigMenuMousePressed"/>
           </Events>
         </Menu>
-        <Menu class="javax.swing.JMenu" name="pridajInstruktoraMenu">
+        <Menu class="javax.swing.JMenu" name="pridatInstruktoraMenu">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Pridaj in&#x161;truktora"/>
+            <Property name="text" type="java.lang.String" value="Prida&#x165; in&#x161;truktora"/>
           </Properties>
           <Events>
-            <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="pridajInstruktoraMenuMousePressed"/>
+            <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="pridatInstruktoraMenuMousePressed"/>
           </Events>
         </Menu>
-        <Menu class="javax.swing.JMenu" name="odhlasZoSpinninguMenu">
+        <Menu class="javax.swing.JMenu" name="odhlasitZoSpinninguMenu">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Odhlas zo spinningu"/>
+            <Property name="text" type="java.lang.String" value="Odhl&#xe1;si&#x165; zo spinningu"/>
           </Properties>
           <Events>
-            <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="odhlasZoSpinninguMenuMousePressed"/>
+            <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="odhlasitZoSpinninguMenuMousePressed"/>
           </Events>
         </Menu>
       </SubComponents>
@@ -69,7 +69,7 @@
   <SyntheticProperties>
     <SyntheticProperty name="menuBar" type="java.lang.String" value="spinningMenuBar"/>
     <SyntheticProperty name="formSizePolicy" type="int" value="1"/>
-    <SyntheticProperty name="generateCenter" type="boolean" value="false"/>
+    <SyntheticProperty name="generateCenter" type="boolean" value="true"/>
   </SyntheticProperties>
   <AuxValues>
     <AuxValue name="FormSettings_autoResourcing" type="java.lang.Integer" value="0"/>

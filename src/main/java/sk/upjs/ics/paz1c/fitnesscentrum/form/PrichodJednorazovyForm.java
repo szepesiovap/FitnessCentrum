@@ -13,16 +13,17 @@ import sk.upjs.ics.paz1c.fitnesscentrum.entity.Zakaznik;
 
 public class PrichodJednorazovyForm extends javax.swing.JDialog {
 
-    private final ZakaznikDao zakaznikDao;
-    private static final int ID_COLUMN = 0;
+    private final ZakaznikDao zakaznikDao = DaoFactory.INSTANCE.getZakaznikDao();
+    private static final int ID_COLUMN = 5;
 
     /**
      * Creates new form PrichodJednorazovyForm
+     * @param parent
+     * @param modal
      */
     public PrichodJednorazovyForm(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
-        zakaznikDao = DaoFactory.INSTANCE.getZakaznikDao();
         aktualizovatZoznamZakaznikov();
     }
 
@@ -35,21 +36,22 @@ public class PrichodJednorazovyForm extends javax.swing.JDialog {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        hladajPodlaMenaLabel = new javax.swing.JLabel();
-        hladajPodlaMenaTextField = new javax.swing.JTextField();
-        hladajButton = new javax.swing.JButton();
+        hladatPodlaMenaLabel = new javax.swing.JLabel();
+        hladatPodlaMenaTextField = new javax.swing.JTextField();
+        hladatButton = new javax.swing.JButton();
         zoznamZakaznikovScrollPane = new javax.swing.JScrollPane();
         zoznamZakaznikovTable = new javax.swing.JTable();
         prichodButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Jednorázový príchod");
 
-        hladajPodlaMenaLabel.setText("Hľadaj podľa mena: ");
+        hladatPodlaMenaLabel.setText("Hľadať podľa mena: ");
 
-        hladajButton.setText("Hľadaj");
-        hladajButton.addActionListener(new java.awt.event.ActionListener() {
+        hladatButton.setText("Hľadať");
+        hladatButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                hladajButtonActionPerformed(evt);
+                hladatButtonActionPerformed(evt);
             }
         });
 
@@ -69,39 +71,43 @@ public class PrichodJednorazovyForm extends javax.swing.JDialog {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(hladajPodlaMenaLabel)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(hladajPodlaMenaTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 296, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(hladajButton, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(prichodButton, javax.swing.GroupLayout.DEFAULT_SIZE, 114, Short.MAX_VALUE)
-                .addContainerGap())
-            .addComponent(zoznamZakaznikovScrollPane)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(zoznamZakaznikovScrollPane)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(hladatPodlaMenaLabel)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(hladatPodlaMenaTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 296, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(hladatButton, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(prichodButton, javax.swing.GroupLayout.DEFAULT_SIZE, 112, Short.MAX_VALUE)
+                        .addContainerGap())))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(hladajPodlaMenaLabel)
+                    .addComponent(hladatPodlaMenaLabel)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(hladajPodlaMenaTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(hladajButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(hladatPodlaMenaTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(hladatButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(prichodButton)))
                 .addGap(18, 18, 18)
-                .addComponent(zoznamZakaznikovScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 380, Short.MAX_VALUE))
+                .addComponent(zoznamZakaznikovScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 370, Short.MAX_VALUE)
+                .addGap(10, 10, 10))
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void prichodButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_prichodButtonActionPerformed
         try {
-            Long idZakaznika = (Long) zoznamZakaznikovTable.getValueAt(this.zoznamZakaznikovTable.getSelectedRow(), ID_COLUMN);
+            Long idZakaznika = (Long) zoznamZakaznikovTable.getModel().getValueAt(this.zoznamZakaznikovTable.getSelectedRow(), ID_COLUMN);
             Zakaznik zakaznik = zakaznikDao.dajZakaznikaSId(idZakaznika);
             if (!zakaznik.isPritomny()) {
-                new PotvrdPrichodZakaznikaForm(this, true, zakaznik).setVisible(true);
+                new PotvrditPrichodZakaznikaForm(this, true, zakaznik).setVisible(true);
                 aktualizovatZoznamZakaznikov();
             } else {
                 JOptionPane.showMessageDialog(this, "Zákazník je už prítomný!");
@@ -111,9 +117,9 @@ public class PrichodJednorazovyForm extends javax.swing.JDialog {
         }
     }//GEN-LAST:event_prichodButtonActionPerformed
 
-    private void hladajButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_hladajButtonActionPerformed
-        zoznamZakaznikovTable.setModel(new ZakaznikTableModel(hladajPodlaMenaTextField.getText()));
-    }//GEN-LAST:event_hladajButtonActionPerformed
+    private void hladatButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_hladatButtonActionPerformed
+        zoznamZakaznikovTable.setModel(new ZakaznikTableModel(hladatPodlaMenaTextField.getText()));
+    }//GEN-LAST:event_hladatButtonActionPerformed
 
     public void aktualizovatZoznamZakaznikov() {
         ZakaznikTableModel model = (ZakaznikTableModel) zoznamZakaznikovTable.getModel();
@@ -163,9 +169,9 @@ public class PrichodJednorazovyForm extends javax.swing.JDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton hladajButton;
-    private javax.swing.JLabel hladajPodlaMenaLabel;
-    private javax.swing.JTextField hladajPodlaMenaTextField;
+    private javax.swing.JButton hladatButton;
+    private javax.swing.JLabel hladatPodlaMenaLabel;
+    private javax.swing.JTextField hladatPodlaMenaTextField;
     private javax.swing.JButton prichodButton;
     private javax.swing.JScrollPane zoznamZakaznikovScrollPane;
     private javax.swing.JTable zoznamZakaznikovTable;

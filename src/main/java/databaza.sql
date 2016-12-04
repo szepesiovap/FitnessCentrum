@@ -40,38 +40,6 @@ CREATE TABLE IF NOT EXISTS `fitnesscentrum`.`kluc` (
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8;
 
-INSERT INTO `fitnesscentrum`.`kluc` (`meno_kluca`) VALUES ('1M');
-INSERT INTO `fitnesscentrum`.`kluc` (`meno_kluca`) VALUES ('2M');
-INSERT INTO `fitnesscentrum`.`kluc` (`meno_kluca`) VALUES ('3M');
-INSERT INTO `fitnesscentrum`.`kluc` (`meno_kluca`) VALUES ('4M');
-INSERT INTO `fitnesscentrum`.`kluc` (`meno_kluca`) VALUES ('5M');
-INSERT INTO `fitnesscentrum`.`kluc` (`meno_kluca`) VALUES ('6M');
-INSERT INTO `fitnesscentrum`.`kluc` (`meno_kluca`) VALUES ('7M');
-INSERT INTO `fitnesscentrum`.`kluc` (`meno_kluca`) VALUES ('8M');
-INSERT INTO `fitnesscentrum`.`kluc` (`meno_kluca`) VALUES ('9M');
-INSERT INTO `fitnesscentrum`.`kluc` (`meno_kluca`) VALUES ('10M');
-INSERT INTO `fitnesscentrum`.`kluc` (`meno_kluca`) VALUES ('11M');
-INSERT INTO `fitnesscentrum`.`kluc` (`meno_kluca`) VALUES ('12M');
-INSERT INTO `fitnesscentrum`.`kluc` (`meno_kluca`) VALUES ('13M');
-INSERT INTO `fitnesscentrum`.`kluc` (`meno_kluca`) VALUES ('14M');
-INSERT INTO `fitnesscentrum`.`kluc` (`meno_kluca`) VALUES ('15M');
-INSERT INTO `fitnesscentrum`.`kluc` (`meno_kluca`) VALUES ('1Z');
-INSERT INTO `fitnesscentrum`.`kluc` (`meno_kluca`) VALUES ('2Z');
-INSERT INTO `fitnesscentrum`.`kluc` (`meno_kluca`) VALUES ('3Z');
-INSERT INTO `fitnesscentrum`.`kluc` (`meno_kluca`) VALUES ('4Z');
-INSERT INTO `fitnesscentrum`.`kluc` (`meno_kluca`) VALUES ('5Z');
-INSERT INTO `fitnesscentrum`.`kluc` (`meno_kluca`) VALUES ('6Z');
-INSERT INTO `fitnesscentrum`.`kluc` (`meno_kluca`) VALUES ('7Z');
-INSERT INTO `fitnesscentrum`.`kluc` (`meno_kluca`) VALUES ('8Z');
-INSERT INTO `fitnesscentrum`.`kluc` (`meno_kluca`) VALUES ('9Z');
-INSERT INTO `fitnesscentrum`.`kluc` (`meno_kluca`) VALUES ('10Z');
-INSERT INTO `fitnesscentrum`.`kluc` (`meno_kluca`) VALUES ('11Z');
-INSERT INTO `fitnesscentrum`.`kluc` (`meno_kluca`) VALUES ('12Z');
-INSERT INTO `fitnesscentrum`.`kluc` (`meno_kluca`) VALUES ('13Z');
-INSERT INTO `fitnesscentrum`.`kluc` (`meno_kluca`) VALUES ('14Z');
-INSERT INTO `fitnesscentrum`.`kluc` (`meno_kluca`) VALUES ('15Z');
-
-
 -- -----------------------------------------------------
 -- Table `fitnesscentrum`.`recepcny`
 -- -----------------------------------------------------

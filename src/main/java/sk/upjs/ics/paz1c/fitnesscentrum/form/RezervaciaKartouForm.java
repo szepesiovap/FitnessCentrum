@@ -13,22 +13,23 @@ import sk.upjs.ics.paz1c.fitnesscentrum.entity.Zakaznik;
 
 public class RezervaciaKartouForm extends javax.swing.JDialog {
 
-    private static final double SUMA = 3.2;
-    private static Spinning spinning;
-    private final RezervaciaDao rezervaciaDao;
-    private final ZakaznikDao zakaznikDao;
-    private final SpinningDao spinningDao;
+    private static final double SUMA = DaoFactory.INSTANCE.getVstupneDao().dajCeny().getCenaSpinnigu();
+    private final RezervaciaDao rezervaciaDao = DaoFactory.INSTANCE.getRezervaciaDao();
+    private final ZakaznikDao zakaznikDao = DaoFactory.INSTANCE.getZakaznikDao();
+    private final SpinningDao spinningDao = DaoFactory.INSTANCE.getSpinningDao();
     private Zakaznik zakaznik;
+    private static Spinning spinning;
 
     /**
      * Creates new form RezervujKartouForm
+     *
+     * @param parent
+     * @param modal
+     * @param spinning
      */
     public RezervaciaKartouForm(java.awt.Dialog parent, boolean modal, Spinning spinning) {
         super(parent, modal);
         this.spinning = spinning;
-        spinningDao = DaoFactory.INSTANCE.getSpinningDao();
-        zakaznikDao = DaoFactory.INSTANCE.getZakaznikDao();
-        rezervaciaDao = DaoFactory.INSTANCE.getRezervaciaDao();
         initComponents();
         zobrazSpinningLabel.setText(spinning.toString());
     }
@@ -47,17 +48,18 @@ public class RezervaciaKartouForm extends javax.swing.JDialog {
         menoLabel = new javax.swing.JLabel();
         cisloKartyLabel = new javax.swing.JLabel();
         kreditLabel = new javax.swing.JLabel();
-        nacitajButton = new javax.swing.JButton();
+        nacitatButton = new javax.swing.JButton();
         zobrazMenoLabel = new javax.swing.JLabel();
         zobrazCisloKartyLabel = new javax.swing.JLabel();
         zobrazKreditLabel = new javax.swing.JLabel();
-        rezervujButton = new javax.swing.JButton();
+        rezervovatButton = new javax.swing.JButton();
         spinningLabel = new javax.swing.JLabel();
         zobrazSpinningLabel = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Rezervácia kartou");
 
-        zadajCisloLabel.setText("Zadaj číslo: ");
+        zadajCisloLabel.setText("Číslo karty: ");
 
         menoLabel.setText("Meno: ");
 
@@ -65,18 +67,18 @@ public class RezervaciaKartouForm extends javax.swing.JDialog {
 
         kreditLabel.setText("Kredit: ");
 
-        nacitajButton.setText("Načítaj");
-        nacitajButton.addActionListener(new java.awt.event.ActionListener() {
+        nacitatButton.setText("Načítať");
+        nacitatButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                nacitajButtonActionPerformed(evt);
+                nacitatButtonActionPerformed(evt);
             }
         });
 
-        rezervujButton.setText("Rezervuj");
-        rezervujButton.setEnabled(false);
-        rezervujButton.addActionListener(new java.awt.event.ActionListener() {
+        rezervovatButton.setText("Rezervovať");
+        rezervovatButton.setEnabled(false);
+        rezervovatButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                rezervujButtonActionPerformed(evt);
+                rezervovatButtonActionPerformed(evt);
             }
         });
 
@@ -89,7 +91,7 @@ public class RezervaciaKartouForm extends javax.swing.JDialog {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(rezervujButton, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(rezervovatButton, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(kreditLabel)
@@ -99,13 +101,13 @@ public class RezervaciaKartouForm extends javax.swing.JDialog {
                             .addComponent(spinningLabel))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(cisloKartyTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 185, Short.MAX_VALUE)
-                            .addComponent(zobrazMenoLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(zobrazMenoLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 247, Short.MAX_VALUE)
                             .addComponent(zobrazCisloKartyLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(zobrazKreditLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(nacitajButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(zobrazSpinningLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                .addContainerGap(21, Short.MAX_VALUE))
+                            .addComponent(zobrazSpinningLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(cisloKartyTextField)
+                            .addComponent(nacitatButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(14, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -122,7 +124,7 @@ public class RezervaciaKartouForm extends javax.swing.JDialog {
                         .addContainerGap()
                         .addComponent(cisloKartyTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(nacitajButton)
+                .addComponent(nacitatButton)
                 .addGap(9, 9, 9)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(menoLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -136,34 +138,35 @@ public class RezervaciaKartouForm extends javax.swing.JDialog {
                     .addComponent(kreditLabel)
                     .addComponent(zobrazKreditLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(rezervujButton)
+                .addComponent(rezervovatButton)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void nacitajButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nacitajButtonActionPerformed
+    private void nacitatButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nacitatButtonActionPerformed
         try {
             zakaznik = zakaznikDao.dajZakaznikaSCislomPermanentky(cisloKartyTextField.getText());
         } catch (EmptyResultDataAccessException e) {
             zakaznik = null;
         }
         if (zakaznik == null) {
-            rezervujButton.setEnabled(false);
+            rezervovatButton.setEnabled(false);
             zobrazMenoLabel.setText("");
             zobrazKreditLabel.setText("");
             zobrazCisloKartyLabel.setText("");
             JOptionPane.showMessageDialog(null, "Neplatné číslo permanentky!");
         } else {
-            rezervujButton.setEnabled(true);
+            rezervovatButton.setEnabled(true);
             zobrazMenoLabel.setText(zakaznik.getMeno());
             zobrazKreditLabel.setText("" + zakaznik.getKredit());
             zobrazCisloKartyLabel.setText(zakaznik.getCisloPermanentky());
         }
-    }//GEN-LAST:event_nacitajButtonActionPerformed
+    }//GEN-LAST:event_nacitatButtonActionPerformed
 
-    private void rezervujButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rezervujButtonActionPerformed
+    private void rezervovatButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rezervovatButtonActionPerformed
         if (zakaznik.getKredit() <= SUMA) {
             JOptionPane.showMessageDialog(this, "Nedostatočný kredit!");
         } else {
@@ -176,7 +179,7 @@ public class RezervaciaKartouForm extends javax.swing.JDialog {
             rezervaciaDao.pridajRezervaciu(rezervacia);
             dispose();
         }
-    }//GEN-LAST:event_rezervujButtonActionPerformed
+    }//GEN-LAST:event_rezervovatButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -226,8 +229,8 @@ public class RezervaciaKartouForm extends javax.swing.JDialog {
     private javax.swing.JTextField cisloKartyTextField;
     private javax.swing.JLabel kreditLabel;
     private javax.swing.JLabel menoLabel;
-    private javax.swing.JButton nacitajButton;
-    private javax.swing.JButton rezervujButton;
+    private javax.swing.JButton nacitatButton;
+    private javax.swing.JButton rezervovatButton;
     private javax.swing.JLabel spinningLabel;
     private javax.swing.JLabel zadajCisloLabel;
     private javax.swing.JLabel zobrazCisloKartyLabel;

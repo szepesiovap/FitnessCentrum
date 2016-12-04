@@ -7,7 +7,7 @@
   </Properties>
   <SyntheticProperties>
     <SyntheticProperty name="formSizePolicy" type="int" value="1"/>
-    <SyntheticProperty name="generateCenter" type="boolean" value="false"/>
+    <SyntheticProperty name="generateCenter" type="boolean" value="true"/>
   </SyntheticProperties>
   <AuxValues>
     <AuxValue name="FormSettings_autoResourcing" type="java.lang.Integer" value="0"/>
@@ -25,38 +25,35 @@
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" attributes="0">
-              <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                  <Group type="102" alignment="1" attributes="0">
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                          <Component id="loginjLabel" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Group type="102" alignment="0" attributes="0">
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="stareHesloLabel" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Component id="noveHesloLabel" alignment="0" min="-2" max="-2" attributes="0"/>
-                              </Group>
-                              <EmptySpace min="49" pref="49" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="stareHesloPasswordField" alignment="0" min="-2" pref="123" max="-2" attributes="0"/>
-                                  <Component id="loginTextField" alignment="0" min="-2" pref="123" max="-2" attributes="0"/>
-                                  <Component id="noveHesloPasswordField" alignment="0" min="-2" pref="123" max="-2" attributes="0"/>
-                              </Group>
-                          </Group>
-                          <Group type="102" alignment="0" attributes="0">
-                              <Component id="noveHesloZnovaLabel" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace type="separate" max="-2" attributes="0"/>
-                              <Component id="noveHesloZnovaPasswordField" max="32767" attributes="0"/>
-                          </Group>
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" attributes="0">
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="stareHesloLabel" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="noveHesloLabel" alignment="0" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace min="49" pref="49" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="loginTextField" alignment="0" max="32767" attributes="0"/>
+                          <Component id="stareHesloPasswordField" alignment="0" max="32767" attributes="0"/>
+                          <Component id="noveHesloPasswordField" max="32767" attributes="0"/>
+                          <Component id="noveHesloZnovaPasswordField" alignment="0" max="32767" attributes="0"/>
                       </Group>
                   </Group>
-                  <Group type="102" alignment="1" attributes="0">
-                      <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
-                      <Component id="ulozZmenyButton" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="32767" attributes="0"/>
-                      <Component id="zrusitButton" min="-2" pref="86" max="-2" attributes="0"/>
+                  <Component id="loginjLabel" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Group type="102" attributes="0">
+                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                          <Component id="noveHesloZnovaLabel" min="-2" max="-2" attributes="0"/>
+                          <Group type="102" attributes="0">
+                              <EmptySpace min="8" pref="8" max="-2" attributes="0"/>
+                              <Component id="ulozitZmenyButton" max="32767" attributes="0"/>
+                          </Group>
+                      </Group>
+                      <EmptySpace min="-2" pref="33" max="-2" attributes="0"/>
+                      <Component id="zrusitButton" min="-2" pref="121" max="-2" attributes="0"/>
                   </Group>
               </Group>
-              <EmptySpace pref="18" max="32767" attributes="0"/>
+              <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -85,7 +82,7 @@
               </Group>
               <EmptySpace pref="28" max="32767" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="ulozZmenyButton" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="ulozitZmenyButton" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="zrusitButton" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
@@ -107,12 +104,12 @@
     </Component>
     <Component class="javax.swing.JTextField" name="loginTextField">
     </Component>
-    <Component class="javax.swing.JButton" name="ulozZmenyButton">
+    <Component class="javax.swing.JButton" name="ulozitZmenyButton">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Ulo&#x17e; zmeny"/>
+        <Property name="text" type="java.lang.String" value="Ulo&#x17e;i&#x165; zmeny"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="ulozZmenyButtonActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="ulozitZmenyButtonActionPerformed"/>
       </Events>
     </Component>
     <Component class="javax.swing.JButton" name="zrusitButton">

@@ -6,10 +6,14 @@ import sk.upjs.ics.paz1c.fitnesscentrum.entity.Zakaznik;
 
 public class ZmazatZakaznikaForm extends javax.swing.JDialog {
 
+    private final ZakaznikDao zakaznikDao = DaoFactory.INSTANCE.getZakaznikDao();
     private static Zakaznik zakaznik;
 
     /**
      * Creates new form ZmazZakaznikaForm
+     * @param parent
+     * @param modal
+     * @param zakaznik
      */
     public ZmazatZakaznikaForm(java.awt.Frame parent, boolean modal, Zakaznik zakaznik) {
         super(parent, modal);
@@ -58,10 +62,10 @@ public class ZmazatZakaznikaForm extends javax.swing.JDialog {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(zmazatLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 398, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(62, 62, 62)
-                        .addComponent(zmazatButton)
-                        .addGap(79, 79, 79)
-                        .addComponent(zrusitButton, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(59, 59, 59)
+                        .addComponent(zmazatButton, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(49, 49, 49)
+                        .addComponent(zrusitButton, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -77,10 +81,10 @@ public class ZmazatZakaznikaForm extends javax.swing.JDialog {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void zmazatButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_zmazatButtonActionPerformed
-        ZakaznikDao zakaznikDao = DaoFactory.INSTANCE.getZakaznikDao();
         zakaznikDao.vymazZakaznika(zakaznik);
         dispose();    }//GEN-LAST:event_zmazatButtonActionPerformed
 

@@ -12,18 +12,19 @@ import sk.upjs.ics.paz1c.fitnesscentrum.entity.Zakaznik;
 public class PrichodKartouForm extends javax.swing.JDialog {
 
     //TODO spravit nacitavanie cien 
-    private static final double SUMA = 2;
-    private final KlucDao klucDao;
-    private final ZakaznikDao zakaznikDao;
+    private static final double SUMA = DaoFactory.INSTANCE.getVstupneDao().dajCeny().getCenaVstupneho();
+    private final KlucDao klucDao = DaoFactory.INSTANCE.getKlucDao();
+    private final ZakaznikDao zakaznikDao = DaoFactory.INSTANCE.getZakaznikDao();
     private Zakaznik zakaznik;
 
     /**
      * Creates new form PrichodKartouForm
+     *
+     * @param parent
+     * @param modal
      */
     public PrichodKartouForm(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
-        zakaznikDao = DaoFactory.INSTANCE.getZakaznikDao();
-        klucDao = DaoFactory.INSTANCE.getKlucDao();
         initComponents();
     }
 
@@ -46,10 +47,11 @@ public class PrichodKartouForm extends javax.swing.JDialog {
         zobrazCisloKartyLabel = new javax.swing.JLabel();
         zobrazKreditLabel = new javax.swing.JLabel();
         cisloKartyTextField = new javax.swing.JTextField();
-        zadajCisloLabel = new javax.swing.JLabel();
-        nacitajButton = new javax.swing.JButton();
+        zadatCisloLabel = new javax.swing.JLabel();
+        nacitatButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Príchod kartou");
 
         menoLabel.setText("Meno: ");
 
@@ -70,12 +72,12 @@ public class PrichodKartouForm extends javax.swing.JDialog {
 
         cisloKartyLabel.setText("Číslo karty: ");
 
-        zadajCisloLabel.setText("Zadaj číslo: ");
+        zadatCisloLabel.setText("Číslo karty: ");
 
-        nacitajButton.setText("Načítaj");
-        nacitajButton.addActionListener(new java.awt.event.ActionListener() {
+        nacitatButton.setText("Načítať");
+        nacitatButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                nacitajButtonActionPerformed(evt);
+                nacitatButtonActionPerformed(evt);
             }
         });
 
@@ -86,14 +88,14 @@ public class PrichodKartouForm extends javax.swing.JDialog {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(nacitajButton, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(nacitatButton, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(klucLabel)
                             .addComponent(kreditLabel)
                             .addComponent(menoLabel)
                             .addComponent(cisloKartyLabel)
-                            .addComponent(zadajCisloLabel))
+                            .addComponent(zadatCisloLabel))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(zobrazMenoLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -104,7 +106,7 @@ public class PrichodKartouForm extends javax.swing.JDialog {
                             .addComponent(zobrazCisloKartyLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(zobrazKreditLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(cisloKartyTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 176, Short.MAX_VALUE))))
-                .addContainerGap(28, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -112,9 +114,9 @@ public class PrichodKartouForm extends javax.swing.JDialog {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(cisloKartyTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(zadajCisloLabel))
+                    .addComponent(zadatCisloLabel))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(nacitajButton)
+                .addComponent(nacitatButton)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(menoLabel, javax.swing.GroupLayout.Alignment.TRAILING)
@@ -136,6 +138,7 @@ public class PrichodKartouForm extends javax.swing.JDialog {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void prichodButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_prichodButtonActionPerformed
@@ -153,7 +156,7 @@ public class PrichodKartouForm extends javax.swing.JDialog {
 
     }//GEN-LAST:event_prichodButtonActionPerformed
 
-    private void nacitajButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nacitajButtonActionPerformed
+    private void nacitatButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nacitatButtonActionPerformed
         try {
             zakaznik = zakaznikDao.dajZakaznikaSCislomPermanentky(cisloKartyTextField.getText());
         } catch (EmptyResultDataAccessException e) {
@@ -173,7 +176,7 @@ public class PrichodKartouForm extends javax.swing.JDialog {
             zobrazKreditLabel.setText("" + zakaznik.getKredit());
             zobrazCisloKartyLabel.setText(zakaznik.getCisloPermanentky());
         }
-    }//GEN-LAST:event_nacitajButtonActionPerformed
+    }//GEN-LAST:event_nacitatButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -223,9 +226,9 @@ public class PrichodKartouForm extends javax.swing.JDialog {
     private javax.swing.JLabel klucLabel;
     private javax.swing.JLabel kreditLabel;
     private javax.swing.JLabel menoLabel;
-    private javax.swing.JButton nacitajButton;
+    private javax.swing.JButton nacitatButton;
     private javax.swing.JButton prichodButton;
-    private javax.swing.JLabel zadajCisloLabel;
+    private javax.swing.JLabel zadatCisloLabel;
     private javax.swing.JLabel zobrazCisloKartyLabel;
     private javax.swing.JLabel zobrazKreditLabel;
     private javax.swing.JLabel zobrazMenoLabel;

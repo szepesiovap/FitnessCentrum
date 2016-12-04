@@ -6,18 +6,19 @@ import sk.upjs.ics.paz1c.fitnesscentrum.SpinningTableModel;
 import sk.upjs.ics.paz1c.fitnesscentrum.dao.SpinningDao;
 import sk.upjs.ics.paz1c.fitnesscentrum.entity.Spinning;
 
-public class ZrusSpinningForm extends javax.swing.JDialog {
+public class ZrusitSpinningForm extends javax.swing.JDialog {
 
-    private static int ID_COLUMN = 2;
+    private static final int ID_COLUMN = 2;
+    private final SpinningDao spinningDao = DaoFactory.INSTANCE.getSpinningDao();
     private Spinning spinning;
-    private SpinningDao spinningDao;
 
     /**
      * Creates new form ZrusSpinningForm
+     * @param parent
+     * @param modal
      */
-    public ZrusSpinningForm(java.awt.Frame parent, boolean modal) {
+    public ZrusitSpinningForm(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
-        spinningDao = DaoFactory.INSTANCE.getSpinningDao();
         initComponents();
     }
 
@@ -32,18 +33,18 @@ public class ZrusSpinningForm extends javax.swing.JDialog {
 
         zoznamSpinningovScrollPane = new javax.swing.JScrollPane();
         zoznamSpinningovTable = new javax.swing.JTable();
-        zrusSpinningButton = new javax.swing.JButton();
+        zrusitSpinningButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("Zruš spinning");
+        setTitle("Zrušiť spinning");
 
         zoznamSpinningovTable.setModel(new SpinningTableModel());
         zoznamSpinningovScrollPane.setViewportView(zoznamSpinningovTable);
 
-        zrusSpinningButton.setText("Zruš spinning");
-        zrusSpinningButton.addActionListener(new java.awt.event.ActionListener() {
+        zrusitSpinningButton.setText("Zrušiť spinning");
+        zrusitSpinningButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                zrusSpinningButtonActionPerformed(evt);
+                zrusitSpinningButtonActionPerformed(evt);
             }
         });
 
@@ -52,8 +53,8 @@ public class ZrusSpinningForm extends javax.swing.JDialog {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(287, Short.MAX_VALUE)
-                .addComponent(zrusSpinningButton)
+                .addContainerGap(277, Short.MAX_VALUE)
+                .addComponent(zrusitSpinningButton)
                 .addContainerGap())
             .addComponent(zoznamSpinningovScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
         );
@@ -62,14 +63,15 @@ public class ZrusSpinningForm extends javax.swing.JDialog {
             .addGroup(layout.createSequentialGroup()
                 .addComponent(zoznamSpinningovScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 286, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(zrusSpinningButton)
+                .addComponent(zrusitSpinningButton)
                 .addContainerGap())
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void zrusSpinningButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_zrusSpinningButtonActionPerformed
+    private void zrusitSpinningButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_zrusitSpinningButtonActionPerformed
         try {
             Long idSpinningu = (Long) zoznamSpinningovTable.getModel().getValueAt(this.zoznamSpinningovTable.getSelectedRow(), ID_COLUMN);
             spinning = spinningDao.dajSpinningSId(idSpinningu);
@@ -82,10 +84,10 @@ public class ZrusSpinningForm extends javax.swing.JDialog {
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, "Nie je vybraný žiaden spinning.");
         }
-        aktualizujZoznamSpinningovTable();
-    }//GEN-LAST:event_zrusSpinningButtonActionPerformed
+        aktualizovatZoznamSpinningovTable();
+    }//GEN-LAST:event_zrusitSpinningButtonActionPerformed
 
-    private void aktualizujZoznamSpinningovTable() {
+    private void aktualizovatZoznamSpinningovTable() {
         SpinningTableModel model = (SpinningTableModel) zoznamSpinningovTable.getModel();
         model.aktualizovat();
     }
@@ -108,27 +110,28 @@ public class ZrusSpinningForm extends javax.swing.JDialog {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(ZrusSpinningForm.class
+            java.util.logging.Logger.getLogger(ZrusitSpinningForm.class
                     .getName()).log(java.util.logging.Level.SEVERE, null, ex);
 
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(ZrusSpinningForm.class
+            java.util.logging.Logger.getLogger(ZrusitSpinningForm.class
                     .getName()).log(java.util.logging.Level.SEVERE, null, ex);
 
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(ZrusSpinningForm.class
+            java.util.logging.Logger.getLogger(ZrusitSpinningForm.class
                     .getName()).log(java.util.logging.Level.SEVERE, null, ex);
 
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(ZrusSpinningForm.class
+            java.util.logging.Logger.getLogger(ZrusitSpinningForm.class
                     .getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                ZrusSpinningForm dialog = new ZrusSpinningForm(new javax.swing.JFrame(), true);
+                ZrusitSpinningForm dialog = new ZrusitSpinningForm(new javax.swing.JFrame(), true);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {
@@ -143,6 +146,6 @@ public class ZrusSpinningForm extends javax.swing.JDialog {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JScrollPane zoznamSpinningovScrollPane;
     private javax.swing.JTable zoznamSpinningovTable;
-    private javax.swing.JButton zrusSpinningButton;
+    private javax.swing.JButton zrusitSpinningButton;
     // End of variables declaration//GEN-END:variables
 }

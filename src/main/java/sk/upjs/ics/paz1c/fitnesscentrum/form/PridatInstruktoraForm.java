@@ -4,16 +4,18 @@ import sk.upjs.ics.paz1c.fitnesscentrum.DaoFactory;
 import sk.upjs.ics.paz1c.fitnesscentrum.dao.InstruktorDao;
 import sk.upjs.ics.paz1c.fitnesscentrum.entity.Instruktor;
 
-public class PridajInstruktoraForm extends javax.swing.JDialog {
+public class PridatInstruktoraForm extends javax.swing.JDialog {
 
-    private final InstruktorDao instruktorDao;
+    private final InstruktorDao instruktorDao = DaoFactory.INSTANCE.getInstruktorDao();
 
     /**
      * Creates new form PridajInstruktoraForm
+     *
+     * @param parent
+     * @param modal
      */
-    public PridajInstruktoraForm(java.awt.Dialog parent, boolean modal) {
+    public PridatInstruktoraForm(java.awt.Dialog parent, boolean modal) {
         super(parent, modal);
-        instruktorDao = DaoFactory.INSTANCE.getInstruktorDao();
         initComponents();
     }
 
@@ -27,26 +29,26 @@ public class PridajInstruktoraForm extends javax.swing.JDialog {
     private void initComponents() {
 
         menoInstruktoraTextField = new javax.swing.JTextField();
-        jLabel1 = new javax.swing.JLabel();
-        pridajButton = new javax.swing.JButton();
-        zrusButton = new javax.swing.JButton();
+        menoLabel = new javax.swing.JLabel();
+        pridatButton = new javax.swing.JButton();
+        zrusitButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Nový inštruktor");
 
-        jLabel1.setText("Meno: ");
+        menoLabel.setText("Meno: ");
 
-        pridajButton.setText("Pridaj");
-        pridajButton.addActionListener(new java.awt.event.ActionListener() {
+        pridatButton.setText("Pridať");
+        pridatButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                pridajButtonActionPerformed(evt);
+                pridatButtonActionPerformed(evt);
             }
         });
 
-        zrusButton.setText("Zruš");
-        zrusButton.addActionListener(new java.awt.event.ActionListener() {
+        zrusitButton.setText("Zrušiť");
+        zrusitButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                zrusButtonActionPerformed(evt);
+                zrusitButtonActionPerformed(evt);
             }
         });
 
@@ -58,44 +60,45 @@ public class PridajInstruktoraForm extends javax.swing.JDialog {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(menoInstruktoraTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 322, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel1))
+                    .addComponent(menoLabel))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
-                .addGap(55, 55, 55)
-                .addComponent(zrusButton, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(39, 39, 39)
+                .addComponent(zrusitButton, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(pridajButton)
-                .addGap(50, 50, 50))
+                .addComponent(pridatButton, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(47, 47, 47))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(19, 19, 19)
-                .addComponent(jLabel1)
+                .addComponent(menoLabel)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(menoInstruktoraTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(53, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(pridajButton)
-                    .addComponent(zrusButton))
+                    .addComponent(pridatButton)
+                    .addComponent(zrusitButton))
                 .addContainerGap())
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void zrusButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_zrusButtonActionPerformed
+    private void zrusitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_zrusitButtonActionPerformed
         dispose();
-    }//GEN-LAST:event_zrusButtonActionPerformed
+    }//GEN-LAST:event_zrusitButtonActionPerformed
 
-    private void pridajButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pridajButtonActionPerformed
+    private void pridatButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pridatButtonActionPerformed
         Instruktor instruktor = new Instruktor();
         instruktor.setMeno(menoInstruktoraTextField.getText());
         instruktorDao.pridajInstruktora(instruktor);
         dispose();
-    }//GEN-LAST:event_pridajButtonActionPerformed
+    }//GEN-LAST:event_pridatButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -114,20 +117,21 @@ public class PridajInstruktoraForm extends javax.swing.JDialog {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(PridajInstruktoraForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(PridatInstruktoraForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(PridajInstruktoraForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(PridatInstruktoraForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(PridajInstruktoraForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(PridatInstruktoraForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(PridajInstruktoraForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(PridatInstruktoraForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                PridajInstruktoraForm dialog = new PridajInstruktoraForm(new javax.swing.JDialog(), true);
+                PridatInstruktoraForm dialog = new PridatInstruktoraForm(new javax.swing.JDialog(), true);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {
@@ -140,9 +144,9 @@ public class PridajInstruktoraForm extends javax.swing.JDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JTextField menoInstruktoraTextField;
-    private javax.swing.JButton pridajButton;
-    private javax.swing.JButton zrusButton;
+    private javax.swing.JLabel menoLabel;
+    private javax.swing.JButton pridatButton;
+    private javax.swing.JButton zrusitButton;
     // End of variables declaration//GEN-END:variables
 }

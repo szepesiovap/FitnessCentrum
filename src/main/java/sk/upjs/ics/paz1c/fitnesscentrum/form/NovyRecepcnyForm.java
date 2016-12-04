@@ -11,7 +11,7 @@ import sk.upjs.ics.paz1c.fitnesscentrum.entity.Recepcny;
 public class NovyRecepcnyForm extends javax.swing.JDialog {
 
     private Recepcny recepcny;
-    private final RecepcnyDao recepcnyDao;
+    private final RecepcnyDao recepcnyDao = DaoFactory.INSTANCE.getRecepcnyDao();
 
     /**
      * Creates new form NovyRecepcnyForm
@@ -21,7 +21,6 @@ public class NovyRecepcnyForm extends javax.swing.JDialog {
      */
     public NovyRecepcnyForm(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
-        recepcnyDao = DaoFactory.INSTANCE.getRecepcnyDao();
         initComponents();
     }
 
@@ -38,7 +37,7 @@ public class NovyRecepcnyForm extends javax.swing.JDialog {
         loginLabel = new javax.swing.JLabel();
         hesloLabel = new javax.swing.JLabel();
         zrusitButton = new javax.swing.JButton();
-        ulozButton = new javax.swing.JButton();
+        ulozitButton = new javax.swing.JButton();
         menoTextField = new javax.swing.JTextField();
         loginTextField = new javax.swing.JTextField();
         hesloPasswordField = new javax.swing.JPasswordField();
@@ -62,16 +61,10 @@ public class NovyRecepcnyForm extends javax.swing.JDialog {
             }
         });
 
-        ulozButton.setText("Ulož");
-        ulozButton.addActionListener(new java.awt.event.ActionListener() {
+        ulozitButton.setText("Uložiť");
+        ulozitButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                ulozButtonActionPerformed(evt);
-            }
-        });
-
-        menoTextField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                menoTextFieldActionPerformed(evt);
+                ulozitButtonActionPerformed(evt);
             }
         });
 
@@ -83,12 +76,12 @@ public class NovyRecepcnyForm extends javax.swing.JDialog {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(38, 38, 38)
-                        .addComponent(ulozButton, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(zrusitButton, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(14, 14, 14)
+                        .addComponent(ulozitButton, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(46, 46, 46)
+                        .addComponent(zrusitButton, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(hesloLabel)
@@ -101,7 +94,7 @@ public class NovyRecepcnyForm extends javax.swing.JDialog {
                             .addComponent(hesloZnovaPasswordField, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(loginTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(menoTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(34, Short.MAX_VALUE))
+                .addContainerGap(22, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -127,18 +120,19 @@ public class NovyRecepcnyForm extends javax.swing.JDialog {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(zrusitButton)
-                    .addComponent(ulozButton))
+                    .addComponent(ulozitButton))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void zrusitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_zrusitButtonActionPerformed
         this.dispose();
     }//GEN-LAST:event_zrusitButtonActionPerformed
 
-    private void ulozButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ulozButtonActionPerformed
+    private void ulozitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ulozitButtonActionPerformed
 
         recepcny = new Recepcny();
 
@@ -179,11 +173,7 @@ public class NovyRecepcnyForm extends javax.swing.JDialog {
         }
 
         this.dispose();
-    }//GEN-LAST:event_ulozButtonActionPerformed
-
-    private void menoTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menoTextFieldActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_menoTextFieldActionPerformed
+    }//GEN-LAST:event_ulozitButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -237,7 +227,7 @@ public class NovyRecepcnyForm extends javax.swing.JDialog {
     private javax.swing.JTextField loginTextField;
     private javax.swing.JLabel menoLabel;
     private javax.swing.JTextField menoTextField;
-    private javax.swing.JButton ulozButton;
+    private javax.swing.JButton ulozitButton;
     private javax.swing.JButton zrusitButton;
     // End of variables declaration//GEN-END:variables
 }

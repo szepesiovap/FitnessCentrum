@@ -9,8 +9,8 @@ import sk.upjs.ics.paz1c.fitnesscentrum.entity.Zakaznik;
 public final class ZoznamForm extends javax.swing.JFrame {
 
     private static HlavneOknoForm hlavneOkno;
-    private ZakaznikDao zakaznikDao;
-    private static final int ID_COLUMN = 0;
+    private final ZakaznikDao zakaznikDao = DaoFactory.INSTANCE.getZakaznikDao();
+    private static final int ID_COLUMN = 5;
 
     /**
      * Creates new form ZoznamForm
@@ -18,7 +18,6 @@ public final class ZoznamForm extends javax.swing.JFrame {
      * @param hlavneOkno
      */
     public ZoznamForm(HlavneOknoForm hlavneOkno) {
-        zakaznikDao = DaoFactory.INSTANCE.getZakaznikDao();
         ZoznamForm.hlavneOkno = hlavneOkno;
         hlavneOkno.setEnabled(false);
         initComponents();
@@ -36,10 +35,10 @@ public final class ZoznamForm extends javax.swing.JFrame {
 
         zoznamZakaznikovScrollPane = new javax.swing.JScrollPane();
         zoznamZakaznikovTable = new javax.swing.JTable();
-        zmazButton = new javax.swing.JButton();
-        hladajPodlaMenaLabel = new javax.swing.JLabel();
-        hladajPodlaMenaTextField = new javax.swing.JTextField();
-        hladajButton = new javax.swing.JButton();
+        zmazatButton = new javax.swing.JButton();
+        hladatPodlaMenaLabel = new javax.swing.JLabel();
+        hladatPodlaMenaTextField = new javax.swing.JTextField();
+        hladatButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Zoznam Zákazníkov");
@@ -53,19 +52,19 @@ public final class ZoznamForm extends javax.swing.JFrame {
         zoznamZakaznikovTable.setModel(new ZakaznikTableModel(""));
         zoznamZakaznikovScrollPane.setViewportView(zoznamZakaznikovTable);
 
-        zmazButton.setText("Zmaž");
-        zmazButton.addActionListener(new java.awt.event.ActionListener() {
+        zmazatButton.setText("Zmazať");
+        zmazatButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                zmazButtonActionPerformed(evt);
+                zmazatButtonActionPerformed(evt);
             }
         });
 
-        hladajPodlaMenaLabel.setText("Hľadaj podľa mena: ");
+        hladatPodlaMenaLabel.setText("Hľadať podľa mena: ");
 
-        hladajButton.setText("Hľadaj");
-        hladajButton.addActionListener(new java.awt.event.ActionListener() {
+        hladatButton.setText("Hľadať");
+        hladatButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                hladajButtonActionPerformed(evt);
+                hladatButtonActionPerformed(evt);
             }
         });
 
@@ -75,13 +74,13 @@ public final class ZoznamForm extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(hladajPodlaMenaLabel)
+                .addComponent(hladatPodlaMenaLabel)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(hladajPodlaMenaTextField)
+                .addComponent(hladatPodlaMenaTextField)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(hladajButton, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(hladatButton, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(zmazButton, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(zmazatButton, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
             .addGroup(layout.createSequentialGroup()
                 .addComponent(zoznamZakaznikovScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 773, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -94,17 +93,18 @@ public final class ZoznamForm extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(hladajPodlaMenaLabel)
-                            .addComponent(hladajButton)
-                            .addComponent(zmazButton))
+                            .addComponent(hladatPodlaMenaLabel)
+                            .addComponent(hladatButton)
+                            .addComponent(zmazatButton))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(hladajPodlaMenaTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(hladatPodlaMenaTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(12, 12, 12)))
                 .addComponent(zoznamZakaznikovScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 408, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
@@ -112,9 +112,9 @@ public final class ZoznamForm extends javax.swing.JFrame {
         hlavneOkno.setEnabled(true);
     }//GEN-LAST:event_formWindowClosed
 
-    private void zmazButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_zmazButtonActionPerformed
+    private void zmazatButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_zmazatButtonActionPerformed
         try {
-            Long idZakaznika = (Long) zoznamZakaznikovTable.getValueAt(this.zoznamZakaznikovTable.getSelectedRow(), ID_COLUMN);
+            Long idZakaznika = (Long) zoznamZakaznikovTable.getModel().getValueAt(this.zoznamZakaznikovTable.getSelectedRow(), ID_COLUMN);
             Zakaznik zakaznik = zakaznikDao.dajZakaznikaSId(idZakaznika);
             if (!zakaznik.isPritomny()) {
                 new ZmazatZakaznikaForm(this, true, zakaznik).setVisible(true);
@@ -123,15 +123,15 @@ public final class ZoznamForm extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(this, "Nemožno vymazať prítomného zákazníka!");
             }
         } catch (Exception e) {
-            System.err.println("Vyber zákazníka na zmazanie.");
+            JOptionPane.showMessageDialog(this, "Vyber zákazníka na odchod!");
         }
-    }//GEN-LAST:event_zmazButtonActionPerformed
+    }//GEN-LAST:event_zmazatButtonActionPerformed
 
-    private void hladajButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_hladajButtonActionPerformed
-        System.out.println(hladajPodlaMenaTextField.getText());
-        zoznamZakaznikovTable.setModel(new ZakaznikTableModel(hladajPodlaMenaTextField.getText()));
+    private void hladatButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_hladatButtonActionPerformed
+        System.out.println(hladatPodlaMenaTextField.getText());
+        zoznamZakaznikovTable.setModel(new ZakaznikTableModel(hladatPodlaMenaTextField.getText()));
         aktualizovatZoznamZakaznikov();
-    }//GEN-LAST:event_hladajButtonActionPerformed
+    }//GEN-LAST:event_hladatButtonActionPerformed
 
     public void aktualizovatZoznamZakaznikov() {
         ZakaznikTableModel model = (ZakaznikTableModel) zoznamZakaznikovTable.getModel();
@@ -151,10 +151,10 @@ public final class ZoznamForm extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton hladajButton;
-    private javax.swing.JLabel hladajPodlaMenaLabel;
-    private javax.swing.JTextField hladajPodlaMenaTextField;
-    private javax.swing.JButton zmazButton;
+    private javax.swing.JButton hladatButton;
+    private javax.swing.JLabel hladatPodlaMenaLabel;
+    private javax.swing.JTextField hladatPodlaMenaTextField;
+    private javax.swing.JButton zmazatButton;
     private javax.swing.JScrollPane zoznamZakaznikovScrollPane;
     private javax.swing.JTable zoznamZakaznikovTable;
     // End of variables declaration//GEN-END:variables

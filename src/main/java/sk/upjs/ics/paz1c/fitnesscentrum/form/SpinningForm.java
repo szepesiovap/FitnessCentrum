@@ -10,15 +10,17 @@ import sk.upjs.ics.paz1c.fitnesscentrum.entity.Spinning;
 public class SpinningForm extends javax.swing.JDialog {
 
     private static final int ID_COLUMN = 2;
-    private final RezervaciaDao rezervaciaDao;
+    private final RezervaciaDao rezervaciaDao = DaoFactory.INSTANCE.getRezervaciaDao();
+
     /**
      * Creates new form SpinningForm
+     * @param parent
+     * @param modal
      */
     public SpinningForm(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
-        rezervaciaDao = DaoFactory.INSTANCE.getRezervaciaDao();
         initComponents();
-        zobrazRezervacie();
+        aktualizovatRezervacie();
     }
 
     /**
@@ -35,13 +37,13 @@ public class SpinningForm extends javax.swing.JDialog {
         spinningComboBox = new javax.swing.JComboBox<>();
         spinningLabel = new javax.swing.JLabel();
         spinningMenuBar = new javax.swing.JMenuBar();
-        rezervujMenu = new javax.swing.JMenu();
+        rezervovatMenu = new javax.swing.JMenu();
         jednorazovyMenuItem = new javax.swing.JMenuItem();
         kartouMenuItem = new javax.swing.JMenuItem();
-        pridajSpinningMenu = new javax.swing.JMenu();
-        zrusSpinnigMenu = new javax.swing.JMenu();
-        pridajInstruktoraMenu = new javax.swing.JMenu();
-        odhlasZoSpinninguMenu = new javax.swing.JMenu();
+        pridatSpinningMenu = new javax.swing.JMenu();
+        zrusitSpinnigMenu = new javax.swing.JMenu();
+        pridatInstruktoraMenu = new javax.swing.JMenu();
+        odhlasitZoSpinninguMenu = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Rezervácie na spinning");
@@ -58,7 +60,7 @@ public class SpinningForm extends javax.swing.JDialog {
 
         spinningLabel.setText("Spinning : ");
 
-        rezervujMenu.setText("Rezervuj");
+        rezervovatMenu.setText("Rezervovať");
 
         jednorazovyMenuItem.setText("Jednorázový");
         jednorazovyMenuItem.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -66,7 +68,7 @@ public class SpinningForm extends javax.swing.JDialog {
                 jednorazovyMenuItemMousePressed(evt);
             }
         });
-        rezervujMenu.add(jednorazovyMenuItem);
+        rezervovatMenu.add(jednorazovyMenuItem);
 
         kartouMenuItem.setText("Kartou");
         kartouMenuItem.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -74,41 +76,41 @@ public class SpinningForm extends javax.swing.JDialog {
                 kartouMenuItemMousePressed(evt);
             }
         });
-        rezervujMenu.add(kartouMenuItem);
+        rezervovatMenu.add(kartouMenuItem);
 
-        spinningMenuBar.add(rezervujMenu);
+        spinningMenuBar.add(rezervovatMenu);
 
-        pridajSpinningMenu.setText("Pridaj spinning");
-        pridajSpinningMenu.addMouseListener(new java.awt.event.MouseAdapter() {
+        pridatSpinningMenu.setText("Pridať spinning");
+        pridatSpinningMenu.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
-                pridajSpinningMenuMousePressed(evt);
+                pridatSpinningMenuMousePressed(evt);
             }
         });
-        spinningMenuBar.add(pridajSpinningMenu);
+        spinningMenuBar.add(pridatSpinningMenu);
 
-        zrusSpinnigMenu.setText("Zruš spinning");
-        zrusSpinnigMenu.addMouseListener(new java.awt.event.MouseAdapter() {
+        zrusitSpinnigMenu.setText("Zrušiť spinning");
+        zrusitSpinnigMenu.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
-                zrusSpinnigMenuMousePressed(evt);
+                zrusitSpinnigMenuMousePressed(evt);
             }
         });
-        spinningMenuBar.add(zrusSpinnigMenu);
+        spinningMenuBar.add(zrusitSpinnigMenu);
 
-        pridajInstruktoraMenu.setText("Pridaj inštruktora");
-        pridajInstruktoraMenu.addMouseListener(new java.awt.event.MouseAdapter() {
+        pridatInstruktoraMenu.setText("Pridať inštruktora");
+        pridatInstruktoraMenu.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
-                pridajInstruktoraMenuMousePressed(evt);
+                pridatInstruktoraMenuMousePressed(evt);
             }
         });
-        spinningMenuBar.add(pridajInstruktoraMenu);
+        spinningMenuBar.add(pridatInstruktoraMenu);
 
-        odhlasZoSpinninguMenu.setText("Odhlas zo spinningu");
-        odhlasZoSpinninguMenu.addMouseListener(new java.awt.event.MouseAdapter() {
+        odhlasitZoSpinninguMenu.setText("Odhlásiť zo spinningu");
+        odhlasitZoSpinninguMenu.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
-                odhlasZoSpinninguMenuMousePressed(evt);
+                odhlasitZoSpinninguMenuMousePressed(evt);
             }
         });
-        spinningMenuBar.add(odhlasZoSpinninguMenu);
+        spinningMenuBar.add(odhlasitZoSpinninguMenu);
 
         setJMenuBar(spinningMenuBar);
 
@@ -136,29 +138,32 @@ public class SpinningForm extends javax.swing.JDialog {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void pridajSpinningMenuMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pridajSpinningMenuMousePressed
-        new PridajSpinningForm(this, true).setVisible(true);
+    private void pridatSpinningMenuMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pridatSpinningMenuMousePressed
+        new PridatSpinningForm(this, true).setVisible(true);
         ((SpinningComboBoxModel) spinningComboBox.getModel()).aktualizuj();
-    }//GEN-LAST:event_pridajSpinningMenuMousePressed
+    }//GEN-LAST:event_pridatSpinningMenuMousePressed
 
-    private void pridajInstruktoraMenuMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pridajInstruktoraMenuMousePressed
-        new PridajInstruktoraForm(this, true).setVisible(true);
-    }//GEN-LAST:event_pridajInstruktoraMenuMousePressed
+    private void pridatInstruktoraMenuMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pridatInstruktoraMenuMousePressed
+        new PridatInstruktoraForm(this, true).setVisible(true);
+    }//GEN-LAST:event_pridatInstruktoraMenuMousePressed
 
     private void kartouMenuItemMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_kartouMenuItemMousePressed
         try {
             Spinning spinning = (Spinning) spinningComboBox.getSelectedItem();
             if (spinning.getVolne() > 0) {
                 new RezervaciaKartouForm(this, true, spinning).setVisible(true);
-                zobrazRezervacie();
+                aktualizovatRezervacie();
+                aktualizovatSpinningy();
             } else {
                 JOptionPane.showMessageDialog(this, "Tento spinning je plne obsadený!");
             }
         } catch (NullPointerException e) {
             JOptionPane.showMessageDialog(this, "Vyber spinning!");
         }
+
     }//GEN-LAST:event_kartouMenuItemMousePressed
 
     private void jednorazovyMenuItemMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jednorazovyMenuItemMousePressed
@@ -166,41 +171,47 @@ public class SpinningForm extends javax.swing.JDialog {
             Spinning spinning = (Spinning) spinningComboBox.getSelectedItem();
             if (spinning.getVolne() > 0) {
                 new RezervaciaForm(this, true, spinning).setVisible(true);
-                zobrazRezervacie();
+                aktualizovatRezervacie();
+                aktualizovatSpinningy();
             } else {
                 JOptionPane.showMessageDialog(this, "Tento spinning je plne obsadený!");
             }
         } catch (NullPointerException e) {
             JOptionPane.showMessageDialog(this, "Vyber spinning!");
+
         }    }//GEN-LAST:event_jednorazovyMenuItemMousePressed
 
     private void spinningComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_spinningComboBoxActionPerformed
-        zobrazRezervacie();
+        aktualizovatRezervacie();
     }//GEN-LAST:event_spinningComboBoxActionPerformed
 
-    private void odhlasZoSpinninguMenuMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_odhlasZoSpinninguMenuMousePressed
+    private void odhlasitZoSpinninguMenuMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_odhlasitZoSpinninguMenuMousePressed
         try {
             Long idRezervacie = (Long) rezervacieTable.getModel().getValueAt(this.rezervacieTable.getSelectedRow(), ID_COLUMN);
-            
+
             rezervaciaDao.odstranRezervacia(idRezervacie);
-            ((RezervaciaTableModel)rezervacieTable.getModel()).aktualizovat();
-            
+            ((RezervaciaTableModel) rezervacieTable.getModel()).aktualizovat();
+
         } catch (ArrayIndexOutOfBoundsException e) {
             JOptionPane.showMessageDialog(null, "Vyber zákazníka na odhlásenie zo spinningu.");
         }
-    }//GEN-LAST:event_odhlasZoSpinninguMenuMousePressed
+    }//GEN-LAST:event_odhlasitZoSpinninguMenuMousePressed
 
-    private void zrusSpinnigMenuMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_zrusSpinnigMenuMousePressed
-        new ZrusSpinningForm(new javax.swing.JFrame(), true).setVisible(true);
-    }//GEN-LAST:event_zrusSpinnigMenuMousePressed
+    private void zrusitSpinnigMenuMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_zrusitSpinnigMenuMousePressed
+        new ZrusitSpinningForm(new javax.swing.JFrame(), true).setVisible(true);
+    }//GEN-LAST:event_zrusitSpinnigMenuMousePressed
 
-    private void zobrazRezervacie() {
+    private void aktualizovatRezervacie() {
         try {
             Spinning spinning = (Spinning) spinningComboBox.getSelectedItem();
             rezervacieTable.setModel(new RezervaciaTableModel(spinning));
         } catch (NullPointerException e) {
             JOptionPane.showMessageDialog(this, "Vyber spinning!");
         }
+    }
+
+    private void aktualizovatSpinningy() {
+        ((SpinningComboBoxModel) spinningComboBox.getModel()).aktualizuj();
     }
 
     /**
@@ -248,15 +259,15 @@ public class SpinningForm extends javax.swing.JDialog {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuItem jednorazovyMenuItem;
     private javax.swing.JMenuItem kartouMenuItem;
-    private javax.swing.JMenu odhlasZoSpinninguMenu;
-    private javax.swing.JMenu pridajInstruktoraMenu;
-    private javax.swing.JMenu pridajSpinningMenu;
+    private javax.swing.JMenu odhlasitZoSpinninguMenu;
+    private javax.swing.JMenu pridatInstruktoraMenu;
+    private javax.swing.JMenu pridatSpinningMenu;
     private javax.swing.JScrollPane rezervacieScrollPane;
     private javax.swing.JTable rezervacieTable;
-    private javax.swing.JMenu rezervujMenu;
+    private javax.swing.JMenu rezervovatMenu;
     private javax.swing.JComboBox<Spinning> spinningComboBox;
     private javax.swing.JLabel spinningLabel;
     private javax.swing.JMenuBar spinningMenuBar;
-    private javax.swing.JMenu zrusSpinnigMenu;
+    private javax.swing.JMenu zrusitSpinnigMenu;
     // End of variables declaration//GEN-END:variables
 }

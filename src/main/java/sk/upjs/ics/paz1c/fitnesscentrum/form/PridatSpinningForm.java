@@ -11,9 +11,9 @@ import sk.upjs.ics.paz1c.fitnesscentrum.dao.SpinningDao;
 import sk.upjs.ics.paz1c.fitnesscentrum.entity.Instruktor;
 import sk.upjs.ics.paz1c.fitnesscentrum.entity.Spinning;
 
-public class PridajSpinningForm extends javax.swing.JDialog {
+public class PridatSpinningForm extends javax.swing.JDialog {
 
-    private final SpinningDao spinningDao;
+    private final SpinningDao spinningDao = DaoFactory.INSTANCE.getSpinningDao();
     private final String[] DNI = {"01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31"};
     private final String[] MESIACE = {"01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12"};
     private final String[] MINUTY = {"00", "15", "30", "45"};
@@ -21,12 +21,14 @@ public class PridajSpinningForm extends javax.swing.JDialog {
 
     /**
      * Creates new form PridajSpinningForm
+     *
+     * @param parent
+     * @param modal
      */
-    public PridajSpinningForm(java.awt.Dialog parent, boolean modal) {
+    public PridatSpinningForm(java.awt.Dialog parent, boolean modal) {
         super(parent, modal);
-        spinningDao = DaoFactory.INSTANCE.getSpinningDao();
         initComponents();
-        inicializuj();
+        inicializovat();
     }
 
     /**
@@ -47,8 +49,8 @@ public class PridajSpinningForm extends javax.swing.JDialog {
         minutaComboBox = new javax.swing.JComboBox<>();
         instruktorLabel = new javax.swing.JLabel();
         instruktorComboBox = new javax.swing.JComboBox<>();
-        zrusButton = new javax.swing.JButton();
-        pridajButton = new javax.swing.JButton();
+        zrusitButton = new javax.swing.JButton();
+        pridatButton = new javax.swing.JButton();
         kapacitaLabel = new javax.swing.JLabel();
         kapacitaTextField = new javax.swing.JTextField();
 
@@ -65,17 +67,17 @@ public class PridajSpinningForm extends javax.swing.JDialog {
 
         instruktorComboBox.setModel(new InstruktorComboBoxModel());
 
-        zrusButton.setText("Zruš");
-        zrusButton.addActionListener(new java.awt.event.ActionListener() {
+        zrusitButton.setText("Zrušiť");
+        zrusitButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                zrusButtonActionPerformed(evt);
+                zrusitButtonActionPerformed(evt);
             }
         });
 
-        pridajButton.setText("Pridaj");
-        pridajButton.addActionListener(new java.awt.event.ActionListener() {
+        pridatButton.setText("Pridať");
+        pridatButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                pridajButtonActionPerformed(evt);
+                pridatButtonActionPerformed(evt);
             }
         });
 
@@ -91,9 +93,9 @@ public class PridajSpinningForm extends javax.swing.JDialog {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(105, 105, 105)
-                        .addComponent(zrusButton, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(zrusitButton, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(30, 30, 30)
-                        .addComponent(pridajButton, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(pridatButton, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(22, 22, 22)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -149,19 +151,20 @@ public class PridajSpinningForm extends javax.swing.JDialog {
                         .addComponent(kapacitaTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 25, Short.MAX_VALUE)
                         .addGap(16, 16, 16)))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(pridajButton)
-                    .addComponent(zrusButton))
+                    .addComponent(pridatButton)
+                    .addComponent(zrusitButton))
                 .addContainerGap(32, Short.MAX_VALUE))
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void zrusButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_zrusButtonActionPerformed
+    private void zrusitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_zrusitButtonActionPerformed
         dispose();
-    }//GEN-LAST:event_zrusButtonActionPerformed
+    }//GEN-LAST:event_zrusitButtonActionPerformed
 
-    private void pridajButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pridajButtonActionPerformed
+    private void pridatButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pridatButtonActionPerformed
         LocalDateTime datum = null;
         try {
             int den = Integer.parseInt((String) denComboBox.getSelectedItem());
@@ -184,13 +187,13 @@ public class PridajSpinningForm extends javax.swing.JDialog {
 
         } catch (NullPointerException e) {
             JOptionPane.showMessageDialog(this, "Nebol vybraný inštruktor!");
-        } catch (Exception e) {
+        } catch (NumberFormatException e) {
             JOptionPane.showMessageDialog(this, "Nesprávny formát!");
         }
 
-    }//GEN-LAST:event_pridajButtonActionPerformed
+    }//GEN-LAST:event_pridatButtonActionPerformed
 
-    public void inicializuj() {
+    public void inicializovat() {
         denComboBox.setModel(new DefaultComboBoxModel<String>(DNI));
         hodinaComboBox.setModel(new DefaultComboBoxModel<String>(HODINY));
         mesiacComboBox.setModel(new DefaultComboBoxModel<String>(MESIACE));
@@ -215,20 +218,21 @@ public class PridajSpinningForm extends javax.swing.JDialog {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(PridajSpinningForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(PridatSpinningForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(PridajSpinningForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(PridatSpinningForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(PridajSpinningForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(PridatSpinningForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(PridajSpinningForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(PridatSpinningForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                PridajSpinningForm dialog = new PridajSpinningForm(new javax.swing.JDialog(), true);
+                PridatSpinningForm dialog = new PridatSpinningForm(new javax.swing.JDialog(), true);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {
@@ -251,8 +255,8 @@ public class PridajSpinningForm extends javax.swing.JDialog {
     private javax.swing.JTextField kapacitaTextField;
     private javax.swing.JComboBox<String> mesiacComboBox;
     private javax.swing.JComboBox<String> minutaComboBox;
-    private javax.swing.JButton pridajButton;
+    private javax.swing.JButton pridatButton;
     private javax.swing.JTextField rokTextField;
-    private javax.swing.JButton zrusButton;
+    private javax.swing.JButton zrusitButton;
     // End of variables declaration//GEN-END:variables
 }

@@ -8,7 +8,7 @@
   </Properties>
   <SyntheticProperties>
     <SyntheticProperty name="formSizePolicy" type="int" value="1"/>
-    <SyntheticProperty name="generateCenter" type="boolean" value="false"/>
+    <SyntheticProperty name="generateCenter" type="boolean" value="true"/>
   </SyntheticProperties>
   <Events>
     <EventHandler event="windowClosed" listener="java.awt.event.WindowListener" parameters="java.awt.event.WindowEvent" handler="formWindowClosed"/>
@@ -30,13 +30,13 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="hladajPodlaMenaLabel" min="-2" max="-2" attributes="0"/>
+              <Component id="hladatPodlaMenaLabel" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="hladajPodlaMenaTextField" max="32767" attributes="0"/>
+              <Component id="hladatPodlaMenaTextField" max="32767" attributes="0"/>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
-              <Component id="hladajButton" min="-2" pref="90" max="-2" attributes="0"/>
+              <Component id="hladatButton" min="-2" pref="90" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="zmazButton" min="-2" pref="92" max="-2" attributes="0"/>
+              <Component id="zmazatButton" min="-2" pref="92" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
           <Group type="102" alignment="0" attributes="0">
@@ -52,14 +52,14 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="hladajPodlaMenaLabel" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="hladajButton" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="zmazButton" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="hladatPodlaMenaLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="hladatButton" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="zmazatButton" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="32767" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="1" attributes="0">
-                      <Component id="hladajPodlaMenaTextField" min="-2" pref="25" max="-2" attributes="0"/>
+                      <Component id="hladatPodlaMenaTextField" min="-2" pref="25" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
                   </Group>
               </Group>
@@ -82,27 +82,27 @@
         </Component>
       </SubComponents>
     </Container>
-    <Component class="javax.swing.JButton" name="zmazButton">
+    <Component class="javax.swing.JButton" name="zmazatButton">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Zma&#x17e;"/>
+        <Property name="text" type="java.lang.String" value="Zmaza&#x165;"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="zmazButtonActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="zmazatButtonActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JLabel" name="hladajPodlaMenaLabel">
+    <Component class="javax.swing.JLabel" name="hladatPodlaMenaLabel">
       <Properties>
-        <Property name="text" type="java.lang.String" value="H&#x13e;adaj pod&#x13e;a mena: "/>
+        <Property name="text" type="java.lang.String" value="H&#x13e;ada&#x165; pod&#x13e;a mena: "/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="hladajPodlaMenaTextField">
+    <Component class="javax.swing.JTextField" name="hladatPodlaMenaTextField">
     </Component>
-    <Component class="javax.swing.JButton" name="hladajButton">
+    <Component class="javax.swing.JButton" name="hladatButton">
       <Properties>
-        <Property name="text" type="java.lang.String" value="H&#x13e;adaj"/>
+        <Property name="text" type="java.lang.String" value="H&#x13e;ada&#x165;"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="hladajButtonActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="hladatButtonActionPerformed"/>
       </Events>
     </Component>
   </SubComponents>

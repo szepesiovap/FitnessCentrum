@@ -7,11 +7,13 @@ import javax.swing.UnsupportedLookAndFeelException;
 import org.springframework.dao.DuplicateKeyException;
 import sk.upjs.ics.paz1c.fitnesscentrum.DaoFactory;
 import sk.upjs.ics.paz1c.fitnesscentrum.KreditComboBoxModel;
+import sk.upjs.ics.paz1c.fitnesscentrum.dao.ZakaznikDao;
 import sk.upjs.ics.paz1c.fitnesscentrum.entity.Kredit;
 import sk.upjs.ics.paz1c.fitnesscentrum.entity.Zakaznik;
 
 public class NovyZakaznikForm extends javax.swing.JFrame {
 
+    private final ZakaznikDao zakaznikDao = DaoFactory.INSTANCE.getZakaznikDao();
     private static HlavneOknoForm hlavneOkno;
 
     /**
@@ -23,7 +25,6 @@ public class NovyZakaznikForm extends javax.swing.JFrame {
         NovyZakaznikForm.hlavneOkno = hlavneOkno;
         hlavneOkno.setEnabled(false);
         initComponents();
-        //inicializaciaZaciatocnehoStavu();
     }
 
     /**
@@ -37,7 +38,7 @@ public class NovyZakaznikForm extends javax.swing.JFrame {
 
         menoZakaznikaTextField = new javax.swing.JTextField();
         menoZakaznikaLabel = new javax.swing.JLabel();
-        ulozButton = new javax.swing.JButton();
+        ulozitButton = new javax.swing.JButton();
         zrusitButton = new javax.swing.JButton();
         cisloKartyLabel = new javax.swing.JLabel();
         cisloKartyTextField = new javax.swing.JTextField();
@@ -56,10 +57,10 @@ public class NovyZakaznikForm extends javax.swing.JFrame {
 
         menoZakaznikaLabel.setText("Meno: ");
 
-        ulozButton.setText("Ulož");
-        ulozButton.addActionListener(new java.awt.event.ActionListener() {
+        ulozitButton.setText("Uložiť");
+        ulozitButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                ulozButtonActionPerformed(evt);
+                ulozitButtonActionPerformed(evt);
             }
         });
 
@@ -70,11 +71,11 @@ public class NovyZakaznikForm extends javax.swing.JFrame {
             }
         });
 
-        cisloKartyLabel.setText("Číslo karty");
+        cisloKartyLabel.setText("Číslo karty: ");
 
         cisloKartyTextField.setEnabled(false);
 
-        kreditLabel.setText("Kredit");
+        kreditLabel.setText("Kredit: ");
 
         kreditComboBox.setModel(new KreditComboBoxModel());
         kreditComboBox.setEnabled(false);
@@ -91,40 +92,39 @@ public class NovyZakaznikForm extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(zrusitButton, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(121, 121, 121)
+                        .addComponent(ulozitButton, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(kreditLabel, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(cisloKartyLabel, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(menoZakaznikaLabel, javax.swing.GroupLayout.Alignment.TRAILING))
+                        .addGap(34, 34, 34)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(kreditComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(menoZakaznikaTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 220, Short.MAX_VALUE)
+                            .addComponent(cisloKartyTextField))))
+                .addGap(24, 24, 24))
+            .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                            .addComponent(menoZakaznikaLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(menoZakaznikaTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(layout.createSequentialGroup()
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(cisloKartyLabel)
-                                .addComponent(kreditLabel))
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(kreditComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(cisloKartyTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGroup(layout.createSequentialGroup()
-                            .addComponent(ulozButton, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(87, 87, 87)
-                            .addComponent(zrusitButton)
-                            .addGap(24, 24, 24)))
-                    .addComponent(permanentkaCheckBox))
-                .addContainerGap(66, Short.MAX_VALUE))
+                .addComponent(permanentkaCheckBox)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(24, 24, 24)
+                .addGap(39, 39, 39)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(menoZakaznikaLabel)
                     .addComponent(menoZakaznikaTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(12, 12, 12)
+                .addGap(18, 18, 18)
                 .addComponent(permanentkaCheckBox)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGap(18, 18, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(cisloKartyLabel)
                     .addComponent(cisloKartyTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
@@ -133,24 +133,24 @@ public class NovyZakaznikForm extends javax.swing.JFrame {
                     .addComponent(kreditComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(ulozButton)
-                    .addComponent(zrusitButton))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(zrusitButton)
+                    .addComponent(ulozitButton))
+                .addGap(27, 27, 27))
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void ulozButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ulozButtonActionPerformed
+    private void ulozitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ulozitButtonActionPerformed
         Zakaznik zakaznik = new Zakaznik();
         zakaznik.setMeno(menoZakaznikaTextField.getText());
         if (permanentkaCheckBox.isSelected()) {
             zakaznik.setCisloPermanentky(cisloKartyTextField.getText());
-            zakaznik.setKredit(((Kredit)kreditComboBox.getSelectedItem()).getCena());
-            System.out.println(kreditComboBox.getSelectedIndex());
+            zakaznik.setKredit(((Kredit) kreditComboBox.getSelectedItem()).getCena());
         }
         try {
-            DaoFactory.INSTANCE.getZakaznikDao().pridajZakaznika(zakaznik);
+            zakaznikDao.pridajZakaznika(zakaznik);
         } catch (DuplicateKeyException e) {
             JOptionPane.showMessageDialog(this, "Číslo karty už je priradené inému zákazníkovi.");
             return;
@@ -159,7 +159,7 @@ public class NovyZakaznikForm extends javax.swing.JFrame {
         hlavneOkno.aktualizovatZoznamPritomnych();
         this.dispose();
         hlavneOkno.setVisible(true);
-    }//GEN-LAST:event_ulozButtonActionPerformed
+    }//GEN-LAST:event_ulozitButtonActionPerformed
 
     private void zrusitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_zrusitButtonActionPerformed
         this.dispose();
@@ -178,10 +178,6 @@ public class NovyZakaznikForm extends javax.swing.JFrame {
     private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
         hlavneOkno.setEnabled(true);
     }//GEN-LAST:event_formWindowClosed
-
-    //private void inicializaciaZaciatocnehoStavu() {
-    //    kreditComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(KREDIT_MOZNOSTI));
-    //}
 
     /**
      * @param args the command line arguments
@@ -229,7 +225,7 @@ public class NovyZakaznikForm extends javax.swing.JFrame {
     private javax.swing.JLabel menoZakaznikaLabel;
     private javax.swing.JTextField menoZakaznikaTextField;
     private javax.swing.JCheckBox permanentkaCheckBox;
-    private javax.swing.JButton ulozButton;
+    private javax.swing.JButton ulozitButton;
     private javax.swing.JButton zrusitButton;
     // End of variables declaration//GEN-END:variables
 }
