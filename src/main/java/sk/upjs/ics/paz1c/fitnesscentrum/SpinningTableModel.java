@@ -10,7 +10,7 @@ public class SpinningTableModel extends AbstractTableModel {
 
     private final SpinningDao spinnigDao = DaoFactory.INSTANCE.getSpinningDao();
 
-    private static final String[] NAZVY_STLPCOV = {"Dátum", "Inštruktor"};
+    private static final String[] NAZVY_STLPCOV = {"Dátum", "Inštruktor", "Počet voľných miest", "Počet miest" };
     private static final int POCET_STLPCOV = NAZVY_STLPCOV.length;
     private List<Spinning> listSpinningov = new ArrayList<>();
 
@@ -37,6 +37,10 @@ public class SpinningTableModel extends AbstractTableModel {
             case 1:
                 return spinning.getInstruktor();
             case 2:
+                return spinning.getVolne();
+            case 3:
+                return spinning.getKapacita();
+            case 4:
                 return spinning.getId();
             default:
                 return "???";

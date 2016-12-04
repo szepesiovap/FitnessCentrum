@@ -71,6 +71,14 @@ public class MySQLSpinningDao implements SpinningDao {
         String sql = "UPDATE spinning SET volne =? WHERE id=?";
         jdbcTemplate.update(sql, volne, spinning.getId());
     }
+    
+    @Override
+    public void odrezervujSpinning(Spinning spinning) {
+        int volne = spinning.getVolne();
+        volne++;
+        String sql = "UPDATE spinning SET volne =? WHERE id=?";
+        jdbcTemplate.update(sql, volne, spinning.getId());
+    }
 
     @Override
     public void vymazSpinning(Long idSpinningu) {

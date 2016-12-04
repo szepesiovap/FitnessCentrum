@@ -8,12 +8,13 @@ import sk.upjs.ics.paz1c.fitnesscentrum.entity.Spinning;
 
 public class ZrusitSpinningForm extends javax.swing.JDialog {
 
-    private static final int ID_COLUMN = 2;
+    private static final int ID_COLUMN = 4;
     private final SpinningDao spinningDao = DaoFactory.INSTANCE.getSpinningDao();
     private Spinning spinning;
 
     /**
      * Creates new form ZrusSpinningForm
+     *
      * @param parent
      * @param modal
      */
@@ -76,11 +77,16 @@ public class ZrusitSpinningForm extends javax.swing.JDialog {
             Long idSpinningu = (Long) zoznamSpinningovTable.getModel().getValueAt(this.zoznamSpinningovTable.getSelectedRow(), ID_COLUMN);
             spinning = spinningDao.dajSpinningSId(idSpinningu);
 
-            Object[] options = {"Zmazať", "Zrušiť"};
-            if (JOptionPane.showOptionDialog(this, "Naozaj chcete zmazať spinning s instruktorom " + spinning.getInstruktor() + ", ktorý sa má uskutočniť dňa " + spinning.getDatum().toLocalDate() + " o " + spinning.getDatum().toLocalTime() + "?", "Zmaž kľúč", JOptionPane.DEFAULT_OPTION, JOptionPane.PLAIN_MESSAGE, null, options, options[1]) == 1) {
-                return;
+            if (spinning.getKapacita() == spinning.getVolne()) {
+                Object[] options = {"Zmazať", "Zrušiť"};
+                if (JOptionPane.showOptionDialog(this, "Naozaj chcete zmazať spinning s instruktorom " + spinning.getInstruktor() + ", ktorý sa má uskutočniť dňa " + spinning.getDatum().toLocalDate() + " o " + spinning.getDatum().toLocalTime() + "?", "Zmaž kľúč", JOptionPane.DEFAULT_OPTION, JOptionPane.PLAIN_MESSAGE, null, options, options[1]) == 1) {
+                    return;
+                }
+                spinningDao.vymazSpinning(idSpinningu);
+            }else{
+                JOptionPane.showMessageDialog(this, "Nemožno vymazať spinning, na ktorý sú rezervácie! Najprv musíte zrušiť rezervácie.");
             }
-            spinningDao.vymazSpinning(idSpinningu);
+
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, "Nie je vybraný žiaden spinning.");
         }

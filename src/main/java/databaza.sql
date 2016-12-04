@@ -165,7 +165,7 @@ CREATE TABLE IF NOT EXISTS `fitnesscentrum`.`zakaznik` (
   `meno_priezvisko` VARCHAR(45) NULL DEFAULT NULL,
   `posledny_prichod` TIMESTAMP NULL DEFAULT NULL,
   `pritomny` TINYINT(1) NULL DEFAULT NULL,
-  `kredit` INT(11) NULL DEFAULT NULL,
+  `kredit` DOUBLE NULL DEFAULT NULL,
   `cislo_permanentky` VARCHAR(20) NULL DEFAULT NULL,
   `id_kluca` INT(11) NULL DEFAULT NULL,
   PRIMARY KEY (`id`),

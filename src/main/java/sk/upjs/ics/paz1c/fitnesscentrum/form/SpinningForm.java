@@ -5,12 +5,14 @@ import sk.upjs.ics.paz1c.fitnesscentrum.DaoFactory;
 import sk.upjs.ics.paz1c.fitnesscentrum.RezervaciaTableModel;
 import sk.upjs.ics.paz1c.fitnesscentrum.SpinningComboBoxModel;
 import sk.upjs.ics.paz1c.fitnesscentrum.dao.RezervaciaDao;
+import sk.upjs.ics.paz1c.fitnesscentrum.dao.SpinningDao;
 import sk.upjs.ics.paz1c.fitnesscentrum.entity.Spinning;
 
 public class SpinningForm extends javax.swing.JDialog {
 
     private static final int ID_COLUMN = 2;
     private final RezervaciaDao rezervaciaDao = DaoFactory.INSTANCE.getRezervaciaDao();
+    private final SpinningDao spinningDao = DaoFactory.INSTANCE.getSpinningDao();
 
     /**
      * Creates new form SpinningForm
@@ -190,7 +192,12 @@ public class SpinningForm extends javax.swing.JDialog {
             Long idRezervacie = (Long) rezervacieTable.getModel().getValueAt(this.rezervacieTable.getSelectedRow(), ID_COLUMN);
 
             rezervaciaDao.odstranRezervacia(idRezervacie);
+            
+            Spinning spinning = (Spinning)spinningComboBox.getSelectedItem();
+            spinningDao.odrezervujSpinning(spinning);
+            
             ((RezervaciaTableModel) rezervacieTable.getModel()).aktualizovat();
+            ((SpinningComboBoxModel) spinningComboBox.getModel()).aktualizuj();
 
         } catch (ArrayIndexOutOfBoundsException e) {
             JOptionPane.showMessageDialog(null, "Vyber zákazníka na odhlásenie zo spinningu.");

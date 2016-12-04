@@ -16,5 +16,7 @@ public interface SpinningDao {
 
     public void rezervujSpinning(Spinning spinning);
     
+    public void odrezervujSpinning(Spinning spinning);
+    
     public void vymazSpinning(Long idSpinningu);
 }
