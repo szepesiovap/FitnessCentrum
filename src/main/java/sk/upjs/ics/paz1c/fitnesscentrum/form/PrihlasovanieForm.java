@@ -145,10 +145,10 @@ public class PrihlasovanieForm extends javax.swing.JFrame {
         String login = loginTextField.getText();
 
         Recepcny recepcny = recepcnyDao.dajRecepcneho(login);
-        // funkcne prihlasovanie s databazou
-        /*if (recepcny != null && login.equals(recepcny.getLogin())) {
-            String hashovaneHeslo = Hashovanie.zahesuj(recepcny.getSalt(), hesloPasswordField.getText());
-            if (hashovaneHeslo.equals(recepcny.getHeslo())) {
+        /*// funkcne prihlasovanie s databazou
+        if (recepcny != null && login.equals(recepcny.getLogin())) {
+            String hashovaneHeslo = HesloManager.zahesujHeslo(recepcny.getSalt(), heslo);
+            if (HesloManager.overZhoduHesiel(hashovaneHeslo, recepcny.getHeslo())) {
                 new HlavneOknoForm().setVisible(true);
                 this.dispose();
                 return;

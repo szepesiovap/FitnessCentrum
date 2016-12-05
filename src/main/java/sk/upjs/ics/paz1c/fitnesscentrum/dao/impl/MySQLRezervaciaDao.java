@@ -105,8 +105,8 @@ public class MySQLRezervaciaDao implements RezervaciaDao {
 
     @Override
     public void odstranRezervacia(Long idRezervacie) {
-       String sql = "DELETE FROM rezervacia WHERE id_rezervacia = ?";
-       jdbcTemplate.update(sql, idRezervacie);
+        String sql = "DELETE FROM rezervacia WHERE id_rezervacia = ?";
+        jdbcTemplate.update(sql, idRezervacie);
     }
 
 }

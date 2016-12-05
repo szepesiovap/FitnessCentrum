@@ -1,10 +1,9 @@
 package sk.upjs.ics.paz1c.fitnesscentrum.form;
 
-import java.util.UUID;
 import javax.swing.JOptionPane;
 import org.springframework.dao.DuplicateKeyException;
 import sk.upjs.ics.paz1c.fitnesscentrum.DaoFactory;
-import sk.upjs.ics.paz1c.fitnesscentrum.Hashovanie;
+import sk.upjs.ics.paz1c.fitnesscentrum.HesloManager;
 import sk.upjs.ics.paz1c.fitnesscentrum.dao.RecepcnyDao;
 import sk.upjs.ics.paz1c.fitnesscentrum.entity.Recepcny;
 
@@ -133,14 +132,17 @@ public class NovyRecepcnyForm extends javax.swing.JDialog {
     }//GEN-LAST:event_zrusitButtonActionPerformed
 
     private void ulozitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ulozitButtonActionPerformed
+        String meno = menoTextField.getText();
+        String login = loginTextField.getText();
 
+        String noveHeslo = hesloPasswordField.getText();
+        String noveHesloZnova = hesloZnovaPasswordField.getText();
         recepcny = new Recepcny();
 
-        if (!("").equals(menoTextField.getText())) {
-            recepcny.setMeno(menoTextField.getText());
-
-            if (!("").equals(loginTextField.getText())) {
-                recepcny.setLogin(loginTextField.getText());
+        if (!("").equals(meno)) {
+            recepcny.setMeno(meno);
+            if (!("").equals(login)) {
+                recepcny.setLogin(login);
             } else {
                 JOptionPane.showMessageDialog(this, "Zadajte login");
                 return;
@@ -150,11 +152,13 @@ public class NovyRecepcnyForm extends javax.swing.JDialog {
             return;
         }
 
-        if (!("").equals(hesloPasswordField.getText())) {
-            if (hesloPasswordField.getText().equals(hesloZnovaPasswordField.getText())) {
-                String salt = UUID.randomUUID().toString();
+        if (!("").equals(noveHeslo)) {
+            if (HesloManager.overZhoduHesiel(noveHesloZnova, noveHeslo)) {
+                String salt = HesloManager.vygenerujSalt();
                 recepcny.setSalt(salt);
-                recepcny.setHeslo(Hashovanie.zahesuj(salt, hesloPasswordField.getText()));
+
+                String hashHeslo = HesloManager.zahesujHeslo(salt, noveHeslo);
+                recepcny.setHeslo(hashHeslo);
             } else {
                 JOptionPane.showMessageDialog(this, "Heslo sa nezhoduje");
                 return;

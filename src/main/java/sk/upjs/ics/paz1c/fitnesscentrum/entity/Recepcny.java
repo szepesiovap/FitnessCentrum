@@ -39,7 +39,7 @@ public class Recepcny {
     public void setHeslo(String heslo) {
         this.heslo = heslo;
     }
-    
+
     public String getSalt() {
         return salt;
     }

@@ -3,6 +3,7 @@ package sk.upjs.ics.paz1c.fitnesscentrum.form;
 import javax.swing.JOptionPane;
 import sk.upjs.ics.paz1c.fitnesscentrum.DaoFactory;
 import sk.upjs.ics.paz1c.fitnesscentrum.Hashovanie;
+import sk.upjs.ics.paz1c.fitnesscentrum.HesloManager;
 import sk.upjs.ics.paz1c.fitnesscentrum.dao.RecepcnyDao;
 import sk.upjs.ics.paz1c.fitnesscentrum.entity.Recepcny;
 
@@ -10,7 +11,7 @@ public class ZmenaHeslaRecepcnehoForm extends javax.swing.JDialog {
 
     private final RecepcnyDao recepcnyDao = DaoFactory.INSTANCE.getRecepcnyDao();
     private Recepcny recepcny;
-
+    
     /**
      * Creates new form ZmenaHeslaRecepcnehoJDialog
      * @param parent
@@ -127,19 +128,18 @@ public class ZmenaHeslaRecepcnehoForm extends javax.swing.JDialog {
     private void ulozitZmenyButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ulozitZmenyButtonActionPerformed
         String login = loginTextField.getText();
         String heslo = stareHesloPasswordField.getText();
+        String noveHeslo = noveHesloPasswordField.getText();
         recepcny = recepcnyDao.dajRecepcneho(login);
-
+        String salt = recepcny.getSalt();
+        
         if (recepcny != null && login.equals(recepcny.getLogin())) {
-            String hashovaneHeslo = Hashovanie.zahesuj(recepcny.getSalt(), heslo);
-            if (hashovaneHeslo.equals(recepcny.getHeslo())) {
-                noveHesloPasswordField.enable(true);
-                noveHesloZnovaPasswordField.enable(true);
+            String hashovaneHeslo = HesloManager.zahesujHeslo(salt, heslo);
+            if (HesloManager.overZhoduHesiel(hashovaneHeslo, recepcny.getHeslo())) {
+                String noveHashovaneHeslo = HesloManager.zahesujHeslo(salt, noveHeslo);
+                String noveHashovaneHesloZnova = Hashovanie.zahesuj(salt, noveHesloZnovaPasswordField.getText());
 
-                String noveHashovaneHeslo = Hashovanie.zahesuj(recepcny.getSalt(), noveHesloPasswordField.getText());
-                String noveHashovaneHesloZnova = Hashovanie.zahesuj(recepcny.getSalt(), noveHesloZnovaPasswordField.getText());
-
-                if (!("").equals(noveHesloPasswordField.getText())) {
-                    if (noveHashovaneHeslo.equals(noveHashovaneHesloZnova)) {
+                if (!("").equals(noveHeslo)) {
+                    if (HesloManager.overZhoduHesiel(noveHashovaneHeslo, noveHashovaneHesloZnova)) {
                         recepcny.setHeslo(noveHashovaneHeslo);
                         DaoFactory.INSTANCE.getRecepcnyDao().updateRecepcneho(recepcny);
                         JOptionPane.showMessageDialog(this, "Heslo recepčného s loginom " + recepcny.getLogin() + " bolo zmenené!");

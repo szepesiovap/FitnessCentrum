@@ -8,7 +8,7 @@ import sk.upjs.ics.paz1c.fitnesscentrum.dao.ZakaznikDao;
 
 public class PritomniZakazniciTableModel extends AbstractTableModel {
 
-    private ZakaznikDao zakaznikDao = DaoFactory.INSTANCE.getZakaznikDao();
+    private final ZakaznikDao zakaznikDao = DaoFactory.INSTANCE.getZakaznikDao();
     private static final String[] NAZVY_STLPCOV = {"Meno", "Kľúč", "Čas príchodu", "Číslo karty"};
     private static final int POCET_STLPCOV = NAZVY_STLPCOV.length;
     private List<Zakaznik> listPritomnychZakaznikov = new ArrayList<>();

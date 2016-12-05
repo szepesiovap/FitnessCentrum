@@ -3,11 +3,11 @@ package sk.upjs.ics.paz1c.fitnesscentrum.form;
 import javax.swing.JOptionPane;
 import sk.upjs.ics.paz1c.fitnesscentrum.DaoFactory;
 import sk.upjs.ics.paz1c.fitnesscentrum.Hashovanie;
+import sk.upjs.ics.paz1c.fitnesscentrum.HesloManager;
 import sk.upjs.ics.paz1c.fitnesscentrum.dao.RecepcnyDao;
 import sk.upjs.ics.paz1c.fitnesscentrum.entity.Recepcny;
 
 public class OverenieHeslaForm extends javax.swing.JDialog {
-
     private Recepcny recepcny;
     private final RecepcnyDao recepcnyDao = DaoFactory.INSTANCE.getRecepcnyDao();
     private final String akcia;
@@ -99,9 +99,9 @@ public class OverenieHeslaForm extends javax.swing.JDialog {
         recepcny = recepcnyDao.dajRecepcneho(0L);
         String salt = recepcny.getSalt();
         String heslo = hesloPasswordField.getText();
-        String hashHeslo = Hashovanie.zahesuj(salt, heslo);
+        String hashHeslo = HesloManager.zahesujHeslo(salt, heslo);
 
-        if (hashHeslo.equals(recepcny.getHeslo())) {
+        if (HesloManager.overZhoduHesiel(hashHeslo, recepcny.getHeslo())) {
             this.dispose();
             if ("nastavenia".equals(akcia)) {
                 new NastaveniaForm(new javax.swing.JFrame(), true).setVisible(true);
