@@ -8,7 +8,7 @@ import sk.upjs.ics.paz1c.fitnesscentrum.entity.Kluc;
 
 public class KlucTableModel extends AbstractTableModel {
 
-    private final KlucDao klucDao = DaoFactory.INSTANCE.getKlucDao();
+    private final KlucDao klucDao = ObjectFactory.INSTANCE.getKlucDao();
     private static final String[] NAZVY_STLPCOV = {"ID", "Meno kľúča"};
     private static final int POCET_STLPCOV = NAZVY_STLPCOV.length;
     private List<Kluc> listKlucov = new ArrayList<>();

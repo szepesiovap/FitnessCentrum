@@ -3,20 +3,20 @@ package sk.upjs.ics.paz1c.fitnesscentrum.daol;
 import java.util.List;
 import org.junit.Test;
 import static org.junit.Assert.*;
-import sk.upjs.ics.paz1c.fitnesscentrum.DaoFactory;
+import sk.upjs.ics.paz1c.fitnesscentrum.ObjectFactory;
 import sk.upjs.ics.paz1c.fitnesscentrum.dao.InstruktorDao;
 import sk.upjs.ics.paz1c.fitnesscentrum.entity.Instruktor;
 
 public class MySQLInstruktorDaoTest extends PripravaNaTestovanie {
     
-    private final InstruktorDao instruktorDao = DaoFactory.INSTANCE.getInstruktorDao();
+    private final InstruktorDao instruktorDao = ObjectFactory.INSTANCE.getInstruktorDao();
     
     /**
      * Test of dajVsetychInstruktorov method, of class MySQLInstruktorDao.
      */
     @Test
     public void testDajVsetychInstruktorov() {
-        List<Instruktor> result = DaoFactory.INSTANCE.getInstruktorDao().dajVsetychInstruktorov();
+        List<Instruktor> result = ObjectFactory.INSTANCE.getInstruktorDao().dajVsetychInstruktorov();
         assertEquals(1, result.size());
     }
 

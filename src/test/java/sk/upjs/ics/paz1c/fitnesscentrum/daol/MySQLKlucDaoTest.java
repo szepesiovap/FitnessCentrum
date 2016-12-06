@@ -3,14 +3,14 @@ package sk.upjs.ics.paz1c.fitnesscentrum.daol;
 import java.util.List;
 import org.junit.Test;
 import static org.junit.Assert.*;
-import sk.upjs.ics.paz1c.fitnesscentrum.DaoFactory;
+import sk.upjs.ics.paz1c.fitnesscentrum.ObjectFactory;
 import sk.upjs.ics.paz1c.fitnesscentrum.dao.KlucDao;
 import sk.upjs.ics.paz1c.fitnesscentrum.entity.Kluc;
 import sk.upjs.ics.paz1c.fitnesscentrum.entity.Zakaznik;
 
 public class MySQLKlucDaoTest extends PripravaNaTestovanie {
 
-    private static final KlucDao klucDao = DaoFactory.INSTANCE.getKlucDao();
+    private static final KlucDao klucDao = ObjectFactory.INSTANCE.getKlucDao();
 
     /**
      * Test of dajVsetkyKluce method, of class MySQLKlucDao.

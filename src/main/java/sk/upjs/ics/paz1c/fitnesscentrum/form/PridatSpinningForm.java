@@ -5,7 +5,7 @@ import java.time.LocalDateTime;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
 
-import sk.upjs.ics.paz1c.fitnesscentrum.DaoFactory;
+import sk.upjs.ics.paz1c.fitnesscentrum.ObjectFactory;
 import sk.upjs.ics.paz1c.fitnesscentrum.InstruktorComboBoxModel;
 import sk.upjs.ics.paz1c.fitnesscentrum.dao.SpinningDao;
 import sk.upjs.ics.paz1c.fitnesscentrum.entity.Instruktor;
@@ -13,7 +13,7 @@ import sk.upjs.ics.paz1c.fitnesscentrum.entity.Spinning;
 
 public class PridatSpinningForm extends javax.swing.JDialog {
 
-    private final SpinningDao spinningDao = DaoFactory.INSTANCE.getSpinningDao();
+    private final SpinningDao spinningDao = ObjectFactory.INSTANCE.getSpinningDao();
     private final String[] DNI = {"01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31"};
     private final String[] MESIACE = {"01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12"};
     private final String[] MINUTY = {"00", "15", "30", "45"};
@@ -199,49 +199,6 @@ public class PridatSpinningForm extends javax.swing.JDialog {
         mesiacComboBox.setModel(new DefaultComboBoxModel<String>(MESIACE));
         minutaComboBox.setModel(new DefaultComboBoxModel<String>(MINUTY));
 
-    }
-
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(PridatSpinningForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(PridatSpinningForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(PridatSpinningForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(PridatSpinningForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-        //</editor-fold>
-
-        /* Create and display the dialog */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                PridatSpinningForm dialog = new PridatSpinningForm(new javax.swing.JDialog(), true);
-                dialog.addWindowListener(new java.awt.event.WindowAdapter() {
-                    @Override
-                    public void windowClosing(java.awt.event.WindowEvent e) {
-                        System.exit(0);
-                    }
-                });
-                dialog.setVisible(true);
-            }
-        });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

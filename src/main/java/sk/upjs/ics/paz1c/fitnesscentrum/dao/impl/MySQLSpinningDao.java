@@ -3,7 +3,7 @@ package sk.upjs.ics.paz1c.fitnesscentrum.dao.impl;
 import java.sql.Timestamp;
 import java.util.List;
 import org.springframework.jdbc.core.JdbcTemplate;
-import sk.upjs.ics.paz1c.fitnesscentrum.DaoFactory;
+import sk.upjs.ics.paz1c.fitnesscentrum.ObjectFactory;
 import sk.upjs.ics.paz1c.fitnesscentrum.dao.SpinningDao;
 import sk.upjs.ics.paz1c.fitnesscentrum.entity.Spinning;
 import sk.upjs.ics.paz1c.fitnesscentrum.rowmapper.SpinningRowMapper;
@@ -14,7 +14,7 @@ public class MySQLSpinningDao implements SpinningDao {
     private final SpinningRowMapper spinningRowMapper;
 
     public MySQLSpinningDao() {
-        jdbcTemplate = DaoFactory.INSTANCE.getJdbcTemplate();
+        jdbcTemplate = ObjectFactory.INSTANCE.getJdbcTemplate();
         spinningRowMapper = new SpinningRowMapper();
     }
 

@@ -2,13 +2,13 @@ package sk.upjs.ics.paz1c.fitnesscentrum.daol;
 
 import org.junit.Test;
 import static org.junit.Assert.*;
-import sk.upjs.ics.paz1c.fitnesscentrum.DaoFactory;
+import sk.upjs.ics.paz1c.fitnesscentrum.ObjectFactory;
 import sk.upjs.ics.paz1c.fitnesscentrum.dao.VstupneDao;
 import sk.upjs.ics.paz1c.fitnesscentrum.entity.Vstupne;
 
 public class MySQLVstupneDaoTest extends PripravaNaTestovanie {
 
-    private static final VstupneDao vstupneDao = DaoFactory.INSTANCE.getVstupneDao();
+    private static final VstupneDao vstupneDao = ObjectFactory.INSTANCE.getVstupneDao();
 
     /**
      * Test of updateCenaVstupneho method, of class MySQLVstupneDao.

@@ -8,7 +8,7 @@ import sk.upjs.ics.paz1c.fitnesscentrum.entity.Spinning;
 
 public class SpinningTableModel extends AbstractTableModel {
 
-    private final SpinningDao spinnigDao = DaoFactory.INSTANCE.getSpinningDao();
+    private final SpinningDao spinnigDao = ObjectFactory.INSTANCE.getSpinningDao();
 
     private static final String[] NAZVY_STLPCOV = {"Dátum", "Inštruktor", "Počet voľných miest", "Počet miest" };
     private static final int POCET_STLPCOV = NAZVY_STLPCOV.length;

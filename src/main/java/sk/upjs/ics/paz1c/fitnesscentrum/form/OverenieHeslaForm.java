@@ -1,16 +1,17 @@
 package sk.upjs.ics.paz1c.fitnesscentrum.form;
 
 import javax.swing.JOptionPane;
-import sk.upjs.ics.paz1c.fitnesscentrum.DaoFactory;
-import sk.upjs.ics.paz1c.fitnesscentrum.Hashovanie;
+import sk.upjs.ics.paz1c.fitnesscentrum.ObjectFactory;
 import sk.upjs.ics.paz1c.fitnesscentrum.HesloManager;
 import sk.upjs.ics.paz1c.fitnesscentrum.dao.RecepcnyDao;
 import sk.upjs.ics.paz1c.fitnesscentrum.entity.Recepcny;
 
 public class OverenieHeslaForm extends javax.swing.JDialog {
+
     private Recepcny recepcny;
-    private final RecepcnyDao recepcnyDao = DaoFactory.INSTANCE.getRecepcnyDao();
+    private final RecepcnyDao recepcnyDao = ObjectFactory.INSTANCE.getRecepcnyDao();
     private final String akcia;
+    private final HesloManager hesloManager = ObjectFactory.INSTANCE.getHesloManager();
 
     /**
      * Creates new form OverenieHeslaJDialog
@@ -96,17 +97,12 @@ public class OverenieHeslaForm extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void potvrditButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_potvrditButtonActionPerformed
-        recepcny = recepcnyDao.dajRecepcneho(0L);
-        String salt = recepcny.getSalt();
-        String heslo = hesloPasswordField.getText();
-        String hashHeslo = HesloManager.zahesujHeslo(salt, heslo);
-
-        if (HesloManager.overZhoduHesiel(hashHeslo, recepcny.getHeslo())) {
+        if (hesloManager.overHeslo(recepcnyDao.dajRecepcneho(0L).getSalt(), hesloPasswordField.getText(), 0L)) {
             this.dispose();
             if ("nastavenia".equals(akcia)) {
-                new NastaveniaForm(new javax.swing.JFrame(), true).setVisible(true);
+                new NastaveniaForm().setVisible(true);
             } else {
-                new NovyRecepcnyForm(new javax.swing.JFrame(), true).setVisible(true);
+                new NovyRecepcnyForm().setVisible(true);
             }
         } else {
             JOptionPane.showMessageDialog(null, "Zadané heslo nie je správne");
@@ -116,49 +112,6 @@ public class OverenieHeslaForm extends javax.swing.JDialog {
     private void zrusitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_zrusitButtonActionPerformed
         this.dispose();
     }//GEN-LAST:event_zrusitButtonActionPerformed
-
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(OverenieHeslaForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(OverenieHeslaForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(OverenieHeslaForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(OverenieHeslaForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-        //</editor-fold>
-
-        /* Create and display the dialog */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                OverenieHeslaForm dialog = new OverenieHeslaForm(new javax.swing.JFrame(), true, "Nastavenia");
-                dialog.addWindowListener(new java.awt.event.WindowAdapter() {
-                    @Override
-                    public void windowClosing(java.awt.event.WindowEvent e) {
-                        System.exit(0);
-                    }
-                });
-                dialog.setVisible(true);
-            }
-        });
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPasswordField hesloPasswordField;

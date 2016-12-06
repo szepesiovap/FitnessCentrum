@@ -3,13 +3,13 @@ package sk.upjs.ics.paz1c.fitnesscentrum.daol;
 import java.util.List;
 import org.junit.Test;
 import static org.junit.Assert.*;
-import sk.upjs.ics.paz1c.fitnesscentrum.DaoFactory;
+import sk.upjs.ics.paz1c.fitnesscentrum.ObjectFactory;
 import sk.upjs.ics.paz1c.fitnesscentrum.dao.KreditDao;
 import sk.upjs.ics.paz1c.fitnesscentrum.entity.Kredit;
 
 public class MySQLKreditDaoTest extends PripravaNaTestovanie {
 
-    private static final KreditDao kreditDao = DaoFactory.INSTANCE.getKreditDao();
+    private static final KreditDao kreditDao = ObjectFactory.INSTANCE.getKreditDao();
 
     /**
      * Test of dajVsetkyKredity method, of class MySQLKreditDao.

@@ -1,18 +1,20 @@
 package sk.upjs.ics.paz1c.fitnesscentrum.form;
 
 import javax.swing.JOptionPane;
-import sk.upjs.ics.paz1c.fitnesscentrum.DaoFactory;
+import sk.upjs.ics.paz1c.fitnesscentrum.ObjectFactory;
 import sk.upjs.ics.paz1c.fitnesscentrum.RezervaciaTableModel;
 import sk.upjs.ics.paz1c.fitnesscentrum.SpinningComboBoxModel;
 import sk.upjs.ics.paz1c.fitnesscentrum.dao.RezervaciaDao;
 import sk.upjs.ics.paz1c.fitnesscentrum.dao.SpinningDao;
+import sk.upjs.ics.paz1c.fitnesscentrum.entity.Rezervacia;
 import sk.upjs.ics.paz1c.fitnesscentrum.entity.Spinning;
 
 public class SpinningForm extends javax.swing.JDialog {
 
     private static final int ID_COLUMN = 2;
-    private final RezervaciaDao rezervaciaDao = DaoFactory.INSTANCE.getRezervaciaDao();
-    private final SpinningDao spinningDao = DaoFactory.INSTANCE.getSpinningDao();
+    private final RezervaciaDao rezervaciaDao = ObjectFactory.INSTANCE.getRezervaciaDao();
+    private final SpinningDao spinningDao = ObjectFactory.INSTANCE.getSpinningDao();
+    private Rezervacia rezervacia;
 
     /**
      * Creates new form SpinningForm
@@ -145,7 +147,7 @@ public class SpinningForm extends javax.swing.JDialog {
 
     private void pridatSpinningMenuMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pridatSpinningMenuMousePressed
         new PridatSpinningForm(this, true).setVisible(true);
-        ((SpinningComboBoxModel) spinningComboBox.getModel()).aktualizuj();
+        ((SpinningComboBoxModel) spinningComboBox.getModel()).aktualizovat();
     }//GEN-LAST:event_pridatSpinningMenuMousePressed
 
     private void pridatInstruktoraMenuMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pridatInstruktoraMenuMousePressed
@@ -191,13 +193,24 @@ public class SpinningForm extends javax.swing.JDialog {
         try {
             Long idRezervacie = (Long) rezervacieTable.getModel().getValueAt(this.rezervacieTable.getSelectedRow(), ID_COLUMN);
 
-            rezervaciaDao.odstranRezervacia(idRezervacie);
+            rezervacia = rezervaciaDao.dajRezervaciuSId(idRezervacie);
+
+            if (rezervacia != null) {
+                Object[] options = {"Zmazať", "Zrušiť"};
+                if (JOptionPane.showOptionDialog(this, "Naozaj chcete odhlásiť zo spinningu zakaznika " + rezervacia.getZakaznik().getMeno() + "?",
+                        "Zruš rezervaciu",
+                        JOptionPane.DEFAULT_OPTION, JOptionPane.PLAIN_MESSAGE, null,
+                        options, options[1]) == 1) {
+                    return;
+                }
+                rezervaciaDao.odstranRezervacia(idRezervacie);
+            }
             
             Spinning spinning = (Spinning)spinningComboBox.getSelectedItem();
             spinningDao.odrezervujSpinning(spinning);
             
             ((RezervaciaTableModel) rezervacieTable.getModel()).aktualizovat();
-            ((SpinningComboBoxModel) spinningComboBox.getModel()).aktualizuj();
+            ((SpinningComboBoxModel) spinningComboBox.getModel()).aktualizovat();
 
         } catch (ArrayIndexOutOfBoundsException e) {
             JOptionPane.showMessageDialog(null, "Vyber zákazníka na odhlásenie zo spinningu.");
@@ -205,7 +218,7 @@ public class SpinningForm extends javax.swing.JDialog {
     }//GEN-LAST:event_odhlasitZoSpinninguMenuMousePressed
 
     private void zrusitSpinnigMenuMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_zrusitSpinnigMenuMousePressed
-        new ZrusitSpinningForm(new javax.swing.JFrame(), true).setVisible(true);
+        new ZrusitSpinningForm().setVisible(true);
     }//GEN-LAST:event_zrusitSpinnigMenuMousePressed
 
     private void aktualizovatRezervacie() {
@@ -218,49 +231,7 @@ public class SpinningForm extends javax.swing.JDialog {
     }
 
     private void aktualizovatSpinningy() {
-        ((SpinningComboBoxModel) spinningComboBox.getModel()).aktualizuj();
-    }
-
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(SpinningForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(SpinningForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(SpinningForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(SpinningForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the dialog */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                SpinningForm dialog = new SpinningForm(new javax.swing.JFrame(), true);
-                dialog.addWindowListener(new java.awt.event.WindowAdapter() {
-                    @Override
-                    public void windowClosing(java.awt.event.WindowEvent e) {
-                        System.exit(0);
-                    }
-                });
-                dialog.setVisible(true);
-            }
-        });
+        ((SpinningComboBoxModel) spinningComboBox.getModel()).aktualizovat();
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

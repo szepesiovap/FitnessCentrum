@@ -11,7 +11,7 @@ public class KreditComboBoxModel extends DefaultComboBoxModel<Kredit> {
     private List<Kredit> mozneKredity;
 
     public KreditComboBoxModel() {
-        kreditDao = DaoFactory.INSTANCE.getKreditDao();
+        kreditDao = ObjectFactory.INSTANCE.getKreditDao();
         aktualizuj();
     }
 

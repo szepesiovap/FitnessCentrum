@@ -13,11 +13,11 @@ public class SpinningComboBoxModel extends DefaultComboBoxModel<Spinning> {
     private List<Spinning> spinningy;
     
     public SpinningComboBoxModel() {
-        spinningDao = DaoFactory.INSTANCE.getSpinningDao();
-        aktualizuj();
+        spinningDao = ObjectFactory.INSTANCE.getSpinningDao();
+        aktualizovat();
     }
     
-    public void aktualizuj() {
+    public void aktualizovat() {
         removeAllElements();
         spinningy = spinningDao.dajSpinningyOdDatumu(Timestamp.valueOf(LocalDateTime.now()));
         for (Spinning spinning : spinningy) {

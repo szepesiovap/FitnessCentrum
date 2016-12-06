@@ -3,7 +3,7 @@ package sk.upjs.ics.paz1c.fitnesscentrum.dao.impl;
 import java.util.List;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
-import sk.upjs.ics.paz1c.fitnesscentrum.DaoFactory;
+import sk.upjs.ics.paz1c.fitnesscentrum.ObjectFactory;
 import sk.upjs.ics.paz1c.fitnesscentrum.dao.KreditDao;
 import sk.upjs.ics.paz1c.fitnesscentrum.entity.Kredit;
 import sk.upjs.ics.paz1c.fitnesscentrum.rowmapper.KreditRowMapper;
@@ -14,7 +14,7 @@ public class MySQLKreditDao implements KreditDao {
     private final KreditRowMapper kreditRowMapper;
 
     public MySQLKreditDao() {
-        jdbcTemplate = DaoFactory.INSTANCE.getJdbcTemplate();
+        jdbcTemplate = ObjectFactory.INSTANCE.getJdbcTemplate();
         kreditRowMapper = new KreditRowMapper();
     }
 

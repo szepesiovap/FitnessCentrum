@@ -3,7 +3,7 @@ package sk.upjs.ics.paz1c.fitnesscentrum.dao.impl;
 import java.util.List;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
-import sk.upjs.ics.paz1c.fitnesscentrum.DaoFactory;
+import sk.upjs.ics.paz1c.fitnesscentrum.ObjectFactory;
 import sk.upjs.ics.paz1c.fitnesscentrum.dao.KlucDao;
 import sk.upjs.ics.paz1c.fitnesscentrum.entity.Kluc;
 import sk.upjs.ics.paz1c.fitnesscentrum.entity.Zakaznik;
@@ -15,7 +15,7 @@ public class MySQLKlucDao implements KlucDao {
     private final KlucRowMapper klucRowMapper;
 
     public MySQLKlucDao() {
-        jdbcTemplate = DaoFactory.INSTANCE.getJdbcTemplate();
+        jdbcTemplate = ObjectFactory.INSTANCE.getJdbcTemplate();
         klucRowMapper = new KlucRowMapper();
     }
 

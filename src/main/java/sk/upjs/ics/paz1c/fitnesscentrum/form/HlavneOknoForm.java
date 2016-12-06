@@ -1,6 +1,6 @@
 package sk.upjs.ics.paz1c.fitnesscentrum.form;
 
-import sk.upjs.ics.paz1c.fitnesscentrum.DaoFactory;
+import sk.upjs.ics.paz1c.fitnesscentrum.ObjectFactory;
 import sk.upjs.ics.paz1c.fitnesscentrum.PritomniZakazniciTableModel;
 import sk.upjs.ics.paz1c.fitnesscentrum.dao.KlucDao;
 import sk.upjs.ics.paz1c.fitnesscentrum.dao.ZakaznikDao;
@@ -9,8 +9,8 @@ import sk.upjs.ics.paz1c.fitnesscentrum.entity.Zakaznik;
 
 public final class HlavneOknoForm extends javax.swing.JFrame {
 
-    private final ZakaznikDao zakaznikDao = DaoFactory.INSTANCE.getZakaznikDao();
-    private final KlucDao klucDao = DaoFactory.INSTANCE.getKlucDao();
+    private final ZakaznikDao zakaznikDao = ObjectFactory.INSTANCE.getZakaznikDao();
+    private final KlucDao klucDao = ObjectFactory.INSTANCE.getKlucDao();
     private static final int ID_COLUMN = 4;
 
     /**
@@ -81,6 +81,11 @@ public final class HlavneOknoForm extends javax.swing.JFrame {
         odchodMenu.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 odchodMenuMousePressed(evt);
+            }
+        });
+        odchodMenu.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                odchodMenuActionPerformed(evt);
             }
         });
         hlavneOknoMenuBar.add(odchodMenu);
@@ -199,47 +204,9 @@ public final class HlavneOknoForm extends javax.swing.JFrame {
         new ZoznamForm(this).setVisible(true);
     }//GEN-LAST:event_zoznamMenuMousePressed
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(HlavneOknoForm.class
-                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(HlavneOknoForm.class
-                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(HlavneOknoForm.class
-                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(HlavneOknoForm.class
-                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            @Override
-            public void run() {
-                new PrihlasovanieForm().setVisible(true);
-            }
-        });
-    }
+    private void odchodMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_odchodMenuActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_odchodMenuActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenu dobiMenu;

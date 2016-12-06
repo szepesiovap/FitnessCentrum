@@ -9,7 +9,7 @@ import sk.upjs.ics.paz1c.fitnesscentrum.entity.Spinning;
 
 public class RezervaciaTableModel extends AbstractTableModel {
 
-    private final RezervaciaDao rezervaciaDao = DaoFactory.INSTANCE.getRezervaciaDao();
+    private final RezervaciaDao rezervaciaDao = ObjectFactory.INSTANCE.getRezervaciaDao();
 
     private static final String[] NAZVY_STLPCOV = {"Meno zákazníka", "Dátum rezervácie"};
     private static final int POCET_STLPCOV = NAZVY_STLPCOV.length;

@@ -8,7 +8,7 @@ import sk.upjs.ics.paz1c.fitnesscentrum.entity.Recepcny;
 
 public class ZoznamRecepcnychTableModel extends AbstractTableModel {
 
-    private final RecepcnyDao recepcnyDao = DaoFactory.INSTANCE.getRecepcnyDao();
+    private final RecepcnyDao recepcnyDao = ObjectFactory.INSTANCE.getRecepcnyDao();
     private static final String[] NAZVY_STLPCOV = {"Meno a priezvisko", "Login"};
     private static final int POCET_STLPCOV = NAZVY_STLPCOV.length;
     private List<Recepcny> listRecepcnych = new ArrayList<>();

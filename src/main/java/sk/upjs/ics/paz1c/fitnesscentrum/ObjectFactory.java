@@ -19,7 +19,7 @@ import sk.upjs.ics.paz1c.fitnesscentrum.dao.impl.MySQLSpinningDao;
 import sk.upjs.ics.paz1c.fitnesscentrum.dao.impl.MySQLVstupneDao;
 import sk.upjs.ics.paz1c.fitnesscentrum.dao.impl.MySQLZakaznikDao;
 
-public enum DaoFactory {
+public enum ObjectFactory {
 
     INSTANCE;
     private JdbcTemplate jdbcTemplate;
@@ -31,6 +31,7 @@ public enum DaoFactory {
     private RezervaciaDao rezervaciaDao;
     private VstupneDao vstupneDao;
     private KreditDao kreditDao;
+    private HesloManager hesloManager;
 
     public JdbcTemplate getJdbcTemplate() {
         if (jdbcTemplate == null) {
@@ -102,5 +103,12 @@ public enum DaoFactory {
             kreditDao = new MySQLKreditDao();
         }
         return kreditDao;
+    }
+
+    public HesloManager getHesloManager() {
+        if (hesloManager == null) {
+            hesloManager = new HesloManager();
+        }
+        return hesloManager;
     }
 }

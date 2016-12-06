@@ -2,15 +2,17 @@ package sk.upjs.ics.paz1c.fitnesscentrum.form;
 
 import javax.swing.JOptionPane;
 import org.springframework.dao.DuplicateKeyException;
-import sk.upjs.ics.paz1c.fitnesscentrum.DaoFactory;
+import sk.upjs.ics.paz1c.fitnesscentrum.ObjectFactory;
 import sk.upjs.ics.paz1c.fitnesscentrum.HesloManager;
+
 import sk.upjs.ics.paz1c.fitnesscentrum.dao.RecepcnyDao;
 import sk.upjs.ics.paz1c.fitnesscentrum.entity.Recepcny;
 
 public class NovyRecepcnyForm extends javax.swing.JDialog {
 
     private Recepcny recepcny;
-    private final RecepcnyDao recepcnyDao = DaoFactory.INSTANCE.getRecepcnyDao();
+    private final RecepcnyDao recepcnyDao = ObjectFactory.INSTANCE.getRecepcnyDao();
+    private final HesloManager hesloManager = ObjectFactory.INSTANCE.getHesloManager();
 
     /**
      * Creates new form NovyRecepcnyForm
@@ -20,6 +22,11 @@ public class NovyRecepcnyForm extends javax.swing.JDialog {
      */
     public NovyRecepcnyForm(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
+        initComponents();
+    }
+
+    public NovyRecepcnyForm() {
+        super(new javax.swing.JFrame(), true);
         initComponents();
     }
 
@@ -153,17 +160,16 @@ public class NovyRecepcnyForm extends javax.swing.JDialog {
         }
 
         if (!("").equals(noveHeslo)) {
-            if (HesloManager.overZhoduHesiel(noveHesloZnova, noveHeslo)) {
-                String salt = HesloManager.vygenerujSalt();
+            if (hesloManager.overZhoduHesiel(noveHesloZnova, noveHeslo)) {
+                String salt = hesloManager.vygenerujSalt();
                 recepcny.setSalt(salt);
 
-                String hashHeslo = HesloManager.zahesujHeslo(salt, noveHeslo);
+                String hashHeslo = hesloManager.zahesujHeslo(salt, noveHeslo);
                 recepcny.setHeslo(hashHeslo);
             } else {
                 JOptionPane.showMessageDialog(this, "Heslo sa nezhoduje");
                 return;
             }
-
         } else {
             JOptionPane.showMessageDialog(this, "Heslo nemôže byť prázdne.");
             return;
@@ -175,52 +181,9 @@ public class NovyRecepcnyForm extends javax.swing.JDialog {
             JOptionPane.showMessageDialog(this, "Zvolený login je už použitý");
             return;
         }
+        dispose();
 
-        this.dispose();
     }//GEN-LAST:event_ulozitButtonActionPerformed
-
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(NovyRecepcnyForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(NovyRecepcnyForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(NovyRecepcnyForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(NovyRecepcnyForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-        //</editor-fold>
-
-        /* Create and display the dialog */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                NovyRecepcnyForm dialog = new NovyRecepcnyForm(new javax.swing.JFrame(), true);
-                dialog.addWindowListener(new java.awt.event.WindowAdapter() {
-                    @Override
-                    public void windowClosing(java.awt.event.WindowEvent e) {
-                        System.exit(0);
-                    }
-                });
-                dialog.setVisible(true);
-            }
-        });
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel hesloLabel;

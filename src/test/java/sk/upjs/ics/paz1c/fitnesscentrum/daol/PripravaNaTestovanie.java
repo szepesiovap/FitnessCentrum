@@ -13,7 +13,7 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.springframework.jdbc.core.JdbcTemplate;
-import sk.upjs.ics.paz1c.fitnesscentrum.DaoFactory;
+import sk.upjs.ics.paz1c.fitnesscentrum.ObjectFactory;
 
 public class PripravaNaTestovanie {
 
@@ -38,7 +38,7 @@ public class PripravaNaTestovanie {
         dataSource.setDatabaseName(DB_MENO);
         dataSource.setUser(DB_USER);
         dataSource.setPassword(DB_PASSWORD);
-        DaoFactory.INSTANCE.setJdbcTemplate(new JdbcTemplate(dataSource));        
+        ObjectFactory.INSTANCE.setJdbcTemplate(new JdbcTemplate(dataSource));        
     }
     
     @Before

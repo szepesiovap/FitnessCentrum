@@ -2,13 +2,13 @@ package sk.upjs.ics.paz1c.fitnesscentrum.form;
 
 import javax.swing.JOptionPane;
 import javax.swing.UIManager;
-import sk.upjs.ics.paz1c.fitnesscentrum.DaoFactory;
+import sk.upjs.ics.paz1c.fitnesscentrum.ObjectFactory;
 import sk.upjs.ics.paz1c.fitnesscentrum.dao.RecepcnyDao;
 import sk.upjs.ics.paz1c.fitnesscentrum.entity.Recepcny;
 
 public class PrihlasovanieForm extends javax.swing.JFrame {
 
-    private final RecepcnyDao recepcnyDao = DaoFactory.INSTANCE.getRecepcnyDao();
+    private final RecepcnyDao recepcnyDao = ObjectFactory.INSTANCE.getRecepcnyDao();
 
     /**
      * Creates new form PrihlasovanieForm
@@ -184,7 +184,7 @@ public class PrihlasovanieForm extends javax.swing.JFrame {
         new OverenieHeslaForm(this, true, "nastavenia").setVisible(true);
     }//GEN-LAST:event_nastaveniaMousePressed
 
-    /**
+        /**
      * @param args the command line arguments
      */
     public static void main(String args[]) {
@@ -224,7 +224,7 @@ public class PrihlasovanieForm extends javax.swing.JFrame {
             }
         });
     }
-
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel hesloLabel;
     private javax.swing.JPasswordField hesloPasswordField;

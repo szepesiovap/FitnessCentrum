@@ -11,7 +11,7 @@ public class KlucComboBoxModel extends DefaultComboBoxModel<Kluc> {
     private List<Kluc> volneKluce;
 
     public KlucComboBoxModel() {
-        klucDao = DaoFactory.INSTANCE.getKlucDao();
+        klucDao = ObjectFactory.INSTANCE.getKlucDao();
         aktualizuj();
     }
 

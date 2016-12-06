@@ -4,7 +4,7 @@ import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.util.List;
 import org.springframework.jdbc.core.JdbcTemplate;
-import sk.upjs.ics.paz1c.fitnesscentrum.DaoFactory;
+import sk.upjs.ics.paz1c.fitnesscentrum.ObjectFactory;
 import sk.upjs.ics.paz1c.fitnesscentrum.rowmapper.ZakaznikRowMapper;
 import sk.upjs.ics.paz1c.fitnesscentrum.dao.ZakaznikDao;
 import sk.upjs.ics.paz1c.fitnesscentrum.entity.Kluc;
@@ -16,7 +16,7 @@ public class MySQLZakaznikDao implements ZakaznikDao {
     private final ZakaznikRowMapper zakaznikRowMapper;
 
     public MySQLZakaznikDao() {
-        jdbcTemplate = DaoFactory.INSTANCE.getJdbcTemplate();
+        jdbcTemplate = ObjectFactory.INSTANCE.getJdbcTemplate();
         zakaznikRowMapper = new ZakaznikRowMapper();
     }
 

@@ -1,9 +1,11 @@
 package sk.upjs.ics.paz1c.fitnesscentrum.dao.impl;
 
 import java.util.List;
+import javax.swing.JOptionPane;
+import org.springframework.dao.DuplicateKeyException;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
-import sk.upjs.ics.paz1c.fitnesscentrum.DaoFactory;
+import sk.upjs.ics.paz1c.fitnesscentrum.ObjectFactory;
 import sk.upjs.ics.paz1c.fitnesscentrum.rowmapper.RecepcnyRowMapper;
 import sk.upjs.ics.paz1c.fitnesscentrum.dao.RecepcnyDao;
 import sk.upjs.ics.paz1c.fitnesscentrum.entity.Recepcny;
@@ -15,7 +17,7 @@ public class MySQLRecepcnyDao implements RecepcnyDao {
     private final static int ID_ADMINA = 0;
 
     public MySQLRecepcnyDao() {
-        jdbcTemplate = DaoFactory.INSTANCE.getJdbcTemplate();
+        jdbcTemplate = ObjectFactory.INSTANCE.getJdbcTemplate();
         recepcnyRowMapper = new RecepcnyRowMapper();
     }
 

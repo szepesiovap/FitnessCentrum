@@ -3,7 +3,7 @@ package sk.upjs.ics.paz1c.fitnesscentrum.dao.impl;
 import java.sql.Timestamp;
 import java.util.List;
 import org.springframework.jdbc.core.JdbcTemplate;
-import sk.upjs.ics.paz1c.fitnesscentrum.DaoFactory;
+import sk.upjs.ics.paz1c.fitnesscentrum.ObjectFactory;
 import sk.upjs.ics.paz1c.fitnesscentrum.dao.RezervaciaDao;
 import sk.upjs.ics.paz1c.fitnesscentrum.entity.Rezervacia;
 import sk.upjs.ics.paz1c.fitnesscentrum.entity.Spinning;
@@ -15,7 +15,7 @@ public class MySQLRezervaciaDao implements RezervaciaDao {
     private final RezervaciaRowMapper rezervaciaRowMapper;
 
     public MySQLRezervaciaDao() {
-        jdbcTemplate = DaoFactory.INSTANCE.getJdbcTemplate();
+        jdbcTemplate = ObjectFactory.INSTANCE.getJdbcTemplate();
         rezervaciaRowMapper = new RezervaciaRowMapper();
     }
 

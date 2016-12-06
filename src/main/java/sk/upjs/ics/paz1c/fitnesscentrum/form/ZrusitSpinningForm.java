@@ -1,7 +1,7 @@
 package sk.upjs.ics.paz1c.fitnesscentrum.form;
 
 import javax.swing.JOptionPane;
-import sk.upjs.ics.paz1c.fitnesscentrum.DaoFactory;
+import sk.upjs.ics.paz1c.fitnesscentrum.ObjectFactory;
 import sk.upjs.ics.paz1c.fitnesscentrum.SpinningTableModel;
 import sk.upjs.ics.paz1c.fitnesscentrum.dao.SpinningDao;
 import sk.upjs.ics.paz1c.fitnesscentrum.entity.Spinning;
@@ -9,7 +9,7 @@ import sk.upjs.ics.paz1c.fitnesscentrum.entity.Spinning;
 public class ZrusitSpinningForm extends javax.swing.JDialog {
 
     private static final int ID_COLUMN = 4;
-    private final SpinningDao spinningDao = DaoFactory.INSTANCE.getSpinningDao();
+    private final SpinningDao spinningDao = ObjectFactory.INSTANCE.getSpinningDao();
     private Spinning spinning;
 
     /**
@@ -20,6 +20,11 @@ public class ZrusitSpinningForm extends javax.swing.JDialog {
      */
     public ZrusitSpinningForm(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
+        initComponents();
+    }
+    
+    public ZrusitSpinningForm() {
+        super(new javax.swing.JFrame(), true);
         initComponents();
     }
 
@@ -79,12 +84,18 @@ public class ZrusitSpinningForm extends javax.swing.JDialog {
 
             if (spinning.getKapacita() == spinning.getVolne()) {
                 Object[] options = {"Zmazať", "Zrušiť"};
-                if (JOptionPane.showOptionDialog(this, "Naozaj chcete zmazať spinning s instruktorom " + spinning.getInstruktor() + ", ktorý sa má uskutočniť dňa " + spinning.getDatum().toLocalDate() + " o " + spinning.getDatum().toLocalTime() + "?", "Zmaž kľúč", JOptionPane.DEFAULT_OPTION, JOptionPane.PLAIN_MESSAGE, null, options, options[1]) == 1) {
+                if (JOptionPane.showOptionDialog(this, "Naozaj chcete zmazať spinning s instruktorom " 
+                        + spinning.getInstruktor() + ", ktorý sa má uskutočniť dňa " 
+                        + spinning.getDatum().toLocalDate() + " o " 
+                        + spinning.getDatum().toLocalTime() + "?", 
+                        "Zrušiť spinning", JOptionPane.DEFAULT_OPTION, 
+                        JOptionPane.PLAIN_MESSAGE, null, options, options[1]) == 1) {
                     return;
                 }
                 spinningDao.vymazSpinning(idSpinningu);
             }else{
-                JOptionPane.showMessageDialog(this, "Nemožno vymazať spinning, na ktorý sú rezervácie! Najprv musíte zrušiť rezervácie.");
+                JOptionPane.showMessageDialog(this, "Nemožno vymazať spinning, na ktorý sú rezervácie! "
+                        + "Najprv musíte zrušiť rezervácie.");
             }
 
         } catch (Exception e) {
@@ -96,57 +107,6 @@ public class ZrusitSpinningForm extends javax.swing.JDialog {
     private void aktualizovatZoznamSpinningovTable() {
         SpinningTableModel model = (SpinningTableModel) zoznamSpinningovTable.getModel();
         model.aktualizovat();
-    }
-
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(ZrusitSpinningForm.class
-                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
-
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(ZrusitSpinningForm.class
-                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
-
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(ZrusitSpinningForm.class
-                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
-
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(ZrusitSpinningForm.class
-                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-        //</editor-fold>
-
-        /* Create and display the dialog */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                ZrusitSpinningForm dialog = new ZrusitSpinningForm(new javax.swing.JFrame(), true);
-                dialog.addWindowListener(new java.awt.event.WindowAdapter() {
-                    @Override
-                    public void windowClosing(java.awt.event.WindowEvent e) {
-                        System.exit(0);
-                    }
-                });
-                dialog.setVisible(true);
-            }
-        });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

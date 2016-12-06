@@ -3,7 +3,7 @@ package sk.upjs.ics.paz1c.fitnesscentrum.dao.impl;
 import java.util.List;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
-import sk.upjs.ics.paz1c.fitnesscentrum.DaoFactory;
+import sk.upjs.ics.paz1c.fitnesscentrum.ObjectFactory;
 import sk.upjs.ics.paz1c.fitnesscentrum.dao.InstruktorDao;
 import sk.upjs.ics.paz1c.fitnesscentrum.entity.Instruktor;
 import sk.upjs.ics.paz1c.fitnesscentrum.rowmapper.InstruktorRowMapper;
@@ -14,7 +14,7 @@ public class MySQLInstruktorDao implements InstruktorDao {
     private final InstruktorRowMapper instruktorRowMapper;
 
     public MySQLInstruktorDao() {
-        jdbcTemplate = DaoFactory.INSTANCE.getJdbcTemplate();
+        jdbcTemplate = ObjectFactory.INSTANCE.getJdbcTemplate();
         instruktorRowMapper = new InstruktorRowMapper();
     }
 

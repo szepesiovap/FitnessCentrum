@@ -8,7 +8,7 @@ import sk.upjs.ics.paz1c.fitnesscentrum.entity.Kredit;
 
 public class KreditTableModel extends AbstractTableModel {
 
-    private final KreditDao kreditDao = DaoFactory.INSTANCE.getKreditDao();
+    private final KreditDao kreditDao = ObjectFactory.INSTANCE.getKreditDao();
     private static final String[] NAZVY_STLPCOV = {"Cena", "Názov"};
     private static final int POCET_STLPCOV = NAZVY_STLPCOV.length;
     private List<Kredit> listKreditov = new ArrayList<>();

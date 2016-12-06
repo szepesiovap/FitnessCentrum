@@ -1,7 +1,7 @@
 package sk.upjs.ics.paz1c.fitnesscentrum.dao.impl;
 
 import org.springframework.jdbc.core.JdbcTemplate;
-import sk.upjs.ics.paz1c.fitnesscentrum.DaoFactory;
+import sk.upjs.ics.paz1c.fitnesscentrum.ObjectFactory;
 import sk.upjs.ics.paz1c.fitnesscentrum.dao.VstupneDao;
 import sk.upjs.ics.paz1c.fitnesscentrum.entity.Vstupne;
 import sk.upjs.ics.paz1c.fitnesscentrum.rowmapper.VstupneRowMapper;
@@ -13,7 +13,7 @@ public class MySQLVstupneDao implements VstupneDao {
     private static final int ID = 1;
 
     public MySQLVstupneDao() {
-        jdbcTemplate = DaoFactory.INSTANCE.getJdbcTemplate();
+        jdbcTemplate = ObjectFactory.INSTANCE.getJdbcTemplate();
         vstupneRowMapper = new VstupneRowMapper();
     }
 

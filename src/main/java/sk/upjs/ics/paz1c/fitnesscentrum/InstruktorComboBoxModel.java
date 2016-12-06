@@ -11,7 +11,7 @@ public class InstruktorComboBoxModel extends DefaultComboBoxModel<Instruktor> {
     private List<Instruktor> instruktori;
 
     public InstruktorComboBoxModel() {
-        instruktorDao = DaoFactory.INSTANCE.getInstruktorDao();
+        instruktorDao = ObjectFactory.INSTANCE.getInstruktorDao();
         aktualizuj();
     }
 
