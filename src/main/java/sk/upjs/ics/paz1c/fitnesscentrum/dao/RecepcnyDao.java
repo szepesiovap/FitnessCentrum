@@ -1,6 +1,7 @@
 package sk.upjs.ics.paz1c.fitnesscentrum.dao;
 
 import java.util.List;
+import sk.upjs.ics.paz1c.fitnesscentrum.NevalidnyVstupException;
 import sk.upjs.ics.paz1c.fitnesscentrum.entity.Recepcny;
 
 public interface RecepcnyDao {
@@ -11,9 +12,9 @@ public interface RecepcnyDao {
 
     public List<Recepcny> dajVsetkychRecepcnych();
 
-    public void pridajRecepcneho(Recepcny recepcny);
+    public void pridajRecepcneho(Recepcny recepcny) throws NevalidnyVstupException;
 
-    public void updateRecepcneho(Recepcny recepcny);
+    public void zmenaHeslaRecepcneho(Recepcny recepcny);
 
     public void vymazRecepcneho(Long idRecepcny);
 }

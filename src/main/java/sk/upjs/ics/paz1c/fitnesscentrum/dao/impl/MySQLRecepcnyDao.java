@@ -1,7 +1,7 @@
 package sk.upjs.ics.paz1c.fitnesscentrum.dao.impl;
 
+import sk.upjs.ics.paz1c.fitnesscentrum.NevalidnyVstupException;
 import java.util.List;
-import javax.swing.JOptionPane;
 import org.springframework.dao.DuplicateKeyException;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -39,12 +39,6 @@ public class MySQLRecepcnyDao implements RecepcnyDao {
     }
 
     @Override
-    public void pridajRecepcneho(Recepcny recepcny) {
-        String sql = "INSERT INTO recepcny (meno_priezvisko, login, heslo, salt) VALUES (?, ?, ?, ?)";
-        jdbcTemplate.update(sql, recepcny.getMeno(), recepcny.getLogin(), recepcny.getHeslo(), recepcny.getSalt());
-    }
-
-    @Override
     public void vymazRecepcneho(Long idRecepcny) {
         String sql = "DELETE FROM recepcny WHERE id=?";
         jdbcTemplate.update(sql, idRecepcny);
@@ -53,7 +47,6 @@ public class MySQLRecepcnyDao implements RecepcnyDao {
     @Override
     public Recepcny dajRecepcneho(Long idRecepcneho) {
         String sql = "SELECT * FROM recepcny WHERE id=?";
-
         try {
             return jdbcTemplate.queryForObject(sql, recepcnyRowMapper, idRecepcneho);
         } catch (EmptyResultDataAccessException e) {
@@ -62,9 +55,18 @@ public class MySQLRecepcnyDao implements RecepcnyDao {
     }
 
     @Override
-    public void updateRecepcneho(Recepcny recepcny) {
+    public void zmenaHeslaRecepcneho(Recepcny recepcny) {
         String sql = "UPDATE recepcny SET heslo =? WHERE id=?";
         jdbcTemplate.update(sql, recepcny.getHeslo(), recepcny.getId());
     }
 
+    @Override
+    public void pridajRecepcneho(Recepcny recepcny) throws NevalidnyVstupException {
+        String sql = "INSERT INTO recepcny (meno_priezvisko, login, heslo, salt) VALUES (?, ?, ?, ?)";
+        try {
+            jdbcTemplate.update(sql, recepcny.getMeno(), recepcny.getLogin(), recepcny.getHeslo(), recepcny.getSalt());
+        } catch (DuplicateKeyException e) {
+            throw new NevalidnyVstupException("Zvolený login je už použitý!");
+        }
+    }
 }

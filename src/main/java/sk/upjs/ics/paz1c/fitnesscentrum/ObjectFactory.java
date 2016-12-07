@@ -32,6 +32,7 @@ public enum ObjectFactory {
     private VstupneDao vstupneDao;
     private KreditDao kreditDao;
     private HesloManager hesloManager;
+    private RecepcnyManager recepcnyManager;
 
     public JdbcTemplate getJdbcTemplate() {
         if (jdbcTemplate == null) {
@@ -110,5 +111,12 @@ public enum ObjectFactory {
             hesloManager = new HesloManager();
         }
         return hesloManager;
+    }
+    
+        public RecepcnyManager getRecepcnyManager() {
+        if (recepcnyManager == null) {
+            recepcnyManager = new RecepcnyManager();
+        }
+        return recepcnyManager;
     }
 }

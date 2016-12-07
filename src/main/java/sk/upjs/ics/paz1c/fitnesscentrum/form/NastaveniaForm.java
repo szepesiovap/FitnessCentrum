@@ -42,7 +42,7 @@ public class NastaveniaForm extends javax.swing.JDialog {
         super(new javax.swing.JFrame(), true);
         initComponents();
         aktualizovatVstupneTabbedPane();
-    }  
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.

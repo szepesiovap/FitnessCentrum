@@ -1,18 +1,13 @@
 package sk.upjs.ics.paz1c.fitnesscentrum.form;
 
 import javax.swing.JOptionPane;
-import org.springframework.dao.DuplicateKeyException;
 import sk.upjs.ics.paz1c.fitnesscentrum.ObjectFactory;
-import sk.upjs.ics.paz1c.fitnesscentrum.HesloManager;
-
-import sk.upjs.ics.paz1c.fitnesscentrum.dao.RecepcnyDao;
-import sk.upjs.ics.paz1c.fitnesscentrum.entity.Recepcny;
+import sk.upjs.ics.paz1c.fitnesscentrum.NevalidnyVstupException;
+import sk.upjs.ics.paz1c.fitnesscentrum.RecepcnyManager;
 
 public class NovyRecepcnyForm extends javax.swing.JDialog {
 
-    private Recepcny recepcny;
-    private final RecepcnyDao recepcnyDao = ObjectFactory.INSTANCE.getRecepcnyDao();
-    private final HesloManager hesloManager = ObjectFactory.INSTANCE.getHesloManager();
+    private static RecepcnyManager recepcnyManager = ObjectFactory.INSTANCE.getRecepcnyManager();
 
     /**
      * Creates new form NovyRecepcnyForm
@@ -139,49 +134,18 @@ public class NovyRecepcnyForm extends javax.swing.JDialog {
     }//GEN-LAST:event_zrusitButtonActionPerformed
 
     private void ulozitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ulozitButtonActionPerformed
-        String meno = menoTextField.getText();
-        String login = loginTextField.getText();
-
-        String noveHeslo = hesloPasswordField.getText();
-        String noveHesloZnova = hesloZnovaPasswordField.getText();
-        recepcny = new Recepcny();
-
-        if (!("").equals(meno)) {
-            recepcny.setMeno(meno);
-            if (!("").equals(login)) {
-                recepcny.setLogin(login);
-            } else {
-                JOptionPane.showMessageDialog(this, "Zadajte login");
-                return;
-            }
-        } else {
-            JOptionPane.showMessageDialog(this, "Zadajte meno");
-            return;
-        }
-
-        if (!("").equals(noveHeslo)) {
-            if (hesloManager.overZhoduHesiel(noveHesloZnova, noveHeslo)) {
-                String salt = hesloManager.vygenerujSalt();
-                recepcny.setSalt(salt);
-
-                String hashHeslo = hesloManager.zahesujHeslo(salt, noveHeslo);
-                recepcny.setHeslo(hashHeslo);
-            } else {
-                JOptionPane.showMessageDialog(this, "Heslo sa nezhoduje");
-                return;
-            }
-        } else {
-            JOptionPane.showMessageDialog(this, "Heslo nemôže byť prázdne.");
-            return;
-        }
-
         try {
-            recepcnyDao.pridajRecepcneho(recepcny);
-        } catch (DuplicateKeyException e) {
-            JOptionPane.showMessageDialog(this, "Zvolený login je už použitý");
-            return;
+            String meno = menoTextField.getText();
+            String login = loginTextField.getText();
+            
+            String noveHeslo = hesloPasswordField.getText();
+            String noveHesloZnova = hesloZnovaPasswordField.getText();
+            recepcnyManager.pridajRecepcneho(meno, login, noveHeslo, noveHesloZnova);
+            JOptionPane.showMessageDialog(this, "Recepčný " + meno +" s loginom " + login + " bol pridaný.");
+            dispose();
+        } catch (NevalidnyVstupException e) {
+            JOptionPane.showMessageDialog(this, e.getMessage());
         }
-        dispose();
 
     }//GEN-LAST:event_ulozitButtonActionPerformed
 

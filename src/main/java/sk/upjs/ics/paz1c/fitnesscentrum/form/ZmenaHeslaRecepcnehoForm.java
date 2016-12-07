@@ -1,20 +1,20 @@
 package sk.upjs.ics.paz1c.fitnesscentrum.form;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import sk.upjs.ics.paz1c.fitnesscentrum.ObjectFactory;
-import sk.upjs.ics.paz1c.fitnesscentrum.Hashovanie;
-import sk.upjs.ics.paz1c.fitnesscentrum.HesloManager;
-import sk.upjs.ics.paz1c.fitnesscentrum.dao.RecepcnyDao;
-import sk.upjs.ics.paz1c.fitnesscentrum.entity.Recepcny;
+import sk.upjs.ics.paz1c.fitnesscentrum.NeexistujuciRecepcnyException;
+import sk.upjs.ics.paz1c.fitnesscentrum.NevalidnyVstupException;
+import sk.upjs.ics.paz1c.fitnesscentrum.RecepcnyManager;
 
 public class ZmenaHeslaRecepcnehoForm extends javax.swing.JDialog {
 
-    private final RecepcnyDao recepcnyDao = ObjectFactory.INSTANCE.getRecepcnyDao();
-    private Recepcny recepcny;
-    private final HesloManager hesloManager = ObjectFactory.INSTANCE.getHesloManager();
-    
+    private final RecepcnyManager recepcnyManager = ObjectFactory.INSTANCE.getRecepcnyManager();
+
     /**
      * Creates new form ZmenaHeslaRecepcnehoJDialog
+     *
      * @param parent
      * @param modal
      */
@@ -127,35 +127,17 @@ public class ZmenaHeslaRecepcnehoForm extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void ulozitZmenyButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ulozitZmenyButtonActionPerformed
-        String login = loginTextField.getText();
-        String heslo = stareHesloPasswordField.getText();
-        String noveHeslo = noveHesloPasswordField.getText();
-        recepcny = recepcnyDao.dajRecepcneho(login);
-        String salt = recepcny.getSalt();
-        
-        if (recepcny != null && login.equals(recepcny.getLogin())) {
-            String hashovaneHeslo = hesloManager.zahesujHeslo(salt, heslo);
-            if (hesloManager.overZhoduHesiel(hashovaneHeslo, recepcny.getHeslo())) {
-                String noveHashovaneHeslo = hesloManager.zahesujHeslo(salt, noveHeslo);
-                String noveHashovaneHesloZnova = Hashovanie.zahesuj(salt, noveHesloZnovaPasswordField.getText());
+        try {
+            String login = loginTextField.getText();
+            String heslo = stareHesloPasswordField.getText();
+            String noveHeslo = noveHesloPasswordField.getText();
+            String noveHesloZnova = noveHesloZnovaPasswordField.getText();
 
-                if (!("").equals(noveHeslo)) {
-                    if (hesloManager.overZhoduHesiel(noveHashovaneHeslo, noveHashovaneHesloZnova)) {
-                        recepcny.setHeslo(noveHashovaneHeslo);
-                        ObjectFactory.INSTANCE.getRecepcnyDao().updateRecepcneho(recepcny);
-                        JOptionPane.showMessageDialog(this, "Heslo recepčného s loginom " + recepcny.getLogin() + " bolo zmenené!");
-                        this.dispose();
-                    } else {
-                        JOptionPane.showMessageDialog(this, "Nové heslo sa nezhoduje.");
-                    }
-                } else {
-                    JOptionPane.showMessageDialog(this, "Heslo nemôže byť prázdne.");
-                }
-            } else {
-                JOptionPane.showMessageDialog(this, "Nesprávne heslo");
-            }
-        } else {
-            JOptionPane.showMessageDialog(this, "Recepčný s daným loginom neexistuje");
+            recepcnyManager.zmenHesloRecepcneho(login, heslo, noveHeslo, noveHesloZnova);
+            JOptionPane.showMessageDialog(this, "Heslo recepčného s loginom " + login + " bolo zmenené!");
+            this.dispose();
+        } catch (NevalidnyVstupException | NeexistujuciRecepcnyException e) {
+            JOptionPane.showMessageDialog(this, e.getMessage());
         }
     }//GEN-LAST:event_ulozitZmenyButtonActionPerformed
 
