@@ -40,6 +40,116 @@ CREATE TABLE IF NOT EXISTS `fitnesscentrum`.`kluc` (
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8;
 
+
+-- -----------------------------------------------------
+-- Table `fitnesscentrum`.`kredit`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `fitnesscentrum`.`kredit` (
+  `id` INT(11) NOT NULL AUTO_INCREMENT,
+  `cena` DOUBLE NULL DEFAULT NULL,
+  `nazov` VARCHAR(20) NULL DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE INDEX `cena_UNIQUE` (`cena` ASC))
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8;
+
+
+-- -----------------------------------------------------
+-- Table `fitnesscentrum`.`recepcny`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `fitnesscentrum`.`recepcny` (
+  `id` INT(11) NOT NULL AUTO_INCREMENT,
+  `meno_priezvisko` VARCHAR(60) NULL DEFAULT NULL,
+  `login` VARCHAR(45) NOT NULL,
+  `heslo` VARCHAR(75) NULL DEFAULT NULL,
+  `salt` VARCHAR(75) NULL DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE INDEX `login_UNIQUE` (`login` ASC))
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8;
+
+
+-- -----------------------------------------------------
+-- Table `fitnesscentrum`.`spinning`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `fitnesscentrum`.`spinning` (
+  `id` INT(11) NOT NULL AUTO_INCREMENT,
+  `datum` TIMESTAMP NULL DEFAULT NULL,
+  `kapacita` INT(11) NULL DEFAULT NULL,
+  `volne` INT(11) NULL DEFAULT NULL,
+  `id_instruktora` INT(11) NULL DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  INDEX `id_instruktora_idx` (`id_instruktora` ASC),
+  CONSTRAINT `idTrenera`
+    FOREIGN KEY (`id_instruktora`)
+    REFERENCES `fitnesscentrum`.`instruktor` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8;
+
+
+-- -----------------------------------------------------
+-- Table `fitnesscentrum`.`zakaznik`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `fitnesscentrum`.`zakaznik` (
+  `id` INT(11) NOT NULL AUTO_INCREMENT,
+  `meno_priezvisko` VARCHAR(45) NULL DEFAULT NULL,
+  `posledny_prichod` TIMESTAMP NULL DEFAULT NULL,
+  `pritomny` TINYINT(1) NULL DEFAULT NULL,
+  `kredit` DOUBLE NULL DEFAULT NULL,
+  `cislo_permanentky` VARCHAR(20) NULL DEFAULT NULL,
+  `id_kluca` INT(11) NULL DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE INDEX `cislo_permanentky_UNIQUE` (`cislo_permanentky` ASC))
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8;
+
+
+-- -----------------------------------------------------
+-- Table `fitnesscentrum`.`rezervacia`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `fitnesscentrum`.`rezervacia` (
+  `id_rezervacia` INT(11) NOT NULL AUTO_INCREMENT,
+  `id_spinning` INT(11) NULL DEFAULT NULL,
+  `id_zakaznik` INT(11) NULL DEFAULT NULL,
+  `cas_rezervacie` TIMESTAMP NULL DEFAULT NULL,
+  `spinning_id` INT(11) NOT NULL,
+  `zakaznik_id` INT(11) NOT NULL,
+  PRIMARY KEY (`id_rezervacia`),
+  INDEX `fk_rezervacia_spinning1_idx` (`spinning_id` ASC),
+  INDEX `fk_rezervacia_zakaznik1_idx` (`zakaznik_id` ASC),
+  CONSTRAINT `fk_rezervacia_spinning1`
+    FOREIGN KEY (`spinning_id`)
+    REFERENCES `fitnesscentrum`.`spinning` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_rezervacia_zakaznik1`
+    FOREIGN KEY (`zakaznik_id`)
+    REFERENCES `fitnesscentrum`.`zakaznik` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8;
+
+
+-- -----------------------------------------------------
+-- Table `fitnesscentrum`.`vstupne`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `fitnesscentrum`.`vstupne` (
+  `id` INT(11) NOT NULL AUTO_INCREMENT,
+  `cena_vstupneho` DOUBLE NULL DEFAULT NULL,
+  `cena_spinningu` DOUBLE NULL DEFAULT NULL,
+  PRIMARY KEY (`id`))
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8;
+
+
+SET SQL_MODE=@OLD_SQL_MODE;
+SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
+SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
+
+
 INSERT INTO `fitnesscentrum`.`kluc` (`meno_kluca`) VALUES ('1M');
 INSERT INTO `fitnesscentrum`.`kluc` (`meno_kluca`) VALUES ('2M');
 INSERT INTO `fitnesscentrum`.`kluc` (`meno_kluca`) VALUES ('3M');
@@ -72,108 +182,18 @@ INSERT INTO `fitnesscentrum`.`kluc` (`meno_kluca`) VALUES ('14Z');
 INSERT INTO `fitnesscentrum`.`kluc` (`meno_kluca`) VALUES ('15Z');
 
 
--- -----------------------------------------------------
--- Table `fitnesscentrum`.`kredit`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `fitnesscentrum`.`kredit` (
-  `id` INT(11) NOT NULL AUTO_INCREMENT,
-  `cena` DOUBLE NULL DEFAULT NULL,
-  `nazov` VARCHAR(20) NULL DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE INDEX `cena_UNIQUE` (`cena` ASC))
-ENGINE = InnoDB
-DEFAULT CHARACTER SET = utf8;
-
 INSERT INTO `fitnesscentrum`.`kredit` (`cena`, `nazov`) VALUES ('30', '30 eur');
 INSERT INTO `fitnesscentrum`.`kredit` (`cena`, `nazov`) VALUES ('50', '50 eur');
 INSERT INTO `fitnesscentrum`.`kredit` (`cena`, `nazov`) VALUES ('80', '80 eur');
 
 
--- -----------------------------------------------------
--- Table `fitnesscentrum`.`recepcny`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `fitnesscentrum`.`recepcny` (
-  `id` INT(11) NOT NULL AUTO_INCREMENT,
-  `meno_priezvisko` VARCHAR(60) NULL DEFAULT NULL,
-  `login` VARCHAR(45) NOT NULL,
-  `heslo` VARCHAR(75) NULL DEFAULT NULL,
-  `salt` VARCHAR(75) NULL DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE INDEX `login_UNIQUE` (`login` ASC))
-ENGINE = InnoDB
-DEFAULT CHARACTER SET = utf8;
-
 INSERT INTO `fitnesscentrum`.`recepcny` (`meno_priezvisko`, `login`, `heslo`, `salt`)
 VALUES ('admin','admin','CE6736FEFE7C7F09E83206EDF1756C182D81824EF987542EBBA1244202F0319E', 'd19d6534-e083-4f93-96b9-8499c09dc811');
+
 
 UPDATE `fitnesscentrum`.`recepcny` SET id = 0 WHERE id = 1;
 
 
--- -----------------------------------------------------
--- Table `fitnesscentrum`.`rezervacia`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `fitnesscentrum`.`rezervacia` (
-  `id_rezervacia` INT(11) NOT NULL AUTO_INCREMENT,
-  `id_spinning` INT(11) NULL DEFAULT NULL,
-  `id_zakaznik` INT(11) NULL DEFAULT NULL,
-  `cas_rezervacie` TIMESTAMP NULL DEFAULT NULL,
-  PRIMARY KEY (`id_rezervacia`))
-ENGINE = InnoDB
-DEFAULT CHARACTER SET = utf8;
-
-
--- -----------------------------------------------------
--- Table `fitnesscentrum`.`spinning`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `fitnesscentrum`.`spinning` (
-  `id` INT(11) NOT NULL AUTO_INCREMENT,
-  `datum` TIMESTAMP NULL DEFAULT NULL,
-  `kapacita` INT(11) NULL DEFAULT NULL,
-  `volne` INT(11) NULL DEFAULT NULL,
-  `id_instruktora` INT(11) NULL DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  INDEX `id_instruktora_idx` (`id_instruktora` ASC),
-  CONSTRAINT `idTrenera`
-    FOREIGN KEY (`id_instruktora`)
-    REFERENCES `fitnesscentrum`.`instruktor` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB
-DEFAULT CHARACTER SET = utf8;
-
-
--- -----------------------------------------------------
--- Table `fitnesscentrum`.`vstupne`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `fitnesscentrum`.`vstupne` (
-  `id` INT(11) NOT NULL AUTO_INCREMENT,
-  `cena_vstupneho` DOUBLE NULL DEFAULT NULL,
-  `cena_spinningu` DOUBLE NULL DEFAULT NULL,
-  PRIMARY KEY (`id`))
-ENGINE = InnoDB
-DEFAULT CHARACTER SET = utf8;
-
 -- opatrenie, aby tam nikdy nebolo null
 INSERT INTO `fitnesscentrum`.`vstupne` (`cena_vstupneho`, `cena_spinningu`) VALUES ('3','5');
 
-
--- -----------------------------------------------------
--- Table `fitnesscentrum`.`zakaznik`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `fitnesscentrum`.`zakaznik` (
-  `id` INT(11) NOT NULL AUTO_INCREMENT,
-  `meno_priezvisko` VARCHAR(45) NULL DEFAULT NULL,
-  `posledny_prichod` TIMESTAMP NULL DEFAULT NULL,
-  `pritomny` TINYINT(1) NULL DEFAULT NULL,
-  `kredit` DOUBLE NULL DEFAULT NULL,
-  `cislo_permanentky` VARCHAR(20) NULL DEFAULT NULL,
-  `id_kluca` INT(11) NULL DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE INDEX `cislo_permanentky_UNIQUE` (`cislo_permanentky` ASC))
-ENGINE = InnoDB
-DEFAULT CHARACTER SET = utf8;
-
-
-SET SQL_MODE=@OLD_SQL_MODE;
-SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
-SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;

@@ -6,15 +6,14 @@ import static org.junit.Assert.*;
 import org.springframework.dao.DuplicateKeyException;
 import sk.upjs.ics.paz1c.fitnesscentrum.NevalidnyVstupException;
 import sk.upjs.ics.paz1c.fitnesscentrum.ObjectFactory;
-import sk.upjs.ics.paz1c.fitnesscentrum.RecepcnyManager;
 import sk.upjs.ics.paz1c.fitnesscentrum.dao.RecepcnyDao;
 import sk.upjs.ics.paz1c.fitnesscentrum.entity.Recepcny;
 
 public class MySQLRecepcnyDaoTest extends PripravaNaTestovanie {
 
     private static final RecepcnyDao recepcnyDao = ObjectFactory.INSTANCE.getRecepcnyDao();
-    private RecepcnyManager recepcnyManager = ObjectFactory.INSTANCE.getRecepcnyManager();
-    
+    private Recepcny recepcny;
+
     /**
      * Test of dajRecepcneho method, of class MySQLRecepcnyDao.
      */
@@ -36,16 +35,21 @@ public class MySQLRecepcnyDaoTest extends PripravaNaTestovanie {
 
     /**
      * Test of pridajRecepcneho method, of class MySQLRecepcnyDao.
+     *
      * @throws sk.upjs.ics.paz1c.fitnesscentrum.NevalidnyVstupException
      */
     @Test
     public void testPridajRecepcneho() throws NevalidnyVstupException {
+        recepcny = new Recepcny();
         String meno = "Jozko Mrkvicka";
         String login = "jozko";
         String heslo = "0000";
-        String hesloZnova = "0000";
-        
-        recepcnyManager.pridajRecepcneho(meno, login, heslo, hesloZnova);
+
+        recepcny.setMeno(meno);
+        recepcny.setLogin(login);
+        recepcny.setHeslo(heslo);
+
+        recepcnyDao.pridajRecepcneho(recepcny);
 
         List<Recepcny> listRecepcnych = recepcnyDao.dajVsetkychRecepcnych();
         boolean jePridany = false;
@@ -60,21 +64,23 @@ public class MySQLRecepcnyDaoTest extends PripravaNaTestovanie {
     /**
      * Test unikatneho loginu pre pridajRecepcneho method, of class
      * MySQLRecepcnyDao.
+     *
      * @throws sk.upjs.ics.paz1c.fitnesscentrum.NevalidnyVstupException
      */
     @Test
     public void testPridajRovnakehoRecepcneho() throws NevalidnyVstupException {
-        Recepcny recepcny = new Recepcny();
+        recepcny = new Recepcny();
         String meno = "Jozko Mrkvicka";
         String login = "jozko";
         String heslo = "0000";
-        String hesloZnova = "0000";        
 
         recepcny.setMeno(meno);
         recepcny.setLogin(login);
-        recepcnyManager.pridajRecepcneho(meno, login, heslo, hesloZnova);
+        recepcny.setHeslo(heslo);
+
+        recepcnyDao.pridajRecepcneho(recepcny);
         try {
-            recepcnyManager.pridajRecepcneho(meno, login, heslo, hesloZnova);
+            recepcnyDao.pridajRecepcneho(recepcny);
             fail("Login musi byt unikatny.");
         } catch (DuplicateKeyException e) {
             // Vsetko v poriadku, login recepneho musi byt unikatny
@@ -115,7 +121,7 @@ public class MySQLRecepcnyDaoTest extends PripravaNaTestovanie {
     @Test
     public void testUpdateRecepcneho() {
         String noveHeslo = "noveHeslo";
-        Recepcny recepcny = recepcnyDao.dajRecepcneho(2L);
+        recepcny = recepcnyDao.dajRecepcneho(2L);
         recepcny.setHeslo(noveHeslo);
         recepcnyDao.zmenaHeslaRecepcneho(recepcny);
         recepcny = recepcnyDao.dajRecepcneho(2L);

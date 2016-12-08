@@ -137,9 +137,9 @@ public class NovyRecepcnyForm extends javax.swing.JDialog {
         try {
             String meno = menoTextField.getText();
             String login = loginTextField.getText();
-            
             String noveHeslo = hesloPasswordField.getText();
             String noveHesloZnova = hesloZnovaPasswordField.getText();
+            
             recepcnyManager.pridajRecepcneho(meno, login, noveHeslo, noveHesloZnova);
             JOptionPane.showMessageDialog(this, "Recepčný " + meno +" s loginom " + login + " bol pridaný.");
             dispose();

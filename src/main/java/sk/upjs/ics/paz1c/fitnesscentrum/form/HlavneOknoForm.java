@@ -83,11 +83,6 @@ public final class HlavneOknoForm extends javax.swing.JFrame {
                 odchodMenuMousePressed(evt);
             }
         });
-        odchodMenu.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                odchodMenuActionPerformed(evt);
-            }
-        });
         hlavneOknoMenuBar.add(odchodMenu);
 
         zoznamMenu.setText("Zoznam ");
@@ -203,10 +198,6 @@ public final class HlavneOknoForm extends javax.swing.JFrame {
     private void zoznamMenuMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_zoznamMenuMousePressed
         new ZoznamForm(this).setVisible(true);
     }//GEN-LAST:event_zoznamMenuMousePressed
-
-    private void odchodMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_odchodMenuActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_odchodMenuActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenu dobiMenu;

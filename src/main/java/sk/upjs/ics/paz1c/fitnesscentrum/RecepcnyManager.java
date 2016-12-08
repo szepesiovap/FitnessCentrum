@@ -1,5 +1,6 @@
 package sk.upjs.ics.paz1c.fitnesscentrum;
 
+import java.util.UUID;
 import sk.upjs.ics.paz1c.fitnesscentrum.dao.RecepcnyDao;
 import sk.upjs.ics.paz1c.fitnesscentrum.entity.Recepcny;
 
@@ -25,7 +26,7 @@ public class RecepcnyManager {
 
         if (!("").equals(noveHeslo)) {
             if (hesloManager.overZhoduHesiel(noveHesloZnova, noveHeslo)) {
-                String salt = hesloManager.vygenerujSalt();
+                String salt = UUID.randomUUID().toString();
                 recepcny.setSalt(salt);
 
                 String hashHeslo = hesloManager.zahesujHeslo(salt, noveHeslo);
