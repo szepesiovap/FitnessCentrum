@@ -18,10 +18,10 @@ public class RecepcnyManager {
             if (!("").equals(login)) {
                 recepcny.setLogin(login);
             } else {
-                throw new NevalidnyVstupException("Zadajte login"); //zmenaa
+                throw new NevalidnyVstupException("Zadajte login!");
             }
         } else {
-            throw new NevalidnyVstupException("Zadajte meno"); //zmenaa
+            throw new NevalidnyVstupException("Zadajte meno!");
         }
 
         if (!("").equals(noveHeslo)) {
@@ -32,11 +32,11 @@ public class RecepcnyManager {
                 String hashHeslo = hesloManager.zahesujHeslo(salt, noveHeslo);
                 recepcny.setHeslo(hashHeslo);
             } else {
-                throw new NevalidnyVstupException("Heslo sa nezhoduje");//zmenaa
+                throw new NevalidnyVstupException("Heslo sa nezhoduje!");
             }
 
         } else {
-            throw new NevalidnyVstupException("Heslo nemôže byť prázdne.");//zmenaa
+            throw new NevalidnyVstupException("Nové heslo nemôže byť prázdne!");
         }
 
         ObjectFactory.INSTANCE.getRecepcnyDao()
@@ -61,7 +61,7 @@ public class RecepcnyManager {
                         throw new NevalidnyVstupException("Nové heslo sa nezhoduje!");
                     }
                 } else {
-                    throw new NevalidnyVstupException("Heslo nemôže byť prázdne!");
+                    throw new NevalidnyVstupException("Nové heslo nemôže byť prázdne!");
                 }
             } else {
                 throw new NevalidnyVstupException("Nesprávne heslo!");

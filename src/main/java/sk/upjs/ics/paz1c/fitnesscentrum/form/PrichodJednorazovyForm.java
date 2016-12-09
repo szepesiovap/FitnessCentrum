@@ -99,7 +99,8 @@ public class PrichodJednorazovyForm extends javax.swing.JDialog {
 
     private void prichodButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_prichodButtonActionPerformed
         try {
-            Long idZakaznika = (Long) zoznamZakaznikovTable.getModel().getValueAt(this.zoznamZakaznikovTable.getSelectedRow(), ID_COLUMN);
+            Long idZakaznika = (Long) zoznamZakaznikovTable.getModel().
+                    getValueAt(this.zoznamZakaznikovTable.getSelectedRow(), ID_COLUMN);
             Zakaznik zakaznik = zakaznikDao.dajZakaznikaSId(idZakaznika);
             if (!zakaznik.isPritomny()) {
                 new PotvrditPrichodZakaznikaForm(this, true, zakaznik).setVisible(true);
@@ -108,7 +109,7 @@ public class PrichodJednorazovyForm extends javax.swing.JDialog {
                 JOptionPane.showMessageDialog(this, "Zákazník je už prítomný!");
             }
         } catch (ArrayIndexOutOfBoundsException e) {
-            JOptionPane.showMessageDialog(null, "Vyber zákazníka na príchod.");
+            JOptionPane.showMessageDialog(null, "Vyber zákazníka na príchod!");
         }
     }//GEN-LAST:event_prichodButtonActionPerformed
 

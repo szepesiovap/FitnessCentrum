@@ -88,7 +88,7 @@ public class MySQLRezervaciaDao implements RezervaciaDao {
                 + "    zakaznik.kredit AS z_kredit,\n"
                 + "    zakaznik.cislo_permanentky AS z_cislo_permanentky,\n"
                 + "	zakaznik.id_kluca AS kluc_id, \n"
-                + "	kluc.meno_kluca AS kluc_meno \n"
+                + "     kluc.meno_kluca AS kluc_meno \n"
                 + "    FROM rezervacia LEFT JOIN (spinning,zakaznik,instruktor)\n"
                 + "    ON rezervacia.id_spinning = spinning.id "
                 + "AND rezervacia.id_zakaznik=zakaznik.id "

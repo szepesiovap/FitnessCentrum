@@ -54,12 +54,24 @@ DEFAULT CHARACTER SET = utf8;
 -- -----------------------------------------------------
 -- Table `testFitnesscentrum`.`rezervacia`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `testFitnesscentrum`.`rezervacia` (
+CREATE TABLE IF NOT EXISTS `fitnesscentrum`.`rezervacia` (
   `id_rezervacia` INT(11) NOT NULL AUTO_INCREMENT,
   `id_spinning` INT(11) NULL DEFAULT NULL,
   `id_zakaznik` INT(11) NULL DEFAULT NULL,
   `cas_rezervacie` TIMESTAMP NULL DEFAULT NULL,
-  PRIMARY KEY (`id_rezervacia`))
+  PRIMARY KEY (`id_rezervacia`),
+  INDEX `zakaznik.id_idx` (`id_zakaznik` ASC),
+  INDEX `spinning.id_idx` (`id_spinning` ASC),
+  CONSTRAINT `spinning.id`
+    FOREIGN KEY (`id_spinning`)
+    REFERENCES `fitnesscentrum`.`spinning` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `zakaznik.id`
+    FOREIGN KEY (`id_zakaznik`)
+    REFERENCES `fitnesscentrum`.`zakaznik` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8;
 

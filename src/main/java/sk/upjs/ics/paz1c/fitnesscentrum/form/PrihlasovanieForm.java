@@ -2,6 +2,7 @@ package sk.upjs.ics.paz1c.fitnesscentrum.form;
 
 import javax.swing.JOptionPane;
 import javax.swing.UIManager;
+import sk.upjs.ics.paz1c.fitnesscentrum.HesloManager;
 import sk.upjs.ics.paz1c.fitnesscentrum.ObjectFactory;
 import sk.upjs.ics.paz1c.fitnesscentrum.dao.RecepcnyDao;
 import sk.upjs.ics.paz1c.fitnesscentrum.entity.Recepcny;
@@ -9,6 +10,7 @@ import sk.upjs.ics.paz1c.fitnesscentrum.entity.Recepcny;
 public class PrihlasovanieForm extends javax.swing.JFrame {
 
     private final RecepcnyDao recepcnyDao = ObjectFactory.INSTANCE.getRecepcnyDao();
+    private final HesloManager hesloManager = ObjectFactory.INSTANCE.getHesloManager();
 
     /**
      * Creates new form PrihlasovanieForm
@@ -51,12 +53,6 @@ public class PrihlasovanieForm extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("User Login");
         setName("prihlasenieFrame"); // NOI18N
-
-        loginTextField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                loginTextFieldActionPerformed(evt);
-            }
-        });
 
         loginLabel.setText("login:");
 
@@ -136,35 +132,28 @@ public class PrihlasovanieForm extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void loginTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginTextFieldActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_loginTextFieldActionPerformed
-
     private void prihlasitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_prihlasitButtonActionPerformed
         String heslo = hesloPasswordField.getText();
         String login = loginTextField.getText();
-
         Recepcny recepcny = recepcnyDao.dajRecepcneho(login);
-        /*// funkcne prihlasovanie s databazou
-        if (recepcny != null && login.equals(recepcny.getLogin())) {
-            String hashovaneHeslo = HesloManager.zahesujHeslo(recepcny.getSalt(), heslo);
-            if (HesloManager.overZhoduHesiel(hashovaneHeslo, recepcny.getHeslo())) {
+
+        // funkcne prihlasovanie s databazou
+        /* if (recepcny != null) {
+            if (hesloManager.overHeslo(recepcny.getSalt(), heslo, recepcny.getId())) {
                 new HlavneOknoForm().setVisible(true);
                 this.dispose();
-                return;
             } else {
-                JOptionPane.showMessageDialog(this, "Nesprávne heslo");
+                JOptionPane.showMessageDialog(this, "Zadané heslo nie je správne!");
             }
-        }else{
-            JOptionPane.showMessageDialog(this, "Recepčný s daným loginom neexistuje");
+        } else {
+            JOptionPane.showMessageDialog(this, "Recepčný so zadaným loginom neexistuje!");
         }*/
-
         //docasne!!!!!!!
         if ((recepcny != null) || (1 == 1)) {
             new HlavneOknoForm().setVisible(true);
             this.dispose();
         } else {
-            JOptionPane.showMessageDialog(this, "Nespravne prihlasovacie udaje");
+            JOptionPane.showMessageDialog(this, "Nesprávne prihlasovacie údaje!");
         }
     }//GEN-LAST:event_prihlasitButtonActionPerformed
 
@@ -184,7 +173,7 @@ public class PrihlasovanieForm extends javax.swing.JFrame {
         new OverenieHeslaForm(this, true, "nastavenia").setVisible(true);
     }//GEN-LAST:event_nastaveniaMousePressed
 
-        /**
+    /**
      * @param args the command line arguments
      */
     public static void main(String args[]) {
@@ -198,16 +187,24 @@ public class PrihlasovanieForm extends javax.swing.JFrame {
                 if ("Nimbus".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
+
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(PrihlasovanieForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(PrihlasovanieForm.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
+
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(PrihlasovanieForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(PrihlasovanieForm.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
+
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(PrihlasovanieForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(PrihlasovanieForm.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
+
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(PrihlasovanieForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(PrihlasovanieForm.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
         try {
@@ -224,7 +221,7 @@ public class PrihlasovanieForm extends javax.swing.JFrame {
             }
         });
     }
-    
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel hesloLabel;
     private javax.swing.JPasswordField hesloPasswordField;

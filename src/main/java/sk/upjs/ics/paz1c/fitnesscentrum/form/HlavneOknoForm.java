@@ -1,5 +1,6 @@
 package sk.upjs.ics.paz1c.fitnesscentrum.form;
 
+import javax.swing.JOptionPane;
 import sk.upjs.ics.paz1c.fitnesscentrum.ObjectFactory;
 import sk.upjs.ics.paz1c.fitnesscentrum.PritomniZakazniciTableModel;
 import sk.upjs.ics.paz1c.fitnesscentrum.dao.KlucDao;
@@ -169,7 +170,7 @@ public final class HlavneOknoForm extends javax.swing.JFrame {
             zakaznikDao.odchod(zakaznik);
             aktualizovatZoznamPritomnych();
         } catch (ArrayIndexOutOfBoundsException e) {
-            System.err.println("Nebol vybrany ziaden zakaznik");
+            JOptionPane.showMessageDialog(this, "Nie je vybraný žiaden zákazník!");
         }
     }//GEN-LAST:event_odchodMenuMousePressed
 

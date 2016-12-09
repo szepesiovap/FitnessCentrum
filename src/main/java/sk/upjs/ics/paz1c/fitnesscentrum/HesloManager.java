@@ -6,8 +6,8 @@ public class HesloManager {
     
     private static HesloManager hesloManager = ObjectFactory.INSTANCE.getHesloManager();
 
-    public boolean overZhoduHesiel(String zadaneHeslo, String heslo) {
-        return zadaneHeslo.equals(heslo);
+    public boolean overZhoduHesiel(String zadaneHeslo, String hesloVDb) {
+        return zadaneHeslo.equals(hesloVDb);
     }
 
     public String zahesujHeslo(String salt, String heslo) {

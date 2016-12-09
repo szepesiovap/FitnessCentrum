@@ -114,18 +114,16 @@ CREATE TABLE IF NOT EXISTS `fitnesscentrum`.`rezervacia` (
   `id_spinning` INT(11) NULL DEFAULT NULL,
   `id_zakaznik` INT(11) NULL DEFAULT NULL,
   `cas_rezervacie` TIMESTAMP NULL DEFAULT NULL,
-  `spinning_id` INT(11) NOT NULL,
-  `zakaznik_id` INT(11) NOT NULL,
   PRIMARY KEY (`id_rezervacia`),
-  INDEX `fk_rezervacia_spinning1_idx` (`spinning_id` ASC),
-  INDEX `fk_rezervacia_zakaznik1_idx` (`zakaznik_id` ASC),
-  CONSTRAINT `fk_rezervacia_spinning1`
-    FOREIGN KEY (`spinning_id`)
+  INDEX `zakaznik.id_idx` (`id_zakaznik` ASC),
+  INDEX `spinning.id_idx` (`id_spinning` ASC),
+  CONSTRAINT `spinning.id`
+    FOREIGN KEY (`id_spinning`)
     REFERENCES `fitnesscentrum`.`spinning` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
-  CONSTRAINT `fk_rezervacia_zakaznik1`
-    FOREIGN KEY (`zakaznik_id`)
+  CONSTRAINT `zakaznik.id`
+    FOREIGN KEY (`id_zakaznik`)
     REFERENCES `fitnesscentrum`.`zakaznik` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)

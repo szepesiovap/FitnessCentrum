@@ -141,7 +141,7 @@ public class NovyRecepcnyForm extends javax.swing.JDialog {
             String noveHesloZnova = hesloZnovaPasswordField.getText();
             
             recepcnyManager.pridajRecepcneho(meno, login, noveHeslo, noveHesloZnova);
-            JOptionPane.showMessageDialog(this, "Recepčný " + meno +" s loginom " + login + " bol pridaný.");
+            JOptionPane.showMessageDialog(this, "Recepčný " + meno +" s loginom " + login + " bol pridaný!");
             dispose();
         } catch (NevalidnyVstupException e) {
             JOptionPane.showMessageDialog(this, e.getMessage());

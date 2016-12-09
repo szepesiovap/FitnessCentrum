@@ -4,11 +4,9 @@ import javax.swing.JOptionPane;
 import sk.upjs.ics.paz1c.fitnesscentrum.ObjectFactory;
 import sk.upjs.ics.paz1c.fitnesscentrum.HesloManager;
 import sk.upjs.ics.paz1c.fitnesscentrum.dao.RecepcnyDao;
-import sk.upjs.ics.paz1c.fitnesscentrum.entity.Recepcny;
 
 public class OverenieHeslaForm extends javax.swing.JDialog {
 
-    private Recepcny recepcny;
     private final RecepcnyDao recepcnyDao = ObjectFactory.INSTANCE.getRecepcnyDao();
     private final String akcia;
     private final HesloManager hesloManager = ObjectFactory.INSTANCE.getHesloManager();
@@ -105,7 +103,7 @@ public class OverenieHeslaForm extends javax.swing.JDialog {
                 new NovyRecepcnyForm().setVisible(true);
             }
         } else {
-            JOptionPane.showMessageDialog(null, "Zadané heslo nie je správne");
+            JOptionPane.showMessageDialog(null, "Zadané heslo nie je správne!");
         }
     }//GEN-LAST:event_potvrditButtonActionPerformed
 

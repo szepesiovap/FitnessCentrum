@@ -18,6 +18,7 @@ public class SpinningForm extends javax.swing.JDialog {
 
     /**
      * Creates new form SpinningForm
+     *
      * @param parent
      * @param modal
      */
@@ -196,29 +197,28 @@ public class SpinningForm extends javax.swing.JDialog {
             rezervacia = rezervaciaDao.dajRezervaciuSId(idRezervacie);
 
             if (rezervacia != null) {
-                Object[] options = {"Zmazať", "Zrušiť"};
+                Object[] options = {"Odhlásiť", "Zrušiť"};
                 if (JOptionPane.showOptionDialog(this, "Naozaj chcete odhlásiť zo spinningu zakaznika " + rezervacia.getZakaznik().getMeno() + "?",
-                        "Zruš rezervaciu",
+                        "Odhlásiť zo spinningu",
                         JOptionPane.DEFAULT_OPTION, JOptionPane.PLAIN_MESSAGE, null,
-                        options, options[1]) == 1) {
-                    return;
+                        options, options[0]) == JOptionPane.YES_OPTION) {
+                    rezervaciaDao.odstranRezervacia(idRezervacie);
                 }
-                rezervaciaDao.odstranRezervacia(idRezervacie);
             }
-            
-            Spinning spinning = (Spinning)spinningComboBox.getSelectedItem();
+
+            Spinning spinning = (Spinning) spinningComboBox.getSelectedItem();
             spinningDao.odrezervujSpinning(spinning);
-            
+
             ((RezervaciaTableModel) rezervacieTable.getModel()).aktualizovat();
             ((SpinningComboBoxModel) spinningComboBox.getModel()).aktualizovat();
 
         } catch (ArrayIndexOutOfBoundsException e) {
-            JOptionPane.showMessageDialog(null, "Vyber zákazníka na odhlásenie zo spinningu.");
+            JOptionPane.showMessageDialog(null, "Vyber zákazníka na odhlásenie zo spinningu!");
         }
     }//GEN-LAST:event_odhlasitZoSpinninguMenuMousePressed
 
     private void zrusitSpinnigMenuMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_zrusitSpinnigMenuMousePressed
-        new ZrusitSpinningForm().setVisible(true);
+        new ZmazatSpinningForm().setVisible(true);
     }//GEN-LAST:event_zrusitSpinnigMenuMousePressed
 
     private void aktualizovatRezervacie() {

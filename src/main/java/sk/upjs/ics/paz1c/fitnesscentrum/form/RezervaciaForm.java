@@ -135,12 +135,16 @@ public class RezervaciaForm extends javax.swing.JDialog {
             rezervacia.setSpinning(spinning);
             rezervacia.setZakaznik(zakaznik);
             rezervacia.setCasRezervacie(LocalDateTime.now());
-            int reply = JOptionPane.showConfirmDialog(this, "Rezervovať miesto na spinningu pre zákazníka " + zakaznik.getMeno() + "?", "Potvrdiť rezerváciu", JOptionPane.YES_NO_OPTION);
-            if (reply == JOptionPane.YES_OPTION) {
+            
+            Object[] options = {"Rezervovať", "Zrušiť"};
+            if (JOptionPane.showOptionDialog(this, "Rezervovať miesto na spinningu pre zákazníka "
+                    + zakaznik.getMeno() + "?", "Potvrdiť rezerváciu",
+                    JOptionPane.DEFAULT_OPTION, JOptionPane.PLAIN_MESSAGE, null,
+                    options, options[0]) == JOptionPane.YES_OPTION) {
                 rezervaciaDao.pridajRezervaciu(rezervacia);
                 spinningDao.rezervujSpinning(spinning);
+                dispose();
             }
-            dispose();
         } catch (ArrayIndexOutOfBoundsException e) {
             JOptionPane.showMessageDialog(null, "Vyber zákazníka na rezerváciu.");
         }
