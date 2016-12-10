@@ -1,12 +1,13 @@
 package sk.upjs.ics.paz1c.fitnesscentrum.form;
 
+import javax.swing.JOptionPane;
 import sk.upjs.ics.paz1c.fitnesscentrum.ObjectFactory;
-import sk.upjs.ics.paz1c.fitnesscentrum.FitnessManager;
+import sk.upjs.ics.paz1c.fitnesscentrum.manager.InstruktorManager;
 import sk.upjs.ics.paz1c.fitnesscentrum.entity.Instruktor;
 
 public class PridatInstruktoraForm extends javax.swing.JDialog {
 
-    private final FitnessManager fitnessManager = ObjectFactory.INSTANCE.getFitnessManager();
+    private final InstruktorManager instruktorManager = ObjectFactory.INSTANCE.getInstruktorManager();
 
     /**
      * Creates new form PridajInstruktoraForm
@@ -94,7 +95,8 @@ public class PridatInstruktoraForm extends javax.swing.JDialog {
     private void pridatButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pridatButtonActionPerformed
         Instruktor instruktor = new Instruktor();
         instruktor.setMeno(menoInstruktoraTextField.getText());
-        fitnessManager.pridajInstruktora(instruktor);
+        instruktorManager.pridajInstruktora(instruktor);
+        JOptionPane.showMessageDialog(this, "Inštruktor " + instruktor.getMeno() + " bol pridaný!");
         dispose();
     }//GEN-LAST:event_pridatButtonActionPerformed
 

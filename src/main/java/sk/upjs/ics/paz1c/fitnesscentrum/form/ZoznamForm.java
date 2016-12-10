@@ -2,7 +2,7 @@ package sk.upjs.ics.paz1c.fitnesscentrum.form;
 
 import javax.swing.JOptionPane;
 import sk.upjs.ics.paz1c.fitnesscentrum.ObjectFactory;
-import sk.upjs.ics.paz1c.fitnesscentrum.FitnessManager;
+import sk.upjs.ics.paz1c.fitnesscentrum.manager.ZakaznikManager;
 import sk.upjs.ics.paz1c.fitnesscentrum.entity.Zakaznik;
 import sk.upjs.ics.paz1c.fitnesscentrum.exception.PritomnyZakaznikException;
 import sk.upjs.ics.paz1c.fitnesscentrum.model.ZakaznikTableModel;
@@ -10,7 +10,7 @@ import sk.upjs.ics.paz1c.fitnesscentrum.model.ZakaznikTableModel;
 public final class ZoznamForm extends javax.swing.JFrame {
 
     private static HlavneOknoForm hlavneOkno;
-    private final FitnessManager fitnessManager = ObjectFactory.INSTANCE.getFitnessManager();
+    private final ZakaznikManager zakaznikManager = ObjectFactory.INSTANCE.getZakaznikManager();
     private static final int ID_COLUMN = 5;
 
     /**
@@ -116,13 +116,13 @@ public final class ZoznamForm extends javax.swing.JFrame {
     private void zmazatButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_zmazatButtonActionPerformed
         try {
             Long idZakaznika = (Long) zoznamZakaznikovTable.getModel().getValueAt(this.zoznamZakaznikovTable.getSelectedRow(), ID_COLUMN);
-            Zakaznik zakaznik = fitnessManager.dajZakaznikaSId(idZakaznika);
+            Zakaznik zakaznik = zakaznikManager.dajZakaznikaSId(idZakaznika);
             Object[] options = {"Zmazať", "Zrušiť"};
             if (JOptionPane.showOptionDialog(this, "Chcete zmazať zákazníka "
                     + zakaznik.getMeno() + "?", "Zmazať zákazníka",
                     JOptionPane.DEFAULT_OPTION, JOptionPane.PLAIN_MESSAGE, null,
                     options, options[0]) == JOptionPane.YES_OPTION) {
-                fitnessManager.zmazZakaznika(zakaznik);
+                zakaznikManager.zmazZakaznika(zakaznik);
                 aktualizovatZoznamZakaznikov();
             }
         } catch (PritomnyZakaznikException e) {

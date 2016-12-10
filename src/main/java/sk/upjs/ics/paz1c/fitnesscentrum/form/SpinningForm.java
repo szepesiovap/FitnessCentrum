@@ -2,7 +2,8 @@ package sk.upjs.ics.paz1c.fitnesscentrum.form;
 
 import javax.swing.JOptionPane;
 import sk.upjs.ics.paz1c.fitnesscentrum.ObjectFactory;
-import sk.upjs.ics.paz1c.fitnesscentrum.FitnessManager;
+import sk.upjs.ics.paz1c.fitnesscentrum.manager.RezervaciaManager;
+import sk.upjs.ics.paz1c.fitnesscentrum.manager.SpinningManager;
 import sk.upjs.ics.paz1c.fitnesscentrum.model.RezervaciaTableModel;
 import sk.upjs.ics.paz1c.fitnesscentrum.model.SpinningComboBoxModel;
 import sk.upjs.ics.paz1c.fitnesscentrum.entity.Rezervacia;
@@ -11,7 +12,8 @@ import sk.upjs.ics.paz1c.fitnesscentrum.entity.Spinning;
 public class SpinningForm extends javax.swing.JDialog {
 
     private static final int ID_COLUMN = 2;
-    private final FitnessManager fitnessManager = ObjectFactory.INSTANCE.getFitnessManager();
+    private final RezervaciaManager rezervaciaManager = ObjectFactory.INSTANCE.getRezervaciaManager();
+    private final SpinningManager spinningManager = ObjectFactory.INSTANCE.getSpinningManager();
 
     /**
      * Creates new form SpinningForm
@@ -190,14 +192,14 @@ public class SpinningForm extends javax.swing.JDialog {
     private void odhlasitZoSpinninguMenuMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_odhlasitZoSpinninguMenuMousePressed
         try {
             Long idRezervacie = (Long) rezervacieTable.getModel().getValueAt(this.rezervacieTable.getSelectedRow(), ID_COLUMN);
-            Rezervacia rezervacia = fitnessManager.dajRezervaciuSId(idRezervacie);
+            Rezervacia rezervacia = rezervaciaManager.dajRezervaciuSId(idRezervacie);
             Spinning spinning = (Spinning) spinningComboBox.getSelectedItem();
             Object[] options = {"Odhlásiť", "Zrušiť"};
             if (JOptionPane.showOptionDialog(this, "Naozaj chcete odhlásiť zo spinningu zakaznika " + rezervacia.getZakaznik().getMeno() + "?",
                     "Odhlásiť zo spinningu",
                     JOptionPane.DEFAULT_OPTION, JOptionPane.PLAIN_MESSAGE, null,
                     options, options[0]) == JOptionPane.YES_OPTION) {
-                fitnessManager.odhlasitZoSpinningu(rezervacia, spinning);
+                spinningManager.odhlasitZoSpinningu(rezervacia, spinning);
             }
             aktualizovatRezervacie();
             aktualizovatSpinningy();

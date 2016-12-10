@@ -2,13 +2,13 @@ package sk.upjs.ics.paz1c.fitnesscentrum.form;
 
 import javax.swing.JOptionPane;
 import sk.upjs.ics.paz1c.fitnesscentrum.ObjectFactory;
-import sk.upjs.ics.paz1c.fitnesscentrum.FitnessManager;
+import sk.upjs.ics.paz1c.fitnesscentrum.manager.ZakaznikManager;
 import sk.upjs.ics.paz1c.fitnesscentrum.model.ZakaznikTableModel;
 import sk.upjs.ics.paz1c.fitnesscentrum.entity.Zakaznik;
 
 public class PrichodJednorazovyForm extends javax.swing.JDialog {
 
-    private final FitnessManager fitnessManager = ObjectFactory.INSTANCE.getFitnessManager();
+    private final ZakaznikManager zakaznikManager = ObjectFactory.INSTANCE.getZakaznikManager();
     private static final int ID_COLUMN = 5;
 
     /**
@@ -102,7 +102,7 @@ public class PrichodJednorazovyForm extends javax.swing.JDialog {
         try {
             Long idZakaznika = (Long) zoznamZakaznikovTable.getModel().
                     getValueAt(this.zoznamZakaznikovTable.getSelectedRow(), ID_COLUMN);
-            Zakaznik zakaznik = fitnessManager.dajZakaznikaSId(idZakaznika);
+            Zakaznik zakaznik = zakaznikManager.dajZakaznikaSId(idZakaznika);
             if (!zakaznik.isPritomny()) {
                 new PotvrditPrichodZakaznikaForm(this, true, zakaznik).setVisible(true);
                 aktualizovatZoznamZakaznikov();

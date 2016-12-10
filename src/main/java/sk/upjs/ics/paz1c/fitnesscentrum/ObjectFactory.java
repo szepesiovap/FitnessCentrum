@@ -1,23 +1,11 @@
 package sk.upjs.ics.paz1c.fitnesscentrum;
 
+import sk.upjs.ics.paz1c.fitnesscentrum.manager.impl.*;
 import com.mysql.cj.jdbc.MysqlDataSource;
 import org.springframework.jdbc.core.JdbcTemplate;
-import sk.upjs.ics.paz1c.fitnesscentrum.dao.InstruktorDao;
-import sk.upjs.ics.paz1c.fitnesscentrum.dao.KlucDao;
-import sk.upjs.ics.paz1c.fitnesscentrum.dao.KreditDao;
-import sk.upjs.ics.paz1c.fitnesscentrum.dao.RecepcnyDao;
-import sk.upjs.ics.paz1c.fitnesscentrum.dao.RezervaciaDao;
-import sk.upjs.ics.paz1c.fitnesscentrum.dao.SpinningDao;
-import sk.upjs.ics.paz1c.fitnesscentrum.dao.VstupneDao;
-import sk.upjs.ics.paz1c.fitnesscentrum.dao.ZakaznikDao;
-import sk.upjs.ics.paz1c.fitnesscentrum.dao.impl.MySQLInstruktorDao;
-import sk.upjs.ics.paz1c.fitnesscentrum.dao.impl.MySQLKlucDao;
-import sk.upjs.ics.paz1c.fitnesscentrum.dao.impl.MySQLKreditDao;
-import sk.upjs.ics.paz1c.fitnesscentrum.dao.impl.MySQLRecepcnyDao;
-import sk.upjs.ics.paz1c.fitnesscentrum.dao.impl.MySQLRezervaciaDao;
-import sk.upjs.ics.paz1c.fitnesscentrum.dao.impl.MySQLSpinningDao;
-import sk.upjs.ics.paz1c.fitnesscentrum.dao.impl.MySQLVstupneDao;
-import sk.upjs.ics.paz1c.fitnesscentrum.dao.impl.MySQLZakaznikDao;
+import sk.upjs.ics.paz1c.fitnesscentrum.dao.*;
+import sk.upjs.ics.paz1c.fitnesscentrum.dao.impl.*;
+import sk.upjs.ics.paz1c.fitnesscentrum.manager.*;
 
 public enum ObjectFactory {
 
@@ -34,8 +22,12 @@ public enum ObjectFactory {
     private HesloManager hesloManager;
     private RecepcnyManager recepcnyManager;
     private KreditManager kreditManager;
-    private DefaultFitnessManager fitnessManager;
     private KlucManager klucManager;
+    private InstruktorManager instruktorManager;
+    private RezervaciaManager rezervaciaManager;
+    private SpinningManager spinningManager;
+    private ZakaznikManager zakaznikManager;
+    private VstupneManager vstupneManager;
 
     public JdbcTemplate getJdbcTemplate() {
         if (jdbcTemplate == null) {
@@ -111,37 +103,64 @@ public enum ObjectFactory {
 
     public HesloManager getHesloManager() {
         if (hesloManager == null) {
-            hesloManager = new HesloManager();
+            hesloManager = new DefaultHesloManager();
         }
         return hesloManager;
     }
 
     public RecepcnyManager getRecepcnyManager() {
         if (recepcnyManager == null) {
-            recepcnyManager = new RecepcnyManager();
+            recepcnyManager = new DefaultRecepcnyManager();
         }
         return recepcnyManager;
     }
 
     public KreditManager getKreditManager() {
         if (kreditManager == null) {
-            kreditManager = new KreditManager();
+            kreditManager = new DefaultKreditManager();
         }
         return kreditManager;
     }
 
-    public DefaultFitnessManager getFitnessManager() {
-        if (fitnessManager == null) {
-            fitnessManager = new DefaultFitnessManager();
-        }
-        return fitnessManager;
-    }
-
     public KlucManager getKlucManager() {
         if (klucManager == null) {
-            klucManager = new KlucManager();
+            klucManager = new DefaultKlucManager();
         }
         return klucManager;
     }
 
+    public InstruktorManager getInstruktorManager() {
+        if (instruktorManager == null) {
+            instruktorManager = new DefaultInstruktorManager();
+        }
+        return instruktorManager;
+    }
+
+    public RezervaciaManager getRezervaciaManager() {
+        if (rezervaciaManager == null) {
+            rezervaciaManager = new DefaultRezervaciaManager();
+        }
+        return rezervaciaManager;
+    }
+
+    public SpinningManager getSpinningManager() {
+        if (spinningManager == null) {
+            spinningManager = new DefaultSpinningManager();
+        }
+        return spinningManager;
+    }
+
+    public ZakaznikManager getZakaznikManager() {
+        if (zakaznikManager == null) {
+            zakaznikManager = new DefaultZakaznikManager();
+        }
+        return zakaznikManager;
+    }
+
+    public VstupneManager getVstupneManager() {
+        if (vstupneManager == null) {
+            vstupneManager = new DefaultVstupneManager();
+        }
+        return vstupneManager;
+    }
 }

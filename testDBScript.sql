@@ -143,8 +143,9 @@ INSERT INTO `testFitnesscentrum`.`recepcny` (`meno_priezvisko`, `login`, `heslo`
 VALUES ('admin','admin','CE6736FEFE7C7F09E83206EDF1756C182D81824EF987542EBBA1244202F0319E', 'd19d6534-e083-4f93-96b9-8499c09dc811');
 UPDATE `testFitnesscentrum`.`recepcny` SET id = 0 WHERE id = 1;
 
+-- ma heslo 1111 (8BB4FFE3C9F049BAD909C4C9838B59A3292F1830FD66F10405BC559EB0706EB2)
 INSERT INTO `testFitnesscentrum`.`recepcny` (`meno_priezvisko`, `login`, `heslo`, `salt`)
-VALUES ('Ferko Nizky','ferko','8BB4FFE3C9F049BAD909C4C9838B59A3292F1830FD66F10405BC559EB0706EB2', '90ab8469-d66b-45fd-83ea-4497b0902413');
+VALUES ('Ferko Nizky','ferko','3A5941FAFEB710CC30E47E9CFA73445A49B4B217CD9A6D6FA4D1FCEF3BAD43FB', '90ab8469-d66b-45fd-83ea-4497b0902413');
 
 
 INSERT INTO `testFitnesscentrum`.`zakaznik` (`meno_priezvisko`, `posledny_prichod`, `pritomny`) VALUES ('Jan Vysoky', '2016-12-04 11:20:21', '0');

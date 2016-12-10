@@ -16,7 +16,7 @@ public class MySQLInstruktorDaoTest extends PripravaNaTestovanie {
      */
     @Test
     public void testDajVsetychInstruktorov() {
-        List<Instruktor> result = ObjectFactory.INSTANCE.getInstruktorDao().dajVsetychInstruktorov();
+        List<Instruktor> result = instruktorDao.dajVsetychInstruktorov();
         assertEquals(1, result.size());
     }
 

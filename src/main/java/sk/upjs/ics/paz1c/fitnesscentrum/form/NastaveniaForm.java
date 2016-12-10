@@ -2,10 +2,7 @@ package sk.upjs.ics.paz1c.fitnesscentrum.form;
 
 import javax.swing.JOptionPane;
 import org.springframework.dao.DuplicateKeyException;
-import sk.upjs.ics.paz1c.fitnesscentrum.KlucManager;
-import sk.upjs.ics.paz1c.fitnesscentrum.KreditManager;
 import sk.upjs.ics.paz1c.fitnesscentrum.ObjectFactory;
-import sk.upjs.ics.paz1c.fitnesscentrum.RecepcnyManager;
 import sk.upjs.ics.paz1c.fitnesscentrum.model.KlucTableModel;
 import sk.upjs.ics.paz1c.fitnesscentrum.model.KreditTableModel;
 import sk.upjs.ics.paz1c.fitnesscentrum.model.ZoznamRecepcnychTableModel;
@@ -15,6 +12,10 @@ import sk.upjs.ics.paz1c.fitnesscentrum.entity.Kredit;
 import sk.upjs.ics.paz1c.fitnesscentrum.entity.Recepcny;
 import sk.upjs.ics.paz1c.fitnesscentrum.exception.ObsadenyKlucException;
 import sk.upjs.ics.paz1c.fitnesscentrum.exception.PrazdnyRetazecException;
+import sk.upjs.ics.paz1c.fitnesscentrum.manager.KlucManager;
+import sk.upjs.ics.paz1c.fitnesscentrum.manager.KreditManager;
+import sk.upjs.ics.paz1c.fitnesscentrum.manager.RecepcnyManager;
+import sk.upjs.ics.paz1c.fitnesscentrum.manager.VstupneManager;
 
 public class NastaveniaForm extends javax.swing.JDialog {
 
@@ -23,6 +24,8 @@ public class NastaveniaForm extends javax.swing.JDialog {
     private final KreditManager kreditManager = ObjectFactory.INSTANCE.getKreditManager();
     private final RecepcnyManager recepcnyManager = ObjectFactory.INSTANCE.getRecepcnyManager();
 
+    private final VstupneManager vstupneManager = ObjectFactory.INSTANCE.getVstupneManager();
+    
     private static final int ID_COLUMN_KREDIT = 2;
     private static final int ID_COLUMN_RECEPCNY = 2;
     private static final int ID_COLUMN_KLUC = 0;
@@ -61,7 +64,7 @@ public class NastaveniaForm extends javax.swing.JDialog {
         cenaSpinninguLabel = new javax.swing.JLabel();
         cenaVstupnehoTexttField = new javax.swing.JTextField();
         cenaSpinninguTextField = new javax.swing.JTextField();
-        ulozitZmenyButton = new javax.swing.JButton();
+        ulozitVstupneButton = new javax.swing.JButton();
         euroLabel = new javax.swing.JLabel();
         eurLabel = new javax.swing.JLabel();
         recepcnyPanel = new javax.swing.JPanel();
@@ -91,10 +94,10 @@ public class NastaveniaForm extends javax.swing.JDialog {
 
         cenaSpinninguLabel.setText("Cena spinningu:");
 
-        ulozitZmenyButton.setText("Uložiť zmeny");
-        ulozitZmenyButton.addActionListener(new java.awt.event.ActionListener() {
+        ulozitVstupneButton.setText("Uložiť zmeny");
+        ulozitVstupneButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                ulozitZmenyButtonActionPerformed(evt);
+                ulozitVstupneButtonActionPerformed(evt);
             }
         });
 
@@ -124,7 +127,7 @@ public class NastaveniaForm extends javax.swing.JDialog {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, vstupnePanelLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(ulozitZmenyButton)
+                .addComponent(ulozitVstupneButton)
                 .addGap(26, 26, 26))
         );
         vstupnePanelLayout.setVerticalGroup(
@@ -141,7 +144,7 @@ public class NastaveniaForm extends javax.swing.JDialog {
                     .addComponent(cenaSpinninguTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(eurLabel))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 284, Short.MAX_VALUE)
-                .addComponent(ulozitZmenyButton)
+                .addComponent(ulozitVstupneButton)
                 .addGap(24, 24, 24))
         );
 
@@ -308,17 +311,18 @@ public class NastaveniaForm extends javax.swing.JDialog {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void ulozitZmenyButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ulozitZmenyButtonActionPerformed
+    private void ulozitVstupneButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ulozitVstupneButtonActionPerformed
         try {
-            vstupneDao.updateCenaVstupneho(Double.parseDouble(cenaVstupnehoTexttField.getText()));
-            vstupneDao.updateCenaSpinningu(Double.parseDouble(cenaSpinninguTextField.getText()));
+            vstupneManager.updateCenaSpinningu(Double.parseDouble(cenaSpinninguTextField.getText()));
+            vstupneManager.updateCenaVstupneho(Double.parseDouble(cenaVstupnehoTexttField.getText()));
+            
             JOptionPane.showMessageDialog(this, "Cena bola zmenená!");
             aktualizovatVstupneTabbedPane();
         } catch (NumberFormatException e) {
             JOptionPane.showMessageDialog(this, "Zlý format ceny!");
         }
 
-    }//GEN-LAST:event_ulozitZmenyButtonActionPerformed
+    }//GEN-LAST:event_ulozitVstupneButtonActionPerformed
 
     private void zmazatKreditButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_zmazatKreditButtonActionPerformed
         try {
@@ -396,7 +400,7 @@ public class NastaveniaForm extends javax.swing.JDialog {
         try {
             kredit.setCena(Double.parseDouble(novyKreditTextField.getText()));
             kredit.setNazov(novyKreditTextField.getText() + " eur");
-            kreditManager.pridajKredit(kredit);
+            kreditManager.ulozitKredit(kredit);
             aktualizovatKreditTable();
             JOptionPane.showMessageDialog(this, "Kredit " + kredit.getNazov() + " bol pridaný!");
         } catch (NumberFormatException e) {
@@ -461,7 +465,7 @@ public class NastaveniaForm extends javax.swing.JDialog {
     private javax.swing.JPanel recepcnyPanel;
     private javax.swing.JButton ulozitKlucButton;
     private javax.swing.JButton ulozitKreditButton;
-    private javax.swing.JButton ulozitZmenyButton;
+    private javax.swing.JButton ulozitVstupneButton;
     private javax.swing.JPanel vstupnePanel;
     private javax.swing.JTabbedPane vstupneTabbedPane;
     private javax.swing.JButton zmazatKlucButton;

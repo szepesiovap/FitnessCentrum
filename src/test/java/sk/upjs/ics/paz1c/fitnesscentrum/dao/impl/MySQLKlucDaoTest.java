@@ -11,7 +11,6 @@ import sk.upjs.ics.paz1c.fitnesscentrum.entity.Zakaznik;
 public class MySQLKlucDaoTest extends PripravaNaTestovanie {
 
     private static final KlucDao klucDao = ObjectFactory.INSTANCE.getKlucDao();
-    private Kluc kluc;
 
     /**
      * Test of dajVsetkyKluce method, of class MySQLKlucDao.
@@ -46,7 +45,7 @@ public class MySQLKlucDaoTest extends PripravaNaTestovanie {
      */
     @Test
     public void testPriradZakaznika() {
-        kluc = new Kluc();
+        Kluc kluc = new Kluc();
         kluc.setId(1L);
 
         Zakaznik zakaznik = new Zakaznik();
@@ -73,7 +72,7 @@ public class MySQLKlucDaoTest extends PripravaNaTestovanie {
     @Test
     public void testOdoberZakaznika() {
         long idKluc = 1L;
-        kluc = new Kluc();
+        Kluc kluc = new Kluc();
         kluc.setId(idKluc);
 
         Zakaznik zakaznik = new Zakaznik();
@@ -112,7 +111,7 @@ public class MySQLKlucDaoTest extends PripravaNaTestovanie {
      */
     @Test
     public void testPridajKluc() {
-        kluc = new Kluc();
+        Kluc kluc = new Kluc();
         String meno = "3M";
         kluc.setMeno(meno);
         klucDao.pridajKluc(kluc);

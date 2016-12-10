@@ -2,10 +2,10 @@ package sk.upjs.ics.paz1c.fitnesscentrum.form;
 
 import javax.swing.JOptionPane;
 import javax.swing.UIManager;
-import sk.upjs.ics.paz1c.fitnesscentrum.HesloManager;
 import sk.upjs.ics.paz1c.fitnesscentrum.ObjectFactory;
 import sk.upjs.ics.paz1c.fitnesscentrum.dao.RecepcnyDao;
 import sk.upjs.ics.paz1c.fitnesscentrum.entity.Recepcny;
+import sk.upjs.ics.paz1c.fitnesscentrum.manager.HesloManager;
 
 public class PrihlasovanieForm extends javax.swing.JFrame {
 
@@ -36,7 +36,6 @@ public class PrihlasovanieForm extends javax.swing.JFrame {
         hesloPasswordField = new javax.swing.JPasswordField();
         prihlasovanieMenuBar = new javax.swing.JMenuBar();
         novyRecepcny = new javax.swing.JMenu();
-        zmenaHeslaRecepcny = new javax.swing.JMenu();
         nastavenia = new javax.swing.JMenu();
 
         javax.swing.GroupLayout jFrame1Layout = new javax.swing.GroupLayout(jFrame1.getContentPane());
@@ -51,12 +50,12 @@ public class PrihlasovanieForm extends javax.swing.JFrame {
         );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("User Login");
+        setTitle("Prihlásenie");
         setName("prihlasenieFrame"); // NOI18N
 
-        loginLabel.setText("login:");
+        loginLabel.setText("Login:");
 
-        hesloLabel.setText("heslo:");
+        hesloLabel.setText("Heslo:");
 
         prihlasitButton.setText("Prihlásiť");
         prihlasitButton.addActionListener(new java.awt.event.ActionListener() {
@@ -77,14 +76,6 @@ public class PrihlasovanieForm extends javax.swing.JFrame {
             }
         });
         prihlasovanieMenuBar.add(novyRecepcny);
-
-        zmenaHeslaRecepcny.setText("Zmena hesla");
-        zmenaHeslaRecepcny.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                zmenaHeslaRecepcnyMousePressed(evt);
-            }
-        });
-        prihlasovanieMenuBar.add(zmenaHeslaRecepcny);
 
         nastavenia.setText("Nastavenia");
         nastavenia.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -138,24 +129,28 @@ public class PrihlasovanieForm extends javax.swing.JFrame {
         Recepcny recepcny = recepcnyDao.dajRecepcneho(login);
 
         // funkcne prihlasovanie s databazou
-        /* if (recepcny != null) {
+         if (recepcny != null) {
             if (hesloManager.overHeslo(recepcny.getSalt(), heslo, recepcny.getId())) {
-                new HlavneOknoForm().setVisible(true);
+                new HlavneOknoForm(recepcny).setVisible(true);
                 this.dispose();
             } else {
                 JOptionPane.showMessageDialog(this, "Zadané heslo nie je správne!");
             }
         } else {
             JOptionPane.showMessageDialog(this, "Recepčný so zadaným loginom neexistuje!");
-        }*/
-        
+        }
+     /*   
         if ((recepcny != null)) {
             new HlavneOknoForm(recepcny).setVisible(true);
             this.dispose();
         } else {
             JOptionPane.showMessageDialog(this, "Nesprávne prihlasovacie údaje!");
-        }
+        }*/
     }//GEN-LAST:event_prihlasitButtonActionPerformed
+
+    private void nastaveniaMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_nastaveniaMousePressed
+        new OverenieHeslaForm(this, true, "nastavenia").setVisible(true);
+    }//GEN-LAST:event_nastaveniaMousePressed
 
     private void novyRecepcnyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_novyRecepcnyActionPerformed
         new NovyRecepcnyForm(this, true).setVisible(true);
@@ -164,14 +159,6 @@ public class PrihlasovanieForm extends javax.swing.JFrame {
     private void novyRecepcnyMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_novyRecepcnyMousePressed
         new OverenieHeslaForm(this, true, "novyRecepcny").setVisible(true);
     }//GEN-LAST:event_novyRecepcnyMousePressed
-
-    private void zmenaHeslaRecepcnyMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_zmenaHeslaRecepcnyMousePressed
-        new ZmenaHeslaRecepcnehoForm(this, true).setVisible(true);
-    }//GEN-LAST:event_zmenaHeslaRecepcnyMousePressed
-
-    private void nastaveniaMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_nastaveniaMousePressed
-        new OverenieHeslaForm(this, true, "nastavenia").setVisible(true);
-    }//GEN-LAST:event_nastaveniaMousePressed
 
     /**
      * @param args the command line arguments
@@ -232,6 +219,5 @@ public class PrihlasovanieForm extends javax.swing.JFrame {
     private javax.swing.JMenu novyRecepcny;
     private javax.swing.JButton prihlasitButton;
     private javax.swing.JMenuBar prihlasovanieMenuBar;
-    private javax.swing.JMenu zmenaHeslaRecepcny;
     // End of variables declaration//GEN-END:variables
 }

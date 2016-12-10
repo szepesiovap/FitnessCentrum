@@ -2,14 +2,14 @@ package sk.upjs.ics.paz1c.fitnesscentrum.form;
 
 import javax.swing.JOptionPane;
 import sk.upjs.ics.paz1c.fitnesscentrum.ObjectFactory;
-import sk.upjs.ics.paz1c.fitnesscentrum.FitnessManager;
+import sk.upjs.ics.paz1c.fitnesscentrum.manager.ZakaznikManager;
 import sk.upjs.ics.paz1c.fitnesscentrum.model.PritomniZakazniciTableModel;
 import sk.upjs.ics.paz1c.fitnesscentrum.entity.Recepcny;
 
 public final class HlavneOknoForm extends javax.swing.JFrame {
 
     private final Recepcny recepcny;
-    private final FitnessManager fitnessManager = ObjectFactory.INSTANCE.getFitnessManager();
+    private final ZakaznikManager zakaznikManager = ObjectFactory.INSTANCE.getZakaznikManager();
     private static final int ID_COLUMN = 4;
 
     /**
@@ -20,6 +20,7 @@ public final class HlavneOknoForm extends javax.swing.JFrame {
     public HlavneOknoForm(Recepcny recepcny) {
         this.recepcny = recepcny;
         initComponents();
+        menoPrihlasenehoRecepcnehoLabel.setText(recepcny.getLogin());
         aktualizovatZoznamPritomnych();
     }
 
@@ -37,8 +38,13 @@ public final class HlavneOknoForm extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jMenuBar1 = new javax.swing.JMenuBar();
+        jMenu1 = new javax.swing.JMenu();
+        jMenu2 = new javax.swing.JMenu();
         pritomniScrollPane = new javax.swing.JScrollPane();
         pritomniTable = new javax.swing.JTable();
+        menoPrihlasenehoRecepcnehoLabel = new javax.swing.JLabel();
+        prihlasenyRecepcnyLabel = new javax.swing.JLabel();
         hlavneOknoMenuBar = new javax.swing.JMenuBar();
         prichodMenu = new javax.swing.JMenu();
         jednorazovyPrichodMenuItem = new javax.swing.JMenuItem();
@@ -48,7 +54,14 @@ public final class HlavneOknoForm extends javax.swing.JFrame {
         novyMenu = new javax.swing.JMenu();
         dobiMenu = new javax.swing.JMenu();
         spinningMenu = new javax.swing.JMenu();
+        zmenaHeslaMenu = new javax.swing.JMenu();
         odhlasitMenu = new javax.swing.JMenu();
+
+        jMenu1.setText("File");
+        jMenuBar1.add(jMenu1);
+
+        jMenu2.setText("Edit");
+        jMenuBar1.add(jMenu2);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Fitnesscentrum");
@@ -57,6 +70,8 @@ public final class HlavneOknoForm extends javax.swing.JFrame {
         pritomniTable.setModel(new PritomniZakazniciTableModel()
         );
         pritomniScrollPane.setViewportView(pritomniTable);
+
+        prihlasenyRecepcnyLabel.setText("Prihlásený recepčný:");
 
         prichodMenu.setText("Príchod");
 
@@ -118,6 +133,14 @@ public final class HlavneOknoForm extends javax.swing.JFrame {
         });
         hlavneOknoMenuBar.add(spinningMenu);
 
+        zmenaHeslaMenu.setText("Zmena hesla");
+        zmenaHeslaMenu.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                zmenaHeslaMenuMousePressed(evt);
+            }
+        });
+        hlavneOknoMenuBar.add(zmenaHeslaMenu);
+
         odhlasitMenu.setText("Odhlásiť");
         odhlasitMenu.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
@@ -133,14 +156,22 @@ public final class HlavneOknoForm extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(pritomniScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 925, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(pritomniScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 925, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                        .addComponent(prihlasenyRecepcnyLabel)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(menoPrihlasenehoRecepcnehoLabel)))
                 .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(pritomniScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 639, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addComponent(pritomniScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 612, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(prihlasenyRecepcnyLabel)
+                    .addComponent(menoPrihlasenehoRecepcnehoLabel)))
         );
 
         pack();
@@ -161,7 +192,7 @@ public final class HlavneOknoForm extends javax.swing.JFrame {
     private void odchodMenuMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_odchodMenuMousePressed
         try {
             Long idZakaznika = (Long) pritomniTable.getModel().getValueAt(pritomniTable.getSelectedRow(), ID_COLUMN);
-            fitnessManager.odchodZakaznika(idZakaznika);
+            zakaznikManager.odchodZakaznika(idZakaznika);
             aktualizovatZoznamPritomnych();
         } catch (ArrayIndexOutOfBoundsException e) {
             JOptionPane.showMessageDialog(this, "Nie je vybraný žiaden zákazník!");
@@ -169,7 +200,7 @@ public final class HlavneOknoForm extends javax.swing.JFrame {
     }//GEN-LAST:event_odchodMenuMousePressed
 
     private void novyMenuMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_novyMenuMousePressed
-        new NovyZakaznikForm(this).setVisible(true);
+        new NovyZakaznikForm(this, true).setVisible(true);
     }//GEN-LAST:event_novyMenuMousePressed
 
     private void dobiMenuMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_dobiMenuMousePressed
@@ -194,18 +225,28 @@ public final class HlavneOknoForm extends javax.swing.JFrame {
         new ZoznamForm(this).setVisible(true);
     }//GEN-LAST:event_zoznamMenuMousePressed
 
+    private void zmenaHeslaMenuMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_zmenaHeslaMenuMousePressed
+        new ZmenaHeslaRecepcnehoForm(this, true, recepcny).setVisible(true);
+    }//GEN-LAST:event_zmenaHeslaMenuMousePressed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenu dobiMenu;
     private javax.swing.JMenuBar hlavneOknoMenuBar;
+    private javax.swing.JMenu jMenu1;
+    private javax.swing.JMenu jMenu2;
+    private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jednorazovyPrichodMenuItem;
+    private javax.swing.JLabel menoPrihlasenehoRecepcnehoLabel;
     private javax.swing.JMenu novyMenu;
     private javax.swing.JMenu odchodMenu;
     private javax.swing.JMenu odhlasitMenu;
     private javax.swing.JMenuItem prichodKartouMenuItem;
     private javax.swing.JMenu prichodMenu;
+    private javax.swing.JLabel prihlasenyRecepcnyLabel;
     private javax.swing.JScrollPane pritomniScrollPane;
     private javax.swing.JTable pritomniTable;
     private javax.swing.JMenu spinningMenu;
+    private javax.swing.JMenu zmenaHeslaMenu;
     private javax.swing.JMenu zoznamMenu;
     // End of variables declaration//GEN-END:variables
 

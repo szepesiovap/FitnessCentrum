@@ -28,14 +28,6 @@
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="novyRecepcnyActionPerformed"/>
           </Events>
         </Menu>
-        <Menu class="javax.swing.JMenu" name="zmenaHeslaRecepcny">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="Zmena hesla"/>
-          </Properties>
-          <Events>
-            <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="zmenaHeslaRecepcnyMousePressed"/>
-          </Events>
-        </Menu>
         <Menu class="javax.swing.JMenu" name="nastavenia">
           <Properties>
             <Property name="text" type="java.lang.String" value="Nastavenia"/>
@@ -49,7 +41,7 @@
   </NonVisualComponents>
   <Properties>
     <Property name="defaultCloseOperation" type="int" value="3"/>
-    <Property name="title" type="java.lang.String" value="User Login"/>
+    <Property name="title" type="java.lang.String" value="Prihl&#xe1;senie"/>
     <Property name="name" type="java.lang.String" value="prihlasenieFrame" noResource="true"/>
   </Properties>
   <SyntheticProperties>
@@ -113,12 +105,12 @@
     </Component>
     <Component class="javax.swing.JLabel" name="loginLabel">
       <Properties>
-        <Property name="text" type="java.lang.String" value="login:"/>
+        <Property name="text" type="java.lang.String" value="Login:"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="hesloLabel">
       <Properties>
-        <Property name="text" type="java.lang.String" value="heslo:"/>
+        <Property name="text" type="java.lang.String" value="Heslo:"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JButton" name="prihlasitButton">

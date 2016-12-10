@@ -1,7 +1,7 @@
 package sk.upjs.ics.paz1c.fitnesscentrum.form;
 
 import sk.upjs.ics.paz1c.fitnesscentrum.ObjectFactory;
-import sk.upjs.ics.paz1c.fitnesscentrum.FitnessManager;
+import sk.upjs.ics.paz1c.fitnesscentrum.manager.ZakaznikManager;
 import sk.upjs.ics.paz1c.fitnesscentrum.model.KlucComboBoxModel;
 import sk.upjs.ics.paz1c.fitnesscentrum.entity.Kluc;
 import sk.upjs.ics.paz1c.fitnesscentrum.entity.Zakaznik;
@@ -9,7 +9,7 @@ import sk.upjs.ics.paz1c.fitnesscentrum.entity.Zakaznik;
 public class PotvrditPrichodZakaznikaForm extends javax.swing.JDialog {
     
     private final Zakaznik zakaznik;
-    private final FitnessManager fitnessManager = ObjectFactory.INSTANCE.getFitnessManager();
+    private final ZakaznikManager zakaznikManager = ObjectFactory.INSTANCE.getZakaznikManager();
 
     /**
      * Creates new form PrichodZakaznikaForm
@@ -98,7 +98,7 @@ public class PotvrditPrichodZakaznikaForm extends javax.swing.JDialog {
 
     private void prichodButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_prichodButtonActionPerformed
         Kluc kluc = ((Kluc) klucComboBox.getSelectedItem());
-        fitnessManager.prichodZakaznika(zakaznik, kluc);
+        zakaznikManager.prichodZakaznika(zakaznik, kluc);
         dispose();
     }//GEN-LAST:event_prichodButtonActionPerformed
 

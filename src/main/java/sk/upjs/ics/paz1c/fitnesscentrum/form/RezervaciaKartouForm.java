@@ -2,7 +2,8 @@ package sk.upjs.ics.paz1c.fitnesscentrum.form;
 
 import javax.swing.JOptionPane;
 import sk.upjs.ics.paz1c.fitnesscentrum.ObjectFactory;
-import sk.upjs.ics.paz1c.fitnesscentrum.FitnessManager;
+import sk.upjs.ics.paz1c.fitnesscentrum.manager.SpinningManager;
+import sk.upjs.ics.paz1c.fitnesscentrum.manager.ZakaznikManager;
 import sk.upjs.ics.paz1c.fitnesscentrum.entity.Spinning;
 import sk.upjs.ics.paz1c.fitnesscentrum.entity.Zakaznik;
 import sk.upjs.ics.paz1c.fitnesscentrum.exception.NedostatocnyKreditException;
@@ -10,7 +11,8 @@ import sk.upjs.ics.paz1c.fitnesscentrum.exception.NeexistujuciZakaznikException;
 
 public class RezervaciaKartouForm extends javax.swing.JDialog {
 
-    private final FitnessManager fitnessManager = ObjectFactory.INSTANCE.getFitnessManager();
+    private final ZakaznikManager zakaznikManager = ObjectFactory.INSTANCE.getZakaznikManager();
+    private final SpinningManager spinningManager = ObjectFactory.INSTANCE.getSpinningManager();
     private Zakaznik zakaznik;
     private final Spinning spinning;
 
@@ -142,7 +144,7 @@ public class RezervaciaKartouForm extends javax.swing.JDialog {
 
     private void nacitatButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nacitatButtonActionPerformed
         try {
-            zakaznik = fitnessManager.dajZakaznikaSCislomPermanentky(cisloKartyTextField.getText());
+            zakaznik = zakaznikManager.dajZakaznikaSCislomPermanentky(cisloKartyTextField.getText());
             odblokovatRezervovanie();
         } catch (NeexistujuciZakaznikException e) {
             zablokovatRezervovanie();
@@ -152,7 +154,7 @@ public class RezervaciaKartouForm extends javax.swing.JDialog {
 
     private void rezervovatButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rezervovatButtonActionPerformed
         try {
-            fitnessManager.rezervovatSpinningKartou(spinning, zakaznik);
+            spinningManager.rezervovatSpinningKartou(spinning, zakaznik);
             dispose();
         } catch (NedostatocnyKreditException e) {
             JOptionPane.showMessageDialog(this, "Nedostatočný kredit!");

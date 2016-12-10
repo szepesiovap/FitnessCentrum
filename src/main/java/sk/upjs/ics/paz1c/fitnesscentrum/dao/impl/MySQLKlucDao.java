@@ -69,7 +69,6 @@ public class MySQLKlucDao implements KlucDao {
         }
     }
 
-    //TODO: ? nebolo by lepsie mat v parametroch idkluca a zakaznika? Neviem ci sa to takto moze??
     @Override
     public void priradZakaznika(Kluc kluc, Zakaznik zakaznik) {
         String sql = "UPDATE kluc SET id_zakaznika= ? where id_kluca = ?";

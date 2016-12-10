@@ -3,14 +3,16 @@ package sk.upjs.ics.paz1c.fitnesscentrum.form;
 import javax.swing.JOptionPane;
 import sk.upjs.ics.paz1c.fitnesscentrum.exception.NeexistujuciZakaznikException;
 import sk.upjs.ics.paz1c.fitnesscentrum.ObjectFactory;
-import sk.upjs.ics.paz1c.fitnesscentrum.DefaultFitnessManager;
+import sk.upjs.ics.paz1c.fitnesscentrum.manager.KreditManager;
+import sk.upjs.ics.paz1c.fitnesscentrum.manager.ZakaznikManager;
 import sk.upjs.ics.paz1c.fitnesscentrum.model.KreditComboBoxModel;
 import sk.upjs.ics.paz1c.fitnesscentrum.entity.Kredit;
 import sk.upjs.ics.paz1c.fitnesscentrum.entity.Zakaznik;
 
 public class DobitKreditForm extends javax.swing.JDialog {
 
-    private final DefaultFitnessManager zakaznikManager = ObjectFactory.INSTANCE.getFitnessManager();
+    private final ZakaznikManager zakaznikManager = ObjectFactory.INSTANCE.getZakaznikManager();
+    private final KreditManager kreditManager = ObjectFactory.INSTANCE.getKreditManager();
     private Zakaznik zakaznik;
 
     /**
@@ -148,7 +150,7 @@ public class DobitKreditForm extends javax.swing.JDialog {
 
     private void dobitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dobitButtonActionPerformed
         double vybranyKredit = ((Kredit) kreditComboBox.getSelectedItem()).getCena();
-        zakaznikManager.dobitKredit(zakaznik, vybranyKredit);
+        kreditManager.dobitKredit(zakaznik, vybranyKredit);
         dispose();
     }//GEN-LAST:event_dobitButtonActionPerformed
 

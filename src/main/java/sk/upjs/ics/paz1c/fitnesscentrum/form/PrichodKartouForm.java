@@ -2,7 +2,7 @@ package sk.upjs.ics.paz1c.fitnesscentrum.form;
 
 import javax.swing.JOptionPane;
 import sk.upjs.ics.paz1c.fitnesscentrum.ObjectFactory;
-import sk.upjs.ics.paz1c.fitnesscentrum.FitnessManager;
+import sk.upjs.ics.paz1c.fitnesscentrum.manager.ZakaznikManager;
 import sk.upjs.ics.paz1c.fitnesscentrum.model.KlucComboBoxModel;
 import sk.upjs.ics.paz1c.fitnesscentrum.entity.Kluc;
 import sk.upjs.ics.paz1c.fitnesscentrum.entity.Zakaznik;
@@ -11,7 +11,7 @@ import sk.upjs.ics.paz1c.fitnesscentrum.exception.NeexistujuciZakaznikException;
 
 public class PrichodKartouForm extends javax.swing.JDialog {
 
-    private final FitnessManager fitnessManager = ObjectFactory.INSTANCE.getFitnessManager();
+    private final ZakaznikManager zakaznikManager = ObjectFactory.INSTANCE.getZakaznikManager();
     private Zakaznik zakaznik;
 
     /**
@@ -144,7 +144,7 @@ public class PrichodKartouForm extends javax.swing.JDialog {
         } else {
             Kluc kluc = (Kluc) klucComboBox.getSelectedItem();
             try {
-                fitnessManager.prichodKartouZakaznika(zakaznik, kluc);
+                zakaznikManager.prichodKartouZakaznika(zakaznik, kluc);
             } catch (NedostatocnyKreditException e) {
                 JOptionPane.showMessageDialog(this, "Nedostatočný kredit!");
             }
@@ -155,7 +155,7 @@ public class PrichodKartouForm extends javax.swing.JDialog {
 
     private void nacitatButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nacitatButtonActionPerformed
         try {
-            zakaznik = fitnessManager.dajZakaznikaSCislomPermanentky(cisloKartyTextField.getText());
+            zakaznik = zakaznikManager.dajZakaznikaSCislomPermanentky(cisloKartyTextField.getText());
             odblokovatPrichod();
         } catch (NeexistujuciZakaznikException e) {
             zablokovatPrichod();

@@ -3,20 +3,24 @@ package sk.upjs.ics.paz1c.fitnesscentrum.form;
 import javax.swing.JOptionPane;
 import org.springframework.dao.DuplicateKeyException;
 import sk.upjs.ics.paz1c.fitnesscentrum.ObjectFactory;
-import sk.upjs.ics.paz1c.fitnesscentrum.entity.Kredit;
-import sk.upjs.ics.paz1c.fitnesscentrum.entity.Zakaznik;
 import sk.upjs.ics.paz1c.fitnesscentrum.manager.ZakaznikManager;
 import sk.upjs.ics.paz1c.fitnesscentrum.model.KreditComboBoxModel;
+import sk.upjs.ics.paz1c.fitnesscentrum.entity.Kredit;
+import sk.upjs.ics.paz1c.fitnesscentrum.entity.Zakaznik;
 
-public class NovyZakaznikForm extends javax.swing.JDialog {
+public class NovyZakaznikForm3 extends javax.swing.JFrame {
 
     private final ZakaznikManager zakaznikManager = ObjectFactory.INSTANCE.getZakaznikManager();
+    private static HlavneOknoForm hlavneOkno;
 
     /**
-     * Creates new form NovyZakaznikForm2
+     * Creates new form NovyZakaznikForm
+     *
+     * @param hlavneOkno
      */
-    public NovyZakaznikForm(java.awt.Frame parent, boolean modal) {
-        super(parent, modal);
+    public NovyZakaznikForm3(HlavneOknoForm hlavneOkno) {
+        NovyZakaznikForm3.hlavneOkno = hlavneOkno;
+        hlavneOkno.setEnabled(false);
         initComponents();
     }
 
@@ -40,7 +44,13 @@ public class NovyZakaznikForm extends javax.swing.JDialog {
         permanentkaCheckBox = new javax.swing.JCheckBox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("Nový recepčný");
+        setTitle("Nový zákazník");
+        setResizable(false);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosed(java.awt.event.WindowEvent evt) {
+                formWindowClosed(evt);
+            }
+        });
 
         menoZakaznikaLabel.setText("Meno: ");
 
@@ -79,7 +89,7 @@ public class NovyZakaznikForm extends javax.swing.JDialog {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(30, 30, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(ulozitButton, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -126,11 +136,12 @@ public class NovyZakaznikForm extends javax.swing.JDialog {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void ulozitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ulozitButtonActionPerformed
         Zakaznik zakaznik = new Zakaznik();
-        zakaznik.setMeno(menoZakaznikaTextField.getText());
+
         if (permanentkaCheckBox.isSelected()) {
             zakaznik.setCisloPermanentky(cisloKartyTextField.getText());
             zakaznik.setKredit(((Kredit) kreditComboBox.getSelectedItem()).getCena());
@@ -139,14 +150,22 @@ public class NovyZakaznikForm extends javax.swing.JDialog {
             if ("".equals(menoZakaznikaTextField.getText())) {
                 JOptionPane.showMessageDialog(this, "Zadajte meno zákazníka!");
             } else {
+                zakaznik.setMeno(menoZakaznikaTextField.getText());
                 zakaznikManager.pridajZakaznika(zakaznik);
-                JOptionPane.showMessageDialog(this, "Zákazník " + zakaznik.getMeno() + " bol uložený!");
+                JOptionPane.showMessageDialog(this, "Zákazník" + zakaznik.getMeno() + " bol uložený!");
                 this.dispose();
+                return;
             }
+            hlavneOkno.aktualizovatZoznamPritomnych();
+            this.dispose();
+            hlavneOkno.setVisible(true);
 
         } catch (DuplicateKeyException e) {
             JOptionPane.showMessageDialog(this, "Číslo karty už je priradené inému zákazníkovi!");
+            return;
         }
+
+
     }//GEN-LAST:event_ulozitButtonActionPerformed
 
     private void zrusitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_zrusitButtonActionPerformed
@@ -162,6 +181,10 @@ public class NovyZakaznikForm extends javax.swing.JDialog {
             kreditComboBox.setEnabled(true);
         }
     }//GEN-LAST:event_permanentkaCheckBoxMousePressed
+
+    private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
+        hlavneOkno.setEnabled(true);
+    }//GEN-LAST:event_formWindowClosed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel cisloKartyLabel;

@@ -12,7 +12,6 @@ import sk.upjs.ics.paz1c.fitnesscentrum.entity.Recepcny;
 public class MySQLRecepcnyDaoTest extends PripravaNaTestovanie {
 
     private static final RecepcnyDao recepcnyDao = ObjectFactory.INSTANCE.getRecepcnyDao();
-    private Recepcny recepcny;
 
     /**
      * Test of dajRecepcneho method, of class MySQLRecepcnyDao.
@@ -41,7 +40,7 @@ public class MySQLRecepcnyDaoTest extends PripravaNaTestovanie {
      */
     @Test
     public void testPridajRecepcneho() throws NevalidnyVstupException {
-        recepcny = new Recepcny();
+        Recepcny recepcny = new Recepcny();
         String meno = "Jozko Mrkvicka";
         String login = "jozko";
         String heslo = "0000";
@@ -71,7 +70,7 @@ public class MySQLRecepcnyDaoTest extends PripravaNaTestovanie {
      */
     @Test
     public void testPridajRovnakehoRecepcneho() throws NevalidnyVstupException {
-        recepcny = new Recepcny();
+        Recepcny recepcny = new Recepcny();
         String meno = "Jozko Mrkvicka";
         String login = "jozko";
         String heslo = "0000";
@@ -124,7 +123,7 @@ public class MySQLRecepcnyDaoTest extends PripravaNaTestovanie {
     @Test
     public void testUpdateRecepcneho() {
         String noveHeslo = "noveHeslo";
-        recepcny = recepcnyDao.dajRecepcneho(2L);
+        Recepcny recepcny = recepcnyDao.dajRecepcneho(2L);
         recepcny.setHeslo(noveHeslo);
         recepcnyDao.zmenaHeslaRecepcneho(recepcny);
         recepcny = recepcnyDao.dajRecepcneho(2L);

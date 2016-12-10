@@ -34,7 +34,6 @@
                       </Group>
                       <EmptySpace min="49" pref="49" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="loginTextField" alignment="0" max="32767" attributes="0"/>
                           <Component id="stareHesloPasswordField" alignment="0" max="32767" attributes="0"/>
                           <Component id="noveHesloPasswordField" max="32767" attributes="0"/>
                           <Component id="noveHesloZnovaPasswordField" alignment="0" max="32767" attributes="0"/>
@@ -42,7 +41,11 @@
                   </Group>
                   <Group type="102" attributes="0">
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="loginjLabel" min="-2" max="-2" attributes="0"/>
+                          <Group type="102" attributes="0">
+                              <Component id="loginjLabel" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="78" max="-2" attributes="0"/>
+                              <Component id="loginTextLabel" min="-2" max="-2" attributes="0"/>
+                          </Group>
                           <Group type="102" alignment="0" attributes="0">
                               <Group type="103" groupAlignment="0" max="-2" attributes="0">
                                   <Component id="noveHesloZnovaLabel" min="-2" max="-2" attributes="0"/>
@@ -66,9 +69,9 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="loginjLabel" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="loginTextField" alignment="3" min="-2" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                  <Component id="loginjLabel" max="32767" attributes="0"/>
+                  <Component id="loginTextLabel" max="32767" attributes="0"/>
               </Group>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
@@ -85,7 +88,7 @@
                   <Component id="noveHesloZnovaPasswordField" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="noveHesloZnovaLabel" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace pref="28" max="32767" attributes="0"/>
+              <EmptySpace pref="34" max="32767" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="ulozitZmenyButton" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="zrusitButton" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -106,8 +109,6 @@
     <Component class="javax.swing.JPasswordField" name="noveHesloPasswordField">
     </Component>
     <Component class="javax.swing.JPasswordField" name="noveHesloZnovaPasswordField">
-    </Component>
-    <Component class="javax.swing.JTextField" name="loginTextField">
     </Component>
     <Component class="javax.swing.JButton" name="ulozitZmenyButton">
       <Properties>
@@ -139,6 +140,8 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Nov&#xe9; heslo:"/>
       </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="loginTextLabel">
     </Component>
   </SubComponents>
 </Form>

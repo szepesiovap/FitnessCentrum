@@ -3,7 +3,7 @@ package sk.upjs.ics.paz1c.fitnesscentrum.form;
 import javax.swing.JOptionPane;
 import sk.upjs.ics.paz1c.fitnesscentrum.ObjectFactory;
 import sk.upjs.ics.paz1c.fitnesscentrum.exception.NevalidnyVstupException;
-import sk.upjs.ics.paz1c.fitnesscentrum.RecepcnyManager;
+import sk.upjs.ics.paz1c.fitnesscentrum.manager.RecepcnyManager;
 
 public class NovyRecepcnyForm extends javax.swing.JDialog {
 
@@ -95,7 +95,7 @@ public class NovyRecepcnyForm extends javax.swing.JDialog {
                             .addComponent(hesloZnovaPasswordField, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(loginTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(menoTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(22, Short.MAX_VALUE))
+                .addContainerGap(20, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -141,7 +141,7 @@ public class NovyRecepcnyForm extends javax.swing.JDialog {
             String noveHesloZnova = hesloZnovaPasswordField.getText();
             
             recepcnyManager.pridajRecepcneho(meno, login, noveHeslo, noveHesloZnova);
-            JOptionPane.showMessageDialog(this, "Recepčný " + meno +" s loginom " + login + " bol pridaný!");
+            JOptionPane.showMessageDialog(this, "Recepčný " + meno +" s loginom " + login + " bol uložený!");
             dispose();
         } catch (NevalidnyVstupException e) {
             JOptionPane.showMessageDialog(this, e.getMessage());

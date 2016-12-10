@@ -2,8 +2,8 @@ package sk.upjs.ics.paz1c.fitnesscentrum.form;
 
 import javax.swing.JOptionPane;
 import sk.upjs.ics.paz1c.fitnesscentrum.ObjectFactory;
-import sk.upjs.ics.paz1c.fitnesscentrum.HesloManager;
 import sk.upjs.ics.paz1c.fitnesscentrum.dao.RecepcnyDao;
+import sk.upjs.ics.paz1c.fitnesscentrum.manager.HesloManager;
 
 public class OverenieHeslaForm extends javax.swing.JDialog {
 

@@ -76,7 +76,7 @@
                   </Group>
                   <Group type="102" alignment="1" attributes="0">
                       <EmptySpace max="32767" attributes="0"/>
-                      <Component id="ulozitZmenyButton" min="-2" max="-2" attributes="0"/>
+                      <Component id="ulozitVstupneButton" min="-2" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
                   </Group>
               </Group>
@@ -97,7 +97,7 @@
                           <Component id="eurLabel" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace pref="284" max="32767" attributes="0"/>
-                      <Component id="ulozitZmenyButton" min="-2" max="-2" attributes="0"/>
+                      <Component id="ulozitVstupneButton" min="-2" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="24" max="-2" attributes="0"/>
                   </Group>
               </Group>
@@ -118,12 +118,12 @@
             </Component>
             <Component class="javax.swing.JTextField" name="cenaSpinninguTextField">
             </Component>
-            <Component class="javax.swing.JButton" name="ulozitZmenyButton">
+            <Component class="javax.swing.JButton" name="ulozitVstupneButton">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Ulo&#x17e;i&#x165; zmeny"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="ulozitZmenyButtonActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="ulozitVstupneButtonActionPerformed"/>
               </Events>
             </Component>
             <Component class="javax.swing.JLabel" name="euroLabel">

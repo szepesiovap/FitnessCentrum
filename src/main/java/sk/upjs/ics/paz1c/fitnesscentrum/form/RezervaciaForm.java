@@ -3,7 +3,8 @@ package sk.upjs.ics.paz1c.fitnesscentrum.form;
 import java.time.LocalDateTime;
 import javax.swing.JOptionPane;
 import sk.upjs.ics.paz1c.fitnesscentrum.ObjectFactory;
-import sk.upjs.ics.paz1c.fitnesscentrum.FitnessManager;
+import sk.upjs.ics.paz1c.fitnesscentrum.manager.SpinningManager;
+import sk.upjs.ics.paz1c.fitnesscentrum.manager.ZakaznikManager;
 import sk.upjs.ics.paz1c.fitnesscentrum.entity.Rezervacia;
 import sk.upjs.ics.paz1c.fitnesscentrum.model.ZakaznikTableModel;
 import sk.upjs.ics.paz1c.fitnesscentrum.entity.Spinning;
@@ -13,7 +14,8 @@ public class RezervaciaForm extends javax.swing.JDialog {
 
     private static final int ID_COLUMN = 5;
     private final Spinning spinning;
-    private final FitnessManager fitnessManager = ObjectFactory.INSTANCE.getFitnessManager();
+    private final ZakaznikManager zakaznikManager = ObjectFactory.INSTANCE.getZakaznikManager();
+    private final SpinningManager spinningManager = ObjectFactory.INSTANCE.getSpinningManager();
 
     /**
      * Creates new form RezervaciaForm
@@ -125,7 +127,7 @@ public class RezervaciaForm extends javax.swing.JDialog {
     private void rezervovatButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rezervovatButtonActionPerformed
         try {
             Long idZakaznika = (Long) zoznamZakaznikovTable.getModel().getValueAt(this.zoznamZakaznikovTable.getSelectedRow(), ID_COLUMN);
-            Zakaznik zakaznik = fitnessManager.dajZakaznikaSId(idZakaznika);
+            Zakaznik zakaznik = zakaznikManager.dajZakaznikaSId(idZakaznika);
             Rezervacia rezervacia = new Rezervacia();
             rezervacia.setSpinning(spinning);
             rezervacia.setZakaznik(zakaznik);
@@ -136,7 +138,7 @@ public class RezervaciaForm extends javax.swing.JDialog {
                     + zakaznik.getMeno() + "?", "Potvrdiť rezerváciu",
                     JOptionPane.DEFAULT_OPTION, JOptionPane.PLAIN_MESSAGE, null,
                     options, options[0]) == JOptionPane.YES_OPTION) {
-                fitnessManager.rezervovatSpinning(rezervacia);
+                spinningManager.rezervovatSpinning(rezervacia);
                 dispose();
             }
         } catch (ArrayIndexOutOfBoundsException e) {

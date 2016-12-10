@@ -3,16 +3,15 @@ package sk.upjs.ics.paz1c.fitnesscentrum.form;
 import java.time.LocalDateTime;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
-
 import sk.upjs.ics.paz1c.fitnesscentrum.ObjectFactory;
-import sk.upjs.ics.paz1c.fitnesscentrum.FitnessManager;
+import sk.upjs.ics.paz1c.fitnesscentrum.manager.SpinningManager;
 import sk.upjs.ics.paz1c.fitnesscentrum.model.InstruktorComboBoxModel;
 import sk.upjs.ics.paz1c.fitnesscentrum.entity.Instruktor;
 import sk.upjs.ics.paz1c.fitnesscentrum.entity.Spinning;
 
 public class PridatSpinningForm extends javax.swing.JDialog {
 
-    private final FitnessManager fitnessManager = ObjectFactory.INSTANCE.getFitnessManager();
+    private final SpinningManager spinningManager = ObjectFactory.INSTANCE.getSpinningManager();
     private final String[] DNI = {"01", "02", "03", "04", "05", "06", "07", "08",
         "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20",
         "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31"};
@@ -184,7 +183,7 @@ public class PridatSpinningForm extends javax.swing.JDialog {
                 spinning.setInstruktor((Instruktor) instruktorComboBox.getSelectedItem());
                 spinning.setKapacita(Integer.parseInt((String) kapacitaTextField.getText()));
                 spinning.setVolne(Integer.parseInt((String) kapacitaTextField.getText()));
-                fitnessManager.pridajSpinning(spinning);
+                spinningManager.pridajSpinning(spinning);
                 dispose();
             }
 
