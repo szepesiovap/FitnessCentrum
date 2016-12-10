@@ -1,27 +1,26 @@
-package sk.upjs.ics.paz1c.fitnesscentrum;
+package sk.upjs.ics.paz1c.fitnesscentrum.model;
 
 import java.util.ArrayList;
 import java.util.List;
 import sk.upjs.ics.paz1c.fitnesscentrum.entity.Zakaznik;
 import javax.swing.table.AbstractTableModel;
+import sk.upjs.ics.paz1c.fitnesscentrum.ObjectFactory;
 import sk.upjs.ics.paz1c.fitnesscentrum.dao.ZakaznikDao;
 
-public class ZakaznikTableModel extends AbstractTableModel {
+public class PritomniZakazniciTableModel extends AbstractTableModel {
 
     private final ZakaznikDao zakaznikDao = ObjectFactory.INSTANCE.getZakaznikDao();
-    private static final String[] NAZVY_STLPCOV = {"Meno", "Pritomny", "Posledny prichod", "Kredit", "Cislo permanentky"};
+    private static final String[] NAZVY_STLPCOV = {"Meno", "Kľúč", "Čas príchodu", "Číslo karty"};
     private static final int POCET_STLPCOV = NAZVY_STLPCOV.length;
-    private String vzorka;
-    private List<Zakaznik> listZakaznikovSoVzorkou = new ArrayList<>();
+    private List<Zakaznik> listPritomnychZakaznikov = new ArrayList<>();
 
-    public ZakaznikTableModel(String vzorka) {
-        this.vzorka = vzorka;
+    public PritomniZakazniciTableModel() {
         aktualizovat();
     }
-
+    
     @Override
     public int getRowCount() {
-        return listZakaznikovSoVzorkou.size();
+        return listPritomnychZakaznikov.size();
     }
 
     @Override
@@ -31,31 +30,21 @@ public class ZakaznikTableModel extends AbstractTableModel {
 
     @Override
     public Object getValueAt(int rowIndex, int columnIndex) {
-        Zakaznik zakaznik = listZakaznikovSoVzorkou.get(rowIndex);
+        Zakaznik zakaznik = listPritomnychZakaznikov.get(rowIndex);
         switch (columnIndex) {
             case 0:
                 return zakaznik.getMeno();
             case 1:
-                return zakaznik.isPritomny();
+                return zakaznik.getKluc();
             case 2:
                 return zakaznik.getPoslednyPrichod().toLocalDate() + " " + zakaznik.getPoslednyPrichod().toLocalTime();
             case 3:
-                return zakaznik.getKredit();
-            case 4:
                 return zakaznik.getCisloPermanentky();
-            case 5:
+            case 4:
                 return zakaznik.getId();
             default:
                 return "???";
         }
-    }
-
-    @Override
-    public Class<?> getColumnClass(int columnIndex) {
-        if (columnIndex == 1) {
-            return Boolean.class;
-        }
-        return super.getColumnClass(columnIndex);
     }
 
     @Override
@@ -64,7 +53,7 @@ public class ZakaznikTableModel extends AbstractTableModel {
     }
 
     public void aktualizovat() {
-        listZakaznikovSoVzorkou = zakaznikDao.dajZakaznikovSoZhodouVMene(vzorka);
+        listPritomnychZakaznikov = zakaznikDao.dajPritomnychZakaznikov();
         fireTableDataChanged();
     }
 }

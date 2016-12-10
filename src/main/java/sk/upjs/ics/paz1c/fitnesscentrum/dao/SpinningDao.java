@@ -1,6 +1,6 @@
 package sk.upjs.ics.paz1c.fitnesscentrum.dao;
 
-import java.sql.Timestamp;
+import java.time.LocalDateTime;
 import java.util.List;
 import sk.upjs.ics.paz1c.fitnesscentrum.entity.Spinning;
 
@@ -8,7 +8,7 @@ public interface SpinningDao {
 
     public List<Spinning> dajVsetkySpinningy();
 
-    public List<Spinning> dajSpinningyOdDatumu(Timestamp datum);
+    public List<Spinning> dajSpinningyOdDatumu(LocalDateTime datum);
 
     public Spinning dajSpinningSId(Long idSpinningu);
 
@@ -18,5 +18,5 @@ public interface SpinningDao {
 
     public void odrezervujSpinning(Spinning spinning);
 
-    public void vymazSpinning(Long idSpinningu);
+    public void vymazSpinning(Spinning spinning);
 }

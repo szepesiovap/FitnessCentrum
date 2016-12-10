@@ -1,4 +1,4 @@
-package sk.upjs.ics.paz1c.fitnesscentrum.daol;
+package sk.upjs.ics.paz1c.fitnesscentrum.dao.impl;
 
 import com.ibatis.common.jdbc.ScriptRunner;
 import com.mysql.cj.jdbc.MysqlDataSource;

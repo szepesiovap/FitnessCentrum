@@ -2,7 +2,7 @@ package sk.upjs.ics.paz1c.fitnesscentrum.form;
 
 import javax.swing.JOptionPane;
 import sk.upjs.ics.paz1c.fitnesscentrum.ObjectFactory;
-import sk.upjs.ics.paz1c.fitnesscentrum.SpinningTableModel;
+import sk.upjs.ics.paz1c.fitnesscentrum.model.SpinningTableModel;
 import sk.upjs.ics.paz1c.fitnesscentrum.dao.SpinningDao;
 import sk.upjs.ics.paz1c.fitnesscentrum.entity.Spinning;
 
@@ -91,7 +91,7 @@ public class ZmazatSpinningForm extends javax.swing.JDialog {
                         "Zmazať spinning", JOptionPane.DEFAULT_OPTION,
                         JOptionPane.PLAIN_MESSAGE, null, options, options[0]) == JOptionPane.YES_OPTION) {
                     
-                    spinningDao.vymazSpinning(idSpinningu);
+                    spinningDao.vymazSpinning(spinning);
                     JOptionPane.showMessageDialog(this, "Spinning s instruktorom " 
                             + spinning.getInstruktor() + " z dňa " + spinning.getDatum() + " bol zrušený!");
                 }
@@ -104,6 +104,7 @@ public class ZmazatSpinningForm extends javax.swing.JDialog {
             JOptionPane.showMessageDialog(this, "Nie je vybraný žiaden spinning!");
         }
         aktualizovatZoznamSpinningovTable();
+        
     }//GEN-LAST:event_zrusitSpinningButtonActionPerformed
 
     private void aktualizovatZoznamSpinningovTable() {

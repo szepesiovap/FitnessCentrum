@@ -2,7 +2,7 @@ package sk.upjs.ics.paz1c.fitnesscentrum.form;
 
 import javax.swing.JOptionPane;
 import sk.upjs.ics.paz1c.fitnesscentrum.ObjectFactory;
-import sk.upjs.ics.paz1c.fitnesscentrum.ZakaznikTableModel;
+import sk.upjs.ics.paz1c.fitnesscentrum.model.ZakaznikTableModel;
 import sk.upjs.ics.paz1c.fitnesscentrum.dao.ZakaznikDao;
 import sk.upjs.ics.paz1c.fitnesscentrum.entity.Zakaznik;
 
@@ -100,7 +100,7 @@ public class PrichodJednorazovyForm extends javax.swing.JDialog {
     private void prichodButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_prichodButtonActionPerformed
         try {
             Long idZakaznika = (Long) zoznamZakaznikovTable.getModel().
-                    getValueAt(this.zoznamZakaznikovTable.getSelectedRow(), ID_COLUMN);
+            getValueAt(this.zoznamZakaznikovTable.getSelectedRow(), ID_COLUMN);
             Zakaznik zakaznik = zakaznikDao.dajZakaznikaSId(idZakaznika);
             if (!zakaznik.isPritomny()) {
                 new PotvrditPrichodZakaznikaForm(this, true, zakaznik).setVisible(true);

@@ -3,7 +3,7 @@ package sk.upjs.ics.paz1c.fitnesscentrum.form;
 import java.time.LocalDateTime;
 import javax.swing.JOptionPane;
 import sk.upjs.ics.paz1c.fitnesscentrum.ObjectFactory;
-import sk.upjs.ics.paz1c.fitnesscentrum.ZakaznikTableModel;
+import sk.upjs.ics.paz1c.fitnesscentrum.model.ZakaznikTableModel;
 import sk.upjs.ics.paz1c.fitnesscentrum.dao.RezervaciaDao;
 import sk.upjs.ics.paz1c.fitnesscentrum.dao.SpinningDao;
 import sk.upjs.ics.paz1c.fitnesscentrum.dao.ZakaznikDao;

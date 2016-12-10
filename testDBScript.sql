@@ -51,30 +51,6 @@ CREATE TABLE IF NOT EXISTS `testFitnesscentrum`.`recepcny` (
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8;
 
--- -----------------------------------------------------
--- Table `testFitnesscentrum`.`rezervacia`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `fitnesscentrum`.`rezervacia` (
-  `id_rezervacia` INT(11) NOT NULL AUTO_INCREMENT,
-  `id_spinning` INT(11) NULL DEFAULT NULL,
-  `id_zakaznik` INT(11) NULL DEFAULT NULL,
-  `cas_rezervacie` TIMESTAMP NULL DEFAULT NULL,
-  PRIMARY KEY (`id_rezervacia`),
-  INDEX `zakaznik.id_idx` (`id_zakaznik` ASC),
-  INDEX `spinning.id_idx` (`id_spinning` ASC),
-  CONSTRAINT `spinning.id`
-    FOREIGN KEY (`id_spinning`)
-    REFERENCES `fitnesscentrum`.`spinning` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT `zakaznik.id`
-    FOREIGN KEY (`id_zakaznik`)
-    REFERENCES `fitnesscentrum`.`zakaznik` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB
-DEFAULT CHARACTER SET = utf8;
-
 
 -- -----------------------------------------------------
 -- Table `testFitnesscentrum`.`spinning`
@@ -124,6 +100,30 @@ CREATE TABLE IF NOT EXISTS `testFitnesscentrum`.`zakaznik` (
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8;
 
+-- -----------------------------------------------------
+-- Table `fitnesscentrum`.`rezervacia`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `testFitnesscentrum`.`rezervacia` (
+  `id_rezervacia` INT(11) NOT NULL AUTO_INCREMENT,
+  `id_spinning` INT(11) NULL DEFAULT NULL,
+  `id_zakaznik` INT(11) NULL DEFAULT NULL,
+  `cas_rezervacie` TIMESTAMP NULL DEFAULT NULL,
+  PRIMARY KEY (`id_rezervacia`),
+  INDEX `zakaznik.id_idx` (`id_zakaznik` ASC),
+  INDEX `spinning.id_idx` (`id_spinning` ASC),
+  CONSTRAINT `spinning.id`
+    FOREIGN KEY (`id_spinning`)
+    REFERENCES `testFitnesscentrum`.`spinning` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `zakaznik.id`
+    FOREIGN KEY (`id_zakaznik`)
+    REFERENCES `testFitnesscentrum`.`zakaznik` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8;
+
 INSERT INTO `testFitnesscentrum`.`instruktor` (`meno_priezvisko`) VALUES ('Janko Hrasko');
 
 
@@ -148,3 +148,19 @@ VALUES ('Ferko Nizky','ferko','8BB4FFE3C9F049BAD909C4C9838B59A3292F1830FD66F1040
 
 
 INSERT INTO `testFitnesscentrum`.`zakaznik` (`meno_priezvisko`, `posledny_prichod`, `pritomny`) VALUES ('Jan Vysoky', '2016-12-04 11:20:21', '0');
+INSERT INTO `testFitnesscentrum`.`zakaznik` (`meno_priezvisko`, `posledny_prichod`, `pritomny`,`kredit`,`cislo_permanentky`) VALUES ('Jane Doe', '2016-12-10 18:45:07', '0','50.0','111');
+INSERT INTO `testFitnesscentrum`.`zakaznik` (`meno_priezvisko`, `posledny_prichod`, `pritomny`,`kredit`,`cislo_permanentky`) VALUES ('John Doe', '2016-12-10 18:49:51','1', '100.0','123');
+INSERT INTO `testFitnesscentrum`.`zakaznik` (`meno_priezvisko`, `posledny_prichod`, `pritomny`) VALUES ('Zakaznik na vymazanie', '2016-12-04 11:20:21', '0');
+INSERT INTO `testFitnesscentrum`.`zakaznik` (`meno_priezvisko`, `posledny_prichod`, `pritomny`) VALUES ('Stale pritomny zakaznik', '2016-12-04 11:20:21', '1');
+
+INSERT INTO `testFitnesscentrum`.`spinning` (`datum`, `kapacita`, `volne`,`id_instruktora`) VALUES ('2016-12-24 15:00:00', '10', '10', '1');
+INSERT INTO `testFitnesscentrum`.`spinning` (`datum`, `kapacita`, `volne`,`id_instruktora`) VALUES ('2016-12-25 16:00:00', '5', '5', '1');
+INSERT INTO `testFitnesscentrum`.`spinning` (`datum`, `kapacita`, `volne`,`id_instruktora`) VALUES ('2016-12-05 17:00:00', '10', '10', '1');
+
+INSERT INTO `testFitnesscentrum`.`rezervacia` (`id_spinning`, `id_zakaznik`) VALUES (1,2);
+INSERT INTO `testFitnesscentrum`.`rezervacia` (`id_spinning`, `id_zakaznik`) VALUES (1,3);
+INSERT INTO `testFitnesscentrum`.`rezervacia` (`id_spinning`, `id_zakaznik`) VALUES (2,1);
+
+
+
+

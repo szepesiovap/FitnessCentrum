@@ -1,4 +1,4 @@
-package sk.upjs.ics.paz1c.fitnesscentrum.daol;
+package sk.upjs.ics.paz1c.fitnesscentrum.dao.impl;
 
 import java.util.List;
 import org.junit.Test;

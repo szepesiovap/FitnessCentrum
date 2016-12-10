@@ -2,7 +2,7 @@ package sk.upjs.ics.paz1c.fitnesscentrum.form;
 
 import javax.swing.JOptionPane;
 import sk.upjs.ics.paz1c.fitnesscentrum.ObjectFactory;
-import sk.upjs.ics.paz1c.fitnesscentrum.ZakaznikTableModel;
+import sk.upjs.ics.paz1c.fitnesscentrum.model.ZakaznikTableModel;
 import sk.upjs.ics.paz1c.fitnesscentrum.dao.ZakaznikDao;
 import sk.upjs.ics.paz1c.fitnesscentrum.entity.Zakaznik;
 
@@ -128,7 +128,6 @@ public final class ZoznamForm extends javax.swing.JFrame {
     }//GEN-LAST:event_zmazatButtonActionPerformed
 
     private void hladatButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_hladatButtonActionPerformed
-        System.out.println(hladatPodlaMenaTextField.getText());
         zoznamZakaznikovTable.setModel(new ZakaznikTableModel(hladatPodlaMenaTextField.getText()));
         aktualizovatZoznamZakaznikov();
     }//GEN-LAST:event_hladatButtonActionPerformed

@@ -1,6 +1,8 @@
 package sk.upjs.ics.paz1c.fitnesscentrum.dao.impl;
 
 import java.sql.Timestamp;
+import java.time.Instant;
+import java.time.LocalDateTime;
 import java.util.List;
 import org.springframework.jdbc.core.JdbcTemplate;
 import sk.upjs.ics.paz1c.fitnesscentrum.ObjectFactory;
@@ -51,7 +53,7 @@ public class MySQLSpinningDao implements SpinningDao {
     }
 
     @Override
-    public List<Spinning> dajSpinningyOdDatumu(Timestamp datum) {
+    public List<Spinning> dajSpinningyOdDatumu(LocalDateTime datum) {
         String sql = "SELECT "
                 + "spinning.id AS spinning_id, "
                 + "spinning.datum AS spinning_datum, "
@@ -61,7 +63,7 @@ public class MySQLSpinningDao implements SpinningDao {
                 + "instruktor.meno_priezvisko AS instruktor_meno "
                 + "FROM spinning LEFT JOIN instruktor ON spinning.id_instruktora = instruktor.id "
                 + "WHERE spinning.datum> ?";
-        return jdbcTemplate.query(sql, spinningRowMapper, datum);
+        return jdbcTemplate.query(sql, spinningRowMapper, Timestamp.valueOf(datum));
     }
 
     @Override
@@ -71,7 +73,7 @@ public class MySQLSpinningDao implements SpinningDao {
         String sql = "UPDATE spinning SET volne =? WHERE id=?";
         jdbcTemplate.update(sql, volne, spinning.getId());
     }
-    
+
     @Override
     public void odrezervujSpinning(Spinning spinning) {
         int volne = spinning.getVolne();
@@ -81,8 +83,8 @@ public class MySQLSpinningDao implements SpinningDao {
     }
 
     @Override
-    public void vymazSpinning(Long idSpinningu) {
+    public void vymazSpinning(Spinning spinning) {
         String sql = "DELETE FROM spinning WHERE id = ?";
-        jdbcTemplate.update(sql, idSpinningu);
+        jdbcTemplate.update(sql, spinning.getId());
     }
 }

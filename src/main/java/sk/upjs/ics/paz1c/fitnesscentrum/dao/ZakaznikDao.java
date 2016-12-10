@@ -7,16 +7,25 @@ import sk.upjs.ics.paz1c.fitnesscentrum.entity.Kluc;
 public interface ZakaznikDao {
 
     public List<Zakaznik> dajVsetkychZakaznikov();
+
     public List<Zakaznik> dajPritomnychZakaznikov();
+
     public List<Zakaznik> dajZakaznikovSoZhodouVMene(String vzorka);
+
     public void pridajZakaznika(Zakaznik zakaznik);
+
     public void vymazZakaznika(Zakaznik zakaznik);
-    public void prichod(Zakaznik zakaznik,Kluc kluc);
+
+    public void prichod(Zakaznik zakaznik, Kluc kluc);
+
     public void odchod(Zakaznik zakaznik);
+
     public Zakaznik dajZakaznikaSId(Long idZakaznika);
+
     public Zakaznik dajZakaznikaSCislomPermanentky(String cisloPermanentky);
+
     public void stiahniKreditZakaznikovi(Zakaznik zakaznik, double suma);
+
     public void dobiKreditZakaznikovi(Zakaznik zakaznik, double suma);
 
-    
 }

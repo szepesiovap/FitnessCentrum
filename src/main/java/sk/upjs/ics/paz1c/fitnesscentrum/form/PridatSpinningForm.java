@@ -1,12 +1,11 @@
 package sk.upjs.ics.paz1c.fitnesscentrum.form;
 
-import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
 
 import sk.upjs.ics.paz1c.fitnesscentrum.ObjectFactory;
-import sk.upjs.ics.paz1c.fitnesscentrum.InstruktorComboBoxModel;
+import sk.upjs.ics.paz1c.fitnesscentrum.model.InstruktorComboBoxModel;
 import sk.upjs.ics.paz1c.fitnesscentrum.dao.SpinningDao;
 import sk.upjs.ics.paz1c.fitnesscentrum.entity.Instruktor;
 import sk.upjs.ics.paz1c.fitnesscentrum.entity.Spinning;

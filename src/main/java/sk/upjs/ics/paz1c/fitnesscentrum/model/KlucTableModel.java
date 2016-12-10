@@ -1,25 +1,26 @@
-package sk.upjs.ics.paz1c.fitnesscentrum;
+package sk.upjs.ics.paz1c.fitnesscentrum.model;
 
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.table.AbstractTableModel;
-import sk.upjs.ics.paz1c.fitnesscentrum.dao.KreditDao;
-import sk.upjs.ics.paz1c.fitnesscentrum.entity.Kredit;
+import sk.upjs.ics.paz1c.fitnesscentrum.ObjectFactory;
+import sk.upjs.ics.paz1c.fitnesscentrum.dao.KlucDao;
+import sk.upjs.ics.paz1c.fitnesscentrum.entity.Kluc;
 
-public class KreditTableModel extends AbstractTableModel {
+public class KlucTableModel extends AbstractTableModel {
 
-    private final KreditDao kreditDao = ObjectFactory.INSTANCE.getKreditDao();
-    private static final String[] NAZVY_STLPCOV = {"Cena", "Názov"};
+    private final KlucDao klucDao = ObjectFactory.INSTANCE.getKlucDao();
+    private static final String[] NAZVY_STLPCOV = {"ID", "Meno kľúča"};
     private static final int POCET_STLPCOV = NAZVY_STLPCOV.length;
-    private List<Kredit> listKreditov = new ArrayList<>();
+    private List<Kluc> listKlucov = new ArrayList<>();
 
-    public KreditTableModel() {
+    public KlucTableModel() {
         aktualizovat();
     }
 
     @Override
     public int getRowCount() {
-        return listKreditov.size();
+        return listKlucov.size();
     }
 
     @Override
@@ -29,17 +30,16 @@ public class KreditTableModel extends AbstractTableModel {
 
     @Override
     public Object getValueAt(int rowIndex, int columnIndex) {
-        Kredit kredit = listKreditov.get(rowIndex);
+        Kluc kluc = listKlucov.get(rowIndex);
         switch (columnIndex) {
             case 0:
-                return kredit.getCena();
+                return kluc.getId();
             case 1:
-                return kredit.getNazov();
-            case 2:
-                return kredit.getId();
+                return kluc.getMeno();
             default:
                 return "???";
         }
+
     }
 
     @Override
@@ -48,7 +48,7 @@ public class KreditTableModel extends AbstractTableModel {
     }
 
     public void aktualizovat() {
-        listKreditov = kreditDao.dajVsetkyKredity();
+        listKlucov = klucDao.dajVsetkyKluce();
         fireTableDataChanged();
     }
 

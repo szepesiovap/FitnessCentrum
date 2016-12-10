@@ -3,7 +3,7 @@ package sk.upjs.ics.paz1c.fitnesscentrum.form;
 import javax.swing.JOptionPane;
 import org.springframework.dao.DuplicateKeyException;
 import sk.upjs.ics.paz1c.fitnesscentrum.ObjectFactory;
-import sk.upjs.ics.paz1c.fitnesscentrum.KreditComboBoxModel;
+import sk.upjs.ics.paz1c.fitnesscentrum.model.KreditComboBoxModel;
 import sk.upjs.ics.paz1c.fitnesscentrum.dao.ZakaznikDao;
 import sk.upjs.ics.paz1c.fitnesscentrum.entity.Kredit;
 import sk.upjs.ics.paz1c.fitnesscentrum.entity.Zakaznik;

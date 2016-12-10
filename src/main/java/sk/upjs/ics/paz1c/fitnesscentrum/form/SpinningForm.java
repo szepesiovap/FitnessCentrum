@@ -2,8 +2,8 @@ package sk.upjs.ics.paz1c.fitnesscentrum.form;
 
 import javax.swing.JOptionPane;
 import sk.upjs.ics.paz1c.fitnesscentrum.ObjectFactory;
-import sk.upjs.ics.paz1c.fitnesscentrum.RezervaciaTableModel;
-import sk.upjs.ics.paz1c.fitnesscentrum.SpinningComboBoxModel;
+import sk.upjs.ics.paz1c.fitnesscentrum.model.RezervaciaTableModel;
+import sk.upjs.ics.paz1c.fitnesscentrum.model.SpinningComboBoxModel;
 import sk.upjs.ics.paz1c.fitnesscentrum.dao.RezervaciaDao;
 import sk.upjs.ics.paz1c.fitnesscentrum.dao.SpinningDao;
 import sk.upjs.ics.paz1c.fitnesscentrum.entity.Rezervacia;
@@ -202,7 +202,7 @@ public class SpinningForm extends javax.swing.JDialog {
                         "Odhlásiť zo spinningu",
                         JOptionPane.DEFAULT_OPTION, JOptionPane.PLAIN_MESSAGE, null,
                         options, options[0]) == JOptionPane.YES_OPTION) {
-                    rezervaciaDao.odstranRezervacia(idRezervacie);
+                    rezervaciaDao.odstranRezervacia(rezervacia);
                 }
             }
 
@@ -219,6 +219,7 @@ public class SpinningForm extends javax.swing.JDialog {
 
     private void zrusitSpinnigMenuMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_zrusitSpinnigMenuMousePressed
         new ZmazatSpinningForm().setVisible(true);
+        aktualizovatSpinningy();
     }//GEN-LAST:event_zrusitSpinnigMenuMousePressed
 
     private void aktualizovatRezervacie() {

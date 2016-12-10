@@ -14,5 +14,5 @@ public interface RezervaciaDao {
 
     public void pridajRezervaciu(Rezervacia rezervacia);
 
-    public void odstranRezervacia(Long idRezervacie);
+    public void odstranRezervacia(Rezervacia rezervacia);
 }

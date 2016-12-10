@@ -33,6 +33,7 @@ public enum ObjectFactory {
     private KreditDao kreditDao;
     private HesloManager hesloManager;
     private RecepcnyManager recepcnyManager;
+    private ZakaznikManager zakaznikManager;
 
     public JdbcTemplate getJdbcTemplate() {
         if (jdbcTemplate == null) {
@@ -112,11 +113,19 @@ public enum ObjectFactory {
         }
         return hesloManager;
     }
-    
-        public RecepcnyManager getRecepcnyManager() {
+
+    public RecepcnyManager getRecepcnyManager() {
         if (recepcnyManager == null) {
             recepcnyManager = new RecepcnyManager();
         }
         return recepcnyManager;
     }
+
+    public ZakaznikManager getZakaznikManager() {
+        if (zakaznikManager == null) {
+            zakaznikManager = new ZakaznikManager();
+        }
+        return zakaznikManager;
+    }
+
 }

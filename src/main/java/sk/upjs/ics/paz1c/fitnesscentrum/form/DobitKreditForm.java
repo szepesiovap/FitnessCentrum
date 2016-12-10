@@ -3,14 +3,16 @@ package sk.upjs.ics.paz1c.fitnesscentrum.form;
 import javax.swing.JOptionPane;
 import org.springframework.dao.EmptyResultDataAccessException;
 import sk.upjs.ics.paz1c.fitnesscentrum.ObjectFactory;
-import sk.upjs.ics.paz1c.fitnesscentrum.KreditComboBoxModel;
+import sk.upjs.ics.paz1c.fitnesscentrum.ZakaznikManager;
 import sk.upjs.ics.paz1c.fitnesscentrum.dao.ZakaznikDao;
+import sk.upjs.ics.paz1c.fitnesscentrum.model.KreditComboBoxModel;
 import sk.upjs.ics.paz1c.fitnesscentrum.entity.Kredit;
 import sk.upjs.ics.paz1c.fitnesscentrum.entity.Zakaznik;
 
 public class DobitKreditForm extends javax.swing.JDialog {
 
     private final ZakaznikDao zakaznikDao = ObjectFactory.INSTANCE.getZakaznikDao();
+    private ZakaznikManager zakaznikManager = ObjectFactory.INSTANCE.getZakaznikManager();
     private Zakaznik zakaznik;
 
     /**

@@ -1,7 +1,8 @@
-package sk.upjs.ics.paz1c.fitnesscentrum;
+package sk.upjs.ics.paz1c.fitnesscentrum.model;
 
 import java.util.List;
 import javax.swing.DefaultComboBoxModel;
+import sk.upjs.ics.paz1c.fitnesscentrum.ObjectFactory;
 import sk.upjs.ics.paz1c.fitnesscentrum.dao.InstruktorDao;
 import sk.upjs.ics.paz1c.fitnesscentrum.entity.Instruktor;
 

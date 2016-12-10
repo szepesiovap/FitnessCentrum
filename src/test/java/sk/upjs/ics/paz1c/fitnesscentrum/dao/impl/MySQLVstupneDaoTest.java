@@ -1,4 +1,4 @@
-package sk.upjs.ics.paz1c.fitnesscentrum.daol;
+package sk.upjs.ics.paz1c.fitnesscentrum.dao.impl;
 
 import org.junit.Test;
 import static org.junit.Assert.*;
