@@ -148,9 +148,9 @@ public class PrihlasovanieForm extends javax.swing.JFrame {
         } else {
             JOptionPane.showMessageDialog(this, "Recepčný so zadaným loginom neexistuje!");
         }*/
-        //docasne!!!!!!!
-        if ((recepcny != null) || (1 == 1)) {
-            new HlavneOknoForm().setVisible(true);
+        
+        if ((recepcny != null)) {
+            new HlavneOknoForm(recepcny).setVisible(true);
             this.dispose();
         } else {
             JOptionPane.showMessageDialog(this, "Nesprávne prihlasovacie údaje!");

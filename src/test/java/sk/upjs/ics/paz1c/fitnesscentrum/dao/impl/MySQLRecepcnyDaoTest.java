@@ -4,7 +4,7 @@ import java.util.List;
 import org.junit.Test;
 import static org.junit.Assert.*;
 import org.springframework.dao.DuplicateKeyException;
-import sk.upjs.ics.paz1c.fitnesscentrum.NevalidnyVstupException;
+import sk.upjs.ics.paz1c.fitnesscentrum.exception.NevalidnyVstupException;
 import sk.upjs.ics.paz1c.fitnesscentrum.ObjectFactory;
 import sk.upjs.ics.paz1c.fitnesscentrum.dao.RecepcnyDao;
 import sk.upjs.ics.paz1c.fitnesscentrum.entity.Recepcny;
@@ -36,7 +36,8 @@ public class MySQLRecepcnyDaoTest extends PripravaNaTestovanie {
     /**
      * Test of pridajRecepcneho method, of class MySQLRecepcnyDao.
      *
-     * @throws sk.upjs.ics.paz1c.fitnesscentrum.NevalidnyVstupException
+     * @throws
+     * sk.upjs.ics.paz1c.fitnesscentrum.exception.NevalidnyVstupException
      */
     @Test
     public void testPridajRecepcneho() throws NevalidnyVstupException {
@@ -65,7 +66,8 @@ public class MySQLRecepcnyDaoTest extends PripravaNaTestovanie {
      * Test unikatneho loginu pre pridajRecepcneho method, of class
      * MySQLRecepcnyDao.
      *
-     * @throws sk.upjs.ics.paz1c.fitnesscentrum.NevalidnyVstupException
+     * @throws
+     * sk.upjs.ics.paz1c.fitnesscentrum.exception.NevalidnyVstupException
      */
     @Test
     public void testPridajRovnakehoRecepcneho() throws NevalidnyVstupException {
@@ -93,7 +95,8 @@ public class MySQLRecepcnyDaoTest extends PripravaNaTestovanie {
     @Test
     public void testVymazRecepcneho() {
         Long idRecepcny = 2L;
-        recepcnyDao.vymazRecepcneho(idRecepcny);
+        Recepcny recepcny = recepcnyDao.dajRecepcneho(idRecepcny);
+        recepcnyDao.vymazRecepcneho(recepcny);
         List<Recepcny> listRecepcnych = recepcnyDao.dajVsetkychRecepcnych();
 
         boolean jeOdstraneny = true;

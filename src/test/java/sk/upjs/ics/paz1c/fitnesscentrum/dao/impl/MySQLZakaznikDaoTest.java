@@ -7,6 +7,7 @@ import sk.upjs.ics.paz1c.fitnesscentrum.ObjectFactory;
 import sk.upjs.ics.paz1c.fitnesscentrum.dao.ZakaznikDao;
 import sk.upjs.ics.paz1c.fitnesscentrum.entity.Kluc;
 import sk.upjs.ics.paz1c.fitnesscentrum.entity.Zakaznik;
+import sk.upjs.ics.paz1c.fitnesscentrum.exception.NeexistujuciZakaznikException;
 
 public class MySQLZakaznikDaoTest extends PripravaNaTestovanie {
 
@@ -87,7 +88,7 @@ public class MySQLZakaznikDaoTest extends PripravaNaTestovanie {
      * Test of dajZakaznikaSCislomPermanentky method, of class MySQLZakaznikDao.
      */
     @Test
-    public void testDajZakaznikaSCislomPermanentky() {
+    public void testDajZakaznikaSCislomPermanentky() throws NeexistujuciZakaznikException {
         String cisloPermanentky = "111";
         Zakaznik zakaznik = zakaznikDao.dajZakaznikaSCislomPermanentky(cisloPermanentky);
         assertTrue(zakaznik.getId() == 2L);

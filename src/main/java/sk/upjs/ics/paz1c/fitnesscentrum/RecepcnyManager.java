@@ -1,5 +1,7 @@
 package sk.upjs.ics.paz1c.fitnesscentrum;
 
+import sk.upjs.ics.paz1c.fitnesscentrum.exception.NevalidnyVstupException;
+import sk.upjs.ics.paz1c.fitnesscentrum.exception.NeexistujuciRecepcnyException;
 import java.util.UUID;
 import sk.upjs.ics.paz1c.fitnesscentrum.dao.RecepcnyDao;
 import sk.upjs.ics.paz1c.fitnesscentrum.entity.Recepcny;
@@ -67,5 +69,13 @@ public class RecepcnyManager {
                 throw new NevalidnyVstupException("Nesprávne heslo!");
             }
         }
+    }
+
+    public Recepcny dajRecepcneho(Long idRecepecneho) {
+        return recepcnyDao.dajRecepcneho(idRecepecneho);
+    }
+    
+    public void vymazRecepcneho(Recepcny recepcny) {
+        recepcnyDao.vymazRecepcneho(recepcny);
     }
 }

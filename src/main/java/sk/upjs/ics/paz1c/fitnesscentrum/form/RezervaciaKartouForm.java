@@ -1,24 +1,18 @@
 package sk.upjs.ics.paz1c.fitnesscentrum.form;
 
-import java.time.LocalDateTime;
 import javax.swing.JOptionPane;
-import org.springframework.dao.EmptyResultDataAccessException;
 import sk.upjs.ics.paz1c.fitnesscentrum.ObjectFactory;
-import sk.upjs.ics.paz1c.fitnesscentrum.dao.RezervaciaDao;
-import sk.upjs.ics.paz1c.fitnesscentrum.dao.SpinningDao;
-import sk.upjs.ics.paz1c.fitnesscentrum.dao.ZakaznikDao;
-import sk.upjs.ics.paz1c.fitnesscentrum.entity.Rezervacia;
+import sk.upjs.ics.paz1c.fitnesscentrum.FitnessManager;
 import sk.upjs.ics.paz1c.fitnesscentrum.entity.Spinning;
 import sk.upjs.ics.paz1c.fitnesscentrum.entity.Zakaznik;
+import sk.upjs.ics.paz1c.fitnesscentrum.exception.NedostatocnyKreditException;
+import sk.upjs.ics.paz1c.fitnesscentrum.exception.NeexistujuciZakaznikException;
 
 public class RezervaciaKartouForm extends javax.swing.JDialog {
 
-    private static final double SUMA = ObjectFactory.INSTANCE.getVstupneDao().dajCeny().getCenaSpinnigu();
-    private final RezervaciaDao rezervaciaDao = ObjectFactory.INSTANCE.getRezervaciaDao();
-    private final ZakaznikDao zakaznikDao = ObjectFactory.INSTANCE.getZakaznikDao();
-    private final SpinningDao spinningDao = ObjectFactory.INSTANCE.getSpinningDao();
+    private final FitnessManager fitnessManager = ObjectFactory.INSTANCE.getFitnessManager();
     private Zakaznik zakaznik;
-    private static Spinning spinning;
+    private final Spinning spinning;
 
     /**
      * Creates new form RezervujKartouForm
@@ -148,39 +142,36 @@ public class RezervaciaKartouForm extends javax.swing.JDialog {
 
     private void nacitatButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nacitatButtonActionPerformed
         try {
-            zakaznik = zakaznikDao.dajZakaznikaSCislomPermanentky(cisloKartyTextField.getText());
-        } catch (EmptyResultDataAccessException e) {
-            zakaznik = null;
-        }
-        if (zakaznik == null) {
-            rezervovatButton.setEnabled(false);
-            zobrazMenoLabel.setText("");
-            zobrazKreditLabel.setText("");
-            zobrazCisloKartyLabel.setText("");
-            JOptionPane.showMessageDialog(null, "Neplatné číslo permanentky!");
-        } else {
-            rezervovatButton.setEnabled(true);
-            zobrazMenoLabel.setText(zakaznik.getMeno());
-            zobrazKreditLabel.setText("" + zakaznik.getKredit());
-            zobrazCisloKartyLabel.setText(zakaznik.getCisloPermanentky());
+            zakaznik = fitnessManager.dajZakaznikaSCislomPermanentky(cisloKartyTextField.getText());
+            odblokovatRezervovanie();
+        } catch (NeexistujuciZakaznikException e) {
+            zablokovatRezervovanie();
+            JOptionPane.showMessageDialog(this, "Neplatné číslo permanentky!");
         }
     }//GEN-LAST:event_nacitatButtonActionPerformed
 
     private void rezervovatButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rezervovatButtonActionPerformed
-        if (zakaznik.getKredit() <= SUMA) {
-            JOptionPane.showMessageDialog(this, "Nedostatočný kredit!");
-        } else {
-            Rezervacia rezervacia = new Rezervacia();
-            rezervacia.setSpinning(spinning);
-            rezervacia.setZakaznik(zakaznik);
-            rezervacia.setCasRezervacie(LocalDateTime.now());
-            spinningDao.rezervujSpinning(spinning);
-            zakaznikDao.stiahniKreditZakaznikovi(zakaznik, SUMA);
-            rezervaciaDao.pridajRezervaciu(rezervacia);
+        try {
+            fitnessManager.rezervovatSpinningKartou(spinning, zakaznik);
             dispose();
+        } catch (NedostatocnyKreditException e) {
+            JOptionPane.showMessageDialog(this, "Nedostatočný kredit!");
         }
     }//GEN-LAST:event_rezervovatButtonActionPerformed
 
+    private void odblokovatRezervovanie() {
+        rezervovatButton.setEnabled(true);
+        zobrazMenoLabel.setText(zakaznik.getMeno());
+        zobrazKreditLabel.setText("" + zakaznik.getKredit());
+        zobrazCisloKartyLabel.setText(zakaznik.getCisloPermanentky());
+    }
+
+    private void zablokovatRezervovanie() {
+        rezervovatButton.setEnabled(false);
+        zobrazMenoLabel.setText("");
+        zobrazKreditLabel.setText("");
+        zobrazCisloKartyLabel.setText("");
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel cisloKartyLabel;
     private javax.swing.JTextField cisloKartyTextField;

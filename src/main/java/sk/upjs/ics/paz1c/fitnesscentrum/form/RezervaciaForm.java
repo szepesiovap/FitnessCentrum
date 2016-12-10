@@ -3,21 +3,17 @@ package sk.upjs.ics.paz1c.fitnesscentrum.form;
 import java.time.LocalDateTime;
 import javax.swing.JOptionPane;
 import sk.upjs.ics.paz1c.fitnesscentrum.ObjectFactory;
-import sk.upjs.ics.paz1c.fitnesscentrum.model.ZakaznikTableModel;
-import sk.upjs.ics.paz1c.fitnesscentrum.dao.RezervaciaDao;
-import sk.upjs.ics.paz1c.fitnesscentrum.dao.SpinningDao;
-import sk.upjs.ics.paz1c.fitnesscentrum.dao.ZakaznikDao;
+import sk.upjs.ics.paz1c.fitnesscentrum.FitnessManager;
 import sk.upjs.ics.paz1c.fitnesscentrum.entity.Rezervacia;
+import sk.upjs.ics.paz1c.fitnesscentrum.model.ZakaznikTableModel;
 import sk.upjs.ics.paz1c.fitnesscentrum.entity.Spinning;
 import sk.upjs.ics.paz1c.fitnesscentrum.entity.Zakaznik;
 
 public class RezervaciaForm extends javax.swing.JDialog {
 
     private static final int ID_COLUMN = 5;
-    private static Spinning spinning;
-    private final RezervaciaDao rezervaciaDao = ObjectFactory.INSTANCE.getRezervaciaDao();
-    private final ZakaznikDao zakaznikDao = ObjectFactory.INSTANCE.getZakaznikDao();
-    private final SpinningDao spinningDao = ObjectFactory.INSTANCE.getSpinningDao();
+    private final Spinning spinning;
+    private final FitnessManager fitnessManager = ObjectFactory.INSTANCE.getFitnessManager();
 
     /**
      * Creates new form RezervaciaForm
@@ -127,26 +123,24 @@ public class RezervaciaForm extends javax.swing.JDialog {
     }//GEN-LAST:event_hladatButtonActionPerformed
 
     private void rezervovatButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rezervovatButtonActionPerformed
-
         try {
             Long idZakaznika = (Long) zoznamZakaznikovTable.getModel().getValueAt(this.zoznamZakaznikovTable.getSelectedRow(), ID_COLUMN);
-            Zakaznik zakaznik = zakaznikDao.dajZakaznikaSId(idZakaznika);
+            Zakaznik zakaznik = fitnessManager.dajZakaznikaSId(idZakaznika);
             Rezervacia rezervacia = new Rezervacia();
             rezervacia.setSpinning(spinning);
             rezervacia.setZakaznik(zakaznik);
             rezervacia.setCasRezervacie(LocalDateTime.now());
-            
+
             Object[] options = {"Rezervovať", "Zrušiť"};
             if (JOptionPane.showOptionDialog(this, "Rezervovať miesto na spinningu pre zákazníka "
                     + zakaznik.getMeno() + "?", "Potvrdiť rezerváciu",
                     JOptionPane.DEFAULT_OPTION, JOptionPane.PLAIN_MESSAGE, null,
                     options, options[0]) == JOptionPane.YES_OPTION) {
-                rezervaciaDao.pridajRezervaciu(rezervacia);
-                spinningDao.rezervujSpinning(spinning);
+                fitnessManager.rezervovatSpinning(rezervacia);
                 dispose();
             }
         } catch (ArrayIndexOutOfBoundsException e) {
-            JOptionPane.showMessageDialog(null, "Vyber zákazníka na rezerváciu.");
+            JOptionPane.showMessageDialog(this, "Vyber zákazníka na rezerváciu.");
         }
      }//GEN-LAST:event_rezervovatButtonActionPerformed
 

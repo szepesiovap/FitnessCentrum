@@ -1,19 +1,17 @@
 package sk.upjs.ics.paz1c.fitnesscentrum.form;
 
 import javax.swing.JOptionPane;
-import org.springframework.dao.EmptyResultDataAccessException;
 import sk.upjs.ics.paz1c.fitnesscentrum.ObjectFactory;
+import sk.upjs.ics.paz1c.fitnesscentrum.FitnessManager;
 import sk.upjs.ics.paz1c.fitnesscentrum.model.KlucComboBoxModel;
-import sk.upjs.ics.paz1c.fitnesscentrum.dao.KlucDao;
-import sk.upjs.ics.paz1c.fitnesscentrum.dao.ZakaznikDao;
 import sk.upjs.ics.paz1c.fitnesscentrum.entity.Kluc;
 import sk.upjs.ics.paz1c.fitnesscentrum.entity.Zakaznik;
+import sk.upjs.ics.paz1c.fitnesscentrum.exception.NedostatocnyKreditException;
+import sk.upjs.ics.paz1c.fitnesscentrum.exception.NeexistujuciZakaznikException;
 
 public class PrichodKartouForm extends javax.swing.JDialog {
 
-    private static final double SUMA = ObjectFactory.INSTANCE.getVstupneDao().dajCeny().getCenaVstupneho();
-    private final KlucDao klucDao = ObjectFactory.INSTANCE.getKlucDao();
-    private final ZakaznikDao zakaznikDao = ObjectFactory.INSTANCE.getZakaznikDao();
+    private final FitnessManager fitnessManager = ObjectFactory.INSTANCE.getFitnessManager();
     private Zakaznik zakaznik;
 
     /**
@@ -143,13 +141,13 @@ public class PrichodKartouForm extends javax.swing.JDialog {
     private void prichodButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_prichodButtonActionPerformed
         if (zakaznik.isPritomny()) {
             JOptionPane.showMessageDialog(this, "Zákazník je už prítomný!");
-        } else if (zakaznik.getKredit() <= SUMA) {
-            JOptionPane.showMessageDialog(this, "Nedostatočný kredit!");
         } else {
             Kluc kluc = (Kluc) klucComboBox.getSelectedItem();
-            zakaznikDao.stiahniKreditZakaznikovi(zakaznik, SUMA);
-            zakaznikDao.prichod(zakaznik, kluc);
-            klucDao.priradZakaznika(kluc, zakaznik);
+            try {
+                fitnessManager.prichodKartouZakaznika(zakaznik, kluc);
+            } catch (NedostatocnyKreditException e) {
+                JOptionPane.showMessageDialog(this, "Nedostatočný kredit!");
+            }
             dispose();
         }
 
@@ -157,26 +155,30 @@ public class PrichodKartouForm extends javax.swing.JDialog {
 
     private void nacitatButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nacitatButtonActionPerformed
         try {
-            zakaznik = zakaznikDao.dajZakaznikaSCislomPermanentky(cisloKartyTextField.getText());
-        } catch (EmptyResultDataAccessException e) {
-            zakaznik = null;
+            zakaznik = fitnessManager.dajZakaznikaSCislomPermanentky(cisloKartyTextField.getText());
+            odblokovatPrichod();
+        } catch (NeexistujuciZakaznikException e) {
+            zablokovatPrichod();
+            JOptionPane.showMessageDialog(this, "Neplatné číslo permanentky!");
         }
-        if (zakaznik == null) {
-            klucComboBox.setEnabled(false);
-            prichodButton.setEnabled(false);
-            zobrazMenoLabel.setText("");
-            zobrazKreditLabel.setText("");
-            zobrazCisloKartyLabel.setText("");
-            JOptionPane.showMessageDialog(null, "Neplatné číslo permanentky!");
-        } else {
-            klucComboBox.setEnabled(true);
-            prichodButton.setEnabled(true);
-            zobrazMenoLabel.setText(zakaznik.getMeno());
-            zobrazKreditLabel.setText("" + zakaznik.getKredit());
-            zobrazCisloKartyLabel.setText(zakaznik.getCisloPermanentky());
-        }
+
     }//GEN-LAST:event_nacitatButtonActionPerformed
 
+    private void odblokovatPrichod() {
+        klucComboBox.setEnabled(true);
+        prichodButton.setEnabled(true);
+        zobrazMenoLabel.setText(zakaznik.getMeno());
+        zobrazKreditLabel.setText("" + zakaznik.getKredit());
+        zobrazCisloKartyLabel.setText(zakaznik.getCisloPermanentky());
+    }
+
+    private void zablokovatPrichod() {
+        klucComboBox.setEnabled(false);
+        prichodButton.setEnabled(false);
+        zobrazMenoLabel.setText("");
+        zobrazKreditLabel.setText("");
+        zobrazCisloKartyLabel.setText("");
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel cisloKartyLabel;
     private javax.swing.JTextField cisloKartyTextField;

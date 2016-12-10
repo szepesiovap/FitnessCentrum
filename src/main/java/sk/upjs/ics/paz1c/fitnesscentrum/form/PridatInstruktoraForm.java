@@ -1,12 +1,12 @@
 package sk.upjs.ics.paz1c.fitnesscentrum.form;
 
 import sk.upjs.ics.paz1c.fitnesscentrum.ObjectFactory;
-import sk.upjs.ics.paz1c.fitnesscentrum.dao.InstruktorDao;
+import sk.upjs.ics.paz1c.fitnesscentrum.FitnessManager;
 import sk.upjs.ics.paz1c.fitnesscentrum.entity.Instruktor;
 
 public class PridatInstruktoraForm extends javax.swing.JDialog {
 
-    private final InstruktorDao instruktorDao = ObjectFactory.INSTANCE.getInstruktorDao();
+    private final FitnessManager fitnessManager = ObjectFactory.INSTANCE.getFitnessManager();
 
     /**
      * Creates new form PridajInstruktoraForm
@@ -94,7 +94,7 @@ public class PridatInstruktoraForm extends javax.swing.JDialog {
     private void pridatButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pridatButtonActionPerformed
         Instruktor instruktor = new Instruktor();
         instruktor.setMeno(menoInstruktoraTextField.getText());
-        instruktorDao.pridajInstruktora(instruktor);
+        fitnessManager.pridajInstruktora(instruktor);
         dispose();
     }//GEN-LAST:event_pridatButtonActionPerformed
 

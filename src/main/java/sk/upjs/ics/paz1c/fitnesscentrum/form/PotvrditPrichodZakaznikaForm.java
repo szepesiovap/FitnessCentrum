@@ -1,20 +1,19 @@
 package sk.upjs.ics.paz1c.fitnesscentrum.form;
 
 import sk.upjs.ics.paz1c.fitnesscentrum.ObjectFactory;
+import sk.upjs.ics.paz1c.fitnesscentrum.FitnessManager;
 import sk.upjs.ics.paz1c.fitnesscentrum.model.KlucComboBoxModel;
-import sk.upjs.ics.paz1c.fitnesscentrum.dao.KlucDao;
-import sk.upjs.ics.paz1c.fitnesscentrum.dao.ZakaznikDao;
 import sk.upjs.ics.paz1c.fitnesscentrum.entity.Kluc;
 import sk.upjs.ics.paz1c.fitnesscentrum.entity.Zakaznik;
 
 public class PotvrditPrichodZakaznikaForm extends javax.swing.JDialog {
-
-    private static Zakaznik zakaznik;
-    private final ZakaznikDao zakaznikDao = ObjectFactory.INSTANCE.getZakaznikDao();
-    private final KlucDao klucDao = ObjectFactory.INSTANCE.getKlucDao();
+    
+    private final Zakaznik zakaznik;
+    private final FitnessManager fitnessManager = ObjectFactory.INSTANCE.getFitnessManager();
 
     /**
      * Creates new form PrichodZakaznikaForm
+     *
      * @param parent
      * @param modal
      * @param zakaznik
@@ -99,8 +98,7 @@ public class PotvrditPrichodZakaznikaForm extends javax.swing.JDialog {
 
     private void prichodButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_prichodButtonActionPerformed
         Kluc kluc = ((Kluc) klucComboBox.getSelectedItem());
-        zakaznikDao.prichod(zakaznik, kluc);
-        klucDao.priradZakaznika(kluc, zakaznik);
+        fitnessManager.prichodZakaznika(zakaznik, kluc);
         dispose();
     }//GEN-LAST:event_prichodButtonActionPerformed
 

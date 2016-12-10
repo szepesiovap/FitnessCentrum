@@ -1,18 +1,16 @@
 package sk.upjs.ics.paz1c.fitnesscentrum.form;
 
 import javax.swing.JOptionPane;
-import org.springframework.dao.EmptyResultDataAccessException;
+import sk.upjs.ics.paz1c.fitnesscentrum.exception.NeexistujuciZakaznikException;
 import sk.upjs.ics.paz1c.fitnesscentrum.ObjectFactory;
-import sk.upjs.ics.paz1c.fitnesscentrum.ZakaznikManager;
-import sk.upjs.ics.paz1c.fitnesscentrum.dao.ZakaznikDao;
+import sk.upjs.ics.paz1c.fitnesscentrum.DefaultFitnessManager;
 import sk.upjs.ics.paz1c.fitnesscentrum.model.KreditComboBoxModel;
 import sk.upjs.ics.paz1c.fitnesscentrum.entity.Kredit;
 import sk.upjs.ics.paz1c.fitnesscentrum.entity.Zakaznik;
 
 public class DobitKreditForm extends javax.swing.JDialog {
 
-    private final ZakaznikDao zakaznikDao = ObjectFactory.INSTANCE.getZakaznikDao();
-    private ZakaznikManager zakaznikManager = ObjectFactory.INSTANCE.getZakaznikManager();
+    private final DefaultFitnessManager zakaznikManager = ObjectFactory.INSTANCE.getFitnessManager();
     private Zakaznik zakaznik;
 
     /**
@@ -150,31 +148,34 @@ public class DobitKreditForm extends javax.swing.JDialog {
 
     private void dobitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dobitButtonActionPerformed
         double vybranyKredit = ((Kredit) kreditComboBox.getSelectedItem()).getCena();
-        zakaznikDao.dobiKreditZakaznikovi(zakaznik, vybranyKredit);
+        zakaznikManager.dobitKredit(zakaznik, vybranyKredit);
         dispose();
     }//GEN-LAST:event_dobitButtonActionPerformed
 
     private void nacitatButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nacitatButtonActionPerformed
         try {
-            zakaznik = zakaznikDao.dajZakaznikaSCislomPermanentky(cisloPermanentkyTextField.getText());
-        } catch (EmptyResultDataAccessException e) {
-            zakaznik = null;
-        }
-        if (zakaznik == null) {
-            kreditComboBox.setEnabled(false);
-            dobitButton.setEnabled(false);
-            zobrazMenoLabel.setText("");
-            zobrazKreditLabel.setText("");
-            zobrazCisloKartyLabel.setText("");
-            JOptionPane.showMessageDialog(null, "Neplatné číslo permanentky!");
-        } else {
-            dobitButton.setEnabled(true);
-            kreditComboBox.setEnabled(true);
-            zobrazMenoLabel.setText(zakaznik.getMeno());
-            zobrazKreditLabel.setText("" + zakaznik.getKredit());
-            zobrazCisloKartyLabel.setText(zakaznik.getCisloPermanentky());
+            zakaznik = zakaznikManager.dajZakaznikaSCislomPermanentky(cisloPermanentkyTextField.getText());
+            odblokovatDobitie();
+        } catch (NeexistujuciZakaznikException e) {
+            zablokovatDobitie();
+            JOptionPane.showMessageDialog(this, "Neplatné číslo permanentky!");
         }    }//GEN-LAST:event_nacitatButtonActionPerformed
+    
+    private void odblokovatDobitie() {
+        dobitButton.setEnabled(true);
+        kreditComboBox.setEnabled(true);
+        zobrazMenoLabel.setText(zakaznik.getMeno());
+        zobrazKreditLabel.setText("" + zakaznik.getKredit());
+        zobrazCisloKartyLabel.setText(zakaznik.getCisloPermanentky());
+    }
 
+    private void zablokovatDobitie() {
+        kreditComboBox.setEnabled(false);
+        dobitButton.setEnabled(false);
+        zobrazMenoLabel.setText("");
+        zobrazKreditLabel.setText("");
+        zobrazCisloKartyLabel.setText("");
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel cisloKartyLabel;

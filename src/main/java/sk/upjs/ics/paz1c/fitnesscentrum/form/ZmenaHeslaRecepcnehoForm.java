@@ -1,11 +1,9 @@
 package sk.upjs.ics.paz1c.fitnesscentrum.form;
 
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import sk.upjs.ics.paz1c.fitnesscentrum.ObjectFactory;
-import sk.upjs.ics.paz1c.fitnesscentrum.NeexistujuciRecepcnyException;
-import sk.upjs.ics.paz1c.fitnesscentrum.NevalidnyVstupException;
+import sk.upjs.ics.paz1c.fitnesscentrum.exception.NeexistujuciRecepcnyException;
+import sk.upjs.ics.paz1c.fitnesscentrum.exception.NevalidnyVstupException;
 import sk.upjs.ics.paz1c.fitnesscentrum.RecepcnyManager;
 
 public class ZmenaHeslaRecepcnehoForm extends javax.swing.JDialog {

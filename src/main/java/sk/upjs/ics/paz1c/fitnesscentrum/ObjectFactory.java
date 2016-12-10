@@ -33,7 +33,9 @@ public enum ObjectFactory {
     private KreditDao kreditDao;
     private HesloManager hesloManager;
     private RecepcnyManager recepcnyManager;
-    private ZakaznikManager zakaznikManager;
+    private KreditManager kreditManager;
+    private DefaultFitnessManager fitnessManager;
+    private KlucManager klucManager;
 
     public JdbcTemplate getJdbcTemplate() {
         if (jdbcTemplate == null) {
@@ -121,11 +123,25 @@ public enum ObjectFactory {
         return recepcnyManager;
     }
 
-    public ZakaznikManager getZakaznikManager() {
-        if (zakaznikManager == null) {
-            zakaznikManager = new ZakaznikManager();
+    public KreditManager getKreditManager() {
+        if (kreditManager == null) {
+            kreditManager = new KreditManager();
         }
-        return zakaznikManager;
+        return kreditManager;
+    }
+
+    public DefaultFitnessManager getFitnessManager() {
+        if (fitnessManager == null) {
+            fitnessManager = new DefaultFitnessManager();
+        }
+        return fitnessManager;
+    }
+
+    public KlucManager getKlucManager() {
+        if (klucManager == null) {
+            klucManager = new KlucManager();
+        }
+        return klucManager;
     }
 
 }

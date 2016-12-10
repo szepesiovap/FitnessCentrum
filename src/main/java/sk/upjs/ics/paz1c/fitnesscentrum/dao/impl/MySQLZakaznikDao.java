@@ -3,7 +3,10 @@ package sk.upjs.ics.paz1c.fitnesscentrum.dao.impl;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.util.List;
+import org.springframework.dao.DuplicateKeyException;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
+import sk.upjs.ics.paz1c.fitnesscentrum.exception.NeexistujuciZakaznikException;
 import sk.upjs.ics.paz1c.fitnesscentrum.ObjectFactory;
 import sk.upjs.ics.paz1c.fitnesscentrum.rowmapper.ZakaznikRowMapper;
 import sk.upjs.ics.paz1c.fitnesscentrum.dao.ZakaznikDao;
@@ -51,7 +54,7 @@ public class MySQLZakaznikDao implements ZakaznikDao {
     }
 
     @Override
-    public void pridajZakaznika(Zakaznik zakaznik) {
+    public void pridajZakaznika(Zakaznik zakaznik) throws DuplicateKeyException {
         String sql = "INSERT INTO zakaznik (meno_priezvisko,posledny_prichod,pritomny,cislo_permanentky,kredit) VALUES (?,?,?,?,?)";
         jdbcTemplate.update(sql, zakaznik.getMeno(), Timestamp.valueOf(LocalDateTime.now()), 0, zakaznik.getCisloPermanentky(), zakaznik.getKredit());
     }
@@ -90,18 +93,22 @@ public class MySQLZakaznikDao implements ZakaznikDao {
     }
 
     @Override
-    public Zakaznik dajZakaznikaSCislomPermanentky(String cisloPermanentky) {
-        String sql = "SELECT "
-                + "zakaznik.id AS z_id, "
-                + "zakaznik.meno_priezvisko AS z_meno, "
-                + "zakaznik.posledny_prichod AS z_posledny_prichod"
-                + ", zakaznik.pritomny as z_pritomny, "
-                + "zakaznik.kredit as z_kredit, "
-                + "zakaznik.cislo_permanentky as z_cislo_permanentky, "
-                + "zakaznik.id_kluca AS kluc_id, "
-                + "kluc.meno_kluca AS kluc_meno "
-                + "FROM zakaznik LEFT JOIN kluc ON zakaznik.id_kluca = kluc.id_kluca WHERE cislo_permanentky = ?";
-        return jdbcTemplate.queryForObject(sql, zakaznikRowMapper, cisloPermanentky);
+    public Zakaznik dajZakaznikaSCislomPermanentky(String cisloPermanentky) throws NeexistujuciZakaznikException {
+        try {
+            String sql = "SELECT "
+                    + "zakaznik.id AS z_id, "
+                    + "zakaznik.meno_priezvisko AS z_meno, "
+                    + "zakaznik.posledny_prichod AS z_posledny_prichod"
+                    + ", zakaznik.pritomny as z_pritomny, "
+                    + "zakaznik.kredit as z_kredit, "
+                    + "zakaznik.cislo_permanentky as z_cislo_permanentky, "
+                    + "zakaznik.id_kluca AS kluc_id, "
+                    + "kluc.meno_kluca AS kluc_meno "
+                    + "FROM zakaznik LEFT JOIN kluc ON zakaznik.id_kluca = kluc.id_kluca WHERE cislo_permanentky = ?";
+            return jdbcTemplate.queryForObject(sql, zakaznikRowMapper, cisloPermanentky);
+        } catch (EmptyResultDataAccessException e) {
+            throw new NeexistujuciZakaznikException("Zákazník s daným číslom permanentky neexistuje.");
+        }
     }
 
     @Override

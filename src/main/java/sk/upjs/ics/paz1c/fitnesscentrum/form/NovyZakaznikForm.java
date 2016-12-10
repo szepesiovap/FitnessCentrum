@@ -3,14 +3,14 @@ package sk.upjs.ics.paz1c.fitnesscentrum.form;
 import javax.swing.JOptionPane;
 import org.springframework.dao.DuplicateKeyException;
 import sk.upjs.ics.paz1c.fitnesscentrum.ObjectFactory;
+import sk.upjs.ics.paz1c.fitnesscentrum.FitnessManager;
 import sk.upjs.ics.paz1c.fitnesscentrum.model.KreditComboBoxModel;
-import sk.upjs.ics.paz1c.fitnesscentrum.dao.ZakaznikDao;
 import sk.upjs.ics.paz1c.fitnesscentrum.entity.Kredit;
 import sk.upjs.ics.paz1c.fitnesscentrum.entity.Zakaznik;
 
 public class NovyZakaznikForm extends javax.swing.JFrame {
 
-    private final ZakaznikDao zakaznikDao = ObjectFactory.INSTANCE.getZakaznikDao();
+    private final FitnessManager fitnessManager = ObjectFactory.INSTANCE.getFitnessManager();
     private static HlavneOknoForm hlavneOkno;
 
     /**
@@ -147,7 +147,7 @@ public class NovyZakaznikForm extends javax.swing.JFrame {
             zakaznik.setKredit(((Kredit) kreditComboBox.getSelectedItem()).getCena());
         }
         try {
-            zakaznikDao.pridajZakaznika(zakaznik);
+            fitnessManager.pridajZakaznika(zakaznik);
         } catch (DuplicateKeyException e) {
             JOptionPane.showMessageDialog(this, "Číslo karty už je priradené inému zákazníkovi!");
             return;

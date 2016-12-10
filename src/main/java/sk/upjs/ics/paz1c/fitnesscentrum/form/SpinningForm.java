@@ -2,19 +2,16 @@ package sk.upjs.ics.paz1c.fitnesscentrum.form;
 
 import javax.swing.JOptionPane;
 import sk.upjs.ics.paz1c.fitnesscentrum.ObjectFactory;
+import sk.upjs.ics.paz1c.fitnesscentrum.FitnessManager;
 import sk.upjs.ics.paz1c.fitnesscentrum.model.RezervaciaTableModel;
 import sk.upjs.ics.paz1c.fitnesscentrum.model.SpinningComboBoxModel;
-import sk.upjs.ics.paz1c.fitnesscentrum.dao.RezervaciaDao;
-import sk.upjs.ics.paz1c.fitnesscentrum.dao.SpinningDao;
 import sk.upjs.ics.paz1c.fitnesscentrum.entity.Rezervacia;
 import sk.upjs.ics.paz1c.fitnesscentrum.entity.Spinning;
 
 public class SpinningForm extends javax.swing.JDialog {
 
     private static final int ID_COLUMN = 2;
-    private final RezervaciaDao rezervaciaDao = ObjectFactory.INSTANCE.getRezervaciaDao();
-    private final SpinningDao spinningDao = ObjectFactory.INSTANCE.getSpinningDao();
-    private Rezervacia rezervacia;
+    private final FitnessManager fitnessManager = ObjectFactory.INSTANCE.getFitnessManager();
 
     /**
      * Creates new form SpinningForm
@@ -193,25 +190,17 @@ public class SpinningForm extends javax.swing.JDialog {
     private void odhlasitZoSpinninguMenuMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_odhlasitZoSpinninguMenuMousePressed
         try {
             Long idRezervacie = (Long) rezervacieTable.getModel().getValueAt(this.rezervacieTable.getSelectedRow(), ID_COLUMN);
-
-            rezervacia = rezervaciaDao.dajRezervaciuSId(idRezervacie);
-
-            if (rezervacia != null) {
-                Object[] options = {"Odhlásiť", "Zrušiť"};
-                if (JOptionPane.showOptionDialog(this, "Naozaj chcete odhlásiť zo spinningu zakaznika " + rezervacia.getZakaznik().getMeno() + "?",
-                        "Odhlásiť zo spinningu",
-                        JOptionPane.DEFAULT_OPTION, JOptionPane.PLAIN_MESSAGE, null,
-                        options, options[0]) == JOptionPane.YES_OPTION) {
-                    rezervaciaDao.odstranRezervacia(rezervacia);
-                }
-            }
-
+            Rezervacia rezervacia = fitnessManager.dajRezervaciuSId(idRezervacie);
             Spinning spinning = (Spinning) spinningComboBox.getSelectedItem();
-            spinningDao.odrezervujSpinning(spinning);
-
-            ((RezervaciaTableModel) rezervacieTable.getModel()).aktualizovat();
-            ((SpinningComboBoxModel) spinningComboBox.getModel()).aktualizovat();
-
+            Object[] options = {"Odhlásiť", "Zrušiť"};
+            if (JOptionPane.showOptionDialog(this, "Naozaj chcete odhlásiť zo spinningu zakaznika " + rezervacia.getZakaznik().getMeno() + "?",
+                    "Odhlásiť zo spinningu",
+                    JOptionPane.DEFAULT_OPTION, JOptionPane.PLAIN_MESSAGE, null,
+                    options, options[0]) == JOptionPane.YES_OPTION) {
+                fitnessManager.odhlasitZoSpinningu(rezervacia, spinning);
+            }
+            aktualizovatRezervacie();
+            aktualizovatSpinningy();
         } catch (ArrayIndexOutOfBoundsException e) {
             JOptionPane.showMessageDialog(null, "Vyber zákazníka na odhlásenie zo spinningu!");
         }

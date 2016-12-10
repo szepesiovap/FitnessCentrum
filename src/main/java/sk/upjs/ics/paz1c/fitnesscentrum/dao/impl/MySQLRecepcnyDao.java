@@ -1,6 +1,6 @@
 package sk.upjs.ics.paz1c.fitnesscentrum.dao.impl;
 
-import sk.upjs.ics.paz1c.fitnesscentrum.NevalidnyVstupException;
+import sk.upjs.ics.paz1c.fitnesscentrum.exception.NevalidnyVstupException;
 import java.util.List;
 import org.springframework.dao.DuplicateKeyException;
 import org.springframework.dao.EmptyResultDataAccessException;
@@ -39,9 +39,9 @@ public class MySQLRecepcnyDao implements RecepcnyDao {
     }
 
     @Override
-    public void vymazRecepcneho(Long idRecepcny) {
+    public void vymazRecepcneho(Recepcny recepcny) {
         String sql = "DELETE FROM recepcny WHERE id=?";
-        jdbcTemplate.update(sql, idRecepcny);
+        jdbcTemplate.update(sql, recepcny.getId());
     }
 
     @Override

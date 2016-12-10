@@ -3,6 +3,7 @@ package sk.upjs.ics.paz1c.fitnesscentrum.dao;
 import sk.upjs.ics.paz1c.fitnesscentrum.entity.Zakaznik;
 import java.util.List;
 import sk.upjs.ics.paz1c.fitnesscentrum.entity.Kluc;
+import sk.upjs.ics.paz1c.fitnesscentrum.exception.NeexistujuciZakaznikException;
 
 public interface ZakaznikDao {
 
@@ -20,9 +21,9 @@ public interface ZakaznikDao {
 
     public void odchod(Zakaznik zakaznik);
 
-    public Zakaznik dajZakaznikaSId(Long idZakaznika);
+    public Zakaznik dajZakaznikaSId(Long idZakaznika) ;
 
-    public Zakaznik dajZakaznikaSCislomPermanentky(String cisloPermanentky);
+    public Zakaznik dajZakaznikaSCislomPermanentky(String cisloPermanentky) throws NeexistujuciZakaznikException;
 
     public void stiahniKreditZakaznikovi(Zakaznik zakaznik, double suma);
 

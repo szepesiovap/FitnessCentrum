@@ -2,23 +2,23 @@ package sk.upjs.ics.paz1c.fitnesscentrum.form;
 
 import javax.swing.JOptionPane;
 import sk.upjs.ics.paz1c.fitnesscentrum.ObjectFactory;
+import sk.upjs.ics.paz1c.fitnesscentrum.FitnessManager;
 import sk.upjs.ics.paz1c.fitnesscentrum.model.PritomniZakazniciTableModel;
-import sk.upjs.ics.paz1c.fitnesscentrum.dao.KlucDao;
-import sk.upjs.ics.paz1c.fitnesscentrum.dao.ZakaznikDao;
-import sk.upjs.ics.paz1c.fitnesscentrum.entity.Kluc;
-import sk.upjs.ics.paz1c.fitnesscentrum.entity.Zakaznik;
+import sk.upjs.ics.paz1c.fitnesscentrum.entity.Recepcny;
 
 public final class HlavneOknoForm extends javax.swing.JFrame {
 
-    private final ZakaznikDao zakaznikDao = ObjectFactory.INSTANCE.getZakaznikDao();
-    private final KlucDao klucDao = ObjectFactory.INSTANCE.getKlucDao();
+    private final Recepcny recepcny;
+    private final FitnessManager fitnessManager = ObjectFactory.INSTANCE.getFitnessManager();
     private static final int ID_COLUMN = 4;
 
     /**
      * Creates new form ZoznamZakaznikovForm
+     *
+     * @param recepcny
      */
-    public HlavneOknoForm() {
-
+    public HlavneOknoForm(Recepcny recepcny) {
+        this.recepcny = recepcny;
         initComponents();
         aktualizovatZoznamPritomnych();
     }
@@ -124,11 +124,6 @@ public final class HlavneOknoForm extends javax.swing.JFrame {
                 odhlasitMenuMousePressed(evt);
             }
         });
-        odhlasitMenu.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                odhlasitMenuActionPerformed(evt);
-            }
-        });
         hlavneOknoMenuBar.add(odhlasitMenu);
 
         setJMenuBar(hlavneOknoMenuBar);
@@ -152,22 +147,21 @@ public final class HlavneOknoForm extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void odhlasitMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_odhlasitMenuActionPerformed
-        this.dispose();
-        new PrihlasovanieForm().setVisible(true);
-    }//GEN-LAST:event_odhlasitMenuActionPerformed
-
     private void odhlasitMenuMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_odhlasitMenuMousePressed
-        new OdhlasenieForm(this).setVisible(true);
+        Object[] options = {"Odhlásiť", "Zrušiť"};
+        if (JOptionPane.showOptionDialog(this, "Chcete odhlásiť používateľa "
+                + recepcny.getMeno() + "?", "Odhlásiť",
+                JOptionPane.DEFAULT_OPTION, JOptionPane.PLAIN_MESSAGE, null,
+                options, options[0]) == JOptionPane.YES_OPTION) {
+            dispose();
+            new PrihlasovanieForm().setVisible(true);
+        }
     }//GEN-LAST:event_odhlasitMenuMousePressed
 
     private void odchodMenuMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_odchodMenuMousePressed
         try {
             Long idZakaznika = (Long) pritomniTable.getModel().getValueAt(pritomniTable.getSelectedRow(), ID_COLUMN);
-            Zakaznik zakaznik = zakaznikDao.dajZakaznikaSId(idZakaznika);
-            Kluc kluc = klucDao.dajKlucSId(zakaznik.getKluc().getId());
-            klucDao.odoberZakaznika(kluc);
-            zakaznikDao.odchod(zakaznik);
+            fitnessManager.odchodZakaznika(idZakaznika);
             aktualizovatZoznamPritomnych();
         } catch (ArrayIndexOutOfBoundsException e) {
             JOptionPane.showMessageDialog(this, "Nie je vybraný žiaden zákazník!");

@@ -2,14 +2,14 @@ package sk.upjs.ics.paz1c.fitnesscentrum.form;
 
 import javax.swing.JOptionPane;
 import sk.upjs.ics.paz1c.fitnesscentrum.ObjectFactory;
+import sk.upjs.ics.paz1c.fitnesscentrum.FitnessManager;
 import sk.upjs.ics.paz1c.fitnesscentrum.model.SpinningTableModel;
-import sk.upjs.ics.paz1c.fitnesscentrum.dao.SpinningDao;
 import sk.upjs.ics.paz1c.fitnesscentrum.entity.Spinning;
 
 public class ZmazatSpinningForm extends javax.swing.JDialog {
 
     private static final int ID_COLUMN = 4;
-    private final SpinningDao spinningDao = ObjectFactory.INSTANCE.getSpinningDao();
+    private final FitnessManager fitnessManager = ObjectFactory.INSTANCE.getFitnessManager();
     private Spinning spinning;
 
     /**
@@ -80,31 +80,27 @@ public class ZmazatSpinningForm extends javax.swing.JDialog {
     private void zrusitSpinningButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_zrusitSpinningButtonActionPerformed
         try {
             Long idSpinningu = (Long) zoznamSpinningovTable.getModel().getValueAt(this.zoznamSpinningovTable.getSelectedRow(), ID_COLUMN);
-            spinning = spinningDao.dajSpinningSId(idSpinningu);
+            spinning = fitnessManager.dajSpinningSId(idSpinningu);
+        if (spinning.getKapacita() == spinning.getVolne()) {
+            Object[] options = {"Zmazať", "Zrušiť"};
+            if (JOptionPane.showOptionDialog(this, "Naozaj chcete zmazať spinning s instruktorom "
+                    + spinning.getInstruktor() + ", ktorý sa má uskutočniť dňa "
+                    + spinning.getDatum().toLocalDate() + " o "
+                    + spinning.getDatum().toLocalTime() + "?",
+                    "Zmazať spinning", JOptionPane.DEFAULT_OPTION,
+                    JOptionPane.PLAIN_MESSAGE, null, options, options[0]) == JOptionPane.YES_OPTION) {
 
-            if (spinning.getKapacita() == spinning.getVolne()) {
-                Object[] options = {"Zmazať", "Zrušiť"};
-                if (JOptionPane.showOptionDialog(this, "Naozaj chcete zmazať spinning s instruktorom "
-                        + spinning.getInstruktor() + ", ktorý sa má uskutočniť dňa "
-                        + spinning.getDatum().toLocalDate() + " o "
-                        + spinning.getDatum().toLocalTime() + "?",
-                        "Zmazať spinning", JOptionPane.DEFAULT_OPTION,
-                        JOptionPane.PLAIN_MESSAGE, null, options, options[0]) == JOptionPane.YES_OPTION) {
-                    
-                    spinningDao.vymazSpinning(spinning);
-                    JOptionPane.showMessageDialog(this, "Spinning s instruktorom " 
-                            + spinning.getInstruktor() + " z dňa " + spinning.getDatum() + " bol zrušený!");
-                }
-            } else {
-                JOptionPane.showMessageDialog(this, "Nemožno vymazať spinning, na ktorý sú rezervácie! "
-                        + "Najprv musíte zrušiť rezervácie!");
+                fitnessManager.vymazSpinning(spinning);
+                JOptionPane.showMessageDialog(this, "Spinning s instruktorom "
+                        + spinning.getInstruktor() + " z dňa " + spinning.getDatum() + " bol zrušený!");
             }
-
-        } catch (Exception e) {
+        } else {
+            JOptionPane.showMessageDialog(this, "Nemožno vymazať spinning, na ktorý sú rezervácie! "
+                    + "Najprv musíte zrušiť rezervácie!");
+        }        } catch (ArrayIndexOutOfBoundsException e) {
             JOptionPane.showMessageDialog(this, "Nie je vybraný žiaden spinning!");
         }
         aktualizovatZoznamSpinningovTable();
-        
     }//GEN-LAST:event_zrusitSpinningButtonActionPerformed
 
     private void aktualizovatZoznamSpinningovTable() {

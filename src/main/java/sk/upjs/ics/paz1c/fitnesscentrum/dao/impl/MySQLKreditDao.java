@@ -1,6 +1,7 @@
 package sk.upjs.ics.paz1c.fitnesscentrum.dao.impl;
 
 import java.util.List;
+import org.springframework.dao.DuplicateKeyException;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import sk.upjs.ics.paz1c.fitnesscentrum.ObjectFactory;
@@ -25,7 +26,7 @@ public class MySQLKreditDao implements KreditDao {
     }
 
     @Override
-    public void pridajKredit(Kredit kredit) {
+    public void pridajKredit(Kredit kredit) throws DuplicateKeyException {
         String sql = "INSERT INTO kredit (cena, nazov) VALUES (?, ?)";
         jdbcTemplate.update(sql, kredit.getCena(), kredit.getNazov());
     }

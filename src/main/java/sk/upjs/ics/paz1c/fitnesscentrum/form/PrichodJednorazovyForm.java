@@ -2,17 +2,18 @@ package sk.upjs.ics.paz1c.fitnesscentrum.form;
 
 import javax.swing.JOptionPane;
 import sk.upjs.ics.paz1c.fitnesscentrum.ObjectFactory;
+import sk.upjs.ics.paz1c.fitnesscentrum.FitnessManager;
 import sk.upjs.ics.paz1c.fitnesscentrum.model.ZakaznikTableModel;
-import sk.upjs.ics.paz1c.fitnesscentrum.dao.ZakaznikDao;
 import sk.upjs.ics.paz1c.fitnesscentrum.entity.Zakaznik;
 
 public class PrichodJednorazovyForm extends javax.swing.JDialog {
 
-    private final ZakaznikDao zakaznikDao = ObjectFactory.INSTANCE.getZakaznikDao();
+    private final FitnessManager fitnessManager = ObjectFactory.INSTANCE.getFitnessManager();
     private static final int ID_COLUMN = 5;
 
     /**
      * Creates new form PrichodJednorazovyForm
+     *
      * @param parent
      * @param modal
      */
@@ -100,8 +101,8 @@ public class PrichodJednorazovyForm extends javax.swing.JDialog {
     private void prichodButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_prichodButtonActionPerformed
         try {
             Long idZakaznika = (Long) zoznamZakaznikovTable.getModel().
-            getValueAt(this.zoznamZakaznikovTable.getSelectedRow(), ID_COLUMN);
-            Zakaznik zakaznik = zakaznikDao.dajZakaznikaSId(idZakaznika);
+                    getValueAt(this.zoznamZakaznikovTable.getSelectedRow(), ID_COLUMN);
+            Zakaznik zakaznik = fitnessManager.dajZakaznikaSId(idZakaznika);
             if (!zakaznik.isPritomny()) {
                 new PotvrditPrichodZakaznikaForm(this, true, zakaznik).setVisible(true);
                 aktualizovatZoznamZakaznikov();
@@ -109,7 +110,7 @@ public class PrichodJednorazovyForm extends javax.swing.JDialog {
                 JOptionPane.showMessageDialog(this, "Zákazník je už prítomný!");
             }
         } catch (ArrayIndexOutOfBoundsException e) {
-            JOptionPane.showMessageDialog(null, "Vyber zákazníka na príchod!");
+            JOptionPane.showMessageDialog(this, "Vyber zákazníka na príchod!");
         }
     }//GEN-LAST:event_prichodButtonActionPerformed
 

@@ -51,7 +51,7 @@ public class MySQLKlucDaoTest extends PripravaNaTestovanie {
 
         Zakaznik zakaznik = new Zakaznik();
         zakaznik.setId(1L);
-        
+
         klucDao.priradZakaznika(kluc, zakaznik);
         List<Kluc> listKlucov = klucDao.dajVsetkyKluce();
         boolean jePriradeny = false;
@@ -78,14 +78,14 @@ public class MySQLKlucDaoTest extends PripravaNaTestovanie {
 
         Zakaznik zakaznik = new Zakaznik();
         zakaznik.setId(idKluc);
-        
-        klucDao.priradZakaznika(kluc, zakaznik);        
+
+        klucDao.priradZakaznika(kluc, zakaznik);
         kluc = klucDao.dajKlucSId(idKluc);
         assertNotNull(kluc.getZakaznik());
-        
-        klucDao.odoberZakaznika(kluc);        
+
+        klucDao.odoberZakaznika(kluc);
         kluc = klucDao.dajKlucSId(idKluc);
-        assertNull(kluc.getZakaznik());        
+        assertNull(kluc.getZakaznik());
     }
 
     /**
@@ -94,7 +94,8 @@ public class MySQLKlucDaoTest extends PripravaNaTestovanie {
     @Test
     public void testVymazKluc() {
         Long idKluc = 1L;
-        klucDao.vymazKluc(idKluc);
+        Kluc kluc = klucDao.dajKlucSId(idKluc);
+        klucDao.vymazKluc(kluc);
         List<Kluc> listKlucov = klucDao.dajVsetkyKluce();
         boolean jeOdstraneny = true;
         for (Kluc k : listKlucov) {

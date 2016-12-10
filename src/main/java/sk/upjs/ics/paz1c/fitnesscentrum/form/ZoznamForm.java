@@ -2,14 +2,15 @@ package sk.upjs.ics.paz1c.fitnesscentrum.form;
 
 import javax.swing.JOptionPane;
 import sk.upjs.ics.paz1c.fitnesscentrum.ObjectFactory;
-import sk.upjs.ics.paz1c.fitnesscentrum.model.ZakaznikTableModel;
-import sk.upjs.ics.paz1c.fitnesscentrum.dao.ZakaznikDao;
+import sk.upjs.ics.paz1c.fitnesscentrum.FitnessManager;
 import sk.upjs.ics.paz1c.fitnesscentrum.entity.Zakaznik;
+import sk.upjs.ics.paz1c.fitnesscentrum.exception.PritomnyZakaznikException;
+import sk.upjs.ics.paz1c.fitnesscentrum.model.ZakaznikTableModel;
 
 public final class ZoznamForm extends javax.swing.JFrame {
 
     private static HlavneOknoForm hlavneOkno;
-    private final ZakaznikDao zakaznikDao = ObjectFactory.INSTANCE.getZakaznikDao();
+    private final FitnessManager fitnessManager = ObjectFactory.INSTANCE.getFitnessManager();
     private static final int ID_COLUMN = 5;
 
     /**
@@ -115,15 +116,20 @@ public final class ZoznamForm extends javax.swing.JFrame {
     private void zmazatButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_zmazatButtonActionPerformed
         try {
             Long idZakaznika = (Long) zoznamZakaznikovTable.getModel().getValueAt(this.zoznamZakaznikovTable.getSelectedRow(), ID_COLUMN);
-            Zakaznik zakaznik = zakaznikDao.dajZakaznikaSId(idZakaznika);
-            if (!zakaznik.isPritomny()) {
-                new ZmazatZakaznikaForm(this, true, zakaznik).setVisible(true);
+            Zakaznik zakaznik = fitnessManager.dajZakaznikaSId(idZakaznika);
+            Object[] options = {"Zmazať", "Zrušiť"};
+            if (JOptionPane.showOptionDialog(this, "Chcete zmazať zákazníka "
+                    + zakaznik.getMeno() + "?", "Zmazať zákazníka",
+                    JOptionPane.DEFAULT_OPTION, JOptionPane.PLAIN_MESSAGE, null,
+                    options, options[0]) == JOptionPane.YES_OPTION) {
+                fitnessManager.zmazZakaznika(zakaznik);
                 aktualizovatZoznamZakaznikov();
-            } else {
-                JOptionPane.showMessageDialog(this, "Nemožno vymazať prítomného zákazníka!");
             }
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(this, "Vyber zákazníka na odchod!");
+        } catch (PritomnyZakaznikException e) {
+            JOptionPane.showMessageDialog(this, "Nemožno vymazať prítomného zákazníka!");
+
+        } catch (ArrayIndexOutOfBoundsException e) {
+            JOptionPane.showMessageDialog(this, "Vyber zákazníka na zmazanie!");
         }
     }//GEN-LAST:event_zmazatButtonActionPerformed
 

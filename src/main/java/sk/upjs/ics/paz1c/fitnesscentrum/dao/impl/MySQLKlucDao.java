@@ -61,7 +61,7 @@ public class MySQLKlucDao implements KlucDao {
                 + "zakaznik.kredit as z_kredit, "
                 + "zakaznik.cislo_permanentky as z_cislo_permanentky "
                 + "FROM kluc LEFT JOIN zakaznik ON zakaznik.id = kluc.id_zakaznika WHERE kluc.id_kluca = ?";
-        
+
         try {
             return jdbcTemplate.queryForObject(sql, klucRowMapper, idKluca);
         } catch (EmptyResultDataAccessException e) {
@@ -83,9 +83,9 @@ public class MySQLKlucDao implements KlucDao {
     }
 
     @Override
-    public void vymazKluc(Long idkluca) {
+    public void vymazKluc(Kluc kluc) {
         String sql = "DELETE FROM kluc WHERE id_kluca=?";
-        jdbcTemplate.update(sql, idkluca);
+        jdbcTemplate.update(sql, kluc.getId());
     }
 
     @Override

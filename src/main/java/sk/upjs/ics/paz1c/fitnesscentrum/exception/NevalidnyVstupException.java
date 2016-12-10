@@ -1,4 +1,4 @@
-package sk.upjs.ics.paz1c.fitnesscentrum;
+package sk.upjs.ics.paz1c.fitnesscentrum.exception;
 
 public class NevalidnyVstupException extends Exception{
 
