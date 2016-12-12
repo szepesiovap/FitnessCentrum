@@ -30,7 +30,7 @@ DEFAULT CHARACTER SET = utf8;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `testFitnesscentrum`.`kredit` (
   `id` INT(11) NOT NULL AUTO_INCREMENT,
-  `cena` DOUBLE NULL DEFAULT NULL,
+  `cena` DOUBLE(6,2) NULL DEFAULT NULL,
   `nazov` VARCHAR(20) NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE INDEX `cena_UNIQUE` (`cena` ASC))
@@ -114,12 +114,12 @@ CREATE TABLE IF NOT EXISTS `testFitnesscentrum`.`rezervacia` (
   CONSTRAINT `spinning.id`
     FOREIGN KEY (`id_spinning`)
     REFERENCES `testFitnesscentrum`.`spinning` (`id`)
-    ON DELETE NO ACTION
+    ON DELETE CASCADE
     ON UPDATE NO ACTION,
   CONSTRAINT `zakaznik.id`
     FOREIGN KEY (`id_zakaznik`)
     REFERENCES `testFitnesscentrum`.`zakaznik` (`id`)
-    ON DELETE NO ACTION
+    ON DELETE CASCADE
     ON UPDATE NO ACTION)
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8;

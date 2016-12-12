@@ -4,6 +4,7 @@ import java.util.List;
 import org.junit.Test;
 import static org.junit.Assert.*;
 import sk.upjs.ics.paz1c.fitnesscentrum.ObjectFactory;
+import sk.upjs.ics.paz1c.fitnesscentrum.dao.ZakaznikDao;
 import sk.upjs.ics.paz1c.fitnesscentrum.dao.impl.PripravaNaTestovanie;
 import sk.upjs.ics.paz1c.fitnesscentrum.entity.Kredit;
 import sk.upjs.ics.paz1c.fitnesscentrum.entity.Zakaznik;
@@ -12,6 +13,7 @@ import sk.upjs.ics.paz1c.fitnesscentrum.manager.KreditManager;
 public class DefaultKreditManagerTest extends PripravaNaTestovanie {
 
     private final KreditManager kreditManager = ObjectFactory.INSTANCE.getKreditManager();
+    private final ZakaznikDao zakaznikDao = ObjectFactory.INSTANCE.getZakaznikDao();
 
     /**
      * Test of dajKreditSId method, of class DefaultKreditManager.
@@ -70,16 +72,14 @@ public class DefaultKreditManagerTest extends PripravaNaTestovanie {
      * Test of dobitKredit method, of class DefaultKreditManager.
      */
     @Test
-    // TODO:
     public void testDobitKredit() {
-        Zakaznik zakaznik = new Zakaznik();
-        zakaznik.setKredit(10.0);
-
-        double kredit = 50.0;
-        kreditManager.dobitKredit(zakaznik, kredit);
-        double novyKredit = zakaznik.getKredit();
-        System.out.println(novyKredit);
-        assertEquals(novyKredit, zakaznik.getKredit(), 0.001);
+        Zakaznik zakaznik = zakaznikDao.dajZakaznikaSId(2L);
+        double staryKredit = zakaznik.getKredit();
+        double novyKredit = 50.0;
+        
+        kreditManager.dobitKredit(zakaznik, novyKredit);
+        zakaznik = zakaznikDao.dajZakaznikaSId(2L);
+        assertEquals(novyKredit + staryKredit, zakaznik.getKredit(), 0.001);
     }
 
     /**

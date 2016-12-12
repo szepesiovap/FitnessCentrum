@@ -21,7 +21,7 @@ public interface ZakaznikDao {
 
     public void odchod(Zakaznik zakaznik);
 
-    public Zakaznik dajZakaznikaSId(Long idZakaznika) ;
+    public Zakaznik dajZakaznikaSId(Long idZakaznika);
 
     public Zakaznik dajZakaznikaSCislomPermanentky(String cisloPermanentky) throws NeexistujuciZakaznikException;
 
