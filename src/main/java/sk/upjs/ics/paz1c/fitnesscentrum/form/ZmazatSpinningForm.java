@@ -1,5 +1,6 @@
 package sk.upjs.ics.paz1c.fitnesscentrum.form;
 
+import java.time.LocalDateTime;
 import javax.swing.JOptionPane;
 import sk.upjs.ics.paz1c.fitnesscentrum.ObjectFactory;
 import sk.upjs.ics.paz1c.fitnesscentrum.manager.SpinningManager;
@@ -81,23 +82,24 @@ public class ZmazatSpinningForm extends javax.swing.JDialog {
         try {
             Long idSpinningu = (Long) zoznamSpinningovTable.getModel().getValueAt(this.zoznamSpinningovTable.getSelectedRow(), ID_COLUMN);
             spinning = spinningManager.dajSpinningSId(idSpinningu);
-        if (spinning.getKapacita() == spinning.getVolne()) {
-            Object[] options = {"Zmazať", "Zrušiť"};
-            if (JOptionPane.showOptionDialog(this, "Naozaj chcete zmazať spinning s instruktorom "
-                    + spinning.getInstruktor() + ", ktorý sa má uskutočniť dňa "
-                    + spinning.getDatum().toLocalDate() + " o "
-                    + spinning.getDatum().toLocalTime() + "?",
-                    "Zmazať spinning", JOptionPane.DEFAULT_OPTION,
-                    JOptionPane.PLAIN_MESSAGE, null, options, options[0]) == JOptionPane.YES_OPTION) {
+            if ((spinning.getKapacita() == spinning.getVolne()) || (spinning.getDatum().isBefore(LocalDateTime.now()))) {
+                Object[] options = {"Zmazať", "Zrušiť"};
+                if (JOptionPane.showOptionDialog(this, "Naozaj chcete zmazať spinning s instruktorom "
+                        + spinning.getInstruktor() + ", ktorý sa má uskutočniť dňa "
+                        + spinning.getDatum().toLocalDate() + " o "
+                        + spinning.getDatum().toLocalTime() + "?",
+                        "Zmazať spinning", JOptionPane.DEFAULT_OPTION,
+                        JOptionPane.PLAIN_MESSAGE, null, options, options[0]) == JOptionPane.YES_OPTION) {
 
-                spinningManager.vymazSpinning(spinning);
-                JOptionPane.showMessageDialog(this, "Spinning s instruktorom "
-                        + spinning.getInstruktor() + " z dňa " + spinning.getDatum() + " bol zrušený!");
+                    spinningManager.vymazSpinning(spinning);
+                    JOptionPane.showMessageDialog(this, "Spinning s instruktorom "
+                            + spinning.getInstruktor() + " z dňa " + spinning.getDatum() + " bol zrušený!");
+                }
+            } else {
+                JOptionPane.showMessageDialog(this, "Nemožno vymazať spinning, na ktorý sú rezervácie! "
+                        + "Najprv musíte zrušiť rezervácie!");
             }
-        } else {
-            JOptionPane.showMessageDialog(this, "Nemožno vymazať spinning, na ktorý sú rezervácie! "
-                    + "Najprv musíte zrušiť rezervácie!");
-        }        } catch (ArrayIndexOutOfBoundsException e) {
+        } catch (ArrayIndexOutOfBoundsException e) {
             JOptionPane.showMessageDialog(this, "Nie je vybraný žiaden spinning!");
         }
         aktualizovatZoznamSpinningovTable();

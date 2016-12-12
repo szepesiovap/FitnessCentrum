@@ -13,7 +13,7 @@ public class SpinningTableModel extends AbstractTableModel {
 
     private static final String[] NAZVY_STLPCOV = {"Dátum", "Inštruktor", "Počet voľných miest", "Počet miest" };
     private static final int POCET_STLPCOV = NAZVY_STLPCOV.length;
-    private List<Spinning> listSpinningov = new ArrayList<>();
+    private List<Spinning> listSpinningov = spinnigManager.dajVsetkySpinningy();
 
     public SpinningTableModel() {
         aktualizovat();

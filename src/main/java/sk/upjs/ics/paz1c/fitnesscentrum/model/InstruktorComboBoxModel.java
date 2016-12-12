@@ -8,11 +8,10 @@ import sk.upjs.ics.paz1c.fitnesscentrum.manager.InstruktorManager;
 
 public class InstruktorComboBoxModel extends DefaultComboBoxModel<Instruktor> {
 
-    private final InstruktorManager instruktorManager;
+    private final InstruktorManager instruktorManager= ObjectFactory.INSTANCE.getInstruktorManager();
     private List<Instruktor> instruktori;
 
     public InstruktorComboBoxModel() {
-        instruktorManager = ObjectFactory.INSTANCE.getInstruktorManager();
         aktualizuj();
     }
 
