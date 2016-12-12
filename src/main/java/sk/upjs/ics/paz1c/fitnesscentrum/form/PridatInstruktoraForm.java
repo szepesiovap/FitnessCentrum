@@ -36,6 +36,7 @@ public class PridatInstruktoraForm extends javax.swing.JDialog {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Nový inštruktor");
+        setResizable(false);
 
         menoLabel.setText("Meno: ");
 
@@ -81,7 +82,7 @@ public class PridatInstruktoraForm extends javax.swing.JDialog {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(zrusitButton)
                     .addComponent(pridatButton))
-                .addContainerGap(12, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();

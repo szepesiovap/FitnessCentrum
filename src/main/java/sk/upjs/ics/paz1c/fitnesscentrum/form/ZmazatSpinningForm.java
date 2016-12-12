@@ -44,6 +44,7 @@ public class ZmazatSpinningForm extends javax.swing.JDialog {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Zrušiť spinning");
+        setResizable(false);
 
         zoznamSpinningovTable.setModel(new SpinningTableModel());
         zoznamSpinningovScrollPane.setViewportView(zoznamSpinningovTable);

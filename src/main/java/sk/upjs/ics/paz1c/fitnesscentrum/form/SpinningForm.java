@@ -51,6 +51,7 @@ public class SpinningForm extends javax.swing.JDialog {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Rezervácie na spinning");
+        setResizable(false);
 
         rezervacieTable.setModel(new RezervaciaTableModel(null));
         rezervacieScrollPane.setViewportView(rezervacieTable);

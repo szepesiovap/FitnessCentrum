@@ -52,6 +52,7 @@ public class PrihlasovanieForm extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Prihlásenie");
         setName("prihlasenieFrame"); // NOI18N
+        setResizable(false);
 
         loginLabel.setText("Login:");
 

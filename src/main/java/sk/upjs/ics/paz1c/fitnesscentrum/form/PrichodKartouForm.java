@@ -49,6 +49,7 @@ public class PrichodKartouForm extends javax.swing.JDialog {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Príchod kartou");
+        setResizable(false);
 
         menoLabel.setText("Meno: ");
 

@@ -41,6 +41,7 @@ public class PrichodJednorazovyForm extends javax.swing.JDialog {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Jednorázový príchod");
+        setResizable(false);
 
         hladatPodlaMenaLabel.setText("Hľadať podľa mena: ");
 

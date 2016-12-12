@@ -89,6 +89,7 @@ public class NastaveniaForm extends javax.swing.JDialog {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Nastavenia");
+        setResizable(false);
 
         cenaVstupnehoLabel.setText("Cena jednorazového vstupu:");
 
@@ -385,7 +386,7 @@ public class NastaveniaForm extends javax.swing.JDialog {
                     JOptionPane.DEFAULT_OPTION, JOptionPane.PLAIN_MESSAGE, null,
                     options, options[0]) == JOptionPane.YES_OPTION) {
                 klucManager.vymazKluc(kluc);
-                JOptionPane.showMessageDialog(this, "Klúč " + kluc.getMeno() + "bol zmazaný!");
+                JOptionPane.showMessageDialog(this, "Klúč " + kluc.getMeno() + " bol zmazaný!");
             }
         } catch (ObsadenyKlucException e) {
             JOptionPane.showMessageDialog(this, "Vybraný kľúč je priradený zákazníkovi, "

@@ -47,6 +47,7 @@ public class ZmenaHeslaRecepcnehoForm extends javax.swing.JDialog {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Zmena hesla recepčného");
+        setResizable(false);
 
         noveHesloZnovaLabel.setText("Nové heslo znova:");
 

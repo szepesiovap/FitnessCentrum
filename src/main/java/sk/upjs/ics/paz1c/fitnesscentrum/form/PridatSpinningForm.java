@@ -59,6 +59,7 @@ public class PridatSpinningForm extends javax.swing.JDialog {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Nový spinning");
+        setResizable(false);
 
         rokTextField.setText("2016");
 
