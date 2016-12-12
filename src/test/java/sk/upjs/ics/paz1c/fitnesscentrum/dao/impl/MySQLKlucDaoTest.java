@@ -18,7 +18,7 @@ public class MySQLKlucDaoTest extends PripravaNaTestovanie {
     @Test
     public void testDajVsetkyKluce() {
         List<Kluc> result = klucDao.dajVsetkyKluce();
-        assertEquals(2, result.size());
+        assertEquals(4, result.size());
     }
 
     /**
@@ -27,7 +27,7 @@ public class MySQLKlucDaoTest extends PripravaNaTestovanie {
     @Test
     public void testDajVolneKluce() {
         List<Kluc> result = klucDao.dajVolneKluce();
-        assertEquals(2, result.size());
+        assertEquals(3, result.size());
     }
 
     /**
@@ -112,7 +112,7 @@ public class MySQLKlucDaoTest extends PripravaNaTestovanie {
     @Test
     public void testPridajKluc() {
         Kluc kluc = new Kluc();
-        String meno = "3M";
+        String meno = "5M";
         kluc.setMeno(meno);
         klucDao.pridajKluc(kluc);
         List<Kluc> listKlucov = klucDao.dajVsetkyKluce();

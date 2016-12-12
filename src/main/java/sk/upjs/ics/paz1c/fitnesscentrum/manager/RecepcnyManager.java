@@ -1,5 +1,6 @@
 package sk.upjs.ics.paz1c.fitnesscentrum.manager;
 
+import java.util.List;
 import sk.upjs.ics.paz1c.fitnesscentrum.entity.Recepcny;
 import sk.upjs.ics.paz1c.fitnesscentrum.exception.NeexistujuciRecepcnyException;
 import sk.upjs.ics.paz1c.fitnesscentrum.exception.NevalidnyVstupException;
@@ -13,4 +14,6 @@ public interface RecepcnyManager {
     public Recepcny dajRecepcneho(Long idRecepecneho);
     
     public void vymazRecepcneho(Recepcny recepcny);
+
+    public List<Recepcny> dajVsetkychRecepcnych();
 }

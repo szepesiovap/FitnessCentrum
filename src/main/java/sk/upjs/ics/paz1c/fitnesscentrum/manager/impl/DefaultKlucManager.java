@@ -1,5 +1,6 @@
 package sk.upjs.ics.paz1c.fitnesscentrum.manager.impl;
 
+import java.util.List;
 import sk.upjs.ics.paz1c.fitnesscentrum.manager.KlucManager;
 import org.springframework.dao.DuplicateKeyException;
 import sk.upjs.ics.paz1c.fitnesscentrum.ObjectFactory;
@@ -8,7 +9,7 @@ import sk.upjs.ics.paz1c.fitnesscentrum.entity.Kluc;
 import sk.upjs.ics.paz1c.fitnesscentrum.exception.ObsadenyKlucException;
 import sk.upjs.ics.paz1c.fitnesscentrum.exception.PrazdnyRetazecException;
 
-public class DefaultKlucManager implements KlucManager{
+public class DefaultKlucManager implements KlucManager {
 
     private final KlucDao klucDao = ObjectFactory.INSTANCE.getKlucDao();
 
@@ -36,5 +37,15 @@ public class DefaultKlucManager implements KlucManager{
         } else {
             throw new ObsadenyKlucException();
         }
+    }
+
+    @Override
+    public List<Kluc> dajVolneKluce() {
+        return klucDao.dajVolneKluce();
+    }
+
+    @Override
+    public List<Kluc> dajVsetkyKluce() {
+        return klucDao.dajVsetkyKluce();
     }
 }

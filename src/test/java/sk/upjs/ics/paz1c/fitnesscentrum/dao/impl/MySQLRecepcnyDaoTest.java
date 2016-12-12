@@ -70,6 +70,7 @@ public class MySQLRecepcnyDaoTest extends PripravaNaTestovanie {
      */
     @Test
     public void testPridajRovnakehoRecepcneho() throws NevalidnyVstupException {
+
         Recepcny recepcny = new Recepcny();
         String meno = "Jozko Mrkvicka";
         String login = "jozko";
@@ -80,12 +81,17 @@ public class MySQLRecepcnyDaoTest extends PripravaNaTestovanie {
         recepcny.setHeslo(heslo);
 
         recepcnyDao.pridajRecepcneho(recepcny);
+        int povodnyPocetRecepcnych = recepcnyDao.dajVsetkychRecepcnych().size();
+
         try {
             recepcnyDao.pridajRecepcneho(recepcny);
-            fail("Login musi byt unikatny.");
-        } catch (DuplicateKeyException e) {
+        } catch (Exception e) {
             // Vsetko v poriadku, login recepneho musi byt unikatny
         }
+
+        int novyPocetRecepcnych = recepcnyDao.dajVsetkychRecepcnych().size();
+        //testuje sa, ci sa naozaj nepridal recepcny s rovnakym loginom
+        assertEquals(povodnyPocetRecepcnych, novyPocetRecepcnych);
     }
 
     /**

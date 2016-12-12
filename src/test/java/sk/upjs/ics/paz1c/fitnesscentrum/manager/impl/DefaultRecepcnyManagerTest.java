@@ -12,8 +12,8 @@ import sk.upjs.ics.paz1c.fitnesscentrum.manager.RecepcnyManager;
 
 public class DefaultRecepcnyManagerTest extends PripravaNaTestovanie{
     
-    private static RecepcnyManager recepcnyManager = ObjectFactory.INSTANCE.getRecepcnyManager();
-    private static RecepcnyDao recepcnyDao = ObjectFactory.INSTANCE.getRecepcnyDao();
+    private final RecepcnyManager recepcnyManager = ObjectFactory.INSTANCE.getRecepcnyManager();
+    private final RecepcnyDao recepcnyDao = ObjectFactory.INSTANCE.getRecepcnyDao();
 
     /**
      * Test of pridajRecepcneho method, of class DefaultRecepcnyManager.

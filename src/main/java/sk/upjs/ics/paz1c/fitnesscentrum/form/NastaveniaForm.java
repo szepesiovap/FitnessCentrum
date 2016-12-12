@@ -313,8 +313,9 @@ public class NastaveniaForm extends javax.swing.JDialog {
 
     private void ulozitVstupneButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ulozitVstupneButtonActionPerformed
         try {
-            vstupneManager.updateCenaSpinningu(Double.parseDouble(cenaSpinninguTextField.getText()));
-            vstupneManager.updateCenaVstupneho(Double.parseDouble(cenaVstupnehoTexttField.getText()));
+            double novaCenaVstupneho = Double.parseDouble(cenaVstupnehoTexttField.getText());
+            double novaCenaSpinningu = Double.parseDouble(cenaSpinninguTextField.getText());
+            vstupneManager.nastavCeny(novaCenaVstupneho,novaCenaSpinningu);
             
             JOptionPane.showMessageDialog(this, "Cena bola zmenená!");
             aktualizovatVstupneTabbedPane();

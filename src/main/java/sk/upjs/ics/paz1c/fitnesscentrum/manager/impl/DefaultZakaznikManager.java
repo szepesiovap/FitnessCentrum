@@ -1,5 +1,6 @@
 package sk.upjs.ics.paz1c.fitnesscentrum.manager.impl;
 
+import java.util.List;
 import sk.upjs.ics.paz1c.fitnesscentrum.manager.ZakaznikManager;
 import org.springframework.dao.DuplicateKeyException;
 import sk.upjs.ics.paz1c.fitnesscentrum.ObjectFactory;
@@ -15,7 +16,6 @@ public class DefaultZakaznikManager implements ZakaznikManager {
 
     private final KlucDao klucDao = ObjectFactory.INSTANCE.getKlucDao();
     private final ZakaznikDao zakaznikDao = ObjectFactory.INSTANCE.getZakaznikDao();
-
 
     @Override
     public void zmazZakaznika(Zakaznik zakaznik) throws PritomnyZakaznikException {
@@ -57,7 +57,7 @@ public class DefaultZakaznikManager implements ZakaznikManager {
 
     @Override
     public void prichodKartouZakaznika(Zakaznik zakaznik, Kluc kluc) throws NedostatocnyKreditException {
-        double SUMA = ObjectFactory.INSTANCE.getVstupneDao().dajCeny().getCenaVstupneho();
+        double SUMA = ObjectFactory.INSTANCE.getVstupneManager().dajCeny().getCenaVstupneho();
         if (zakaznik.getKredit() <= SUMA) {
             throw new NedostatocnyKreditException();
         } else {
@@ -65,6 +65,21 @@ public class DefaultZakaznikManager implements ZakaznikManager {
             zakaznikDao.prichod(zakaznik, kluc);
             klucDao.priradZakaznika(kluc, zakaznik);
         }
+    }
+
+    @Override
+    public List<Zakaznik> dajVsetkychZakaznikov() {
+        return zakaznikDao.dajVsetkychZakaznikov();
+    }
+
+    @Override
+    public List<Zakaznik> dajPritomnychZakaznikov() {
+        return zakaznikDao.dajPritomnychZakaznikov();
+    }
+
+    @Override
+    public List<Zakaznik> dajZakaznikovSoZhodouVMene(String vzorka) {
+        return zakaznikDao.dajZakaznikovSoZhodouVMene(vzorka);
     }
 
 }

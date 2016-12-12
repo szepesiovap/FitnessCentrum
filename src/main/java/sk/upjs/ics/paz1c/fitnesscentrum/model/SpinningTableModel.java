@@ -4,13 +4,12 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.swing.table.AbstractTableModel;
 import sk.upjs.ics.paz1c.fitnesscentrum.ObjectFactory;
-import sk.upjs.ics.paz1c.fitnesscentrum.ObjectFactory;
-import sk.upjs.ics.paz1c.fitnesscentrum.dao.SpinningDao;
 import sk.upjs.ics.paz1c.fitnesscentrum.entity.Spinning;
+import sk.upjs.ics.paz1c.fitnesscentrum.manager.SpinningManager;
 
 public class SpinningTableModel extends AbstractTableModel {
 
-    private final SpinningDao spinnigDao = ObjectFactory.INSTANCE.getSpinningDao();
+    private final SpinningManager spinnigManager = ObjectFactory.INSTANCE.getSpinningManager();
 
     private static final String[] NAZVY_STLPCOV = {"Dátum", "Inštruktor", "Počet voľných miest", "Počet miest" };
     private static final int POCET_STLPCOV = NAZVY_STLPCOV.length;
@@ -55,7 +54,7 @@ public class SpinningTableModel extends AbstractTableModel {
     }
 
     public void aktualizovat() {
-        listSpinningov = spinnigDao.dajVsetkySpinningy();
+        listSpinningov = spinnigManager.dajVsetkySpinningy();
         fireTableDataChanged();
     }
 }

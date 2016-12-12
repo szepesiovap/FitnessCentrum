@@ -1,5 +1,7 @@
 package sk.upjs.ics.paz1c.fitnesscentrum.manager;
 
+import java.time.LocalDateTime;
+import java.util.List;
 import sk.upjs.ics.paz1c.fitnesscentrum.entity.Rezervacia;
 import sk.upjs.ics.paz1c.fitnesscentrum.entity.Spinning;
 import sk.upjs.ics.paz1c.fitnesscentrum.entity.Zakaznik;
@@ -18,5 +20,9 @@ public interface SpinningManager {
     public Spinning dajSpinningSId(Long idSpinningu);
 
     public void vymazSpinning(Spinning spinning);
+
+    public List<Spinning> dajSpinningyOdDatumu(LocalDateTime now);
+
+    public List<Spinning> dajVsetkySpinningy();
 
 }

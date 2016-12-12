@@ -2,6 +2,7 @@ package sk.upjs.ics.paz1c.fitnesscentrum.manager.impl;
 
 import sk.upjs.ics.paz1c.fitnesscentrum.manager.SpinningManager;
 import java.time.LocalDateTime;
+import java.util.List;
 import sk.upjs.ics.paz1c.fitnesscentrum.ObjectFactory;
 import sk.upjs.ics.paz1c.fitnesscentrum.dao.RezervaciaDao;
 import sk.upjs.ics.paz1c.fitnesscentrum.dao.SpinningDao;
@@ -58,6 +59,16 @@ public class DefaultSpinningManager implements SpinningManager {
     @Override
     public void vymazSpinning(Spinning spinning) {
         spinningDao.vymazSpinning(spinning);
+    }
+
+    @Override
+    public List<Spinning> dajSpinningyOdDatumu(LocalDateTime datum) {
+        return spinningDao.dajSpinningyOdDatumu(datum);
+    }
+
+    @Override
+    public List<Spinning> dajVsetkySpinningy() {
+        return spinningDao.dajVsetkySpinningy();
     }
 
 }

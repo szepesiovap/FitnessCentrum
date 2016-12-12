@@ -13,11 +13,11 @@ import sk.upjs.ics.paz1c.fitnesscentrum.manager.KlucManager;
  *
  * @author Marcela
  */
-public class DefaultKlucManagerTest extends PripravaNaTestovanie{
-   
-    private static KlucManager klucManager = ObjectFactory.INSTANCE.getKlucManager();
-    private static KlucDao klucDao = ObjectFactory.INSTANCE.getKlucDao();
-    
+public class DefaultKlucManagerTest extends PripravaNaTestovanie {
+
+    private final KlucManager klucManager = ObjectFactory.INSTANCE.getKlucManager();
+    private final KlucDao klucDao = ObjectFactory.INSTANCE.getKlucDao();
+
     /**
      * Test of dajKlucSId method, of class DefaultKlucManager.
      */
@@ -30,6 +30,7 @@ public class DefaultKlucManagerTest extends PripravaNaTestovanie{
 
     /**
      * Test of pridajKluc method, of class DefaultKlucManager.
+     *
      * @throws java.lang.Exception
      */
     @Test
@@ -44,6 +45,7 @@ public class DefaultKlucManagerTest extends PripravaNaTestovanie{
 
     /**
      * Test of vymazKluc method, of class DefaultKlucManager.
+     *
      * @throws java.lang.Exception
      */
     @Test
@@ -51,7 +53,7 @@ public class DefaultKlucManagerTest extends PripravaNaTestovanie{
         Kluc kluc = new Kluc();
         kluc.setMeno("test");
         klucDao.pridajKluc(kluc);
-        
+
         klucManager.vymazKluc(kluc);
         List<Kluc> listKlucov = klucDao.dajVsetkyKluce();
         boolean jeOdstraneny = true;
@@ -62,5 +64,23 @@ public class DefaultKlucManagerTest extends PripravaNaTestovanie{
             }
         }
         assertTrue(jeOdstraneny);
+    }
+
+    /**
+     * Test of dajVolneKluce method, of class DefaultKlucManager.
+     */
+    @Test
+    public void testDajVolneKluce() {
+        List<Kluc> result = klucDao.dajVolneKluce();
+        assertEquals(3, result.size());
+    }
+
+    /**
+     * Test of dajVsetkyKluce method, of class DefaultKlucManager.
+     */
+    @Test
+    public void testDajVsetkyKluce() {
+        List<Kluc> result = klucDao.dajVsetkyKluce();
+        assertEquals(4, result.size());
     }
 }

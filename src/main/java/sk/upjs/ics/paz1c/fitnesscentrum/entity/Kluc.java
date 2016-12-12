@@ -1,5 +1,7 @@
 package sk.upjs.ics.paz1c.fitnesscentrum.entity;
 
+import java.util.Objects;
+
 public class Kluc {
 
     private Long id;
@@ -35,4 +37,12 @@ public class Kluc {
         return meno;
     }
 
+    @Override
+    public int hashCode() {
+        int hash = 5;
+        hash = 67 * hash + Objects.hashCode(this.meno);
+        return hash;
+    }
+
+    
 }

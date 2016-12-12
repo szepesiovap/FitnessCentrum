@@ -1,6 +1,5 @@
 package sk.upjs.ics.paz1c.fitnesscentrum.manager.impl;
 
-import java.util.List;
 import org.junit.Test;
 import static org.junit.Assert.*;
 import sk.upjs.ics.paz1c.fitnesscentrum.ObjectFactory;
@@ -11,8 +10,8 @@ import sk.upjs.ics.paz1c.fitnesscentrum.manager.InstruktorManager;
 
 public class DefaultInstruktorManagerTest extends PripravaNaTestovanie {
 
-    private static InstruktorManager instruktorManager = ObjectFactory.INSTANCE.getInstruktorManager();
-    private static InstruktorDao instruktorDao = ObjectFactory.INSTANCE.getInstruktorDao();
+    private final InstruktorManager instruktorManager = ObjectFactory.INSTANCE.getInstruktorManager();
+    private final InstruktorDao instruktorDao = ObjectFactory.INSTANCE.getInstruktorDao();
 
     /**
      * Test of pridajInstruktora method, of class DefaultInstruktorManager.

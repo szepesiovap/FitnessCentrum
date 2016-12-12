@@ -4,12 +4,12 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.swing.table.AbstractTableModel;
 import sk.upjs.ics.paz1c.fitnesscentrum.ObjectFactory;
-import sk.upjs.ics.paz1c.fitnesscentrum.dao.KlucDao;
 import sk.upjs.ics.paz1c.fitnesscentrum.entity.Kluc;
+import sk.upjs.ics.paz1c.fitnesscentrum.manager.KlucManager;
 
 public class KlucTableModel extends AbstractTableModel {
 
-    private final KlucDao klucDao = ObjectFactory.INSTANCE.getKlucDao();
+    private final KlucManager klucManager = ObjectFactory.INSTANCE.getKlucManager();
     private static final String[] NAZVY_STLPCOV = {"ID", "Meno kľúča"};
     private static final int POCET_STLPCOV = NAZVY_STLPCOV.length;
     private List<Kluc> listKlucov = new ArrayList<>();
@@ -48,7 +48,7 @@ public class KlucTableModel extends AbstractTableModel {
     }
 
     public void aktualizovat() {
-        listKlucov = klucDao.dajVsetkyKluce();
+        listKlucov = klucManager.dajVsetkyKluce();
         fireTableDataChanged();
     }
 

@@ -4,17 +4,17 @@ import java.util.Collections;
 import java.util.List;
 import javax.swing.table.AbstractTableModel;
 import sk.upjs.ics.paz1c.fitnesscentrum.ObjectFactory;
-import sk.upjs.ics.paz1c.fitnesscentrum.dao.RezervaciaDao;
 import sk.upjs.ics.paz1c.fitnesscentrum.entity.Rezervacia;
 import sk.upjs.ics.paz1c.fitnesscentrum.entity.Spinning;
+import sk.upjs.ics.paz1c.fitnesscentrum.manager.RezervaciaManager;
 
 public class RezervaciaTableModel extends AbstractTableModel {
 
-    private final RezervaciaDao rezervaciaDao = ObjectFactory.INSTANCE.getRezervaciaDao();
+    private final RezervaciaManager rezervaciaManager = ObjectFactory.INSTANCE.getRezervaciaManager();
 
     private static final String[] NAZVY_STLPCOV = {"Meno zákazníka", "Dátum rezervácie"};
     private static final int POCET_STLPCOV = NAZVY_STLPCOV.length;
-    private Spinning spinning;
+    private final Spinning spinning;
     private List<Rezervacia> listRezervacii;
 
     public RezervaciaTableModel(Spinning spinning) {
@@ -44,7 +44,7 @@ public class RezervaciaTableModel extends AbstractTableModel {
         if (spinning == null) {
             listRezervacii = Collections.emptyList();
         } else {
-            listRezervacii = rezervaciaDao.dajRezervacieSpinningu(spinning);
+            listRezervacii = rezervaciaManager.dajRezervacieSpinningu(spinning);
         }
         fireTableDataChanged();
     }

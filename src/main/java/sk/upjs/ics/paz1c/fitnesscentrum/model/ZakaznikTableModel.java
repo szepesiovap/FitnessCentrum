@@ -5,15 +5,14 @@ import java.util.List;
 import sk.upjs.ics.paz1c.fitnesscentrum.entity.Zakaznik;
 import javax.swing.table.AbstractTableModel;
 import sk.upjs.ics.paz1c.fitnesscentrum.ObjectFactory;
-import sk.upjs.ics.paz1c.fitnesscentrum.ObjectFactory;
-import sk.upjs.ics.paz1c.fitnesscentrum.dao.ZakaznikDao;
+import sk.upjs.ics.paz1c.fitnesscentrum.manager.ZakaznikManager;
 
 public class ZakaznikTableModel extends AbstractTableModel {
 
-    private final ZakaznikDao zakaznikDao = ObjectFactory.INSTANCE.getZakaznikDao();
+    private final ZakaznikManager zakaznikManager = ObjectFactory.INSTANCE.getZakaznikManager();
     private static final String[] NAZVY_STLPCOV = {"Meno", "Pritomny", "Posledny prichod", "Kredit", "Cislo permanentky"};
     private static final int POCET_STLPCOV = NAZVY_STLPCOV.length;
-    private String vzorka;
+    private final String vzorka;
     private List<Zakaznik> listZakaznikovSoVzorkou = new ArrayList<>();
 
     public ZakaznikTableModel(String vzorka) {
@@ -66,7 +65,7 @@ public class ZakaznikTableModel extends AbstractTableModel {
     }
 
     public void aktualizovat() {
-        listZakaznikovSoVzorkou = zakaznikDao.dajZakaznikovSoZhodouVMene(vzorka);
+        listZakaznikovSoVzorkou = zakaznikManager.dajZakaznikovSoZhodouVMene(vzorka);
         fireTableDataChanged();
     }
 }

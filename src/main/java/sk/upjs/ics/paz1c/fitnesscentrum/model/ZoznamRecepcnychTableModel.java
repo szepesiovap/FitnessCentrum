@@ -4,13 +4,12 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.swing.table.AbstractTableModel;
 import sk.upjs.ics.paz1c.fitnesscentrum.ObjectFactory;
-import sk.upjs.ics.paz1c.fitnesscentrum.ObjectFactory;
-import sk.upjs.ics.paz1c.fitnesscentrum.dao.RecepcnyDao;
 import sk.upjs.ics.paz1c.fitnesscentrum.entity.Recepcny;
+import sk.upjs.ics.paz1c.fitnesscentrum.manager.RecepcnyManager;
 
 public class ZoznamRecepcnychTableModel extends AbstractTableModel {
 
-    private final RecepcnyDao recepcnyDao = ObjectFactory.INSTANCE.getRecepcnyDao();
+    private final RecepcnyManager recepcnyManager = ObjectFactory.INSTANCE.getRecepcnyManager();
     private static final String[] NAZVY_STLPCOV = {"Meno a priezvisko", "Login"};
     private static final int POCET_STLPCOV = NAZVY_STLPCOV.length;
     private List<Recepcny> listRecepcnych = new ArrayList<>();
@@ -51,7 +50,7 @@ public class ZoznamRecepcnychTableModel extends AbstractTableModel {
     }
 
     public void aktualizovat() {
-        listRecepcnych = recepcnyDao.dajVsetkychRecepcnych();
+        listRecepcnych = recepcnyManager.dajVsetkychRecepcnych();
         fireTableDataChanged();
     }
 }

@@ -37,17 +37,19 @@
                           <Component id="spinningLabel" alignment="1" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                          <Component id="zobrazMenoLabel" alignment="0" pref="247" max="32767" attributes="0"/>
-                          <Component id="zobrazCisloKartyLabel" alignment="0" max="32767" attributes="0"/>
-                          <Component id="zobrazKreditLabel" alignment="0" max="32767" attributes="0"/>
-                          <Component id="zobrazSpinningLabel" max="32767" attributes="0"/>
-                          <Component id="cisloKartyTextField" alignment="0" max="32767" attributes="0"/>
-                          <Component id="nacitatButton" alignment="1" min="-2" pref="123" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                              <Component id="zobrazMenoLabel" alignment="0" pref="247" max="32767" attributes="0"/>
+                              <Component id="zobrazCisloKartyLabel" alignment="0" max="32767" attributes="0"/>
+                              <Component id="zobrazKreditLabel" alignment="0" max="32767" attributes="0"/>
+                              <Component id="zobrazSpinningLabel" max="32767" attributes="0"/>
+                          </Group>
+                          <Component id="cisloKartyTextField" min="-2" pref="314" max="-2" attributes="0"/>
                       </Group>
                   </Group>
+                  <Component id="nacitatButton" alignment="1" min="-2" pref="123" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace pref="14" max="32767" attributes="0"/>
+              <EmptySpace pref="23" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -88,7 +90,7 @@
               </Group>
               <EmptySpace max="-2" attributes="0"/>
               <Component id="rezervovatButton" min="-2" max="-2" attributes="0"/>
-              <EmptySpace max="32767" attributes="0"/>
+              <EmptySpace pref="24" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>

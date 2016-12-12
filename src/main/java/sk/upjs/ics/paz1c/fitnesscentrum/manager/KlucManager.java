@@ -1,5 +1,6 @@
 package sk.upjs.ics.paz1c.fitnesscentrum.manager;
 
+import java.util.List;
 import org.springframework.dao.DuplicateKeyException;
 import sk.upjs.ics.paz1c.fitnesscentrum.entity.Kluc;
 import sk.upjs.ics.paz1c.fitnesscentrum.exception.ObsadenyKlucException;
@@ -12,5 +13,9 @@ public interface KlucManager {
     public void pridajKluc(String menoKluca) throws PrazdnyRetazecException, DuplicateKeyException;
 
     public void vymazKluc(Kluc kluc) throws ObsadenyKlucException;
+
+    public List<Kluc> dajVolneKluce();
+
+    public List<Kluc> dajVsetkyKluce();
 
 }

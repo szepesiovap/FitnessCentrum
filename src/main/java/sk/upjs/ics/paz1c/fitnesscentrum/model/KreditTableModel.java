@@ -4,12 +4,12 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.swing.table.AbstractTableModel;
 import sk.upjs.ics.paz1c.fitnesscentrum.ObjectFactory;
-import sk.upjs.ics.paz1c.fitnesscentrum.dao.KreditDao;
 import sk.upjs.ics.paz1c.fitnesscentrum.entity.Kredit;
+import sk.upjs.ics.paz1c.fitnesscentrum.manager.KreditManager;
 
 public class KreditTableModel extends AbstractTableModel {
 
-    private final KreditDao kreditDao = ObjectFactory.INSTANCE.getKreditDao();
+    private final KreditManager kreditManager = ObjectFactory.INSTANCE.getKreditManager();
     private static final String[] NAZVY_STLPCOV = {"Cena", "Názov"};
     private static final int POCET_STLPCOV = NAZVY_STLPCOV.length;
     private List<Kredit> listKreditov = new ArrayList<>();
@@ -49,7 +49,7 @@ public class KreditTableModel extends AbstractTableModel {
     }
 
     public void aktualizovat() {
-        listKreditov = kreditDao.dajVsetkyKredity();
+        listKreditov = kreditManager.dajVsetkyKredity();
         fireTableDataChanged();
     }
 

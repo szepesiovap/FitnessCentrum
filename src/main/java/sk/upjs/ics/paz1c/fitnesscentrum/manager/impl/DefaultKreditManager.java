@@ -1,5 +1,6 @@
 package sk.upjs.ics.paz1c.fitnesscentrum.manager.impl;
 
+import java.util.List;
 import sk.upjs.ics.paz1c.fitnesscentrum.manager.KreditManager;
 import org.springframework.dao.DuplicateKeyException;
 import sk.upjs.ics.paz1c.fitnesscentrum.ObjectFactory;
@@ -31,6 +32,11 @@ public class DefaultKreditManager implements KreditManager {
     @Override
     public void dobitKredit(Zakaznik zakaznik, double kredit) {
         zakaznikDao.dobiKreditZakaznikovi(zakaznik, kredit);
+    }
+
+    @Override
+    public List<Kredit> dajVsetkyKredity() {
+        return kreditDao.dajVsetkyKredity();
     }
 
 }

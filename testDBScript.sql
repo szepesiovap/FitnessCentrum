@@ -129,6 +129,8 @@ INSERT INTO `testFitnesscentrum`.`instruktor` (`meno_priezvisko`) VALUES ('Janko
 
 INSERT INTO `testFitnesscentrum`.`kluc` (`meno_kluca`) VALUES ('1M');
 INSERT INTO `testFitnesscentrum`.`kluc` (`meno_kluca`) VALUES ('2M');
+INSERT INTO `testFitnesscentrum`.`kluc` (`meno_kluca`) VALUES ('3M');
+INSERT INTO `testFitnesscentrum`.`kluc` (`meno_kluca`) VALUES ('4M');
 
 
 INSERT INTO `testFitnesscentrum`.`kredit` (`cena`, `nazov`) VALUES ('30', '30 eur');
@@ -150,9 +152,14 @@ VALUES ('Ferko Nizky','ferko','3A5941FAFEB710CC30E47E9CFA73445A49B4B217CD9A6D6FA
 
 INSERT INTO `testFitnesscentrum`.`zakaznik` (`meno_priezvisko`, `posledny_prichod`, `pritomny`) VALUES ('Jan Vysoky', '2016-12-04 11:20:21', '0');
 INSERT INTO `testFitnesscentrum`.`zakaznik` (`meno_priezvisko`, `posledny_prichod`, `pritomny`,`kredit`,`cislo_permanentky`) VALUES ('Jane Doe', '2016-12-10 18:45:07', '0','50.0','111');
-INSERT INTO `testFitnesscentrum`.`zakaznik` (`meno_priezvisko`, `posledny_prichod`, `pritomny`,`kredit`,`cislo_permanentky`) VALUES ('John Doe', '2016-12-10 18:49:51','1', '100.0','123');
+INSERT INTO `testFitnesscentrum`.`zakaznik` (`meno_priezvisko`, `posledny_prichod`, `pritomny`,`kredit`,`cislo_permanentky`,`id_kluca`) VALUES ('John Doe', '2016-12-10 18:49:51','1', '100.0','123',2);
 INSERT INTO `testFitnesscentrum`.`zakaznik` (`meno_priezvisko`, `posledny_prichod`, `pritomny`) VALUES ('Zakaznik na vymazanie', '2016-12-04 11:20:21', '0');
 INSERT INTO `testFitnesscentrum`.`zakaznik` (`meno_priezvisko`, `posledny_prichod`, `pritomny`) VALUES ('Stale pritomny zakaznik', '2016-12-04 11:20:21', '1');
+INSERT INTO `testFitnesscentrum`.`zakaznik` (`meno_priezvisko`, `posledny_prichod`, `pritomny`,`kredit`,`cislo_permanentky`) VALUES ('Alf', '2016-12-10 18:45:07', '0','50.0','333');
+INSERT INTO `testFitnesscentrum`.`zakaznik` (`meno_priezvisko`, `posledny_prichod`, `pritomny`,`kredit`,`cislo_permanentky`) VALUES ('Melman', '2016-12-10 18:45:07', '0','1.0','666');
+
+
+UPDATE `testFitnesscentrum`.`kluc` SET id_zakaznika=3 WHERE id_kluca=2;
 
 INSERT INTO `testFitnesscentrum`.`spinning` (`datum`, `kapacita`, `volne`,`id_instruktora`) VALUES ('2016-12-24 15:00:00', '10', '10', '1');
 INSERT INTO `testFitnesscentrum`.`spinning` (`datum`, `kapacita`, `volne`,`id_instruktora`) VALUES ('2016-12-25 16:00:00', '5', '5', '1');

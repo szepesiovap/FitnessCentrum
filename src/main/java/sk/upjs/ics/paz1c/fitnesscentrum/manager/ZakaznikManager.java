@@ -1,6 +1,6 @@
-
 package sk.upjs.ics.paz1c.fitnesscentrum.manager;
 
+import java.util.List;
 import org.springframework.dao.DuplicateKeyException;
 import sk.upjs.ics.paz1c.fitnesscentrum.entity.Kluc;
 import sk.upjs.ics.paz1c.fitnesscentrum.entity.Zakaznik;
@@ -9,7 +9,7 @@ import sk.upjs.ics.paz1c.fitnesscentrum.exception.NeexistujuciZakaznikException;
 import sk.upjs.ics.paz1c.fitnesscentrum.exception.PritomnyZakaznikException;
 
 public interface ZakaznikManager {
-        
+
     public void zmazZakaznika(Zakaznik zakaznik) throws PritomnyZakaznikException;
 
     public void odchodZakaznika(Long idZakaznika);
@@ -24,5 +24,10 @@ public interface ZakaznikManager {
 
     public void prichodKartouZakaznika(Zakaznik zakaznik, Kluc kluc) throws NedostatocnyKreditException;
 
-    
+    public List<Zakaznik> dajVsetkychZakaznikov();
+
+    public List<Zakaznik> dajPritomnychZakaznikov();
+
+    public List<Zakaznik> dajZakaznikovSoZhodouVMene(String vzorka);
+
 }

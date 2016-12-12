@@ -5,11 +5,11 @@ import java.util.List;
 import sk.upjs.ics.paz1c.fitnesscentrum.entity.Zakaznik;
 import javax.swing.table.AbstractTableModel;
 import sk.upjs.ics.paz1c.fitnesscentrum.ObjectFactory;
-import sk.upjs.ics.paz1c.fitnesscentrum.dao.ZakaznikDao;
+import sk.upjs.ics.paz1c.fitnesscentrum.manager.ZakaznikManager;
 
 public class PritomniZakazniciTableModel extends AbstractTableModel {
 
-    private final ZakaznikDao zakaznikDao = ObjectFactory.INSTANCE.getZakaznikDao();
+    private final ZakaznikManager zakaznikManager = ObjectFactory.INSTANCE.getZakaznikManager();
     private static final String[] NAZVY_STLPCOV = {"Meno", "Kľúč", "Čas príchodu", "Číslo karty"};
     private static final int POCET_STLPCOV = NAZVY_STLPCOV.length;
     private List<Zakaznik> listPritomnychZakaznikov = new ArrayList<>();
@@ -53,7 +53,7 @@ public class PritomniZakazniciTableModel extends AbstractTableModel {
     }
 
     public void aktualizovat() {
-        listPritomnychZakaznikov = zakaznikDao.dajPritomnychZakaznikov();
+        listPritomnychZakaznikov = zakaznikManager.dajPritomnychZakaznikov();
         fireTableDataChanged();
     }
 }

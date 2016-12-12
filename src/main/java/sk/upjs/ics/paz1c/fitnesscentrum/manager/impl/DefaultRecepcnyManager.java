@@ -1,5 +1,6 @@
 package sk.upjs.ics.paz1c.fitnesscentrum.manager.impl;
 
+import java.util.List;
 import sk.upjs.ics.paz1c.fitnesscentrum.manager.RecepcnyManager;
 import sk.upjs.ics.paz1c.fitnesscentrum.exception.NevalidnyVstupException;
 import sk.upjs.ics.paz1c.fitnesscentrum.exception.NeexistujuciRecepcnyException;
@@ -9,7 +10,7 @@ import sk.upjs.ics.paz1c.fitnesscentrum.dao.RecepcnyDao;
 import sk.upjs.ics.paz1c.fitnesscentrum.entity.Recepcny;
 import sk.upjs.ics.paz1c.fitnesscentrum.manager.HesloManager;
 
-public class DefaultRecepcnyManager implements RecepcnyManager{
+public class DefaultRecepcnyManager implements RecepcnyManager {
 
     private Recepcny recepcny;
     private final HesloManager hesloManager = ObjectFactory.INSTANCE.getHesloManager();
@@ -75,14 +76,19 @@ public class DefaultRecepcnyManager implements RecepcnyManager{
             }
         }
     }
-    
+
     @Override
     public Recepcny dajRecepcneho(Long idRecepecneho) {
         return recepcnyDao.dajRecepcneho(idRecepecneho);
     }
-    
+
     @Override
     public void vymazRecepcneho(Recepcny recepcny) {
         recepcnyDao.vymazRecepcneho(recepcny);
+    }
+
+    @Override
+    public List<Recepcny> dajVsetkychRecepcnych() {
+        return recepcnyDao.dajVsetkychRecepcnych();
     }
 }
