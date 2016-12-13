@@ -75,7 +75,7 @@ public class SpinningForm extends javax.swing.JDialog {
         });
         rezervovatMenu.add(jednorazovyMenuItem);
 
-        kartouMenuItem.setText("Kartou");
+        kartouMenuItem.setText("Permanetkou");
         kartouMenuItem.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 kartouMenuItemMousePressed(evt);
@@ -159,7 +159,7 @@ public class SpinningForm extends javax.swing.JDialog {
         try {
             Spinning spinning = (Spinning) spinningComboBox.getSelectedItem();
             if (spinning.getVolne() > 0) {
-                new RezervaciaKartouForm(this, true, spinning).setVisible(true);
+                new RezervaciaPermanentkouForm(this, true, spinning).setVisible(true);
                 aktualizovatRezervacie();
                 aktualizovatSpinningy();
             } else {

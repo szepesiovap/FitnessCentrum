@@ -37,7 +37,7 @@
                           <Group type="102" attributes="0">
                               <Group type="103" groupAlignment="1" attributes="0">
                                   <Component id="kreditLabel" min="-2" max="-2" attributes="0"/>
-                                  <Component id="cisloKartyLabel" min="-2" max="-2" attributes="0"/>
+                                  <Component id="cisloPermanentkyLabel" min="-2" max="-2" attributes="0"/>
                                   <Component id="menoLabel" min="-2" max="-2" attributes="0"/>
                                   <Component id="dobiKreditLabel" alignment="1" min="-2" max="-2" attributes="0"/>
                               </Group>
@@ -83,7 +83,7 @@
               </Group>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                  <Component id="cisloKartyLabel" max="32767" attributes="0"/>
+                  <Component id="cisloPermanentkyLabel" max="32767" attributes="0"/>
                   <Component id="zobrazCisloKartyLabel" max="32767" attributes="0"/>
               </Group>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
@@ -117,9 +117,9 @@
         <Property name="text" type="java.lang.String" value="Meno: "/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JLabel" name="cisloKartyLabel">
+    <Component class="javax.swing.JLabel" name="cisloPermanentkyLabel">
       <Properties>
-        <Property name="text" type="java.lang.String" value="&#x10c;&#xed;slo karty: "/>
+        <Property name="text" type="java.lang.String" value="&#x10c;&#xed;slo permanentky: "/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="kreditLabel">

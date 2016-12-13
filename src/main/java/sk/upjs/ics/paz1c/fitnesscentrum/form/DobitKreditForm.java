@@ -38,7 +38,7 @@ public class DobitKreditForm extends javax.swing.JDialog {
         zadajCisloLabel = new javax.swing.JLabel();
         cisloPermanentkyTextField = new javax.swing.JTextField();
         menoLabel = new javax.swing.JLabel();
-        cisloKartyLabel = new javax.swing.JLabel();
+        cisloPermanentkyLabel = new javax.swing.JLabel();
         kreditLabel = new javax.swing.JLabel();
         zobrazMenoLabel = new javax.swing.JLabel();
         zobrazCisloKartyLabel = new javax.swing.JLabel();
@@ -56,7 +56,7 @@ public class DobitKreditForm extends javax.swing.JDialog {
 
         menoLabel.setText("Meno: ");
 
-        cisloKartyLabel.setText("Číslo karty: ");
+        cisloPermanentkyLabel.setText("Číslo permanentky: ");
 
         kreditLabel.setText("Kredit: ");
 
@@ -95,7 +95,7 @@ public class DobitKreditForm extends javax.swing.JDialog {
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                     .addComponent(kreditLabel)
-                                    .addComponent(cisloKartyLabel)
+                                    .addComponent(cisloPermanentkyLabel)
                                     .addComponent(menoLabel)
                                     .addComponent(dobiKreditLabel))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -129,7 +129,7 @@ public class DobitKreditForm extends javax.swing.JDialog {
                     .addComponent(zobrazMenoLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(cisloKartyLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(cisloPermanentkyLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(zobrazCisloKartyLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -180,7 +180,7 @@ public class DobitKreditForm extends javax.swing.JDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel cisloKartyLabel;
+    private javax.swing.JLabel cisloPermanentkyLabel;
     private javax.swing.JTextField cisloPermanentkyTextField;
     private javax.swing.JLabel dobiKreditLabel;
     private javax.swing.JButton dobitButton;

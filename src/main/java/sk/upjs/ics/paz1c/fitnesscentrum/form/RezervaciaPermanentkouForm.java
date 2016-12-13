@@ -9,7 +9,7 @@ import sk.upjs.ics.paz1c.fitnesscentrum.entity.Zakaznik;
 import sk.upjs.ics.paz1c.fitnesscentrum.exception.NedostatocnyKreditException;
 import sk.upjs.ics.paz1c.fitnesscentrum.exception.NeexistujuciZakaznikException;
 
-public class RezervaciaKartouForm extends javax.swing.JDialog {
+public class RezervaciaPermanentkouForm extends javax.swing.JDialog {
 
     private final ZakaznikManager zakaznikManager = ObjectFactory.INSTANCE.getZakaznikManager();
     private final SpinningManager spinningManager = ObjectFactory.INSTANCE.getSpinningManager();
@@ -23,7 +23,7 @@ public class RezervaciaKartouForm extends javax.swing.JDialog {
      * @param modal
      * @param spinning
      */
-    public RezervaciaKartouForm(java.awt.Dialog parent, boolean modal, Spinning spinning) {
+    public RezervaciaPermanentkouForm(java.awt.Dialog parent, boolean modal, Spinning spinning) {
         super(parent, modal);
         this.spinning = spinning;
         initComponents();
@@ -53,14 +53,14 @@ public class RezervaciaKartouForm extends javax.swing.JDialog {
         zobrazSpinningLabel = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("Rezervácia kartou");
+        setTitle("Rezervácia permanentkou");
         setResizable(false);
 
-        zadajCisloLabel.setText("Číslo karty: ");
+        zadajCisloLabel.setText("Číslo permanentky: ");
 
         menoLabel.setText("Meno: ");
 
-        cisloKartyLabel.setText("Číslo karty: ");
+        cisloKartyLabel.setText("Číslo permanentky: ");
 
         kreditLabel.setText("Kredit: ");
 

@@ -9,7 +9,7 @@ import sk.upjs.ics.paz1c.fitnesscentrum.entity.Zakaznik;
 import sk.upjs.ics.paz1c.fitnesscentrum.exception.NedostatocnyKreditException;
 import sk.upjs.ics.paz1c.fitnesscentrum.exception.NeexistujuciZakaznikException;
 
-public class PrichodKartouForm extends javax.swing.JDialog {
+public class PrichodPermanentkouForm extends javax.swing.JDialog {
 
     private final ZakaznikManager zakaznikManager = ObjectFactory.INSTANCE.getZakaznikManager();
     private Zakaznik zakaznik;
@@ -20,7 +20,7 @@ public class PrichodKartouForm extends javax.swing.JDialog {
      * @param parent
      * @param modal
      */
-    public PrichodKartouForm(java.awt.Frame parent, boolean modal) {
+    public PrichodPermanentkouForm(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
     }
@@ -48,7 +48,7 @@ public class PrichodKartouForm extends javax.swing.JDialog {
         nacitatButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("Príchod kartou");
+        setTitle("Príchod permanentkou");
         setResizable(false);
 
         menoLabel.setText("Meno: ");
@@ -68,9 +68,9 @@ public class PrichodKartouForm extends javax.swing.JDialog {
 
         kreditLabel.setText("Kredit: ");
 
-        cisloKartyLabel.setText("Číslo karty: ");
+        cisloKartyLabel.setText("Číslo permanentky: ");
 
-        zadatCisloLabel.setText("Číslo karty: ");
+        zadatCisloLabel.setText("Číslo permanentky: ");
 
         nacitatButton.setText("Načítať");
         nacitatButton.addActionListener(new java.awt.event.ActionListener() {
@@ -84,27 +84,30 @@ public class PrichodKartouForm extends javax.swing.JDialog {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(nacitatButton, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(klucLabel)
+                    .addComponent(kreditLabel)
+                    .addComponent(menoLabel)
+                    .addComponent(cisloKartyLabel)
+                    .addComponent(zadatCisloLabel))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(klucLabel)
-                            .addComponent(kreditLabel)
-                            .addComponent(menoLabel)
-                            .addComponent(cisloKartyLabel)
-                            .addComponent(zadatCisloLabel))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(zobrazMenoLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(zobrazMenoLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 176, Short.MAX_VALUE)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(klucComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(prichodButton, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(zobrazCisloKartyLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(zobrazKreditLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(cisloKartyTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 176, Short.MAX_VALUE))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(zobrazKreditLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(103, 103, 103))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(cisloKartyTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(nacitatButton, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap())))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -112,10 +115,9 @@ public class PrichodKartouForm extends javax.swing.JDialog {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(cisloKartyTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(zadatCisloLabel))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(nacitatButton)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(zadatCisloLabel)
+                    .addComponent(nacitatButton))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 32, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(menoLabel, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(zobrazMenoLabel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE))

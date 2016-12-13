@@ -19,7 +19,7 @@
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="kartouMenuItem">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Kartou"/>
+                <Property name="text" type="java.lang.String" value="Permanetkou"/>
               </Properties>
               <Events>
                 <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="kartouMenuItemMousePressed"/>

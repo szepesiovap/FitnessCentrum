@@ -1,6 +1,5 @@
 package sk.upjs.ics.paz1c.fitnesscentrum.form;
 
-import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import sk.upjs.ics.paz1c.fitnesscentrum.ObjectFactory;
 import sk.upjs.ics.paz1c.fitnesscentrum.manager.ZakaznikManager;
@@ -84,7 +83,7 @@ public final class HlavneOknoForm extends javax.swing.JFrame {
         });
         prichodMenu.add(jednorazovyPrichodMenuItem);
 
-        prichodKartouMenuItem.setText("Kartou");
+        prichodKartouMenuItem.setText("Permanentkou");
         prichodKartouMenuItem.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 prichodKartouMenuItemMousePressed(evt);
@@ -216,7 +215,7 @@ public final class HlavneOknoForm extends javax.swing.JFrame {
     }//GEN-LAST:event_jednorazovyPrichodMenuItemMousePressed
 
     private void prichodKartouMenuItemMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_prichodKartouMenuItemMousePressed
-        new PrichodKartouForm(this, true).setVisible(true);
+        new PrichodPermanentkouForm(this, true).setVisible(true);
         aktualizovatZoznamPritomnych();
     }//GEN-LAST:event_prichodKartouMenuItemMousePressed
 

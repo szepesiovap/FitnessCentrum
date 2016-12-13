@@ -10,7 +10,7 @@ import sk.upjs.ics.paz1c.fitnesscentrum.manager.ZakaznikManager;
 public class ZakaznikTableModel extends AbstractTableModel {
 
     private final ZakaznikManager zakaznikManager = ObjectFactory.INSTANCE.getZakaznikManager();
-    private static final String[] NAZVY_STLPCOV = {"Meno", "Pritomny", "Posledny prichod", "Kredit", "Cislo permanentky"};
+    private static final String[] NAZVY_STLPCOV = {"Meno", "Prítomný", "Posledný príchod", "Kredit", "Číslo permanentky"};
     private static final int POCET_STLPCOV = NAZVY_STLPCOV.length;
     private final String vzorka;
     private List<Zakaznik> listZakaznikovSoVzorkou = new ArrayList<>();

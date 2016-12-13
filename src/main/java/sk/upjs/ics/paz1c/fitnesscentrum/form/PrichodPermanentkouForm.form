@@ -3,7 +3,7 @@
 <Form version="1.3" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JDialogFormInfo">
   <Properties>
     <Property name="defaultCloseOperation" type="int" value="2"/>
-    <Property name="title" type="java.lang.String" value="Pr&#xed;chod kartou"/>
+    <Property name="title" type="java.lang.String" value="Pr&#xed;chod permanentkou"/>
     <Property name="resizable" type="boolean" value="false"/>
   </Properties>
   <SyntheticProperties>
@@ -26,20 +26,19 @@
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
-              <EmptySpace max="-2" attributes="0"/>
+              <EmptySpace max="32767" attributes="0"/>
               <Group type="103" groupAlignment="1" attributes="0">
-                  <Component id="nacitatButton" min="-2" pref="99" max="-2" attributes="0"/>
-                  <Group type="102" attributes="0">
-                      <Group type="103" groupAlignment="1" attributes="0">
-                          <Component id="klucLabel" min="-2" max="-2" attributes="0"/>
-                          <Component id="kreditLabel" min="-2" max="-2" attributes="0"/>
-                          <Component id="menoLabel" min="-2" max="-2" attributes="0"/>
-                          <Component id="cisloKartyLabel" min="-2" max="-2" attributes="0"/>
-                          <Component id="zadatCisloLabel" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace max="-2" attributes="0"/>
+                  <Component id="klucLabel" min="-2" max="-2" attributes="0"/>
+                  <Component id="kreditLabel" min="-2" max="-2" attributes="0"/>
+                  <Component id="menoLabel" min="-2" max="-2" attributes="0"/>
+                  <Component id="cisloKartyLabel" min="-2" max="-2" attributes="0"/>
+                  <Component id="zadatCisloLabel" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                  <Group type="102" alignment="0" attributes="0">
                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                          <Component id="zobrazMenoLabel" max="32767" attributes="0"/>
+                          <Component id="zobrazMenoLabel" pref="176" max="32767" attributes="0"/>
                           <Group type="102" alignment="0" attributes="0">
                               <Component id="klucComboBox" min="-2" pref="74" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
@@ -47,11 +46,16 @@
                           </Group>
                           <Component id="zobrazCisloKartyLabel" max="32767" attributes="0"/>
                           <Component id="zobrazKreditLabel" max="32767" attributes="0"/>
-                          <Component id="cisloKartyTextField" pref="176" max="32767" attributes="0"/>
                       </Group>
+                      <EmptySpace min="-2" pref="103" max="-2" attributes="0"/>
+                  </Group>
+                  <Group type="102" alignment="0" attributes="0">
+                      <Component id="cisloKartyTextField" min="-2" pref="158" max="-2" attributes="0"/>
+                      <EmptySpace max="32767" attributes="0"/>
+                      <Component id="nacitatButton" min="-2" pref="99" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
                   </Group>
               </Group>
-              <EmptySpace max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -62,10 +66,9 @@
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="cisloKartyTextField" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="zadatCisloLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="nacitatButton" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace max="-2" attributes="0"/>
-              <Component id="nacitatButton" min="-2" max="-2" attributes="0"/>
-              <EmptySpace max="32767" attributes="0"/>
+              <EmptySpace pref="32" max="32767" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Component id="menoLabel" alignment="1" min="-2" max="-2" attributes="0"/>
                   <Component id="zobrazMenoLabel" alignment="1" min="-2" pref="15" max="-2" attributes="0"/>
@@ -131,7 +134,7 @@
     </Component>
     <Component class="javax.swing.JLabel" name="cisloKartyLabel">
       <Properties>
-        <Property name="text" type="java.lang.String" value="&#x10c;&#xed;slo karty: "/>
+        <Property name="text" type="java.lang.String" value="&#x10c;&#xed;slo permanentky: "/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="zobrazCisloKartyLabel">
@@ -142,7 +145,7 @@
     </Component>
     <Component class="javax.swing.JLabel" name="zadatCisloLabel">
       <Properties>
-        <Property name="text" type="java.lang.String" value="&#x10c;&#xed;slo karty: "/>
+        <Property name="text" type="java.lang.String" value="&#x10c;&#xed;slo permanentky: "/>
       </Properties>
     </Component>
     <Component class="javax.swing.JButton" name="nacitatButton">
