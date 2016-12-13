@@ -48,7 +48,7 @@ public final class HlavneOknoForm extends javax.swing.JFrame {
         hlavneOknoMenuBar = new javax.swing.JMenuBar();
         prichodMenu = new javax.swing.JMenu();
         jednorazovyPrichodMenuItem = new javax.swing.JMenuItem();
-        prichodKartouMenuItem = new javax.swing.JMenuItem();
+        prichodPermanentkouMenuItem = new javax.swing.JMenuItem();
         odchodMenu = new javax.swing.JMenu();
         zoznamMenu = new javax.swing.JMenu();
         novyMenu = new javax.swing.JMenu();
@@ -83,13 +83,13 @@ public final class HlavneOknoForm extends javax.swing.JFrame {
         });
         prichodMenu.add(jednorazovyPrichodMenuItem);
 
-        prichodKartouMenuItem.setText("Permanentkou");
-        prichodKartouMenuItem.addMouseListener(new java.awt.event.MouseAdapter() {
+        prichodPermanentkouMenuItem.setText("Permanentkou");
+        prichodPermanentkouMenuItem.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
-                prichodKartouMenuItemMousePressed(evt);
+                prichodPermanentkouMenuItemMousePressed(evt);
             }
         });
-        prichodMenu.add(prichodKartouMenuItem);
+        prichodMenu.add(prichodPermanentkouMenuItem);
 
         hlavneOknoMenuBar.add(prichodMenu);
 
@@ -214,10 +214,10 @@ public final class HlavneOknoForm extends javax.swing.JFrame {
         aktualizovatZoznamPritomnych();
     }//GEN-LAST:event_jednorazovyPrichodMenuItemMousePressed
 
-    private void prichodKartouMenuItemMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_prichodKartouMenuItemMousePressed
+    private void prichodPermanentkouMenuItemMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_prichodPermanentkouMenuItemMousePressed
         new PrichodPermanentkouForm(this, true).setVisible(true);
         aktualizovatZoznamPritomnych();
-    }//GEN-LAST:event_prichodKartouMenuItemMousePressed
+    }//GEN-LAST:event_prichodPermanentkouMenuItemMousePressed
 
     private void zoznamMenuMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_zoznamMenuMousePressed
         new ZoznamZakaznikovForm(this, true).setVisible(true);
@@ -238,8 +238,8 @@ public final class HlavneOknoForm extends javax.swing.JFrame {
     private javax.swing.JMenu novyMenu;
     private javax.swing.JMenu odchodMenu;
     private javax.swing.JMenu odhlasitMenu;
-    private javax.swing.JMenuItem prichodKartouMenuItem;
     private javax.swing.JMenu prichodMenu;
+    private javax.swing.JMenuItem prichodPermanentkouMenuItem;
     private javax.swing.JLabel prihlasenyRecepcnyLabel;
     private javax.swing.JScrollPane pritomniScrollPane;
     private javax.swing.JTable pritomniTable;

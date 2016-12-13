@@ -17,7 +17,7 @@ public class RezervaciaPermanentkouForm extends javax.swing.JDialog {
     private final Spinning spinning;
 
     /**
-     * Creates new form RezervujKartouForm
+     * Creates new form RezervujPermanentkouForm
      *
      * @param parent
      * @param modal
@@ -40,13 +40,13 @@ public class RezervaciaPermanentkouForm extends javax.swing.JDialog {
     private void initComponents() {
 
         zadajCisloLabel = new javax.swing.JLabel();
-        cisloKartyTextField = new javax.swing.JTextField();
+        cisloPermanentkyTextField = new javax.swing.JTextField();
         menoLabel = new javax.swing.JLabel();
-        cisloKartyLabel = new javax.swing.JLabel();
+        cisloPermanentkyLabel = new javax.swing.JLabel();
         kreditLabel = new javax.swing.JLabel();
         nacitatButton = new javax.swing.JButton();
         zobrazMenoLabel = new javax.swing.JLabel();
-        zobrazCisloKartyLabel = new javax.swing.JLabel();
+        zobrazCisloPermanentkyLabel = new javax.swing.JLabel();
         zobrazKreditLabel = new javax.swing.JLabel();
         rezervovatButton = new javax.swing.JButton();
         spinningLabel = new javax.swing.JLabel();
@@ -60,7 +60,7 @@ public class RezervaciaPermanentkouForm extends javax.swing.JDialog {
 
         menoLabel.setText("Meno: ");
 
-        cisloKartyLabel.setText("Číslo permanentky: ");
+        cisloPermanentkyLabel.setText("Číslo permanentky: ");
 
         kreditLabel.setText("Kredit: ");
 
@@ -89,17 +89,17 @@ public class RezervaciaPermanentkouForm extends javax.swing.JDialog {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(kreditLabel)
-                    .addComponent(cisloKartyLabel)
+                    .addComponent(cisloPermanentkyLabel)
                     .addComponent(menoLabel)
                     .addComponent(zadajCisloLabel)
                     .addComponent(spinningLabel))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(zobrazMenoLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(zobrazCisloKartyLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(zobrazCisloPermanentkyLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(zobrazKreditLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(zobrazSpinningLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(cisloKartyTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 311, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(cisloPermanentkyTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 311, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(nacitatButton, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -119,15 +119,15 @@ public class RezervaciaPermanentkouForm extends javax.swing.JDialog {
                         .addComponent(zadajCisloLabel))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(8, 8, 8)
-                        .addComponent(cisloKartyTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(cisloPermanentkyTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(34, 34, 34)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(menoLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(zobrazMenoLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(cisloKartyLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(zobrazCisloKartyLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(cisloPermanentkyLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(zobrazCisloPermanentkyLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(kreditLabel)
@@ -147,7 +147,7 @@ public class RezervaciaPermanentkouForm extends javax.swing.JDialog {
 
     private void nacitatButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nacitatButtonActionPerformed
         try {
-            zakaznik = zakaznikManager.dajZakaznikaSCislomPermanentky(cisloKartyTextField.getText());
+            zakaznik = zakaznikManager.dajZakaznikaSCislomPermanentky(cisloPermanentkyTextField.getText());
             odblokovatRezervovanie();
         } catch (NeexistujuciZakaznikException e) {
             zablokovatRezervovanie();
@@ -168,25 +168,25 @@ public class RezervaciaPermanentkouForm extends javax.swing.JDialog {
         rezervovatButton.setEnabled(true);
         zobrazMenoLabel.setText(zakaznik.getMeno());
         zobrazKreditLabel.setText("" + zakaznik.getKredit());
-        zobrazCisloKartyLabel.setText(zakaznik.getCisloPermanentky());
+        zobrazCisloPermanentkyLabel.setText(zakaznik.getCisloPermanentky());
     }
 
     private void zablokovatRezervovanie() {
         rezervovatButton.setEnabled(false);
         zobrazMenoLabel.setText("");
         zobrazKreditLabel.setText("");
-        zobrazCisloKartyLabel.setText("");
+        zobrazCisloPermanentkyLabel.setText("");
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel cisloKartyLabel;
-    private javax.swing.JTextField cisloKartyTextField;
+    private javax.swing.JLabel cisloPermanentkyLabel;
+    private javax.swing.JTextField cisloPermanentkyTextField;
     private javax.swing.JLabel kreditLabel;
     private javax.swing.JLabel menoLabel;
     private javax.swing.JButton nacitatButton;
     private javax.swing.JButton rezervovatButton;
     private javax.swing.JLabel spinningLabel;
     private javax.swing.JLabel zadajCisloLabel;
-    private javax.swing.JLabel zobrazCisloKartyLabel;
+    private javax.swing.JLabel zobrazCisloPermanentkyLabel;
     private javax.swing.JLabel zobrazKreditLabel;
     private javax.swing.JLabel zobrazMenoLabel;
     private javax.swing.JLabel zobrazSpinningLabel;

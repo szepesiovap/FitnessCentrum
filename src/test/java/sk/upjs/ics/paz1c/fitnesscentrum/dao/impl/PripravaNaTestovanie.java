@@ -19,8 +19,8 @@ public class PripravaNaTestovanie {
 
     private static final String JDBC_DRIVER = "com.mysql.jdbc.Driver";
     private static final String DB_MENO = "testFitnesscentrum";
-    private static final String DB_USER = "fitnesscentrum";
-    private static final String DB_PASSWORD = "fitnesscentrum";
+    private static final String DB_USER = "root";
+    private static final String DB_PASSWORD = "root";
     private static final String DB_MENO_SUBORU = "testDBScript.sql";
 
     private static Connection connection;
@@ -29,20 +29,17 @@ public class PripravaNaTestovanie {
     public static void setUpClass() throws ClassNotFoundException, SQLException {
 
         Class.forName(JDBC_DRIVER);
-        connection = DriverManager.getConnection("jdbc:mysql://localhost/?user=fitnesscentrum&password=fitnesscentrum");
-        Statement s = connection.createStatement();
-
-        s.executeUpdate("CREATE DATABASE " + DB_MENO);
-
+        connection = DriverManager.getConnection("jdbc:mysql://localhost/?user=" + DB_USER + "&password=" + DB_PASSWORD);
+        
         MysqlDataSource dataSource = new MysqlDataSource();
         dataSource.setDatabaseName(DB_MENO);
         dataSource.setUser(DB_USER);
         dataSource.setPassword(DB_PASSWORD);
-        ObjectFactory.INSTANCE.setJdbcTemplate(new JdbcTemplate(dataSource));        
+        ObjectFactory.INSTANCE.setJdbcTemplate(new JdbcTemplate(dataSource));
     }
-    
+
     @Before
-    public void setUp() throws  IOException, SQLException{
+    public void setUp() throws IOException, SQLException {
         ScriptRunner runner = new ScriptRunner(connection, false, true);
         runner.runScript(new BufferedReader(new FileReader(DB_MENO_SUBORU)));
     }

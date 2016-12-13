@@ -28,7 +28,6 @@ public class PrihlasovanieForm extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jFrame1 = new javax.swing.JFrame();
         loginTextField = new javax.swing.JTextField();
         loginLabel = new javax.swing.JLabel();
         hesloLabel = new javax.swing.JLabel();
@@ -37,17 +36,6 @@ public class PrihlasovanieForm extends javax.swing.JFrame {
         prihlasovanieMenuBar = new javax.swing.JMenuBar();
         novyRecepcny = new javax.swing.JMenu();
         nastavenia = new javax.swing.JMenu();
-
-        javax.swing.GroupLayout jFrame1Layout = new javax.swing.GroupLayout(jFrame1.getContentPane());
-        jFrame1.getContentPane().setLayout(jFrame1Layout);
-        jFrame1Layout.setHorizontalGroup(
-            jFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
-        );
-        jFrame1Layout.setVerticalGroup(
-            jFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
-        );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Prihlásenie");
@@ -65,7 +53,7 @@ public class PrihlasovanieForm extends javax.swing.JFrame {
             }
         });
 
-        novyRecepcny.setText("Nový");
+        novyRecepcny.setText("Nový recepčný");
         novyRecepcny.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 novyRecepcnyMousePressed(evt);
@@ -213,7 +201,6 @@ public class PrihlasovanieForm extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel hesloLabel;
     private javax.swing.JPasswordField hesloPasswordField;
-    private javax.swing.JFrame jFrame1;
     private javax.swing.JLabel loginLabel;
     private javax.swing.JTextField loginTextField;
     private javax.swing.JMenu nastavenia;

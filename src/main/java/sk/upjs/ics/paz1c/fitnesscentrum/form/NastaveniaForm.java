@@ -340,7 +340,7 @@ public class NastaveniaForm extends javax.swing.JDialog {
                     JOptionPane.showMessageDialog(this, "Kredit " + kredit.getNazov() + " bol zmazaný!");
                 }
             }
-        } catch (Exception e) {
+        } catch (ArrayIndexOutOfBoundsException e) {
             JOptionPane.showMessageDialog(this, "Nie je vybraný žiaden kredit!");
         }
         aktualizovatKreditTable();
@@ -362,7 +362,7 @@ public class NastaveniaForm extends javax.swing.JDialog {
                 JOptionPane.showMessageDialog(this, "Recepčný " + recepcny.getMeno() + " s loginom "
                         + recepcny.getLogin() + " bol zmazaný!");
             }
-        } catch (Exception e) {
+        } catch (ArrayIndexOutOfBoundsException e) {
             JOptionPane.showMessageDialog(this, "Nie je vybraný žiaden recepčný!");
         }
 

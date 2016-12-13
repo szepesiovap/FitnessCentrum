@@ -124,7 +124,8 @@ public class RezervaciaForm extends javax.swing.JDialog {
 
     private void rezervovatButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rezervovatButtonActionPerformed
         try {
-            Long idZakaznika = (Long) zoznamZakaznikovTable.getModel().getValueAt(this.zoznamZakaznikovTable.getSelectedRow(), ID_COLUMN);
+            Long idZakaznika = (Long) zoznamZakaznikovTable.getModel()
+                    .getValueAt(this.zoznamZakaznikovTable.getSelectedRow(), ID_COLUMN);
             Zakaznik zakaznik = zakaznikManager.dajZakaznikaSId(idZakaznika);
             Rezervacia rezervacia = new Rezervacia();
             rezervacia.setSpinning(spinning);

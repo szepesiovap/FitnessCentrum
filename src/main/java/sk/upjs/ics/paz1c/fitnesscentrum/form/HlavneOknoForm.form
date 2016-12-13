@@ -35,12 +35,12 @@
                 <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jednorazovyPrichodMenuItemMousePressed"/>
               </Events>
             </MenuItem>
-            <MenuItem class="javax.swing.JMenuItem" name="prichodKartouMenuItem">
+            <MenuItem class="javax.swing.JMenuItem" name="prichodPermanentkouMenuItem">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Permanentkou"/>
               </Properties>
               <Events>
-                <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="prichodKartouMenuItemMousePressed"/>
+                <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="prichodPermanentkouMenuItemMousePressed"/>
               </Events>
             </MenuItem>
           </SubComponents>

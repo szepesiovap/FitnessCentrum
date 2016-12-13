@@ -17,12 +17,12 @@
                 <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jednorazovyMenuItemMousePressed"/>
               </Events>
             </MenuItem>
-            <MenuItem class="javax.swing.JMenuItem" name="kartouMenuItem">
+            <MenuItem class="javax.swing.JMenuItem" name="permanentkouMenuItem">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Permanetkou"/>
               </Properties>
               <Events>
-                <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="kartouMenuItemMousePressed"/>
+                <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="permanentkouMenuItemMousePressed"/>
               </Events>
             </MenuItem>
           </SubComponents>

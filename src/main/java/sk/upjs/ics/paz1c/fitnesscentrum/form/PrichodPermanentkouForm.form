@@ -31,7 +31,7 @@
                   <Component id="klucLabel" min="-2" max="-2" attributes="0"/>
                   <Component id="kreditLabel" min="-2" max="-2" attributes="0"/>
                   <Component id="menoLabel" min="-2" max="-2" attributes="0"/>
-                  <Component id="cisloKartyLabel" min="-2" max="-2" attributes="0"/>
+                  <Component id="cisloPermanentkyLabel" min="-2" max="-2" attributes="0"/>
                   <Component id="zadatCisloLabel" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
@@ -44,13 +44,13 @@
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="prichodButton" min="-2" pref="93" max="-2" attributes="0"/>
                           </Group>
-                          <Component id="zobrazCisloKartyLabel" max="32767" attributes="0"/>
+                          <Component id="zobrazCisloPermanentkyLabel" max="32767" attributes="0"/>
                           <Component id="zobrazKreditLabel" max="32767" attributes="0"/>
                       </Group>
                       <EmptySpace min="-2" pref="103" max="-2" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
-                      <Component id="cisloKartyTextField" min="-2" pref="158" max="-2" attributes="0"/>
+                      <Component id="cisloPermanentkyTextField" min="-2" pref="158" max="-2" attributes="0"/>
                       <EmptySpace max="32767" attributes="0"/>
                       <Component id="nacitatButton" min="-2" pref="99" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
@@ -64,7 +64,7 @@
           <Group type="102" alignment="1" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="cisloKartyTextField" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="cisloPermanentkyTextField" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="zadatCisloLabel" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="nacitatButton" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
@@ -75,8 +75,8 @@
               </Group>
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                  <Component id="zobrazCisloKartyLabel" max="32767" attributes="0"/>
-                  <Component id="cisloKartyLabel" min="-2" max="-2" attributes="0"/>
+                  <Component id="zobrazCisloPermanentkyLabel" max="32767" attributes="0"/>
+                  <Component id="cisloPermanentkyLabel" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" max="-2" attributes="0">
@@ -132,16 +132,16 @@
         <Property name="text" type="java.lang.String" value="Kredit: "/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JLabel" name="cisloKartyLabel">
+    <Component class="javax.swing.JLabel" name="cisloPermanentkyLabel">
       <Properties>
         <Property name="text" type="java.lang.String" value="&#x10c;&#xed;slo permanentky: "/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JLabel" name="zobrazCisloKartyLabel">
+    <Component class="javax.swing.JLabel" name="zobrazCisloPermanentkyLabel">
     </Component>
     <Component class="javax.swing.JLabel" name="zobrazKreditLabel">
     </Component>
-    <Component class="javax.swing.JTextField" name="cisloKartyTextField">
+    <Component class="javax.swing.JTextField" name="cisloPermanentkyTextField">
     </Component>
     <Component class="javax.swing.JLabel" name="zadatCisloLabel">
       <Properties>

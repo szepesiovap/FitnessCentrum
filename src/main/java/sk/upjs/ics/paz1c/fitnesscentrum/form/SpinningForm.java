@@ -43,7 +43,7 @@ public class SpinningForm extends javax.swing.JDialog {
         spinningMenuBar = new javax.swing.JMenuBar();
         rezervovatMenu = new javax.swing.JMenu();
         jednorazovyMenuItem = new javax.swing.JMenuItem();
-        kartouMenuItem = new javax.swing.JMenuItem();
+        permanentkouMenuItem = new javax.swing.JMenuItem();
         pridatSpinningMenu = new javax.swing.JMenu();
         zrusitSpinnigMenu = new javax.swing.JMenu();
         pridatInstruktoraMenu = new javax.swing.JMenu();
@@ -75,13 +75,13 @@ public class SpinningForm extends javax.swing.JDialog {
         });
         rezervovatMenu.add(jednorazovyMenuItem);
 
-        kartouMenuItem.setText("Permanetkou");
-        kartouMenuItem.addMouseListener(new java.awt.event.MouseAdapter() {
+        permanentkouMenuItem.setText("Permanetkou");
+        permanentkouMenuItem.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
-                kartouMenuItemMousePressed(evt);
+                permanentkouMenuItemMousePressed(evt);
             }
         });
-        rezervovatMenu.add(kartouMenuItem);
+        rezervovatMenu.add(permanentkouMenuItem);
 
         spinningMenuBar.add(rezervovatMenu);
 
@@ -155,7 +155,7 @@ public class SpinningForm extends javax.swing.JDialog {
         new PridatInstruktoraForm(this, true).setVisible(true);
     }//GEN-LAST:event_pridatInstruktoraMenuMousePressed
 
-    private void kartouMenuItemMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_kartouMenuItemMousePressed
+    private void permanentkouMenuItemMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_permanentkouMenuItemMousePressed
         try {
             Spinning spinning = (Spinning) spinningComboBox.getSelectedItem();
             if (spinning.getVolne() > 0) {
@@ -169,7 +169,7 @@ public class SpinningForm extends javax.swing.JDialog {
             JOptionPane.showMessageDialog(this, "Vyber spinning!");
         }
 
-    }//GEN-LAST:event_kartouMenuItemMousePressed
+    }//GEN-LAST:event_permanentkouMenuItemMousePressed
 
     private void jednorazovyMenuItemMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jednorazovyMenuItemMousePressed
         try {
@@ -229,8 +229,8 @@ public class SpinningForm extends javax.swing.JDialog {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuItem jednorazovyMenuItem;
-    private javax.swing.JMenuItem kartouMenuItem;
     private javax.swing.JMenu odhlasitZoSpinninguMenu;
+    private javax.swing.JMenuItem permanentkouMenuItem;
     private javax.swing.JMenu pridatInstruktoraMenu;
     private javax.swing.JMenu pridatSpinningMenu;
     private javax.swing.JScrollPane rezervacieScrollPane;

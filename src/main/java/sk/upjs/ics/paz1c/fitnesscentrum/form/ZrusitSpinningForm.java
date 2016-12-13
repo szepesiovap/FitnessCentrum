@@ -81,7 +81,8 @@ public class ZrusitSpinningForm extends javax.swing.JDialog {
 
     private void zrusitSpinningButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_zrusitSpinningButtonActionPerformed
         try {
-            Long idSpinningu = (Long) zoznamSpinningovTable.getModel().getValueAt(this.zoznamSpinningovTable.getSelectedRow(), ID_COLUMN);
+            Long idSpinningu = (Long) zoznamSpinningovTable.getModel()
+                    .getValueAt(this.zoznamSpinningovTable.getSelectedRow(), ID_COLUMN);
             spinning = spinningManager.dajSpinningSId(idSpinningu);
             if ((spinning.getKapacita() == spinning.getVolne()) || (spinning.getDatum().isBefore(LocalDateTime.now()))) {
                 Object[] options = {"Zmazať", "Zrušiť"};

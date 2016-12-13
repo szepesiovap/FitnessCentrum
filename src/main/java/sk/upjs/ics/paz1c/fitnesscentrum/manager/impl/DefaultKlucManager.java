@@ -23,7 +23,6 @@ public class DefaultKlucManager implements KlucManager {
         Kluc kluc = new Kluc();
         if (!("").equals(menoKluca)) {
             kluc.setMeno(menoKluca);
-            kluc.setZakaznik(null);
         } else {
             throw new PrazdnyRetazecException();
         }

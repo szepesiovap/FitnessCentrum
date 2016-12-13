@@ -34,7 +34,7 @@ public class NovyZakaznikForm extends javax.swing.JDialog {
         ulozitButton = new javax.swing.JButton();
         zrusitButton = new javax.swing.JButton();
         cisloKartyLabel = new javax.swing.JLabel();
-        cisloKartyTextField = new javax.swing.JTextField();
+        cisloPermanentkyTextField = new javax.swing.JTextField();
         kreditLabel = new javax.swing.JLabel();
         kreditComboBox = new javax.swing.JComboBox<>();
         permanentkaCheckBox = new javax.swing.JCheckBox();
@@ -60,7 +60,7 @@ public class NovyZakaznikForm extends javax.swing.JDialog {
 
         cisloKartyLabel.setText("Číslo permanentky: ");
 
-        cisloKartyTextField.setEnabled(false);
+        cisloPermanentkyTextField.setEnabled(false);
 
         kreditLabel.setText("Kredit: ");
 
@@ -94,7 +94,7 @@ public class NovyZakaznikForm extends javax.swing.JDialog {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(kreditComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(menoZakaznikaTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 220, Short.MAX_VALUE)
-                            .addComponent(cisloKartyTextField))))
+                            .addComponent(cisloPermanentkyTextField))))
                 .addGap(24, 24, 24))
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
@@ -113,7 +113,7 @@ public class NovyZakaznikForm extends javax.swing.JDialog {
                 .addGap(18, 18, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(cisloKartyLabel)
-                    .addComponent(cisloKartyTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(cisloPermanentkyTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(kreditLabel)
@@ -133,10 +133,10 @@ public class NovyZakaznikForm extends javax.swing.JDialog {
         Zakaznik zakaznik = new Zakaznik();
         zakaznik.setMeno(menoZakaznikaTextField.getText());
         if (permanentkaCheckBox.isSelected()) {
-            if ("".equals(cisloKartyTextField.getText())) {
-                JOptionPane.showMessageDialog(this, "Zadajte číslo karty!");
+            if ("".equals(cisloPermanentkyTextField.getText())) {
+                JOptionPane.showMessageDialog(this, "Zadajte číslo permanentky!");
             } else {
-                zakaznik.setCisloPermanentky(cisloKartyTextField.getText());
+                zakaznik.setCisloPermanentky(cisloPermanentkyTextField.getText());
                 zakaznik.setKredit(((Kredit) kreditComboBox.getSelectedItem()).getCena());
 
                 try {
@@ -149,7 +149,7 @@ public class NovyZakaznikForm extends javax.swing.JDialog {
                     }
 
                 } catch (DuplicateKeyException e) {
-                    JOptionPane.showMessageDialog(this, "Číslo karty už je priradené inému zákazníkovi!");
+                    JOptionPane.showMessageDialog(this, "Číslo permanentky už je priradené inému zákazníkovi!");
                 }
 
             }
@@ -163,17 +163,17 @@ public class NovyZakaznikForm extends javax.swing.JDialog {
 
     private void permanentkaCheckBoxMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_permanentkaCheckBoxMousePressed
         if (permanentkaCheckBox.isSelected()) {
-            cisloKartyTextField.setEnabled(false);
+            cisloPermanentkyTextField.setEnabled(false);
             kreditComboBox.setEnabled(false);
         } else {
-            cisloKartyTextField.setEnabled(true);
+            cisloPermanentkyTextField.setEnabled(true);
             kreditComboBox.setEnabled(true);
         }
     }//GEN-LAST:event_permanentkaCheckBoxMousePressed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel cisloKartyLabel;
-    private javax.swing.JTextField cisloKartyTextField;
+    private javax.swing.JTextField cisloPermanentkyTextField;
     private javax.swing.JComboBox<Kredit> kreditComboBox;
     private javax.swing.JLabel kreditLabel;
     private javax.swing.JLabel menoZakaznikaLabel;
