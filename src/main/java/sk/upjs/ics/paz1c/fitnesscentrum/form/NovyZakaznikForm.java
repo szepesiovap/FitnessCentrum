@@ -40,7 +40,7 @@ public class NovyZakaznikForm extends javax.swing.JDialog {
         permanentkaCheckBox = new javax.swing.JCheckBox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("Nový recepčný");
+        setTitle("Nový zákazník");
 
         menoZakaznikaLabel.setText("Meno: ");
 
@@ -126,26 +126,34 @@ public class NovyZakaznikForm extends javax.swing.JDialog {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void ulozitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ulozitButtonActionPerformed
         Zakaznik zakaznik = new Zakaznik();
         zakaznik.setMeno(menoZakaznikaTextField.getText());
         if (permanentkaCheckBox.isSelected()) {
-            zakaznik.setCisloPermanentky(cisloKartyTextField.getText());
-            zakaznik.setKredit(((Kredit) kreditComboBox.getSelectedItem()).getCena());
-        }
-        try {
-            if ("".equals(menoZakaznikaTextField.getText())) {
-                JOptionPane.showMessageDialog(this, "Zadajte meno zákazníka!");
+            if ("".equals(cisloKartyTextField.getText())) {
+                JOptionPane.showMessageDialog(this, "Zadajte číslo karty!");
             } else {
-                zakaznikManager.pridajZakaznika(zakaznik);
-                JOptionPane.showMessageDialog(this, "Zákazník " + zakaznik.getMeno() + " bol uložený!");
-                this.dispose();
+                zakaznik.setCisloPermanentky(cisloKartyTextField.getText());
+                zakaznik.setKredit(((Kredit) kreditComboBox.getSelectedItem()).getCena());
+
+                try {
+                    if ("".equals(menoZakaznikaTextField.getText())) {
+                        JOptionPane.showMessageDialog(this, "Zadajte meno zákazníka!");
+                    } else {
+                        zakaznikManager.pridajZakaznika(zakaznik);
+                        JOptionPane.showMessageDialog(this, "Zákazník " + zakaznik.getMeno() + " bol uložený!");
+                        this.dispose();
+                    }
+
+                } catch (DuplicateKeyException e) {
+                    JOptionPane.showMessageDialog(this, "Číslo karty už je priradené inému zákazníkovi!");
+                }
+
             }
 
-        } catch (DuplicateKeyException e) {
-            JOptionPane.showMessageDialog(this, "Číslo karty už je priradené inému zákazníkovi!");
         }
     }//GEN-LAST:event_ulozitButtonActionPerformed
 

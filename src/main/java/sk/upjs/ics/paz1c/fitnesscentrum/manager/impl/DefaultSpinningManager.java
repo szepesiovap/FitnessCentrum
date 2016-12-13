@@ -6,6 +6,7 @@ import java.util.List;
 import sk.upjs.ics.paz1c.fitnesscentrum.ObjectFactory;
 import sk.upjs.ics.paz1c.fitnesscentrum.dao.RezervaciaDao;
 import sk.upjs.ics.paz1c.fitnesscentrum.dao.SpinningDao;
+import sk.upjs.ics.paz1c.fitnesscentrum.dao.VstupneDao;
 import sk.upjs.ics.paz1c.fitnesscentrum.dao.ZakaznikDao;
 import sk.upjs.ics.paz1c.fitnesscentrum.entity.Rezervacia;
 import sk.upjs.ics.paz1c.fitnesscentrum.entity.Spinning;
@@ -17,7 +18,8 @@ public class DefaultSpinningManager implements SpinningManager {
     private final ZakaznikDao zakaznikDao = ObjectFactory.INSTANCE.getZakaznikDao();
     private final SpinningDao spinningDao = ObjectFactory.INSTANCE.getSpinningDao();
     private final RezervaciaDao rezervaciaDao = ObjectFactory.INSTANCE.getRezervaciaDao();
-
+    private final VstupneDao vstupneDao = ObjectFactory.INSTANCE.getVstupneDao();
+    
     @Override
     public void rezervovatSpinning(Rezervacia rezervacia) {
         rezervaciaDao.pridajRezervaciu(rezervacia);
@@ -27,7 +29,7 @@ public class DefaultSpinningManager implements SpinningManager {
     @Override
     public void rezervovatSpinningKartou(Spinning spinning, Zakaznik zakaznik) throws NedostatocnyKreditException {
         double SUMA = ObjectFactory.INSTANCE.getVstupneDao().dajCeny().getCenaSpinnigu();
-        if (zakaznik.getKredit() <= SUMA) {
+        if (zakaznik.getKredit() < SUMA) {
             throw new NedostatocnyKreditException();
         } else {
             Rezervacia rezervacia = new Rezervacia();
@@ -47,6 +49,8 @@ public class DefaultSpinningManager implements SpinningManager {
 
     @Override
     public void odhlasitZoSpinningu(Rezervacia rezervacia, Spinning spinning) {
+        double SUMA = vstupneDao.dajCeny().getCenaSpinnigu();
+        zakaznikDao.dobiKreditZakaznikovi(rezervacia.getZakaznik(), SUMA);
         rezervaciaDao.odstranRezervacia(rezervacia);
         spinningDao.odrezervujSpinning(spinning);
     }

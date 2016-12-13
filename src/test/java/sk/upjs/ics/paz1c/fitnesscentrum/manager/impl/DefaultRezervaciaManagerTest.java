@@ -9,10 +9,6 @@ import sk.upjs.ics.paz1c.fitnesscentrum.entity.Rezervacia;
 import sk.upjs.ics.paz1c.fitnesscentrum.entity.Spinning;
 import sk.upjs.ics.paz1c.fitnesscentrum.manager.RezervaciaManager;
 
-/**
- *
- * @author Marcela
- */
 public class DefaultRezervaciaManagerTest extends PripravaNaTestovanie {
 
     private final RezervaciaManager rezervaciaManager = ObjectFactory.INSTANCE.getRezervaciaManager();

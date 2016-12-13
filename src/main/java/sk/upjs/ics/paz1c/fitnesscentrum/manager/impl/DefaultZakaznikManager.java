@@ -58,7 +58,7 @@ public class DefaultZakaznikManager implements ZakaznikManager {
     @Override
     public void prichodKartouZakaznika(Zakaznik zakaznik, Kluc kluc) throws NedostatocnyKreditException {
         double SUMA = ObjectFactory.INSTANCE.getVstupneManager().dajCeny().getCenaVstupneho();
-        if (zakaznik.getKredit() <= SUMA) {
+        if (zakaznik.getKredit() < SUMA) {
             throw new NedostatocnyKreditException();
         } else {
             zakaznikDao.stiahniKreditZakaznikovi(zakaznik, SUMA);

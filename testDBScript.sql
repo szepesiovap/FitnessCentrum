@@ -165,9 +165,9 @@ INSERT INTO `testFitnesscentrum`.`spinning` (`datum`, `kapacita`, `volne`,`id_in
 INSERT INTO `testFitnesscentrum`.`spinning` (`datum`, `kapacita`, `volne`,`id_instruktora`) VALUES ('2016-12-25 16:00:00', '5', '5', '1');
 INSERT INTO `testFitnesscentrum`.`spinning` (`datum`, `kapacita`, `volne`,`id_instruktora`) VALUES ('2016-12-05 17:00:00', '10', '10', '1');
 
-INSERT INTO `testFitnesscentrum`.`rezervacia` (`id_spinning`, `id_zakaznik`) VALUES (1,2);
-INSERT INTO `testFitnesscentrum`.`rezervacia` (`id_spinning`, `id_zakaznik`) VALUES (1,3);
-INSERT INTO `testFitnesscentrum`.`rezervacia` (`id_spinning`, `id_zakaznik`) VALUES (2,1);
+INSERT INTO `testFitnesscentrum`.`rezervacia` (`id_spinning`, `id_zakaznik`, `cas_rezervacie`) VALUES (1,2,'2016-12-24 15:00:00');
+INSERT INTO `testFitnesscentrum`.`rezervacia` (`id_spinning`, `id_zakaznik`, `cas_rezervacie`) VALUES (1,3,'2016-12-23 15:00:00');
+INSERT INTO `testFitnesscentrum`.`rezervacia` (`id_spinning`, `id_zakaznik`, `cas_rezervacie`) VALUES (2,1,'2016-12-25 15:00:00');
 
 
 

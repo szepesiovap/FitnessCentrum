@@ -210,7 +210,7 @@ public class SpinningForm extends javax.swing.JDialog {
     }//GEN-LAST:event_odhlasitZoSpinninguMenuMousePressed
 
     private void zrusitSpinnigMenuMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_zrusitSpinnigMenuMousePressed
-        new ZmazatSpinningForm().setVisible(true);
+        new ZrusitSpinningForm().setVisible(true);
         aktualizovatSpinningy();
     }//GEN-LAST:event_zrusitSpinnigMenuMousePressed
 

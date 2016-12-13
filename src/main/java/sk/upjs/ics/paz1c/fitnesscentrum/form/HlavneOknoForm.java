@@ -1,5 +1,6 @@
 package sk.upjs.ics.paz1c.fitnesscentrum.form;
 
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import sk.upjs.ics.paz1c.fitnesscentrum.ObjectFactory;
 import sk.upjs.ics.paz1c.fitnesscentrum.manager.ZakaznikManager;
@@ -109,7 +110,7 @@ public final class HlavneOknoForm extends javax.swing.JFrame {
         });
         hlavneOknoMenuBar.add(zoznamMenu);
 
-        novyMenu.setText("Nový ");
+        novyMenu.setText("Nový zákazník ");
         novyMenu.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 novyMenuMousePressed(evt);
@@ -220,7 +221,7 @@ public final class HlavneOknoForm extends javax.swing.JFrame {
     }//GEN-LAST:event_prichodKartouMenuItemMousePressed
 
     private void zoznamMenuMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_zoznamMenuMousePressed
-        new ZoznamForm(this).setVisible(true);
+        new ZoznamZakaznikovForm(this, true).setVisible(true);
     }//GEN-LAST:event_zoznamMenuMousePressed
 
     private void zmenaHeslaMenuMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_zmenaHeslaMenuMousePressed

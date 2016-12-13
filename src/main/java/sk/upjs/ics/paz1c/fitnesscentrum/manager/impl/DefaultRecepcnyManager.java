@@ -43,7 +43,7 @@ public class DefaultRecepcnyManager implements RecepcnyManager {
             }
 
         } else {
-            throw new NevalidnyVstupException("Nové heslo nemôže byť prázdne!");
+            throw new NevalidnyVstupException("Heslo nemôže byť prázdne!");
         }
 
         ObjectFactory.INSTANCE.getRecepcnyDao()

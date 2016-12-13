@@ -7,7 +7,7 @@ import sk.upjs.ics.paz1c.fitnesscentrum.manager.SpinningManager;
 import sk.upjs.ics.paz1c.fitnesscentrum.model.SpinningTableModel;
 import sk.upjs.ics.paz1c.fitnesscentrum.entity.Spinning;
 
-public class ZmazatSpinningForm extends javax.swing.JDialog {
+public class ZrusitSpinningForm extends javax.swing.JDialog {
 
     private static final int ID_COLUMN = 4;
     private final SpinningManager spinningManager = ObjectFactory.INSTANCE.getSpinningManager();
@@ -19,12 +19,12 @@ public class ZmazatSpinningForm extends javax.swing.JDialog {
      * @param parent
      * @param modal
      */
-    public ZmazatSpinningForm(java.awt.Frame parent, boolean modal) {
+    public ZrusitSpinningForm(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
     }
 
-    public ZmazatSpinningForm() {
+    public ZrusitSpinningForm() {
         super(new javax.swing.JFrame(), true);
         initComponents();
     }
@@ -61,7 +61,7 @@ public class ZmazatSpinningForm extends javax.swing.JDialog {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(277, Short.MAX_VALUE)
+                .addContainerGap(387, Short.MAX_VALUE)
                 .addComponent(zrusitSpinningButton)
                 .addContainerGap())
             .addComponent(zoznamSpinningovScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)

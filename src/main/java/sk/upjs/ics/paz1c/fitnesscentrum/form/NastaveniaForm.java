@@ -25,7 +25,7 @@ public class NastaveniaForm extends javax.swing.JDialog {
     private final RecepcnyManager recepcnyManager = ObjectFactory.INSTANCE.getRecepcnyManager();
 
     private final VstupneManager vstupneManager = ObjectFactory.INSTANCE.getVstupneManager();
-    
+
     private static final int ID_COLUMN_KREDIT = 2;
     private static final int ID_COLUMN_RECEPCNY = 2;
     private static final int ID_COLUMN_KLUC = 0;
@@ -316,8 +316,8 @@ public class NastaveniaForm extends javax.swing.JDialog {
         try {
             double novaCenaVstupneho = Double.parseDouble(cenaVstupnehoTexttField.getText());
             double novaCenaSpinningu = Double.parseDouble(cenaSpinninguTextField.getText());
-            vstupneManager.nastavCeny(novaCenaVstupneho,novaCenaSpinningu);
-            
+            vstupneManager.nastavCeny(novaCenaVstupneho, novaCenaSpinningu);
+
             JOptionPane.showMessageDialog(this, "Cena bola zmenená!");
             aktualizovatVstupneTabbedPane();
         } catch (NumberFormatException e) {
@@ -408,7 +408,7 @@ public class NastaveniaForm extends javax.swing.JDialog {
         } catch (NumberFormatException e) {
             JOptionPane.showMessageDialog(this, "Nesprávne zadaný kredit!");
         } catch (DuplicateKeyException e) {
-            JOptionPane.showMessageDialog(this, "Kredit už existuje!");
+            JOptionPane.showMessageDialog(this, "Kredit " + kredit.getNazov() + " už existuje!");
         }
 
     }//GEN-LAST:event_ulozitKreditButtonActionPerformed
@@ -421,7 +421,7 @@ public class NastaveniaForm extends javax.swing.JDialog {
         } catch (PrazdnyRetazecException e) {
             JOptionPane.showMessageDialog(this, "Zadaj meno kľúča!");
         } catch (DuplicateKeyException e) {
-            JOptionPane.showMessageDialog(this, "Kľúč už existuje!");
+            JOptionPane.showMessageDialog(this, "Kľúč s menom " + novyKlucTextField.getText() + " už existuje!");
         }
 
     }//GEN-LAST:event_ulozitKlucButtonActionPerformed

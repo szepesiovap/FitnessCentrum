@@ -66,7 +66,7 @@
         </Menu>
         <Menu class="javax.swing.JMenu" name="novyMenu">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Nov&#xfd; "/>
+            <Property name="text" type="java.lang.String" value="Nov&#xfd; z&#xe1;kazn&#xed;k "/>
           </Properties>
           <Events>
             <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="novyMenuMousePressed"/>

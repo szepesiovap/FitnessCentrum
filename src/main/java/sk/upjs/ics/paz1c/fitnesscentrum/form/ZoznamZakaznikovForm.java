@@ -2,27 +2,22 @@ package sk.upjs.ics.paz1c.fitnesscentrum.form;
 
 import javax.swing.JOptionPane;
 import sk.upjs.ics.paz1c.fitnesscentrum.ObjectFactory;
-import sk.upjs.ics.paz1c.fitnesscentrum.manager.ZakaznikManager;
 import sk.upjs.ics.paz1c.fitnesscentrum.entity.Zakaznik;
 import sk.upjs.ics.paz1c.fitnesscentrum.exception.PritomnyZakaznikException;
+import sk.upjs.ics.paz1c.fitnesscentrum.manager.ZakaznikManager;
 import sk.upjs.ics.paz1c.fitnesscentrum.model.ZakaznikTableModel;
 
-public final class ZoznamForm extends javax.swing.JFrame {
+public class ZoznamZakaznikovForm extends javax.swing.JDialog {
 
-    private static HlavneOknoForm hlavneOkno;
     private final ZakaznikManager zakaznikManager = ObjectFactory.INSTANCE.getZakaznikManager();
     private static final int ID_COLUMN = 5;
-
+    
     /**
-     * Creates new form ZoznamForm
-     *
-     * @param hlavneOkno
+     * Creates new form ZoznamZakaznikovForm
      */
-    public ZoznamForm(HlavneOknoForm hlavneOkno) {
-        ZoznamForm.hlavneOkno = hlavneOkno;
-        hlavneOkno.setEnabled(false);
+    public ZoznamZakaznikovForm(java.awt.Frame parent, boolean modal) {
+        super(parent, modal);
         initComponents();
-        aktualizovatZoznamZakaznikov();
     }
 
     /**
@@ -42,13 +37,7 @@ public final class ZoznamForm extends javax.swing.JFrame {
         hladatButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("Zoznam Zákazníkov");
-        setResizable(false);
-        addWindowListener(new java.awt.event.WindowAdapter() {
-            public void windowClosed(java.awt.event.WindowEvent evt) {
-                formWindowClosed(evt);
-            }
-        });
+        setTitle("Zoznam zákazníkov");
 
         zoznamZakaznikovTable.setModel(new ZakaznikTableModel(""));
         zoznamZakaznikovScrollPane.setViewportView(zoznamZakaznikovTable);
@@ -77,7 +66,7 @@ public final class ZoznamForm extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(hladatPodlaMenaLabel)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(hladatPodlaMenaTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 465, Short.MAX_VALUE)
+                .addComponent(hladatPodlaMenaTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 457, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(hladatButton, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -101,11 +90,6 @@ public final class ZoznamForm extends javax.swing.JFrame {
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
-
-    private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
-        hlavneOkno.aktualizovatZoznamPritomnych();
-        hlavneOkno.setEnabled(true);
-    }//GEN-LAST:event_formWindowClosed
 
     private void zmazatButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_zmazatButtonActionPerformed
         try {
@@ -136,7 +120,6 @@ public final class ZoznamForm extends javax.swing.JFrame {
         ZakaznikTableModel model = (ZakaznikTableModel) zoznamZakaznikovTable.getModel();
         model.aktualizovat();
     }
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton hladatButton;
     private javax.swing.JLabel hladatPodlaMenaLabel;
