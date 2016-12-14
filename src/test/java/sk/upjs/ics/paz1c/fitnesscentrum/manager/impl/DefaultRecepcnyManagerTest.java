@@ -22,8 +22,11 @@ public class DefaultRecepcnyManagerTest extends PripravaNaTestovanie{
     @Test
     public void testPridajRecepcneho() throws Exception {
         Recepcny recepcny = new Recepcny();
+        recepcny.setMeno("Julius");
+        recepcny.setLogin("julo");
+        recepcny.setHeslo("0000");
         int povodnaSize = recepcnyDao.dajVsetkychRecepcnych().size();
-        recepcnyManager.pridajRecepcneho("Julius", "julo", "0000", "0000");
+        recepcnyManager.pridajRecepcneho(recepcny);
         int novaSize = recepcnyDao.dajVsetkychRecepcnych().size();
         assertEquals(povodnaSize + 1, novaSize);
     }

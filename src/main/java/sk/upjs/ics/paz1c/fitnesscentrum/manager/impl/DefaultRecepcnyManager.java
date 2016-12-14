@@ -8,6 +8,10 @@ import java.util.UUID;
 import sk.upjs.ics.paz1c.fitnesscentrum.ObjectFactory;
 import sk.upjs.ics.paz1c.fitnesscentrum.dao.RecepcnyDao;
 import sk.upjs.ics.paz1c.fitnesscentrum.entity.Recepcny;
+import sk.upjs.ics.paz1c.fitnesscentrum.exception.DuplikovanyLoginException;
+import sk.upjs.ics.paz1c.fitnesscentrum.exception.PrazdneHesloException;
+import sk.upjs.ics.paz1c.fitnesscentrum.exception.PrazdneMenoException;
+import sk.upjs.ics.paz1c.fitnesscentrum.exception.PrazdnyRetazecException;
 import sk.upjs.ics.paz1c.fitnesscentrum.manager.HesloManager;
 
 public class DefaultRecepcnyManager implements RecepcnyManager {
@@ -17,37 +21,26 @@ public class DefaultRecepcnyManager implements RecepcnyManager {
     private final RecepcnyDao recepcnyDao = ObjectFactory.INSTANCE.getRecepcnyDao();
 
     @Override
-    public void pridajRecepcneho(String meno, String login, String noveHeslo, String noveHesloZnova) throws NevalidnyVstupException {
-        recepcny = new Recepcny();
+    public void pridajRecepcneho(Recepcny recepcny) throws DuplikovanyLoginException,PrazdnyRetazecException, PrazdneMenoException, PrazdneHesloException {
 
-        if (!("").equals(meno)) {
-            recepcny.setMeno(meno);
-            if (!("").equals(login)) {
-                recepcny.setLogin(login);
-            } else {
-                throw new NevalidnyVstupException("Zadajte login!");
-            }
-        } else {
-            throw new NevalidnyVstupException("Zadajte meno!");
+        if (recepcny.getMeno().equals("")) {
+            throw new PrazdneMenoException();
+        }
+        if (recepcny.getLogin().equals("")) {
+            throw new PrazdnyRetazecException();
         }
 
-        if (!("").equals(noveHeslo)) {
-            if (hesloManager.overZhoduHesiel(noveHesloZnova, noveHeslo)) {
-                String salt = UUID.randomUUID().toString();
-                recepcny.setSalt(salt);
-
-                String hashHeslo = hesloManager.zahesujHeslo(salt, noveHeslo);
-                recepcny.setHeslo(hashHeslo);
-            } else {
-                throw new NevalidnyVstupException("Heslo sa nezhoduje!");
-            }
-
-        } else {
-            throw new NevalidnyVstupException("Heslo nemôže byť prázdne!");
+        if (recepcny.getHeslo().equals("")) {
+            throw new PrazdneHesloException();
         }
 
-        ObjectFactory.INSTANCE.getRecepcnyDao()
-                .pridajRecepcneho(recepcny);
+        String salt = UUID.randomUUID().toString();
+        recepcny.setSalt(salt);
+
+        String hashHeslo = hesloManager.zahesujHeslo(salt, recepcny.getHeslo());
+        recepcny.setHeslo(hashHeslo);
+        recepcnyDao.pridajRecepcneho(recepcny);
+
     }
 
     @Override

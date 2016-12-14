@@ -2,7 +2,11 @@ package sk.upjs.ics.paz1c.fitnesscentrum.form;
 
 import javax.swing.JOptionPane;
 import sk.upjs.ics.paz1c.fitnesscentrum.ObjectFactory;
-import sk.upjs.ics.paz1c.fitnesscentrum.exception.NevalidnyVstupException;
+import sk.upjs.ics.paz1c.fitnesscentrum.entity.Recepcny;
+import sk.upjs.ics.paz1c.fitnesscentrum.exception.DuplikovanyLoginException;
+import sk.upjs.ics.paz1c.fitnesscentrum.exception.PrazdneHesloException;
+import sk.upjs.ics.paz1c.fitnesscentrum.exception.PrazdneMenoException;
+import sk.upjs.ics.paz1c.fitnesscentrum.exception.PrazdnyRetazecException;
 import sk.upjs.ics.paz1c.fitnesscentrum.manager.RecepcnyManager;
 
 public class NovyRecepcnyForm extends javax.swing.JDialog {
@@ -134,19 +138,31 @@ public class NovyRecepcnyForm extends javax.swing.JDialog {
     }//GEN-LAST:event_zrusitButtonActionPerformed
 
     private void ulozitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ulozitButtonActionPerformed
-        try {
-            String meno = menoTextField.getText();
-            String login = loginTextField.getText();
-            String noveHeslo = hesloPasswordField.getText();
-            String noveHesloZnova = hesloZnovaPasswordField.getText();
-            
-            recepcnyManager.pridajRecepcneho(meno, login, noveHeslo, noveHesloZnova);
-            JOptionPane.showMessageDialog(this, "Recepčný " + meno +" s loginom " + login + " bol uložený!");
-            dispose();
-        } catch (NevalidnyVstupException e) {
-            JOptionPane.showMessageDialog(this, e.getMessage());
-        }
 
+        Recepcny recepcny = new Recepcny();
+        recepcny.setMeno(menoTextField.getText());
+        recepcny.setLogin(loginTextField.getText());
+        recepcny.setHeslo(hesloPasswordField.getText());
+        String noveHeslo = hesloPasswordField.getText();
+        String noveHesloZnova = hesloZnovaPasswordField.getText();
+
+        if (noveHeslo.equals(noveHesloZnova)) {
+            try {
+                recepcnyManager.pridajRecepcneho(recepcny);
+                JOptionPane.showMessageDialog(this, "Recepčný " + recepcny.getMeno() + " s loginom " + recepcny.getLogin() + " bol uložený!");
+                dispose();
+            } catch (PrazdnyRetazecException ex) {
+                JOptionPane.showMessageDialog(this, "Zadaj login!");
+            } catch (PrazdneHesloException ex) {
+                JOptionPane.showMessageDialog(this, "Zadaj heslo!");
+            } catch (PrazdneMenoException ex) {
+                JOptionPane.showMessageDialog(this, "Zadaj meno!");
+            } catch (DuplikovanyLoginException ex) {
+                JOptionPane.showMessageDialog(this, "Zvolený login je už použitý!");
+            }
+        } else {
+            JOptionPane.showMessageDialog(this, "Heslá sa nezhodujú!");
+        }
     }//GEN-LAST:event_ulozitButtonActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

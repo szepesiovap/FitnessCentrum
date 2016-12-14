@@ -1,6 +1,5 @@
 package sk.upjs.ics.paz1c.fitnesscentrum.dao.impl;
 
-import sk.upjs.ics.paz1c.fitnesscentrum.exception.NevalidnyVstupException;
 import java.util.List;
 import org.springframework.dao.DuplicateKeyException;
 import org.springframework.dao.EmptyResultDataAccessException;
@@ -9,6 +8,7 @@ import sk.upjs.ics.paz1c.fitnesscentrum.ObjectFactory;
 import sk.upjs.ics.paz1c.fitnesscentrum.rowmapper.RecepcnyRowMapper;
 import sk.upjs.ics.paz1c.fitnesscentrum.dao.RecepcnyDao;
 import sk.upjs.ics.paz1c.fitnesscentrum.entity.Recepcny;
+import sk.upjs.ics.paz1c.fitnesscentrum.exception.DuplikovanyLoginException;
 
 public class MySQLRecepcnyDao implements RecepcnyDao {
 
@@ -61,12 +61,12 @@ public class MySQLRecepcnyDao implements RecepcnyDao {
     }
 
     @Override
-    public void pridajRecepcneho(Recepcny recepcny) throws NevalidnyVstupException {
+    public void pridajRecepcneho(Recepcny recepcny) throws DuplikovanyLoginException {
         String sql = "INSERT INTO recepcny (meno_priezvisko, login, heslo, salt) VALUES (?, ?, ?, ?)";
         try {
             jdbcTemplate.update(sql, recepcny.getMeno(), recepcny.getLogin(), recepcny.getHeslo(), recepcny.getSalt());
         } catch (DuplicateKeyException e) {
-            throw new NevalidnyVstupException("Zvolený login je už použitý!");
+            throw new DuplikovanyLoginException("Zvolený login je už použitý!");
         }
     }
 }

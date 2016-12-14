@@ -1,8 +1,8 @@
 package sk.upjs.ics.paz1c.fitnesscentrum.dao;
 
 import java.util.List;
-import sk.upjs.ics.paz1c.fitnesscentrum.exception.NevalidnyVstupException;
 import sk.upjs.ics.paz1c.fitnesscentrum.entity.Recepcny;
+import sk.upjs.ics.paz1c.fitnesscentrum.exception.DuplikovanyLoginException;
 
 public interface RecepcnyDao {
 
@@ -12,7 +12,7 @@ public interface RecepcnyDao {
 
     public List<Recepcny> dajVsetkychRecepcnych();
 
-    public void pridajRecepcneho(Recepcny recepcny) throws NevalidnyVstupException;
+    public void pridajRecepcneho(Recepcny recepcny) throws DuplikovanyLoginException;
 
     public void zmenaHeslaRecepcneho(Recepcny recepcny);
 
