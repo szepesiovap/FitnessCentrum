@@ -4,6 +4,7 @@ import javax.swing.JOptionPane;
 import sk.upjs.ics.paz1c.fitnesscentrum.ObjectFactory;
 import sk.upjs.ics.paz1c.fitnesscentrum.manager.InstruktorManager;
 import sk.upjs.ics.paz1c.fitnesscentrum.entity.Instruktor;
+import sk.upjs.ics.paz1c.fitnesscentrum.exception.PrazdnyRetazecException;
 
 public class PridatInstruktoraForm extends javax.swing.JDialog {
 
@@ -96,9 +97,13 @@ public class PridatInstruktoraForm extends javax.swing.JDialog {
     private void pridatButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pridatButtonActionPerformed
         Instruktor instruktor = new Instruktor();
         instruktor.setMeno(menoInstruktoraTextField.getText());
+        try {
         instruktorManager.pridajInstruktora(instruktor);
         JOptionPane.showMessageDialog(this, "Inštruktor " + instruktor.getMeno() + " bol pridaný!");
         dispose();
+        } catch (PrazdnyRetazecException e) {
+            JOptionPane.showMessageDialog(this, "Zadaj meno inštruktora!");
+        }
     }//GEN-LAST:event_pridatButtonActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

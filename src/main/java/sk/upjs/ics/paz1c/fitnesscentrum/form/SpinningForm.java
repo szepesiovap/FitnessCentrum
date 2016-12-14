@@ -196,7 +196,7 @@ public class SpinningForm extends javax.swing.JDialog {
             Rezervacia rezervacia = rezervaciaManager.dajRezervaciuSId(idRezervacie);
             Spinning spinning = (Spinning) spinningComboBox.getSelectedItem();
             Object[] options = {"Odhlásiť", "Zrušiť"};
-            if (JOptionPane.showOptionDialog(this, "Naozaj chcete odhlásiť zo spinningu zakaznika " + rezervacia.getZakaznik().getMeno() + "?",
+            if (JOptionPane.showOptionDialog(this, "Naozaj chcete odhlásiť zo spinningu zákazníka " + rezervacia.getZakaznik().getMeno() + "?",
                     "Odhlásiť zo spinningu",
                     JOptionPane.DEFAULT_OPTION, JOptionPane.PLAIN_MESSAGE, null,
                     options, options[0]) == JOptionPane.YES_OPTION) {
