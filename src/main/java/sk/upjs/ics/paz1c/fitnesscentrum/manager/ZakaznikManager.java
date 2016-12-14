@@ -6,7 +6,6 @@ import sk.upjs.ics.paz1c.fitnesscentrum.entity.Kluc;
 import sk.upjs.ics.paz1c.fitnesscentrum.entity.Zakaznik;
 import sk.upjs.ics.paz1c.fitnesscentrum.exception.NedostatocnyKreditException;
 import sk.upjs.ics.paz1c.fitnesscentrum.exception.NeexistujuciZakaznikException;
-import sk.upjs.ics.paz1c.fitnesscentrum.exception.PrazdneCisloPermanentkyException;
 import sk.upjs.ics.paz1c.fitnesscentrum.exception.PrazdnyRetazecException;
 import sk.upjs.ics.paz1c.fitnesscentrum.exception.PritomnyZakaznikException;
 
@@ -18,7 +17,7 @@ public interface ZakaznikManager {
 
     public Zakaznik dajZakaznikaSCislomPermanentky(String cisloPermanentky) throws NeexistujuciZakaznikException;
 
-    public void pridajZakaznika(Zakaznik zakaznik) throws DuplicateKeyException,PrazdnyRetazecException,PrazdneCisloPermanentkyException;
+    public void pridajZakaznika(Zakaznik zakaznik) throws DuplicateKeyException,PrazdnyRetazecException;
 
     public Zakaznik dajZakaznikaSId(Long idZakaznika);
 

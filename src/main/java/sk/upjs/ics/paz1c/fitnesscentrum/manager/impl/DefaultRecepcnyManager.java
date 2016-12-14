@@ -9,8 +9,6 @@ import sk.upjs.ics.paz1c.fitnesscentrum.ObjectFactory;
 import sk.upjs.ics.paz1c.fitnesscentrum.dao.RecepcnyDao;
 import sk.upjs.ics.paz1c.fitnesscentrum.entity.Recepcny;
 import sk.upjs.ics.paz1c.fitnesscentrum.exception.DuplikovanyLoginException;
-import sk.upjs.ics.paz1c.fitnesscentrum.exception.PrazdneHesloException;
-import sk.upjs.ics.paz1c.fitnesscentrum.exception.PrazdneMenoException;
 import sk.upjs.ics.paz1c.fitnesscentrum.exception.PrazdnyRetazecException;
 import sk.upjs.ics.paz1c.fitnesscentrum.manager.HesloManager;
 
@@ -21,17 +19,17 @@ public class DefaultRecepcnyManager implements RecepcnyManager {
     private final RecepcnyDao recepcnyDao = ObjectFactory.INSTANCE.getRecepcnyDao();
 
     @Override
-    public void pridajRecepcneho(Recepcny recepcny) throws DuplikovanyLoginException,PrazdnyRetazecException, PrazdneMenoException, PrazdneHesloException {
+    public void pridajRecepcneho(Recepcny recepcny) throws DuplikovanyLoginException,PrazdnyRetazecException {
 
         if (recepcny.getMeno().equals("")) {
-            throw new PrazdneMenoException();
+            throw new PrazdnyRetazecException("Zadaj meno!");
         }
         if (recepcny.getLogin().equals("")) {
-            throw new PrazdnyRetazecException();
+            throw new PrazdnyRetazecException("Zadaj login!");
         }
 
         if (recepcny.getHeslo().equals("")) {
-            throw new PrazdneHesloException();
+            throw new PrazdnyRetazecException("Zadaj heslo!");
         }
 
         String salt = UUID.randomUUID().toString();

@@ -5,7 +5,6 @@ import org.springframework.dao.DuplicateKeyException;
 import sk.upjs.ics.paz1c.fitnesscentrum.ObjectFactory;
 import sk.upjs.ics.paz1c.fitnesscentrum.entity.Kredit;
 import sk.upjs.ics.paz1c.fitnesscentrum.entity.Zakaznik;
-import sk.upjs.ics.paz1c.fitnesscentrum.exception.PrazdneCisloPermanentkyException;
 import sk.upjs.ics.paz1c.fitnesscentrum.exception.PrazdnyRetazecException;
 import sk.upjs.ics.paz1c.fitnesscentrum.manager.ZakaznikManager;
 import sk.upjs.ics.paz1c.fitnesscentrum.model.KreditComboBoxModel;
@@ -146,9 +145,7 @@ public class NovyZakaznikForm extends javax.swing.JDialog {
         } catch (DuplicateKeyException e) {
             JOptionPane.showMessageDialog(this, "Číslo karty už je priradené inému zákazníkovi!");
         } catch (PrazdnyRetazecException ex) {
-            JOptionPane.showMessageDialog(this, "Zadaj meno zákazníka!");
-        } catch (PrazdneCisloPermanentkyException ex) {
-            JOptionPane.showMessageDialog(this, "Zadaj číslo permanentky!");
+            JOptionPane.showMessageDialog(this, ex.getMessage());
         }
     }//GEN-LAST:event_ulozitButtonActionPerformed
 

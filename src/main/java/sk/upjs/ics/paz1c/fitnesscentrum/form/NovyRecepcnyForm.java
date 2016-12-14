@@ -4,8 +4,6 @@ import javax.swing.JOptionPane;
 import sk.upjs.ics.paz1c.fitnesscentrum.ObjectFactory;
 import sk.upjs.ics.paz1c.fitnesscentrum.entity.Recepcny;
 import sk.upjs.ics.paz1c.fitnesscentrum.exception.DuplikovanyLoginException;
-import sk.upjs.ics.paz1c.fitnesscentrum.exception.PrazdneHesloException;
-import sk.upjs.ics.paz1c.fitnesscentrum.exception.PrazdneMenoException;
 import sk.upjs.ics.paz1c.fitnesscentrum.exception.PrazdnyRetazecException;
 import sk.upjs.ics.paz1c.fitnesscentrum.manager.RecepcnyManager;
 
@@ -152,11 +150,7 @@ public class NovyRecepcnyForm extends javax.swing.JDialog {
                 JOptionPane.showMessageDialog(this, "Recepčný " + recepcny.getMeno() + " s loginom " + recepcny.getLogin() + " bol uložený!");
                 dispose();
             } catch (PrazdnyRetazecException ex) {
-                JOptionPane.showMessageDialog(this, "Zadaj login!");
-            } catch (PrazdneHesloException ex) {
-                JOptionPane.showMessageDialog(this, "Zadaj heslo!");
-            } catch (PrazdneMenoException ex) {
-                JOptionPane.showMessageDialog(this, "Zadaj meno!");
+                JOptionPane.showMessageDialog(this, ex.getMessage());
             } catch (DuplikovanyLoginException ex) {
                 JOptionPane.showMessageDialog(this, "Zvolený login je už použitý!");
             }

@@ -10,6 +10,8 @@ import sk.upjs.ics.paz1c.fitnesscentrum.dao.impl.PripravaNaTestovanie;
 import sk.upjs.ics.paz1c.fitnesscentrum.entity.Kluc;
 import sk.upjs.ics.paz1c.fitnesscentrum.entity.Zakaznik;
 import sk.upjs.ics.paz1c.fitnesscentrum.exception.NedostatocnyKreditException;
+import sk.upjs.ics.paz1c.fitnesscentrum.exception.NeexistujuciZakaznikException;
+import sk.upjs.ics.paz1c.fitnesscentrum.exception.PrazdnyRetazecException;
 import sk.upjs.ics.paz1c.fitnesscentrum.exception.PritomnyZakaznikException;
 import sk.upjs.ics.paz1c.fitnesscentrum.manager.KlucManager;
 import sk.upjs.ics.paz1c.fitnesscentrum.manager.VstupneManager;
@@ -26,9 +28,10 @@ public class DefaultZakaznikManagerTest extends PripravaNaTestovanie {
 
     /**
      * Test of zmazZakaznika method, of class DefaultZakaznikManager.
+     * @throws sk.upjs.ics.paz1c.fitnesscentrum.exception.PritomnyZakaznikException
      */
     @Test
-    public void testZmazZakaznika() throws Exception {
+    public void testZmazZakaznika() throws PritomnyZakaznikException {
         Long id = 4L;
         Zakaznik zakaznik = zakaznikManager.dajZakaznikaSId(id);
         zakaznikManager.zmazZakaznika(zakaznik);
@@ -87,9 +90,10 @@ public class DefaultZakaznikManagerTest extends PripravaNaTestovanie {
     /**
      * Test of dajZakaznikaSCislomPermanentky method, of class
      * DefaultZakaznikManager.
+     * @throws sk.upjs.ics.paz1c.fitnesscentrum.exception.NeexistujuciZakaznikException
      */
     @Test
-    public void testDajZakaznikaSCislomPermanentky() throws Exception {
+    public void testDajZakaznikaSCislomPermanentky() throws NeexistujuciZakaznikException {
         String cisloPermanentky = "111";
         Zakaznik zakaznik = zakaznikManager.dajZakaznikaSCislomPermanentky(cisloPermanentky);
         assertTrue(zakaznik.getId() == 2L);
@@ -97,9 +101,10 @@ public class DefaultZakaznikManagerTest extends PripravaNaTestovanie {
 
     /**
      * Test of pridajZakaznika method, of class DefaultZakaznikManager.
+     * @throws sk.upjs.ics.paz1c.fitnesscentrum.exception.PrazdnyRetazecException
      */
     @Test
-    public void testPridajZakaznika() {
+    public void testPridajZakaznika() throws DuplicateKeyException, PrazdnyRetazecException {
         int povodnaSize = zakaznikManager.dajVsetkychZakaznikov().size();
         Zakaznik zakaznik = new Zakaznik();
         zakaznik.setMeno("Adam");
@@ -121,6 +126,34 @@ public class DefaultZakaznikManagerTest extends PripravaNaTestovanie {
         int novaSize2 = zakaznikManager.dajVsetkychZakaznikov().size();
         // testuje, ze zakaznik sa naozaj NEPRIDAL
         assertEquals(povodnaSize2, novaSize2);
+        
+         //skuska pridania zakaznika bez mena.
+        int povodnaSize3 = zakaznikManager.dajVsetkychZakaznikov().size();
+        Zakaznik zakaznik3 = new Zakaznik();
+        zakaznik3.setMeno("");
+        zakaznik3.setCisloPermanentky("1");
+        try {
+            zakaznikManager.pridajZakaznika(zakaznik3);
+        } catch (PrazdnyRetazecException e) {
+            //Ok
+        }
+        int novaSize3 = zakaznikManager.dajVsetkychZakaznikov().size();
+        // testuje, ze zakaznik sa naozaj NEPRIDAL
+        assertEquals(povodnaSize3, novaSize3);
+        
+        //skuska pridania zakaznika s pernamentkou bez cisla.
+        int povodnaSize4 = zakaznikManager.dajVsetkychZakaznikov().size();
+        Zakaznik zakaznik4 = new Zakaznik();
+        zakaznik4.setMeno("aaa");
+        zakaznik4.setCisloPermanentky("");
+        try {
+            zakaznikManager.pridajZakaznika(zakaznik4);
+        } catch (PrazdnyRetazecException e) {
+            //Ok
+        }
+        int novaSize4 = zakaznikManager.dajVsetkychZakaznikov().size();
+        // testuje, ze zakaznik sa naozaj NEPRIDAL
+        assertEquals(povodnaSize4, novaSize4);
 
     }
 
