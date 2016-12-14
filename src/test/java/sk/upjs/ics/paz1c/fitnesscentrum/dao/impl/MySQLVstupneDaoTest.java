@@ -8,7 +8,7 @@ import sk.upjs.ics.paz1c.fitnesscentrum.entity.Vstupne;
 
 public class MySQLVstupneDaoTest extends PripravaNaTestovanie {
 
-    private static final VstupneDao vstupneDao = ObjectFactory.INSTANCE.getVstupneDao();
+    private final VstupneDao vstupneDao = ObjectFactory.INSTANCE.getVstupneDao();
 
     /**
      * Test of updateCenaVstupneho method, of class MySQLVstupneDao.

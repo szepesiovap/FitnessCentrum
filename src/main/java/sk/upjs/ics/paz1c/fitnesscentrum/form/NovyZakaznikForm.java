@@ -1,10 +1,14 @@
 package sk.upjs.ics.paz1c.fitnesscentrum.form;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import org.springframework.dao.DuplicateKeyException;
 import sk.upjs.ics.paz1c.fitnesscentrum.ObjectFactory;
 import sk.upjs.ics.paz1c.fitnesscentrum.entity.Kredit;
 import sk.upjs.ics.paz1c.fitnesscentrum.entity.Zakaznik;
+import sk.upjs.ics.paz1c.fitnesscentrum.exception.PrazdneCisloPermanentkyException;
+import sk.upjs.ics.paz1c.fitnesscentrum.exception.PrazdnyRetazecException;
 import sk.upjs.ics.paz1c.fitnesscentrum.manager.ZakaznikManager;
 import sk.upjs.ics.paz1c.fitnesscentrum.model.KreditComboBoxModel;
 
@@ -132,28 +136,21 @@ public class NovyZakaznikForm extends javax.swing.JDialog {
     private void ulozitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ulozitButtonActionPerformed
         Zakaznik zakaznik = new Zakaznik();
         zakaznik.setMeno(menoZakaznikaTextField.getText());
+
         if (permanentkaCheckBox.isSelected()) {
-            if ("".equals(cisloPermanentkyTextField.getText())) {
-                JOptionPane.showMessageDialog(this, "Zadajte číslo permanentky!");
-            } else {
-                zakaznik.setCisloPermanentky(cisloPermanentkyTextField.getText());
-                zakaznik.setKredit(((Kredit) kreditComboBox.getSelectedItem()).getCena());
-
-                try {
-                    if ("".equals(menoZakaznikaTextField.getText())) {
-                        JOptionPane.showMessageDialog(this, "Zadajte meno zákazníka!");
-                    } else {
-                        zakaznikManager.pridajZakaznika(zakaznik);
-                        JOptionPane.showMessageDialog(this, "Zákazník " + zakaznik.getMeno() + " bol uložený!");
-                        this.dispose();
-                    }
-
-                } catch (DuplicateKeyException e) {
-                    JOptionPane.showMessageDialog(this, "Číslo permanentky už je priradené inému zákazníkovi!");
-                }
-
-            }
-
+            zakaznik.setCisloPermanentky(cisloPermanentkyTextField.getText());
+            zakaznik.setKredit(((Kredit) kreditComboBox.getSelectedItem()).getCena());
+        }
+        try {
+            zakaznikManager.pridajZakaznika(zakaznik);
+            JOptionPane.showMessageDialog(this, "Zákazník " + zakaznik.getMeno() + " bol uložený!");
+            dispose();
+        } catch (DuplicateKeyException e) {
+            JOptionPane.showMessageDialog(this, "Číslo karty už je priradené inému zákazníkovi!");
+        } catch (PrazdnyRetazecException ex) {
+            JOptionPane.showMessageDialog(this, "Zadaj meno zákazníka!");
+        } catch (PrazdneCisloPermanentkyException ex) {
+            JOptionPane.showMessageDialog(this, "Zadaj číslo permanentky!");
         }
     }//GEN-LAST:event_ulozitButtonActionPerformed
 

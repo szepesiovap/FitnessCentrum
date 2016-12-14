@@ -19,8 +19,8 @@ public class PripravaNaTestovanie {
 
     private static final String JDBC_DRIVER = "com.mysql.jdbc.Driver";
     private static final String DB_MENO = "testFitnesscentrum";
-    private static final String DB_USER = "root";
-    private static final String DB_PASSWORD = "root";
+    private static final String DB_USER = "fitnesscentrum";
+    private static final String DB_PASSWORD = "fitnesscentrum";
     private static final String DB_MENO_SUBORU = "testDBScript.sql";
 
     private static Connection connection;

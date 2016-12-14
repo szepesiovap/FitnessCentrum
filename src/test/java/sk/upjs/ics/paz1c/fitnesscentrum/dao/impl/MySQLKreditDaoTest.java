@@ -9,7 +9,7 @@ import sk.upjs.ics.paz1c.fitnesscentrum.entity.Kredit;
 
 public class MySQLKreditDaoTest extends PripravaNaTestovanie {
 
-    private static final KreditDao kreditDao = ObjectFactory.INSTANCE.getKreditDao();
+    private final KreditDao kreditDao = ObjectFactory.INSTANCE.getKreditDao();
 
     /**
      * Test of dajVsetkyKredity method, of class MySQLKreditDao.

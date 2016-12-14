@@ -3,7 +3,6 @@ package sk.upjs.ics.paz1c.fitnesscentrum.dao.impl;
 import java.util.List;
 import org.junit.Test;
 import static org.junit.Assert.*;
-import org.springframework.dao.DuplicateKeyException;
 import sk.upjs.ics.paz1c.fitnesscentrum.exception.NevalidnyVstupException;
 import sk.upjs.ics.paz1c.fitnesscentrum.ObjectFactory;
 import sk.upjs.ics.paz1c.fitnesscentrum.dao.RecepcnyDao;
@@ -11,7 +10,7 @@ import sk.upjs.ics.paz1c.fitnesscentrum.entity.Recepcny;
 
 public class MySQLRecepcnyDaoTest extends PripravaNaTestovanie {
 
-    private static final RecepcnyDao recepcnyDao = ObjectFactory.INSTANCE.getRecepcnyDao();
+    private final RecepcnyDao recepcnyDao = ObjectFactory.INSTANCE.getRecepcnyDao();
 
     /**
      * Test of dajRecepcneho method, of class MySQLRecepcnyDao.

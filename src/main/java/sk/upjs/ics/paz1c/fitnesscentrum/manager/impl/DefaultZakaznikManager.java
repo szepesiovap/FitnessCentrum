@@ -10,6 +10,9 @@ import sk.upjs.ics.paz1c.fitnesscentrum.entity.Kluc;
 import sk.upjs.ics.paz1c.fitnesscentrum.entity.Zakaznik;
 import sk.upjs.ics.paz1c.fitnesscentrum.exception.NedostatocnyKreditException;
 import sk.upjs.ics.paz1c.fitnesscentrum.exception.NeexistujuciZakaznikException;
+import sk.upjs.ics.paz1c.fitnesscentrum.exception.NevalidnyVstupException;
+import sk.upjs.ics.paz1c.fitnesscentrum.exception.PrazdneCisloPermanentkyException;
+import sk.upjs.ics.paz1c.fitnesscentrum.exception.PrazdnyRetazecException;
 import sk.upjs.ics.paz1c.fitnesscentrum.exception.PritomnyZakaznikException;
 
 public class DefaultZakaznikManager implements ZakaznikManager {
@@ -40,7 +43,12 @@ public class DefaultZakaznikManager implements ZakaznikManager {
     }
 
     @Override
-    public void pridajZakaznika(Zakaznik zakaznik) throws DuplicateKeyException {
+    public void pridajZakaznika(Zakaznik zakaznik) throws DuplicateKeyException, PrazdnyRetazecException, PrazdneCisloPermanentkyException {
+        if ((zakaznik.getCisloPermanentky() != null) && (zakaznik.getCisloPermanentky().equals("")))  {
+            throw new PrazdneCisloPermanentkyException();
+        } else if (zakaznik.getMeno().equals("")) {
+            throw new PrazdnyRetazecException();
+        }
         zakaznikDao.pridajZakaznika(zakaznik);
     }
 
