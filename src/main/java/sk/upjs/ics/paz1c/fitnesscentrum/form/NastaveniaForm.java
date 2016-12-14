@@ -174,7 +174,7 @@ public class NastaveniaForm extends javax.swing.JDialog {
         recepcnyPanelLayout.setHorizontalGroup(
             recepcnyPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(recepcnyPanelLayout.createSequentialGroup()
-                .addContainerGap(304, Short.MAX_VALUE)
+                .addContainerGap(316, Short.MAX_VALUE)
                 .addComponent(novyRecepcnyjButton, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(zmazatRecepcnehoButton, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -226,7 +226,7 @@ public class NastaveniaForm extends javax.swing.JDialog {
                 .addGap(18, 18, 18)
                 .addComponent(zmazatKlucButton, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
-            .addComponent(zoznamKlucovScrollPane, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 576, Short.MAX_VALUE)
+            .addComponent(zoznamKlucovScrollPane, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 588, Short.MAX_VALUE)
         );
         klucPanelLayout.setVerticalGroup(
             klucPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -299,9 +299,7 @@ public class NastaveniaForm extends javax.swing.JDialog {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addComponent(vstupneTabbedPane)
-                .addContainerGap())
+            .addComponent(vstupneTabbedPane, javax.swing.GroupLayout.DEFAULT_SIZE, 593, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -421,7 +419,7 @@ public class NastaveniaForm extends javax.swing.JDialog {
         } catch (PrazdnyRetazecException e) {
             JOptionPane.showMessageDialog(this, "Zadaj meno kľúča!");
         } catch (DuplicateKeyException e) {
-            JOptionPane.showMessageDialog(this, "Kľúč s menom " + novyKlucTextField.getText() + " už existuje!");
+            JOptionPane.showMessageDialog(this, "Kľúč " + novyKlucTextField.getText() + " už existuje!");
         }
 
     }//GEN-LAST:event_ulozitKlucButtonActionPerformed

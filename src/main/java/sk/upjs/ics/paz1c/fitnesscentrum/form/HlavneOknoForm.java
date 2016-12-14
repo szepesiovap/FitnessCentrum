@@ -66,12 +66,17 @@ public final class HlavneOknoForm extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Fitnesscentrum");
         setName("zoznamZakaznikovFrame"); // NOI18N
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         pritomniTable.setModel(new PritomniZakazniciTableModel()
         );
         pritomniScrollPane.setViewportView(pritomniTable);
 
+        getContentPane().add(pritomniScrollPane, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1051, 612));
+        getContentPane().add(menoPrihlasenehoRecepcnehoLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 618, -1, -1));
+
         prihlasenyRecepcnyLabel.setText("Prihlásený recepčný:");
+        getContentPane().add(prihlasenyRecepcnyLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 618, -1, -1));
 
         prichodMenu.setText("Príchod");
 
@@ -150,27 +155,6 @@ public final class HlavneOknoForm extends javax.swing.JFrame {
         hlavneOknoMenuBar.add(odhlasitMenu);
 
         setJMenuBar(hlavneOknoMenuBar);
-
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(prihlasenyRecepcnyLabel)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(menoPrihlasenehoRecepcnehoLabel)
-                .addGap(0, 891, Short.MAX_VALUE))
-            .addComponent(pritomniScrollPane, javax.swing.GroupLayout.Alignment.TRAILING)
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(pritomniScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 612, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(prihlasenyRecepcnyLabel)
-                    .addComponent(menoPrihlasenehoRecepcnehoLabel)))
-        );
 
         pack();
         setLocationRelativeTo(null);

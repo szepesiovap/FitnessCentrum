@@ -38,6 +38,7 @@ public class ZoznamZakaznikovForm extends javax.swing.JDialog {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Zoznam zákazníkov");
+        setResizable(false);
 
         zoznamZakaznikovTable.setModel(new ZakaznikTableModel(""));
         zoznamZakaznikovScrollPane.setViewportView(zoznamZakaznikovTable);
