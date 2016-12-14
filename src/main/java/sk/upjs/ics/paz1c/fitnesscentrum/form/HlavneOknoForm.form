@@ -2,24 +2,6 @@
 
 <Form version="1.5" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JFrameFormInfo">
   <NonVisualComponents>
-    <Container class="javax.swing.JMenuBar" name="jMenuBar1">
-
-      <Layout class="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout">
-        <Property name="useNullLayout" type="boolean" value="true"/>
-      </Layout>
-      <SubComponents>
-        <Menu class="javax.swing.JMenu" name="jMenu1">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="File"/>
-          </Properties>
-        </Menu>
-        <Menu class="javax.swing.JMenu" name="jMenu2">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="Edit"/>
-          </Properties>
-        </Menu>
-      </SubComponents>
-    </Container>
     <Menu class="javax.swing.JMenuBar" name="hlavneOknoMenuBar">
       <SubComponents>
         <Menu class="javax.swing.JMenu" name="prichodMenu">
@@ -132,16 +114,24 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Component id="pritomniScrollPane" min="-2" pref="1051" max="-2" attributes="0"/>
-          <Component id="prihlasenyRecepcnyLabel" min="-2" max="-2" attributes="0"/>
+          <Component id="pritomniScrollPane" pref="1051" max="32767" attributes="0"/>
+          <Group type="102" attributes="0">
+              <Component id="prihlasenyRecepcnyLabel" min="-2" max="-2" attributes="0"/>
+              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+              <Component id="menoPrihlasenehoRecepcnehoLabel" min="-2" pref="114" max="-2" attributes="0"/>
+              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+          </Group>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" attributes="0">
-              <Component id="pritomniScrollPane" min="-2" pref="612" max="-2" attributes="0"/>
-              <EmptySpace min="6" pref="6" max="-2" attributes="0"/>
-              <Component id="prihlasenyRecepcnyLabel" min="-2" max="-2" attributes="0"/>
+              <Component id="pritomniScrollPane" pref="612" max="32767" attributes="0"/>
+              <EmptySpace min="-2" pref="6" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="prihlasenyRecepcnyLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="menoPrihlasenehoRecepcnehoLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
           </Group>
       </Group>
     </DimensionLayout>
@@ -160,12 +150,12 @@
         </Component>
       </SubComponents>
     </Container>
-    <Component class="javax.swing.JLabel" name="menoPrihlasenehoRecepcnehoLabel">
-    </Component>
     <Component class="javax.swing.JLabel" name="prihlasenyRecepcnyLabel">
       <Properties>
         <Property name="text" type="java.lang.String" value="Prihl&#xe1;sen&#xfd; recep&#x10d;n&#xfd;:"/>
       </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="menoPrihlasenehoRecepcnehoLabel">
     </Component>
   </SubComponents>
 </Form>

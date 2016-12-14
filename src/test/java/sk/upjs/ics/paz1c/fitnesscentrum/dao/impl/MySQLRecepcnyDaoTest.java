@@ -7,6 +7,7 @@ import sk.upjs.ics.paz1c.fitnesscentrum.exception.NevalidnyVstupException;
 import sk.upjs.ics.paz1c.fitnesscentrum.ObjectFactory;
 import sk.upjs.ics.paz1c.fitnesscentrum.dao.RecepcnyDao;
 import sk.upjs.ics.paz1c.fitnesscentrum.entity.Recepcny;
+import sk.upjs.ics.paz1c.fitnesscentrum.exception.DuplikovanyLoginException;
 
 public class MySQLRecepcnyDaoTest extends PripravaNaTestovanie {
 
@@ -38,7 +39,7 @@ public class MySQLRecepcnyDaoTest extends PripravaNaTestovanie {
      * sk.upjs.ics.paz1c.fitnesscentrum.exception.NevalidnyVstupException
      */
     @Test
-    public void testPridajRecepcneho() throws NevalidnyVstupException {
+    public void testPridajRecepcneho() throws NevalidnyVstupException, DuplikovanyLoginException {
         Recepcny recepcny = new Recepcny();
         String meno = "Jozko Mrkvicka";
         String login = "jozko";
@@ -68,7 +69,7 @@ public class MySQLRecepcnyDaoTest extends PripravaNaTestovanie {
      * sk.upjs.ics.paz1c.fitnesscentrum.exception.NevalidnyVstupException
      */
     @Test
-    public void testPridajRovnakehoRecepcneho() throws NevalidnyVstupException {
+    public void testPridajRovnakehoRecepcneho() throws NevalidnyVstupException, DuplikovanyLoginException {
 
         Recepcny recepcny = new Recepcny();
         String meno = "Jozko Mrkvicka";

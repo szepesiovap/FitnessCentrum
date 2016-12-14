@@ -38,13 +38,10 @@ public final class HlavneOknoForm extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jMenuBar1 = new javax.swing.JMenuBar();
-        jMenu1 = new javax.swing.JMenu();
-        jMenu2 = new javax.swing.JMenu();
         pritomniScrollPane = new javax.swing.JScrollPane();
         pritomniTable = new javax.swing.JTable();
-        menoPrihlasenehoRecepcnehoLabel = new javax.swing.JLabel();
         prihlasenyRecepcnyLabel = new javax.swing.JLabel();
+        menoPrihlasenehoRecepcnehoLabel = new javax.swing.JLabel();
         hlavneOknoMenuBar = new javax.swing.JMenuBar();
         prichodMenu = new javax.swing.JMenu();
         jednorazovyPrichodMenuItem = new javax.swing.JMenuItem();
@@ -56,12 +53,6 @@ public final class HlavneOknoForm extends javax.swing.JFrame {
         spinningMenu = new javax.swing.JMenu();
         zmenaHeslaMenu = new javax.swing.JMenu();
         odhlasitMenu = new javax.swing.JMenu();
-
-        jMenu1.setText("File");
-        jMenuBar1.add(jMenu1);
-
-        jMenu2.setText("Edit");
-        jMenuBar1.add(jMenu2);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Fitnesscentrum");
@@ -155,15 +146,21 @@ public final class HlavneOknoForm extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(pritomniScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 1051, javax.swing.GroupLayout.PREFERRED_SIZE)
-            .addComponent(prihlasenyRecepcnyLabel)
+            .addComponent(pritomniScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 1051, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(prihlasenyRecepcnyLabel)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(menoPrihlasenehoRecepcnehoLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(pritomniScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 612, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(pritomniScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 612, Short.MAX_VALUE)
                 .addGap(6, 6, 6)
-                .addComponent(prihlasenyRecepcnyLabel))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(prihlasenyRecepcnyLabel)
+                    .addComponent(menoPrihlasenehoRecepcnehoLabel)))
         );
 
         pack();
@@ -224,9 +221,6 @@ public final class HlavneOknoForm extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenu dobiMenu;
     private javax.swing.JMenuBar hlavneOknoMenuBar;
-    private javax.swing.JMenu jMenu1;
-    private javax.swing.JMenu jMenu2;
-    private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jednorazovyPrichodMenuItem;
     private javax.swing.JLabel menoPrihlasenehoRecepcnehoLabel;
     private javax.swing.JMenu novyMenu;
