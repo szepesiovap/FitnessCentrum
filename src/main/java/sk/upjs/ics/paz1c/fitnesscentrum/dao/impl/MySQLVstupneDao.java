@@ -24,8 +24,8 @@ public class MySQLVstupneDao implements VstupneDao {
     }
 
     @Override
-    public void updateCenaSpinningu(double cena) {
-        String sql = "UPDATE vstupne SET cena_spinningu=? WHERE id=?";
+    public void updateCenaCvicenia(double cena) {
+        String sql = "UPDATE vstupne SET cena_cvicenia=? WHERE id=?";
         jdbcTemplate.update(sql, cena, ID);
     }
 

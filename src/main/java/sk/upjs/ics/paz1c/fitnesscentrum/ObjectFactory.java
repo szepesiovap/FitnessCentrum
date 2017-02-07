@@ -19,6 +19,8 @@ public enum ObjectFactory {
     private RezervaciaDao rezervaciaDao;
     private VstupneDao vstupneDao;
     private KreditDao kreditDao;
+    private CvicenieDao cvicenieDao;
+    private TypCviceniaDao typCviceniaDao;
     private HesloManager hesloManager;
     private RecepcnyManager recepcnyManager;
     private KreditManager kreditManager;
@@ -26,6 +28,7 @@ public enum ObjectFactory {
     private InstruktorManager instruktorManager;
     private RezervaciaManager rezervaciaManager;
     private SpinningManager spinningManager;
+    private CvicenieManager cvicenieManager;
     private ZakaznikManager zakaznikManager;
     private VstupneManager vstupneManager;
 
@@ -33,6 +36,7 @@ public enum ObjectFactory {
         if (jdbcTemplate == null) {
             MysqlDataSource dataSource;
             dataSource = new MysqlDataSource();
+            dataSource.setUrl("jdbc:mysql://localhost/fitnesscentrum?serverTimezone=UTC");
             dataSource.setDatabaseName("fitnesscentrum");
             dataSource.setUser("fitnesscentrum");
             dataSource.setPassword("fitnesscentrum");
@@ -71,6 +75,20 @@ public enum ObjectFactory {
             spinningDao = new MySQLSpinningDao();
         }
         return spinningDao;
+    }
+    
+    public CvicenieDao getCvicenieDao() {
+        if (cvicenieDao == null) {
+            cvicenieDao = new MySQLCvicenieDao();
+        }
+        return cvicenieDao;
+    }
+    
+    public TypCviceniaDao getTypCviceniaDao() {
+        if (typCviceniaDao == null) {
+            typCviceniaDao = new MySQLTypCviceniaDao();
+        }
+        return typCviceniaDao;
     }
 
     public InstruktorDao getInstruktorDao() {
@@ -143,11 +161,11 @@ public enum ObjectFactory {
         return rezervaciaManager;
     }
 
-    public SpinningManager getSpinningManager() {
-        if (spinningManager == null) {
-            spinningManager = new DefaultSpinningManager();
+    public CvicenieManager getCvicenieManager() {
+        if (cvicenieManager== null) {
+            cvicenieManager= new DefaultCvicenieManager();
         }
-        return spinningManager;
+        return cvicenieManager;
     }
 
     public ZakaznikManager getZakaznikManager() {

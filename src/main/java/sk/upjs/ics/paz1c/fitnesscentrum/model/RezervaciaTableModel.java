@@ -4,6 +4,7 @@ import java.util.Collections;
 import java.util.List;
 import javax.swing.table.AbstractTableModel;
 import sk.upjs.ics.paz1c.fitnesscentrum.ObjectFactory;
+import sk.upjs.ics.paz1c.fitnesscentrum.entity.Cvicenie;
 import sk.upjs.ics.paz1c.fitnesscentrum.entity.Rezervacia;
 import sk.upjs.ics.paz1c.fitnesscentrum.entity.Spinning;
 import sk.upjs.ics.paz1c.fitnesscentrum.manager.RezervaciaManager;
@@ -14,17 +15,17 @@ public class RezervaciaTableModel extends AbstractTableModel {
 
     private static final String[] NAZVY_STLPCOV = {"Meno zákazníka", "Dátum rezervácie"};
     private static final int POCET_STLPCOV = NAZVY_STLPCOV.length;
-    private final Spinning spinning;
+    private final Cvicenie cvicenie;
     private List<Rezervacia> listRezervacii;
 
-    public RezervaciaTableModel(Spinning spinning) {
-        this.spinning = spinning;
+    public RezervaciaTableModel(Cvicenie cvicenie) {
+        this.cvicenie = cvicenie;
         aktualizovat();
     }
 
     @Override
     public int getRowCount() {
-        if (spinning == null) {
+        if (cvicenie == null) {
             return 0;
         }
         return listRezervacii.size();
@@ -41,10 +42,10 @@ public class RezervaciaTableModel extends AbstractTableModel {
     }
 
     public void aktualizovat() {
-        if (spinning == null) {
+        if (cvicenie == null) {
             listRezervacii = Collections.emptyList();
         } else {
-            listRezervacii = rezervaciaManager.dajRezervacieSpinningu(spinning);
+            listRezervacii = rezervaciaManager.dajRezervacieCvicenia(cvicenie);
         }
         fireTableDataChanged();
     }

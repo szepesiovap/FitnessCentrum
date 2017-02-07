@@ -20,16 +20,16 @@ public class DefaultVstupneManagerTest extends PripravaNaTestovanie {
     @Test
     public void testNastavCeny() {
         double cenaVstupneho = 2.75;
-        double cenaSpinningu = 3.2;
-        vstupneManager.nastavCeny(cenaVstupneho, cenaSpinningu);
+        double cenaCvicenia = 3.2;
+        vstupneManager.nastavCeny(cenaVstupneho, cenaCvicenia);
         assertTrue(vstupneManager.dajCeny().getCenaVstupneho() == cenaVstupneho);
-        assertTrue(vstupneManager.dajCeny().getCenaSpinnigu() == cenaSpinningu);
+        assertTrue(vstupneManager.dajCeny().getCenaCvicenia() == cenaCvicenia);
         //nastavujeme na povodne kvoli dalsim metodam
         cenaVstupneho = 3.0;
-        cenaSpinningu = 5.0;
-        vstupneManager.nastavCeny(cenaVstupneho, cenaSpinningu);
+        cenaCvicenia = 5.0;
+        vstupneManager.nastavCeny(cenaVstupneho, cenaCvicenia);
         assertTrue(vstupneManager.dajCeny().getCenaVstupneho() == cenaVstupneho);
-        assertTrue(vstupneManager.dajCeny().getCenaSpinnigu() == cenaSpinningu);
+        assertTrue(vstupneManager.dajCeny().getCenaCvicenia() == cenaCvicenia);
     }
 
     /**
@@ -38,12 +38,12 @@ public class DefaultVstupneManagerTest extends PripravaNaTestovanie {
     @Test
     public void testDajCeny() {
         double ocakavanaCenaVstupneho = 3;
-        double ocakavanaCenaSpinningu = 5;
+        double ocakavanaCenaCvicenia = 5;
         Vstupne vstupne = vstupneManager.dajCeny();
         double vratenaCenaVstupneho = vstupne.getCenaVstupneho();
-        double vratenaCenaSpinningu = vstupne.getCenaSpinnigu();
+        double vratenaCenaCvicenia = vstupne.getCenaCvicenia();
         assertTrue(ocakavanaCenaVstupneho == vratenaCenaVstupneho);
-        assertTrue(ocakavanaCenaSpinningu == vratenaCenaSpinningu);
+        assertTrue(ocakavanaCenaCvicenia == vratenaCenaCvicenia);
     }
 
 }

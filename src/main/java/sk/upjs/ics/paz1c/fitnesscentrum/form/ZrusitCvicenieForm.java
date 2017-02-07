@@ -3,15 +3,17 @@ package sk.upjs.ics.paz1c.fitnesscentrum.form;
 import java.time.LocalDateTime;
 import javax.swing.JOptionPane;
 import sk.upjs.ics.paz1c.fitnesscentrum.ObjectFactory;
+import sk.upjs.ics.paz1c.fitnesscentrum.entity.Cvicenie;
 import sk.upjs.ics.paz1c.fitnesscentrum.manager.SpinningManager;
-import sk.upjs.ics.paz1c.fitnesscentrum.model.SpinningTableModel;
+import sk.upjs.ics.paz1c.fitnesscentrum.model.CvicenieTableModel;
 import sk.upjs.ics.paz1c.fitnesscentrum.entity.Spinning;
+import sk.upjs.ics.paz1c.fitnesscentrum.manager.CvicenieManager;
 
-public class ZrusitSpinningForm extends javax.swing.JDialog {
+public class ZrusitCvicenieForm extends javax.swing.JDialog {
 
     private static final int ID_COLUMN = 4;
-    private final SpinningManager spinningManager = ObjectFactory.INSTANCE.getSpinningManager();
-    private Spinning spinning;
+    private final CvicenieManager cvicenieManager = ObjectFactory.INSTANCE.getCvicenieManager();
+    private Cvicenie cvicenie;
 
     /**
      * Creates new form ZrusSpinningForm
@@ -19,12 +21,12 @@ public class ZrusitSpinningForm extends javax.swing.JDialog {
      * @param parent
      * @param modal
      */
-    public ZrusitSpinningForm(java.awt.Frame parent, boolean modal) {
+    public ZrusitCvicenieForm(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
     }
 
-    public ZrusitSpinningForm() {
+    public ZrusitCvicenieForm() {
         super(new javax.swing.JFrame(), true);
         initComponents();
     }
@@ -46,10 +48,10 @@ public class ZrusitSpinningForm extends javax.swing.JDialog {
         setTitle("Zrušiť spinning");
         setResizable(false);
 
-        zoznamSpinningovTable.setModel(new SpinningTableModel());
+        zoznamSpinningovTable.setModel(new sk.upjs.ics.paz1c.fitnesscentrum.model.CvicenieTableModel());
         zoznamSpinningovScrollPane.setViewportView(zoznamSpinningovTable);
 
-        zrusitSpinningButton.setText("Zrušiť spinning");
+        zrusitSpinningButton.setText("Zrušiť cvičenie");
         zrusitSpinningButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 zrusitSpinningButtonActionPerformed(evt);
@@ -61,7 +63,7 @@ public class ZrusitSpinningForm extends javax.swing.JDialog {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(387, Short.MAX_VALUE)
+                .addContainerGap(389, Short.MAX_VALUE)
                 .addComponent(zrusitSpinningButton)
                 .addContainerGap())
             .addComponent(zoznamSpinningovScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
@@ -81,34 +83,34 @@ public class ZrusitSpinningForm extends javax.swing.JDialog {
 
     private void zrusitSpinningButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_zrusitSpinningButtonActionPerformed
         try {
-            Long idSpinningu = (Long) zoznamSpinningovTable.getModel()
+            Long idCvicenia = (Long) zoznamSpinningovTable.getModel()
                     .getValueAt(this.zoznamSpinningovTable.getSelectedRow(), ID_COLUMN);
-            spinning = spinningManager.dajSpinningSId(idSpinningu);
-            if ((spinning.getKapacita() == spinning.getVolne()) || (spinning.getDatum().isBefore(LocalDateTime.now()))) {
+            cvicenie = cvicenieManager.dajCvicenieSId(idCvicenia);
+            if ((cvicenie.getKapacita() == cvicenie.getVolne()) || (cvicenie.getDatum().isBefore(LocalDateTime.now()))) {
                 Object[] options = {"Zmazať", "Zrušiť"};
-                if (JOptionPane.showOptionDialog(this, "Naozaj chcete zmazať spinning s instruktorom "
-                        + spinning.getInstruktor() + ", ktorý sa má uskutočniť dňa "
-                        + spinning.getDatum().toLocalDate() + " o "
-                        + spinning.getDatum().toLocalTime() + "?",
-                        "Zmazať spinning", JOptionPane.DEFAULT_OPTION,
+                if (JOptionPane.showOptionDialog(this, "Naozaj chcete zmazať cvičenie s instruktorom "
+                        + cvicenie.getInstruktor() + ", ktorý sa má uskutočniť dňa "
+                        + cvicenie.getDatum().toLocalDate() + " o "
+                        + cvicenie.getDatum().toLocalTime() + "?",
+                        "Zmazať cvičenie", JOptionPane.DEFAULT_OPTION,
                         JOptionPane.PLAIN_MESSAGE, null, options, options[0]) == JOptionPane.YES_OPTION) {
 
-                    spinningManager.vymazSpinning(spinning);
-                    JOptionPane.showMessageDialog(this, "Spinning s instruktorom "
-                            + spinning.getInstruktor() + " z dňa " + spinning.getDatum() + " bol zrušený!");
+                    cvicenieManager.vymazCvicenie(cvicenie);
+                    JOptionPane.showMessageDialog(this, "Cvičenie s instruktorom "
+                            + cvicenie.getInstruktor() + " z dňa " + cvicenie.getDatum() + " bol zrušený!");
                 }
             } else {
-                JOptionPane.showMessageDialog(this, "Nemožno vymazať spinning, na ktorý sú rezervácie! "
+                JOptionPane.showMessageDialog(this, "Nemožno vymazať cvičenie, na ktoré sú rezervácie! "
                         + "Najprv musíte zrušiť rezervácie!");
             }
         } catch (ArrayIndexOutOfBoundsException e) {
-            JOptionPane.showMessageDialog(this, "Nie je vybraný žiaden spinning!");
+            JOptionPane.showMessageDialog(this, "Nie je vybraté žiadne cvičenie!");
         }
-        aktualizovatZoznamSpinningovTable();
+        aktualizovatZoznamCviceniTable();
     }//GEN-LAST:event_zrusitSpinningButtonActionPerformed
 
-    private void aktualizovatZoznamSpinningovTable() {
-        SpinningTableModel model = (SpinningTableModel) zoznamSpinningovTable.getModel();
+    private void aktualizovatZoznamCviceniTable() {
+        CvicenieTableModel model = (CvicenieTableModel) zoznamSpinningovTable.getModel();
         model.aktualizovat();
     }
 

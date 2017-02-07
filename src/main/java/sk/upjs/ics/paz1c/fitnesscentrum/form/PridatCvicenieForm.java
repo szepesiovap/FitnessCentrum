@@ -4,14 +4,18 @@ import java.time.LocalDateTime;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
 import sk.upjs.ics.paz1c.fitnesscentrum.ObjectFactory;
+import sk.upjs.ics.paz1c.fitnesscentrum.entity.Cvicenie;
 import sk.upjs.ics.paz1c.fitnesscentrum.manager.SpinningManager;
 import sk.upjs.ics.paz1c.fitnesscentrum.model.InstruktorComboBoxModel;
 import sk.upjs.ics.paz1c.fitnesscentrum.entity.Instruktor;
 import sk.upjs.ics.paz1c.fitnesscentrum.entity.Spinning;
+import sk.upjs.ics.paz1c.fitnesscentrum.entity.TypCvicenia;
+import sk.upjs.ics.paz1c.fitnesscentrum.manager.CvicenieManager;
+import sk.upjs.ics.paz1c.fitnesscentrum.model.TypCviceniaComboBoxModel;
 
-public class PridatSpinningForm extends javax.swing.JDialog {
+public class PridatCvicenieForm extends javax.swing.JDialog {
 
-    private final SpinningManager spinningManager = ObjectFactory.INSTANCE.getSpinningManager();
+    private final CvicenieManager cvicenieManager = ObjectFactory.INSTANCE.getCvicenieManager();
     private final String[] DNI = {"01", "02", "03", "04", "05", "06", "07", "08",
         "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20",
         "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31"};
@@ -28,7 +32,7 @@ public class PridatSpinningForm extends javax.swing.JDialog {
      * @param parent
      * @param modal
      */
-    public PridatSpinningForm(java.awt.Dialog parent, boolean modal) {
+    public PridatCvicenieForm(java.awt.Dialog parent, boolean modal) {
         super(parent, modal);
         initComponents();
         inicializovat();
@@ -56,6 +60,7 @@ public class PridatSpinningForm extends javax.swing.JDialog {
         pridatButton = new javax.swing.JButton();
         kapacitaLabel = new javax.swing.JLabel();
         kapacitaTextField = new javax.swing.JTextField();
+        typCviceniaComboBox = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Nový spinning");
@@ -89,13 +94,15 @@ public class PridatSpinningForm extends javax.swing.JDialog {
 
         kapacitaTextField.setText("20");
 
+        typCviceniaComboBox.setModel(new TypCviceniaComboBoxModel());
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(22, 22, 22)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(25, 25, 25)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -117,15 +124,15 @@ public class PridatSpinningForm extends javax.swing.JDialog {
                             .addComponent(instruktorLabel))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(instruktorComboBox, 0, 201, Short.MAX_VALUE)
-                            .addComponent(kapacitaTextField))))
-                .addContainerGap(57, Short.MAX_VALUE))
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(pridatButton, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(36, 36, 36)
-                .addComponent(zrusitButton, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(38, 38, 38))
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addGroup(layout.createSequentialGroup()
+                                    .addComponent(pridatButton, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGap(31, 31, 31)
+                                    .addComponent(zrusitButton, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(instruktorComboBox, 0, 201, Short.MAX_VALUE)
+                                    .addComponent(kapacitaTextField)))
+                            .addComponent(typCviceniaComboBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -152,11 +159,13 @@ public class PridatSpinningForm extends javax.swing.JDialog {
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(kapacitaTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 25, Short.MAX_VALUE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGap(26, 26, 26)
+                        .addComponent(typCviceniaComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(zrusitButton)
-                            .addComponent(pridatButton))
-                        .addGap(37, 37, 37))))
+                            .addComponent(pridatButton)
+                            .addComponent(zrusitButton))
+                        .addGap(27, 27, 27))))
         );
 
         pack();
@@ -177,14 +186,18 @@ public class PridatSpinningForm extends javax.swing.JDialog {
             int rok = Integer.parseInt(rokTextField.getText());
             datum = LocalDateTime.of(rok, mesiac, den, hodina, minuta);
             if (datum.isBefore(LocalDateTime.now())) {
-                JOptionPane.showMessageDialog(this, "Nemožno naplánovať spinning so starším dátumom!");
+                JOptionPane.showMessageDialog(this, "Nemožno naplánovať cvičenie so starším dátumom!");
             } else {
-                Spinning spinning = new Spinning();
-                spinning.setDatum(datum);
-                spinning.setInstruktor((Instruktor) instruktorComboBox.getSelectedItem());
-                spinning.setKapacita(Integer.parseInt((String) kapacitaTextField.getText()));
-                spinning.setVolne(Integer.parseInt((String) kapacitaTextField.getText()));
-                spinningManager.pridajSpinning(spinning);
+               Cvicenie cvicenie = new Cvicenie();
+                cvicenie.setDatum(datum);
+                cvicenie.setInstruktor((Instruktor) instruktorComboBox.getSelectedItem());
+                cvicenie.setKapacita(Integer.parseInt((String) kapacitaTextField.getText()));
+                cvicenie.setVolne(Integer.parseInt((String) kapacitaTextField.getText()));
+                cvicenie.setTypCvicenia(((TypCvicenia)typCviceniaComboBox.getSelectedItem()).getId());
+                System.out.println(((TypCvicenia)typCviceniaComboBox.getSelectedItem()).getId());
+                 System.out.println(cvicenie.getTypCvicenia());
+                  System.out.println(cvicenie.getInstruktor());
+                cvicenieManager.pridajCvicenie(cvicenie);
                 dispose();
             }
 
@@ -217,6 +230,7 @@ public class PridatSpinningForm extends javax.swing.JDialog {
     private javax.swing.JComboBox<String> minutaComboBox;
     private javax.swing.JButton pridatButton;
     private javax.swing.JTextField rokTextField;
+    private javax.swing.JComboBox<TypCvicenia> typCviceniaComboBox;
     private javax.swing.JButton zrusitButton;
     // End of variables declaration//GEN-END:variables
 }

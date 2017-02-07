@@ -3,19 +3,21 @@ package sk.upjs.ics.paz1c.fitnesscentrum.form;
 import java.time.LocalDateTime;
 import javax.swing.JOptionPane;
 import sk.upjs.ics.paz1c.fitnesscentrum.ObjectFactory;
+import sk.upjs.ics.paz1c.fitnesscentrum.entity.Cvicenie;
 import sk.upjs.ics.paz1c.fitnesscentrum.manager.SpinningManager;
 import sk.upjs.ics.paz1c.fitnesscentrum.manager.ZakaznikManager;
 import sk.upjs.ics.paz1c.fitnesscentrum.entity.Rezervacia;
 import sk.upjs.ics.paz1c.fitnesscentrum.model.ZakaznikTableModel;
 import sk.upjs.ics.paz1c.fitnesscentrum.entity.Spinning;
 import sk.upjs.ics.paz1c.fitnesscentrum.entity.Zakaznik;
+import sk.upjs.ics.paz1c.fitnesscentrum.manager.CvicenieManager;
 
 public class RezervaciaForm extends javax.swing.JDialog {
 
     private static final int ID_COLUMN = 5;
-    private final Spinning spinning;
+    private final Cvicenie cvicenie;
     private final ZakaznikManager zakaznikManager = ObjectFactory.INSTANCE.getZakaznikManager();
-    private final SpinningManager spinningManager = ObjectFactory.INSTANCE.getSpinningManager();
+    private final CvicenieManager cvicenieManager = ObjectFactory.INSTANCE.getCvicenieManager();
 
     /**
      * Creates new form RezervaciaForm
@@ -24,11 +26,11 @@ public class RezervaciaForm extends javax.swing.JDialog {
      * @param modal
      * @param spinning
      */
-    public RezervaciaForm(java.awt.Dialog parent, boolean modal, Spinning spinning) {
+    public RezervaciaForm(java.awt.Dialog parent, boolean modal, Cvicenie cvicenie) {
         super(parent, modal);
-        this.spinning = spinning;
+        this.cvicenie = cvicenie;
         initComponents();
-        zobrazSpinningLabel.setText(spinning.toString());
+        zobrazSpinningLabel.setText(cvicenie.toString());
     }
 
     /**
@@ -53,7 +55,7 @@ public class RezervaciaForm extends javax.swing.JDialog {
         setTitle("Rezervácia Spinningu");
         setResizable(false);
 
-        spinningLabel.setText("Spinning: ");
+        spinningLabel.setText("Cvičenie:");
 
         zoznamZakaznikovTable.setModel(new ZakaznikTableModel(""));
         zoznamZakaznikovScrollPane.setViewportView(zoznamZakaznikovTable);
@@ -128,16 +130,16 @@ public class RezervaciaForm extends javax.swing.JDialog {
                     .getValueAt(this.zoznamZakaznikovTable.getSelectedRow(), ID_COLUMN);
             Zakaznik zakaznik = zakaznikManager.dajZakaznikaSId(idZakaznika);
             Rezervacia rezervacia = new Rezervacia();
-            rezervacia.setSpinning(spinning);
+            rezervacia.setCvicenie(cvicenie);
             rezervacia.setZakaznik(zakaznik);
             rezervacia.setCasRezervacie(LocalDateTime.now());
 
             Object[] options = {"Rezervovať", "Zrušiť"};
-            if (JOptionPane.showOptionDialog(this, "Rezervovať miesto na spinningu pre zákazníka "
+            if (JOptionPane.showOptionDialog(this, "Rezervovať miesto na cvičení pre zákazníka "
                     + zakaznik.getMeno() + "?", "Potvrdiť rezerváciu",
                     JOptionPane.DEFAULT_OPTION, JOptionPane.PLAIN_MESSAGE, null,
                     options, options[0]) == JOptionPane.YES_OPTION) {
-                spinningManager.rezervovatSpinning(rezervacia);
+                cvicenieManager.rezervovatCvicenie(rezervacia);
                 dispose();
             }
         } catch (ArrayIndexOutOfBoundsException e) {

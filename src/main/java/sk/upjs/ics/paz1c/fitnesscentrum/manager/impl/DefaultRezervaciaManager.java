@@ -4,6 +4,7 @@ import java.util.List;
 import sk.upjs.ics.paz1c.fitnesscentrum.ObjectFactory;
 import sk.upjs.ics.paz1c.fitnesscentrum.manager.RezervaciaManager;
 import sk.upjs.ics.paz1c.fitnesscentrum.dao.RezervaciaDao;
+import sk.upjs.ics.paz1c.fitnesscentrum.entity.Cvicenie;
 import sk.upjs.ics.paz1c.fitnesscentrum.entity.Rezervacia;
 import sk.upjs.ics.paz1c.fitnesscentrum.entity.Spinning;
 
@@ -17,8 +18,11 @@ public class DefaultRezervaciaManager implements RezervaciaManager {
     }
 
     @Override
-    public List<Rezervacia> dajRezervacieSpinningu(Spinning spinning) {
-        return rezervaciaDao.dajRezervacieSpinningu(spinning);
+    public List<Rezervacia> dajRezervacieCvicenia(Cvicenie cvicenie) {
+        return rezervaciaDao.dajRezervacieCvicenia(cvicenie);
     }
+
+   
+   
 
 }

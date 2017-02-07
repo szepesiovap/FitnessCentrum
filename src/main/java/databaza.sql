@@ -72,21 +72,21 @@ DEFAULT CHARACTER SET = utf8;
 -- -----------------------------------------------------
 -- Table `fitnesscentrum`.`spinning`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `fitnesscentrum`.`spinning` (
-  `id` INT(11) NOT NULL AUTO_INCREMENT,
-  `datum` TIMESTAMP NULL DEFAULT NULL,
-  `kapacita` INT(11) NULL DEFAULT NULL,
-  `volne` INT(11) NULL DEFAULT NULL,
-  `id_instruktora` INT(11) NULL DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  INDEX `id_instruktora_idx` (`id_instruktora` ASC),
-  CONSTRAINT `idTrenera`
-    FOREIGN KEY (`id_instruktora`)
-    REFERENCES `fitnesscentrum`.`instruktor` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB
-DEFAULT CHARACTER SET = utf8;
+#CREATE TABLE IF NOT EXISTS `fitnesscentrum`.`spinning` (
+#  `id` INT(11) NOT NULL AUTO_INCREMENT,
+#  `datum` TIMESTAMP NULL DEFAULT NULL,
+#  `kapacita` INT(11) NULL DEFAULT NULL,
+#  `volne` INT(11) NULL DEFAULT NULL,
+#  `id_instruktora` INT(11) NULL DEFAULT NULL,
+#  PRIMARY KEY (`id`),
+#  INDEX `id_instruktora_idx` (`id_instruktora` ASC),
+#  CONSTRAINT `idTrenera`
+#    FOREIGN KEY (`id_instruktora`)
+#    REFERENCES `fitnesscentrum`.`instruktor` (`id`)
+#    ON DELETE NO ACTION
+#    ON UPDATE NO ACTION)
+#ENGINE = InnoDB
+#DEFAULT CHARACTER SET = utf8;
 
 
 -- -----------------------------------------------------
@@ -111,15 +111,15 @@ DEFAULT CHARACTER SET = utf8;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `fitnesscentrum`.`rezervacia` (
   `id_rezervacia` INT(11) NOT NULL AUTO_INCREMENT,
-  `id_spinning` INT(11) NULL DEFAULT NULL,
+  `id_cvicenie` INT(11) NULL DEFAULT NULL,
   `id_zakaznik` INT(11) NULL DEFAULT NULL,
   `cas_rezervacie` TIMESTAMP NULL DEFAULT NULL,
   PRIMARY KEY (`id_rezervacia`),
   INDEX `zakaznik.id_idx` (`id_zakaznik` ASC),
-  INDEX `spinning.id_idx` (`id_spinning` ASC),
-  CONSTRAINT `spinning.id`
-    FOREIGN KEY (`id_spinning`)
-    REFERENCES `fitnesscentrum`.`spinning` (`id`)
+  INDEX `cvicenie.id_idx` (`id_cvicenie` ASC),
+  CONSTRAINT `cvicenie.id`
+    FOREIGN KEY (`id_cvicenie`)
+    REFERENCES `fitnesscentrum`.`cvicenie` (`id`)
     ON DELETE CASCADE
     ON UPDATE NO ACTION,
   CONSTRAINT `zakaznik.id`
@@ -137,8 +137,37 @@ DEFAULT CHARACTER SET = utf8;
 CREATE TABLE IF NOT EXISTS `fitnesscentrum`.`vstupne` (
   `id` INT(11) NOT NULL AUTO_INCREMENT,
   `cena_vstupneho` DOUBLE NULL DEFAULT NULL,
-  `cena_spinningu` DOUBLE NULL DEFAULT NULL,
+  `cena_cvicenia` DOUBLE NULL DEFAULT NULL,
   PRIMARY KEY (`id`))
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8;
+
+CREATE TABLE IF NOT EXISTS `fitnesscentrum`.`typ_cvicenia` (
+  `id` INT(11) NOT NULL AUTO_INCREMENT,
+  `nazov` VARCHAR(40) NULL DEFAULT NULL,
+    PRIMARY KEY (`id`))
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8;
+
+CREATE TABLE IF NOT EXISTS `fitnesscentrum`.`cvicenie` (
+  `id` INT(11) NOT NULL AUTO_INCREMENT,
+  `datum` TIMESTAMP NULL DEFAULT NULL,
+  `kapacita` INT(11) NULL DEFAULT NULL,
+  `volne` INT(11) NULL DEFAULT NULL,
+  `id_instruktora` INT(11) NULL DEFAULT NULL,
+  `id_typ_cvicenia` INT(11),
+  PRIMARY KEY (`id`),
+  INDEX `id_instruktora_idx` (`id_instruktora` ASC),
+  CONSTRAINT `idTrenera`
+    FOREIGN KEY (`id_instruktora`)
+    REFERENCES `fitnesscentrum`.`instruktor` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+     CONSTRAINT `TypCvicenia`
+    FOREIGN KEY (`id_typ_cvicenia`)
+    REFERENCES `fitnesscentrum`.`typ_cvicenia` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8;
 
@@ -193,5 +222,5 @@ UPDATE `fitnesscentrum`.`recepcny` SET id = 0 WHERE id = 1;
 
 
 -- opatrenie, aby tam nikdy nebolo null
-INSERT INTO `fitnesscentrum`.`vstupne` (`cena_vstupneho`, `cena_spinningu`) VALUES ('3','5');
+INSERT INTO `fitnesscentrum`.`vstupne` (`cena_vstupneho`, `cena_cvicenia`) VALUES ('3','5');
 

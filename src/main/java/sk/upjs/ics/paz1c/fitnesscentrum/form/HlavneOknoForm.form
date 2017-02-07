@@ -64,7 +64,7 @@
         </Menu>
         <Menu class="javax.swing.JMenu" name="spinningMenu">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Spinning"/>
+            <Property name="text" type="java.lang.String" value="Cvi&#x10d;enie"/>
           </Properties>
           <Events>
             <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="spinningMenuMousePressed"/>

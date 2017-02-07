@@ -12,7 +12,7 @@ public class VstupneRowMapper implements RowMapper<Vstupne>{
       Vstupne vstupne = new Vstupne();
       vstupne.setId(rs.getLong("id"));
       vstupne.setCenaVstupneho(rs.getDouble("cena_vstupneho"));
-      vstupne.setCenaSpinnigu(rs.getDouble("cena_spinningu"));
+      vstupne.setCenaCvicenia(rs.getDouble("cena_cvicenia"));
       
       return vstupne;
     } 
