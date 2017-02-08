@@ -2,10 +2,16 @@ package sk.upjs.ics.paz1c.fitnesscentrum.dao.impl;
 
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import org.springframework.dao.DuplicateKeyException;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
+import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
+import org.springframework.jdbc.core.namedparam.SqlParameterSource;
+import org.springframework.jdbc.support.GeneratedKeyHolder;
 import sk.upjs.ics.paz1c.fitnesscentrum.exception.NeexistujuciZakaznikException;
 import sk.upjs.ics.paz1c.fitnesscentrum.ObjectFactory;
 import sk.upjs.ics.paz1c.fitnesscentrum.rowmapper.ZakaznikRowMapper;
@@ -55,8 +61,21 @@ public class MySQLZakaznikDao implements ZakaznikDao {
 
     @Override
     public void pridajZakaznika(Zakaznik zakaznik) throws DuplicateKeyException {
-        String sql = "INSERT INTO zakaznik (meno_priezvisko,posledny_prichod,pritomny,cislo_permanentky,kredit) VALUES (?,?,?,?,?)";
-        jdbcTemplate.update(sql, zakaznik.getMeno(), Timestamp.valueOf(LocalDateTime.now()), 0, zakaznik.getCisloPermanentky(), zakaznik.getKredit());
+        String sql = "INSERT INTO zakaznik (meno_priezvisko,posledny_prichod,pritomny,cislo_permanentky,kredit) "
+                + "VALUES (:meno , :prichod , :pritomny , :cislo , :kredit )";
+        GeneratedKeyHolder gkh = new GeneratedKeyHolder();
+        
+        Map<String, Object> mapa = new HashMap<>();
+        mapa.put("meno", zakaznik.getMeno());
+        mapa.put("prichod", Timestamp.valueOf(LocalDateTime.now()));
+        mapa.put("pritomny", 0);
+        mapa.put("cislo", zakaznik.getCisloPermanentky());
+        mapa.put("kredit", zakaznik.getKredit());
+        
+        NamedParameterJdbcTemplate npjt = new NamedParameterJdbcTemplate(jdbcTemplate);
+        
+        npjt.update(sql, new MapSqlParameterSource(mapa), gkh);
+        zakaznik.setId(gkh.getKey().longValue());
     }
 
     @Override

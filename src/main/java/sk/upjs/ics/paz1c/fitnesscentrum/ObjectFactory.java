@@ -30,7 +30,12 @@ public enum ObjectFactory {
     private SpinningManager spinningManager;
     private CvicenieManager cvicenieManager;
     private ZakaznikManager zakaznikManager;
+    private ZakaznikInfoManager zakaznikInfoManager;
     private VstupneManager vstupneManager;
+    private NavstevaDao navstevaDao;
+    private UdalostDao udalostDao;
+    
+    public final boolean STATISTIKA = true;
 
     public JdbcTemplate getJdbcTemplate() {
         if (jdbcTemplate == null) {
@@ -118,6 +123,20 @@ public enum ObjectFactory {
         }
         return kreditDao;
     }
+    
+    public NavstevaDao getNavstevaDao() {
+        if (navstevaDao == null) {
+            navstevaDao = new MySQLNavstevaDao();
+        }
+        return navstevaDao;
+    }
+    
+    public UdalostDao getUdalostDao() {
+        if (udalostDao == null) {
+            udalostDao = new MySQLUdalostDao();
+        }
+        return udalostDao;
+    }
 
     public HesloManager getHesloManager() {
         if (hesloManager == null) {
@@ -135,7 +154,11 @@ public enum ObjectFactory {
 
     public KreditManager getKreditManager() {
         if (kreditManager == null) {
-            kreditManager = new DefaultKreditManager();
+            if (this.STATISTIKA) {
+                kreditManager = new LoggingKreditManager();
+            } else {
+                kreditManager = new DefaultKreditManager();
+            }
         }
         return kreditManager;
     }
@@ -163,16 +186,31 @@ public enum ObjectFactory {
 
     public CvicenieManager getCvicenieManager() {
         if (cvicenieManager== null) {
-            cvicenieManager= new DefaultCvicenieManager();
+            if (this.STATISTIKA) {
+                cvicenieManager = new LoggingCvicenieManager();
+            } else{
+                cvicenieManager= new DefaultCvicenieManager();
+            }
         }
         return cvicenieManager;
     }
 
     public ZakaznikManager getZakaznikManager() {
         if (zakaznikManager == null) {
-            zakaznikManager = new DefaultZakaznikManager();
+            if (this.STATISTIKA) {
+                zakaznikManager = new LoggingZakaznikManager();
+            } else {
+                zakaznikManager = new DefaultZakaznikManager();
+            }
         }
         return zakaznikManager;
+    }
+    
+    public ZakaznikInfoManager getZakaznikInfoManager() {
+        if (zakaznikInfoManager == null) {
+            zakaznikInfoManager = new ZakaznikInfoManager();
+        }
+        return zakaznikInfoManager;
     }
 
     public VstupneManager getVstupneManager() {

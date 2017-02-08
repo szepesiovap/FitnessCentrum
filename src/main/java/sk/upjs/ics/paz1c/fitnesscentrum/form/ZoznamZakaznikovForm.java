@@ -1,5 +1,6 @@
 package sk.upjs.ics.paz1c.fitnesscentrum.form;
 
+import java.awt.Frame;
 import javax.swing.JOptionPane;
 import sk.upjs.ics.paz1c.fitnesscentrum.ObjectFactory;
 import sk.upjs.ics.paz1c.fitnesscentrum.entity.Zakaznik;
@@ -41,6 +42,11 @@ public class ZoznamZakaznikovForm extends javax.swing.JDialog {
         setResizable(false);
 
         zoznamZakaznikovTable.setModel(new ZakaznikTableModel(""));
+        zoznamZakaznikovTable.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                zoznamZakaznikovTableMouseClicked(evt);
+            }
+        });
         zoznamZakaznikovScrollPane.setViewportView(zoznamZakaznikovTable);
 
         zmazatButton.setText("Zmazať");
@@ -116,6 +122,16 @@ public class ZoznamZakaznikovForm extends javax.swing.JDialog {
         zoznamZakaznikovTable.setModel(new ZakaznikTableModel(hladatPodlaMenaTextField.getText()));
         aktualizovatZoznamZakaznikov();
     }//GEN-LAST:event_hladatButtonActionPerformed
+
+    private void zoznamZakaznikovTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_zoznamZakaznikovTableMouseClicked
+        if (evt.getClickCount() == 2 && ObjectFactory.INSTANCE.STATISTIKA) {
+            int riadok = zoznamZakaznikovTable.getSelectedRow();
+            Long idZakaznika = (Long) zoznamZakaznikovTable.getModel().getValueAt(riadok, ID_COLUMN);
+            Zakaznik zakaznik = zakaznikManager.dajZakaznikaSId(idZakaznika);
+            ZakaznikInfoForm form = new ZakaznikInfoForm((Frame) this.getParent(), true, zakaznik);
+            form.setVisible(true);
+        }
+    }//GEN-LAST:event_zoznamZakaznikovTableMouseClicked
 
     public void aktualizovatZoznamZakaznikov() {
         ZakaznikTableModel model = (ZakaznikTableModel) zoznamZakaznikovTable.getModel();
