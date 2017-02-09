@@ -1,5 +1,6 @@
 package sk.upjs.ics.paz1c.fitnesscentrum.model;
 
+import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.List;
@@ -37,7 +38,9 @@ public class NavstevaTableModel extends AbstractTableModel {
         Navsteva n = zoznamNavstev.get(i);
         switch (i1) {
             case 0:
-                Long rozdiel = ChronoUnit.MINUTES.between(n.getPrichod(), n.getOdchod());
+                LocalDateTime koniec = n.getOdchod();
+                if (koniec == null) {koniec = LocalDateTime.now();}
+                Long rozdiel = ChronoUnit.MINUTES.between(n.getPrichod(), koniec);
                 String cas = rozdiel.toString();
                 Long minuty = rozdiel;
                 if (minuty <= 0) {
