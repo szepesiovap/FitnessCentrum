@@ -5,6 +5,7 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 import sk.upjs.ics.paz1c.fitnesscentrum.ObjectFactory;
 import sk.upjs.ics.paz1c.fitnesscentrum.dao.impl.PripravaNaTestovanie;
+import sk.upjs.ics.paz1c.fitnesscentrum.entity.Cvicenie;
 import sk.upjs.ics.paz1c.fitnesscentrum.entity.Rezervacia;
 import sk.upjs.ics.paz1c.fitnesscentrum.entity.Spinning;
 import sk.upjs.ics.paz1c.fitnesscentrum.manager.RezervaciaManager;
@@ -27,11 +28,11 @@ public class DefaultRezervaciaManagerTest extends PripravaNaTestovanie {
      * Test of dajRezervacieSpinningu method, of class DefaultRezervaciaManager.
      */
     @Test
-    public void testDajRezervacieSpinningu() {
-        long idSpinningu = 1L;
-        Spinning spinning = ObjectFactory.INSTANCE.getSpinningDao().dajSpinningSId(idSpinningu);
+    public void testDajRezervacieCvicenia() {
+        long idCvicenia = 1L;
+        Cvicenie cvicenie = ObjectFactory.INSTANCE.getCvicenieDao().dajCvicenieSId(idCvicenia);
         int ocakavanaSize = 2;
-        List<Rezervacia> list = rezervaciaManager.dajRezervacieSpinningu(spinning);
+        List<Rezervacia> list = rezervaciaManager.dajRezervacieCvicenia(cvicenie);
         int size = list.size();
         assertEquals(size, ocakavanaSize);
     }

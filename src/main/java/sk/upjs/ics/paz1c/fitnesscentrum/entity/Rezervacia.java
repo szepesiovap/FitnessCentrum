@@ -5,7 +5,7 @@ import java.time.LocalDateTime;
 public class Rezervacia {
 
     private Long id;
-    private Spinning spinning;
+    private Cvicenie cvicenie;
     private Zakaznik zakaznik;
     private LocalDateTime casRezervacie;
 
@@ -17,12 +17,12 @@ public class Rezervacia {
         this.id = id;
     }
 
-    public Spinning getSpinning() {
-        return spinning;
+    public Cvicenie getCvicenie() {
+        return cvicenie;
     }
 
-    public void setSpinning(Spinning spinning) {
-        this.spinning = spinning;
+    public void setCvicenie(Cvicenie cvicenie) {
+        this.cvicenie = cvicenie;
     }
 
     public Zakaznik getZakaznik() {

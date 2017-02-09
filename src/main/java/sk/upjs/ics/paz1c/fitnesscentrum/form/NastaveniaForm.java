@@ -426,9 +426,9 @@ public class NastaveniaForm extends javax.swing.JDialog {
 
     private void aktualizovatVstupneTabbedPane() {
         double vstup = vstupneDao.dajCeny().getCenaVstupneho();
-        double spinning = vstupneDao.dajCeny().getCenaSpinnigu();
+        double cvicenie = vstupneDao.dajCeny().getCenaCvicenia();
         cenaVstupnehoTexttField.setText("" + vstup);
-        cenaSpinninguTextField.setText("" + spinning);
+        cenaSpinninguTextField.setText("" + cvicenie);
     }
 
     private void aktualizovatKreditTable() {

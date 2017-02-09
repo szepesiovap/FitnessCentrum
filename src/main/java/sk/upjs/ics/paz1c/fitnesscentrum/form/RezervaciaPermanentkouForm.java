@@ -2,19 +2,21 @@ package sk.upjs.ics.paz1c.fitnesscentrum.form;
 
 import javax.swing.JOptionPane;
 import sk.upjs.ics.paz1c.fitnesscentrum.ObjectFactory;
+import sk.upjs.ics.paz1c.fitnesscentrum.entity.Cvicenie;
 import sk.upjs.ics.paz1c.fitnesscentrum.manager.SpinningManager;
 import sk.upjs.ics.paz1c.fitnesscentrum.manager.ZakaznikManager;
 import sk.upjs.ics.paz1c.fitnesscentrum.entity.Spinning;
 import sk.upjs.ics.paz1c.fitnesscentrum.entity.Zakaznik;
 import sk.upjs.ics.paz1c.fitnesscentrum.exception.NedostatocnyKreditException;
 import sk.upjs.ics.paz1c.fitnesscentrum.exception.NeexistujuciZakaznikException;
+import sk.upjs.ics.paz1c.fitnesscentrum.manager.CvicenieManager;
 
 public class RezervaciaPermanentkouForm extends javax.swing.JDialog {
 
     private final ZakaznikManager zakaznikManager = ObjectFactory.INSTANCE.getZakaznikManager();
-    private final SpinningManager spinningManager = ObjectFactory.INSTANCE.getSpinningManager();
+    private final CvicenieManager cvicenieManager = ObjectFactory.INSTANCE.getCvicenieManager();
     private Zakaznik zakaznik;
-    private final Spinning spinning;
+    private final Cvicenie cvicenie;
 
     /**
      * Creates new form RezervujPermanentkouForm
@@ -23,11 +25,11 @@ public class RezervaciaPermanentkouForm extends javax.swing.JDialog {
      * @param modal
      * @param spinning
      */
-    public RezervaciaPermanentkouForm(java.awt.Dialog parent, boolean modal, Spinning spinning) {
+    public RezervaciaPermanentkouForm(java.awt.Dialog parent, boolean modal, Cvicenie cvicenie) {
         super(parent, modal);
-        this.spinning = spinning;
+        this.cvicenie = cvicenie;
         initComponents();
-        zobrazSpinningLabel.setText(spinning.toString());
+        zobrazSpinningLabel.setText(cvicenie.toString());
     }
 
     /**
@@ -79,7 +81,7 @@ public class RezervaciaPermanentkouForm extends javax.swing.JDialog {
             }
         });
 
-        spinningLabel.setText("Spinning: ");
+        spinningLabel.setText("Cvičenie:");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -92,7 +94,9 @@ public class RezervaciaPermanentkouForm extends javax.swing.JDialog {
                     .addComponent(cisloPermanentkyLabel)
                     .addComponent(menoLabel)
                     .addComponent(zadajCisloLabel)
-                    .addComponent(spinningLabel))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(spinningLabel)
+                        .addGap(8, 8, 8)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(zobrazMenoLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -157,7 +161,7 @@ public class RezervaciaPermanentkouForm extends javax.swing.JDialog {
 
     private void rezervovatButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rezervovatButtonActionPerformed
         try {
-            spinningManager.rezervovatSpinningKartou(spinning, zakaznik);
+            cvicenieManager.rezervovatCvicenieKartou(cvicenie, zakaznik);
             dispose();
         } catch (NedostatocnyKreditException e) {
             JOptionPane.showMessageDialog(this, "Nedostatočný kredit!");

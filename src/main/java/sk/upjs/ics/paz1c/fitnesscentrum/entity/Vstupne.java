@@ -4,7 +4,7 @@ public class Vstupne {
     
     private Long id;
     private double cenaVstupneho;
-    private double cenaSpinnigu;
+    private double cenaCvicenia;
     
     public Long getId() {
         return id;
@@ -22,12 +22,12 @@ public class Vstupne {
         this.cenaVstupneho = cenaVstupneho;
     }
 
-    public double getCenaSpinnigu() {
-        return cenaSpinnigu;
+    public double getCenaCvicenia() {
+        return cenaCvicenia;
     }
 
-    public void setCenaSpinnigu(double cenaSpinnigu) {
-        this.cenaSpinnigu = cenaSpinnigu;
+    public void setCenaCvicenia(double cenaCvicenia) {
+        this.cenaCvicenia = cenaCvicenia;
     }
     
 }

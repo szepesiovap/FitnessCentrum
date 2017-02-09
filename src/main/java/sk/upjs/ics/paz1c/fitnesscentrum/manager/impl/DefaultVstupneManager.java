@@ -10,9 +10,9 @@ public class DefaultVstupneManager implements VstupneManager {
     private final VstupneDao vstupneDao = ObjectFactory.INSTANCE.getVstupneDao();
 
     @Override
-    public void nastavCeny(double cenaVstupneho, double cenaSpinningu) {
+    public void nastavCeny(double cenaVstupneho, double cenaCvicenia) {
         vstupneDao.updateCenaVstupneho(cenaVstupneho);
-        vstupneDao.updateCenaSpinningu(cenaSpinningu);
+        vstupneDao.updateCenaCvicenia(cenaCvicenia);
     }
 
     @Override

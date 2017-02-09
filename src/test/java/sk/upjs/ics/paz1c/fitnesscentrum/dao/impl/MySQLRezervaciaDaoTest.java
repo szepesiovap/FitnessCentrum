@@ -6,6 +6,7 @@ import static org.junit.Assert.*;
 import org.junit.Test;
 import sk.upjs.ics.paz1c.fitnesscentrum.ObjectFactory;
 import sk.upjs.ics.paz1c.fitnesscentrum.dao.RezervaciaDao;
+import sk.upjs.ics.paz1c.fitnesscentrum.entity.Cvicenie;
 import sk.upjs.ics.paz1c.fitnesscentrum.entity.Rezervacia;
 import sk.upjs.ics.paz1c.fitnesscentrum.entity.Spinning;
 import sk.upjs.ics.paz1c.fitnesscentrum.entity.Zakaznik;
@@ -29,10 +30,10 @@ public class MySQLRezervaciaDaoTest extends PripravaNaTestovanie {
      */
     @Test
     public void testDajRezervacieSpinningu() {
-        long idSpinningu = 1L;
-        Spinning spinning = ObjectFactory.INSTANCE.getSpinningDao().dajSpinningSId(idSpinningu);
+        long idCvicenia = 1L;
+        Cvicenie cvicenie = ObjectFactory.INSTANCE.getCvicenieDao().dajCvicenieSId(idCvicenia);
         int ocakavanaSize = 2;
-        List<Rezervacia> list = rezervaciaDao.dajRezervacieSpinningu(spinning);
+        List<Rezervacia> list = rezervaciaDao.dajRezervacieCvicenia(cvicenie);
         int size = list.size();
         assertEquals(size, ocakavanaSize);
     }
@@ -45,11 +46,11 @@ public class MySQLRezervaciaDaoTest extends PripravaNaTestovanie {
         long idRezervacie = 1L;
         Rezervacia rezervacia = rezervaciaDao.dajRezervaciuSId(idRezervacie);
         long ocakavaneIdZakaznika = 2L;
-        long ocakavaneIdSpinningu = 1L;
+        long ocakavaneIdCvicenia = 1L;
         long idZakaznika = rezervacia.getZakaznik().getId();
-        long idSpinningu = rezervacia.getSpinning().getId();
+        long idCvicenia = rezervacia.getCvicenie().getId();
         assertEquals(idZakaznika, ocakavaneIdZakaznika);
-        assertEquals(idSpinningu, ocakavaneIdSpinningu);
+        assertEquals(idCvicenia, ocakavaneIdCvicenia);
     }
 
     /**
@@ -57,13 +58,13 @@ public class MySQLRezervaciaDaoTest extends PripravaNaTestovanie {
      */
     @Test
     public void testPridajRezervaciu() {
-        long idSpinningu = 1L;
+        long idCvicenia = 1L;
         long idZakaznika = 1L;
         int povodnaSize = rezervaciaDao.dajVsetkyRezervacie().size();
         Rezervacia rezervacia = new Rezervacia();
-        Spinning spinning = ObjectFactory.INSTANCE.getSpinningDao().dajSpinningSId(idSpinningu);
+        Cvicenie cvicenie = ObjectFactory.INSTANCE.getCvicenieDao().dajCvicenieSId(idCvicenia);
         Zakaznik zakaznik = ObjectFactory.INSTANCE.getZakaznikDao().dajZakaznikaSId(idZakaznika);
-        rezervacia.setSpinning(spinning);
+        rezervacia.setCvicenie(cvicenie);
         rezervacia.setZakaznik(zakaznik);
         rezervacia.setCasRezervacie(LocalDateTime.now());
         rezervaciaDao.pridajRezervaciu(rezervacia);

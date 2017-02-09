@@ -25,11 +25,11 @@ public class MySQLVstupneDaoTest extends PripravaNaTestovanie {
      * Test of updateCenaSpinningu method, of class MySQLVstupneDao.
      */
     @Test
-    public void testUpdateCenaSpinningu() {
-        double cenaSpinnigu = 4.0;
-        vstupneDao.updateCenaSpinningu(cenaSpinnigu);
-        double novaCenaSpinningu = vstupneDao.dajCeny().getCenaSpinnigu();
-        assertEquals(cenaSpinnigu, novaCenaSpinningu, 0.0001);
+    public void testUpdateCenaCvicenia() {
+        double cenaCvicenia = 4.0;
+        vstupneDao.updateCenaCvicenia(cenaCvicenia);
+        double novaCenaCvicenia = vstupneDao.dajCeny().getCenaCvicenia();
+        assertEquals(cenaCvicenia, novaCenaCvicenia, 0.0001);
     }
 
     /**
@@ -38,7 +38,7 @@ public class MySQLVstupneDaoTest extends PripravaNaTestovanie {
     @Test
     public void testDajCeny() {
         Vstupne result = vstupneDao.dajCeny();
-        assertTrue(result.getCenaSpinnigu() > 0);
+        assertTrue(result.getCenaCvicenia() > 0);
         assertTrue(result.getCenaVstupneho() > 0);
     }
 

@@ -6,7 +6,7 @@ public interface VstupneDao {
 
     public void updateCenaVstupneho(double cena);
 
-    public void updateCenaSpinningu(double cena);
+    public void updateCenaCvicenia(double cena);
 
     public Vstupne dajCeny();
 }

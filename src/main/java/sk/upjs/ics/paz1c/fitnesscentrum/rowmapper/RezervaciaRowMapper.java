@@ -4,6 +4,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
 import org.springframework.jdbc.core.RowMapper;
+import sk.upjs.ics.paz1c.fitnesscentrum.entity.Cvicenie;
 import sk.upjs.ics.paz1c.fitnesscentrum.entity.Instruktor;
 import sk.upjs.ics.paz1c.fitnesscentrum.entity.Kluc;
 import sk.upjs.ics.paz1c.fitnesscentrum.entity.Rezervacia;
@@ -21,18 +22,18 @@ public class RezervaciaRowMapper implements RowMapper<Rezervacia> {
             rezervacia.setCasRezervacie(timestampCasRezervacie.toLocalDateTime());
         }
         
-        Spinning spinning = new Spinning();
-        spinning.setId(rs.getLong("spinning_id"));
-        Timestamp timestampDatum = rs.getTimestamp("spinning_datum");
+        Cvicenie cvicenie = new Cvicenie();
+        cvicenie.setId(rs.getLong("cvicenie_id"));
+        Timestamp timestampDatum = rs.getTimestamp("cvicenie_datum");
         if (timestampDatum != null) {
-            spinning.setDatum(timestampDatum.toLocalDateTime());
+            cvicenie.setDatum(timestampDatum.toLocalDateTime());
         }
-        spinning.setKapacita(rs.getInt("spinning_kapacita"));
-        spinning.setVolne(rs.getInt("spinning_volne"));
+        cvicenie.setKapacita(rs.getInt("cvicenie_kapacita"));
+        cvicenie.setVolne(rs.getInt("cvicenie_volne"));
         Instruktor instruktor = new Instruktor();
         instruktor.setId(rs.getLong("instruktor_id"));
         instruktor.setMeno(rs.getString("instruktor_meno"));
-        spinning.setInstruktor(instruktor);
+        cvicenie.setInstruktor(instruktor);
         
         Zakaznik zakaznik = new Zakaznik();
         zakaznik.setId(rs.getLong("z_id"));
@@ -54,7 +55,7 @@ public class RezervaciaRowMapper implements RowMapper<Rezervacia> {
             zakaznik.setKluc(kluc);
         }
         
-        rezervacia.setSpinning(spinning);
+        rezervacia.setCvicenie(cvicenie);
         rezervacia.setZakaznik(zakaznik);
         
         return rezervacia;

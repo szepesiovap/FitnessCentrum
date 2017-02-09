@@ -116,7 +116,7 @@ public final class HlavneOknoForm extends javax.swing.JFrame {
         });
         hlavneOknoMenuBar.add(dobiMenu);
 
-        spinningMenu.setText("Spinning");
+        spinningMenu.setText("Cvičenie");
         spinningMenu.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 spinningMenuMousePressed(evt);
@@ -197,7 +197,7 @@ public final class HlavneOknoForm extends javax.swing.JFrame {
     }//GEN-LAST:event_dobiMenuMousePressed
 
     private void spinningMenuMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_spinningMenuMousePressed
-        new SpinningForm(this, true).setVisible(true);
+        new CvicenieForm(this, true).setVisible(true);
     }//GEN-LAST:event_spinningMenuMousePressed
 
     private void jednorazovyPrichodMenuItemMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jednorazovyPrichodMenuItemMousePressed

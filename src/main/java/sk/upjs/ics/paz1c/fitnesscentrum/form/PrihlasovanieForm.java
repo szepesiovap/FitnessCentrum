@@ -119,6 +119,7 @@ public class PrihlasovanieForm extends javax.swing.JFrame {
 
         // funkcne prihlasovanie s databazou
          if (recepcny != null) {
+             System.out.println(recepcnyDao.dajRecepcneho(0L).getLogin());
             if (hesloManager.overHeslo(recepcny.getSalt(), heslo, recepcny.getId())) {
                 new HlavneOknoForm(recepcny).setVisible(true);
                 this.dispose();

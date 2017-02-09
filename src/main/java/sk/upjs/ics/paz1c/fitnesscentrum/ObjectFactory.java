@@ -19,6 +19,8 @@ public enum ObjectFactory {
     private RezervaciaDao rezervaciaDao;
     private VstupneDao vstupneDao;
     private KreditDao kreditDao;
+    private CvicenieDao cvicenieDao;
+    private TypCviceniaDao typCviceniaDao;
     private HesloManager hesloManager;
     private RecepcnyManager recepcnyManager;
     private KreditManager kreditManager;
@@ -26,13 +28,20 @@ public enum ObjectFactory {
     private InstruktorManager instruktorManager;
     private RezervaciaManager rezervaciaManager;
     private SpinningManager spinningManager;
+    private CvicenieManager cvicenieManager;
     private ZakaznikManager zakaznikManager;
+    private ZakaznikInfoManager zakaznikInfoManager;
     private VstupneManager vstupneManager;
+    private NavstevaDao navstevaDao;
+    private UdalostDao udalostDao;
+    
+    public final boolean STATISTIKA = true;
 
     public JdbcTemplate getJdbcTemplate() {
         if (jdbcTemplate == null) {
             MysqlDataSource dataSource;
             dataSource = new MysqlDataSource();
+            dataSource.setUrl("jdbc:mysql://localhost/fitnesscentrum?serverTimezone=UTC");
             dataSource.setDatabaseName("fitnesscentrum");
             dataSource.setUser("fitnesscentrum");
             dataSource.setPassword("fitnesscentrum");
@@ -72,6 +81,20 @@ public enum ObjectFactory {
         }
         return spinningDao;
     }
+    
+    public CvicenieDao getCvicenieDao() {
+        if (cvicenieDao == null) {
+            cvicenieDao = new MySQLCvicenieDao();
+        }
+        return cvicenieDao;
+    }
+    
+    public TypCviceniaDao getTypCviceniaDao() {
+        if (typCviceniaDao == null) {
+            typCviceniaDao = new MySQLTypCviceniaDao();
+        }
+        return typCviceniaDao;
+    }
 
     public InstruktorDao getInstruktorDao() {
         if (instruktorDao == null) {
@@ -100,6 +123,20 @@ public enum ObjectFactory {
         }
         return kreditDao;
     }
+    
+    public NavstevaDao getNavstevaDao() {
+        if (navstevaDao == null) {
+            navstevaDao = new MySQLNavstevaDao();
+        }
+        return navstevaDao;
+    }
+    
+    public UdalostDao getUdalostDao() {
+        if (udalostDao == null) {
+            udalostDao = new MySQLUdalostDao();
+        }
+        return udalostDao;
+    }
 
     public HesloManager getHesloManager() {
         if (hesloManager == null) {
@@ -117,7 +154,11 @@ public enum ObjectFactory {
 
     public KreditManager getKreditManager() {
         if (kreditManager == null) {
-            kreditManager = new DefaultKreditManager();
+            if (this.STATISTIKA) {
+                kreditManager = new LoggingKreditManager();
+            } else {
+                kreditManager = new DefaultKreditManager();
+            }
         }
         return kreditManager;
     }
@@ -143,18 +184,33 @@ public enum ObjectFactory {
         return rezervaciaManager;
     }
 
-    public SpinningManager getSpinningManager() {
-        if (spinningManager == null) {
-            spinningManager = new DefaultSpinningManager();
+    public CvicenieManager getCvicenieManager() {
+        if (cvicenieManager== null) {
+            if (this.STATISTIKA) {
+                cvicenieManager = new LoggingCvicenieManager();
+            } else{
+                cvicenieManager= new DefaultCvicenieManager();
+            }
         }
-        return spinningManager;
+        return cvicenieManager;
     }
 
     public ZakaznikManager getZakaznikManager() {
         if (zakaznikManager == null) {
-            zakaznikManager = new DefaultZakaznikManager();
+            if (this.STATISTIKA) {
+                zakaznikManager = new LoggingZakaznikManager();
+            } else {
+                zakaznikManager = new DefaultZakaznikManager();
+            }
         }
         return zakaznikManager;
+    }
+    
+    public ZakaznikInfoManager getZakaznikInfoManager() {
+        if (zakaznikInfoManager == null) {
+            zakaznikInfoManager = new ZakaznikInfoManager();
+        }
+        return zakaznikInfoManager;
     }
 
     public VstupneManager getVstupneManager() {

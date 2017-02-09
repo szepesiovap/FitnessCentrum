@@ -2,18 +2,22 @@ package sk.upjs.ics.paz1c.fitnesscentrum.form;
 
 import javax.swing.JOptionPane;
 import sk.upjs.ics.paz1c.fitnesscentrum.ObjectFactory;
+import sk.upjs.ics.paz1c.fitnesscentrum.entity.Cvicenie;
 import sk.upjs.ics.paz1c.fitnesscentrum.manager.RezervaciaManager;
 import sk.upjs.ics.paz1c.fitnesscentrum.manager.SpinningManager;
 import sk.upjs.ics.paz1c.fitnesscentrum.model.RezervaciaTableModel;
-import sk.upjs.ics.paz1c.fitnesscentrum.model.SpinningComboBoxModel;
 import sk.upjs.ics.paz1c.fitnesscentrum.entity.Rezervacia;
 import sk.upjs.ics.paz1c.fitnesscentrum.entity.Spinning;
+import sk.upjs.ics.paz1c.fitnesscentrum.entity.TypCvicenia;
+import sk.upjs.ics.paz1c.fitnesscentrum.manager.CvicenieManager;
+import sk.upjs.ics.paz1c.fitnesscentrum.model.CvicenieComboBoxModel;
+import sk.upjs.ics.paz1c.fitnesscentrum.model.TypCviceniaComboBoxModel;
 
-public class SpinningForm extends javax.swing.JDialog {
+public class CvicenieForm extends javax.swing.JDialog {
 
     private static final int ID_COLUMN = 2;
     private final RezervaciaManager rezervaciaManager = ObjectFactory.INSTANCE.getRezervaciaManager();
-    private final SpinningManager spinningManager = ObjectFactory.INSTANCE.getSpinningManager();
+    private final CvicenieManager cvicenieManager = ObjectFactory.INSTANCE.getCvicenieManager();
 
     /**
      * Creates new form SpinningForm
@@ -21,7 +25,7 @@ public class SpinningForm extends javax.swing.JDialog {
      * @param parent
      * @param modal
      */
-    public SpinningForm(java.awt.Frame parent, boolean modal) {
+    public CvicenieForm(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
         aktualizovatRezervacie();
@@ -40,6 +44,8 @@ public class SpinningForm extends javax.swing.JDialog {
         rezervacieTable = new javax.swing.JTable();
         spinningComboBox = new javax.swing.JComboBox<>();
         spinningLabel = new javax.swing.JLabel();
+        typCviceniaComboBox = new javax.swing.JComboBox<>();
+        jLabel1 = new javax.swing.JLabel();
         spinningMenuBar = new javax.swing.JMenuBar();
         rezervovatMenu = new javax.swing.JMenu();
         jednorazovyMenuItem = new javax.swing.JMenuItem();
@@ -48,22 +54,32 @@ public class SpinningForm extends javax.swing.JDialog {
         zrusitSpinnigMenu = new javax.swing.JMenu();
         pridatInstruktoraMenu = new javax.swing.JMenu();
         odhlasitZoSpinninguMenu = new javax.swing.JMenu();
+        jMenu1 = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("Rezervácie na spinning");
+        setTitle("Rezervácie na cvičenie");
         setResizable(false);
 
         rezervacieTable.setModel(new RezervaciaTableModel(null));
         rezervacieScrollPane.setViewportView(rezervacieTable);
 
-        spinningComboBox.setModel(new SpinningComboBoxModel());
+        spinningComboBox.setModel(new CvicenieComboBoxModel());
         spinningComboBox.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 spinningComboBoxActionPerformed(evt);
             }
         });
 
-        spinningLabel.setText("Spinning : ");
+        spinningLabel.setText("Cvičenie:");
+
+        typCviceniaComboBox.setModel(new TypCviceniaComboBoxModel());
+        typCviceniaComboBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                typCviceniaComboBoxActionPerformed(evt);
+            }
+        });
+
+        jLabel1.setText("Typ:");
 
         rezervovatMenu.setText("Rezervovať");
 
@@ -85,7 +101,7 @@ public class SpinningForm extends javax.swing.JDialog {
 
         spinningMenuBar.add(rezervovatMenu);
 
-        pridatSpinningMenu.setText("Pridať spinning");
+        pridatSpinningMenu.setText("Pridať cvičenie");
         pridatSpinningMenu.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 pridatSpinningMenuMousePressed(evt);
@@ -93,7 +109,7 @@ public class SpinningForm extends javax.swing.JDialog {
         });
         spinningMenuBar.add(pridatSpinningMenu);
 
-        zrusitSpinnigMenu.setText("Zrušiť spinning");
+        zrusitSpinnigMenu.setText("Zrušiť cvičenie");
         zrusitSpinnigMenu.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 zrusitSpinnigMenuMousePressed(evt);
@@ -109,7 +125,7 @@ public class SpinningForm extends javax.swing.JDialog {
         });
         spinningMenuBar.add(pridatInstruktoraMenu);
 
-        odhlasitZoSpinninguMenu.setText("Odhlásiť zo spinningu");
+        odhlasitZoSpinninguMenu.setText("Odhlásiť z cvičenia");
         odhlasitZoSpinninguMenu.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 odhlasitZoSpinninguMenuMousePressed(evt);
@@ -117,29 +133,48 @@ public class SpinningForm extends javax.swing.JDialog {
         });
         spinningMenuBar.add(odhlasitZoSpinninguMenu);
 
+        jMenu1.setText("Pridať nový typ cvičenia");
+        jMenu1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jMenu1MouseClicked(evt);
+            }
+        });
+        spinningMenuBar.add(jMenu1);
+
         setJMenuBar(spinningMenuBar);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(rezervacieScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 663, Short.MAX_VALUE)
+            .addComponent(rezervacieScrollPane, javax.swing.GroupLayout.Alignment.TRAILING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(jLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(typCviceniaComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 598, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(spinningLabel)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(spinningComboBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+                .addComponent(spinningComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 600, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(17, 17, 17)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(spinningComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(spinningLabel))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(rezervacieScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 319, Short.MAX_VALUE))
+                    .addComponent(spinningLabel)
+                    .addComponent(spinningComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addComponent(rezervacieScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 272, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(typCviceniaComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel1))
+                .addContainerGap(24, Short.MAX_VALUE))
         );
 
         pack();
@@ -147,8 +182,8 @@ public class SpinningForm extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void pridatSpinningMenuMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pridatSpinningMenuMousePressed
-        new PridatSpinningForm(this, true).setVisible(true);
-        ((SpinningComboBoxModel) spinningComboBox.getModel()).aktualizovat();
+        new PridatCvicenieForm(this, true).setVisible(true);
+        ((CvicenieComboBoxModel) spinningComboBox.getModel()).aktualizovat();
     }//GEN-LAST:event_pridatSpinningMenuMousePressed
 
     private void pridatInstruktoraMenuMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pridatInstruktoraMenuMousePressed
@@ -157,32 +192,32 @@ public class SpinningForm extends javax.swing.JDialog {
 
     private void permanentkouMenuItemMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_permanentkouMenuItemMousePressed
         try {
-            Spinning spinning = (Spinning) spinningComboBox.getSelectedItem();
-            if (spinning.getVolne() > 0) {
-                new RezervaciaPermanentkouForm(this, true, spinning).setVisible(true);
+            Cvicenie cvicenie = (Cvicenie) spinningComboBox.getSelectedItem();
+            if (cvicenie.getVolne() > 0) {
+                new RezervaciaPermanentkouForm(this, true, cvicenie).setVisible(true);
                 aktualizovatRezervacie();
-                aktualizovatSpinningy();
+                aktualizovatCvicenia();
             } else {
-                JOptionPane.showMessageDialog(this, "Tento spinning je plne obsadený!");
+                JOptionPane.showMessageDialog(this, "Toto cvičenie je plne obsadené!");
             }
         } catch (NullPointerException e) {
-            JOptionPane.showMessageDialog(this, "Vyber spinning!");
+            JOptionPane.showMessageDialog(this, "Vyber cvičenie!");
         }
 
     }//GEN-LAST:event_permanentkouMenuItemMousePressed
 
     private void jednorazovyMenuItemMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jednorazovyMenuItemMousePressed
         try {
-            Spinning spinning = (Spinning) spinningComboBox.getSelectedItem();
-            if (spinning.getVolne() > 0) {
-                new RezervaciaForm(this, true, spinning).setVisible(true);
+            Cvicenie cvicenie = (Cvicenie) spinningComboBox.getSelectedItem();
+            if (cvicenie.getVolne() > 0) {
+                new RezervaciaForm(this, true, cvicenie).setVisible(true);
                 aktualizovatRezervacie();
-                aktualizovatSpinningy();
+                aktualizovatCvicenia();
             } else {
-                JOptionPane.showMessageDialog(this, "Tento spinning je plne obsadený!");
+                JOptionPane.showMessageDialog(this, "Toto cvičenie je plne obsadené!");
             }
         } catch (NullPointerException e) {
-            JOptionPane.showMessageDialog(this, "Vyber spinning!");
+            JOptionPane.showMessageDialog(this, "Vyber cvicenie!");
 
         }    }//GEN-LAST:event_jednorazovyMenuItemMousePressed
 
@@ -194,40 +229,65 @@ public class SpinningForm extends javax.swing.JDialog {
         try {
             Long idRezervacie = (Long) rezervacieTable.getModel().getValueAt(this.rezervacieTable.getSelectedRow(), ID_COLUMN);
             Rezervacia rezervacia = rezervaciaManager.dajRezervaciuSId(idRezervacie);
-            Spinning spinning = (Spinning) spinningComboBox.getSelectedItem();
+            Cvicenie cvicenie = (Cvicenie) spinningComboBox.getSelectedItem();
             Object[] options = {"Odhlásiť", "Zrušiť"};
-            if (JOptionPane.showOptionDialog(this, "Naozaj chcete odhlásiť zo spinningu zákazníka " + rezervacia.getZakaznik().getMeno() + "?",
-                    "Odhlásiť zo spinningu",
+            if (JOptionPane.showOptionDialog(this, "Naozaj chcete odhlásiť z cvičenia zákazníka " + rezervacia.getZakaznik().getMeno() + "?",
+                    "Odhlásiť z cvičenia",
                     JOptionPane.DEFAULT_OPTION, JOptionPane.PLAIN_MESSAGE, null,
                     options, options[0]) == JOptionPane.YES_OPTION) {
-                spinningManager.odhlasitZoSpinningu(rezervacia, spinning);
+                cvicenieManager.odhlasitZCvicenia(rezervacia, cvicenie);
             }
             aktualizovatRezervacie();
-            aktualizovatSpinningy();
+            aktualizovatCvicenia();
         } catch (ArrayIndexOutOfBoundsException e) {
             JOptionPane.showMessageDialog(null, "Vyber zákazníka na odhlásenie zo spinningu!");
         }
     }//GEN-LAST:event_odhlasitZoSpinninguMenuMousePressed
 
     private void zrusitSpinnigMenuMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_zrusitSpinnigMenuMousePressed
-        new ZrusitSpinningForm().setVisible(true);
-        aktualizovatSpinningy();
+        new ZrusitCvicenieForm().setVisible(true);
+        aktualizovatCvicenia();
     }//GEN-LAST:event_zrusitSpinnigMenuMousePressed
+
+    private void typCviceniaComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_typCviceniaComboBoxActionPerformed
+        // TODO add your handling code here:
+        try {
+            TypCvicenia typCvicenia = (TypCvicenia) typCviceniaComboBox.getSelectedItem();
+            CvicenieComboBoxModel model = (CvicenieComboBoxModel) spinningComboBox.getModel();
+            model.aktualizovat(typCvicenia);
+        } catch (NullPointerException e) {
+
+            CvicenieComboBoxModel model = (CvicenieComboBoxModel) spinningComboBox.getModel();
+            model.aktualizovat();
+        }
+
+
+    }//GEN-LAST:event_typCviceniaComboBoxActionPerformed
+
+    private void jMenu1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu1MouseClicked
+        // TODO add your handling code here:
+        PridatTypCviceniaForm dialog = new PridatTypCviceniaForm(this, true);
+        dialog.setVisible(true);
+        TypCviceniaComboBoxModel model = (TypCviceniaComboBoxModel) typCviceniaComboBox.getModel();
+        model.aktualizovat();
+    }//GEN-LAST:event_jMenu1MouseClicked
 
     private void aktualizovatRezervacie() {
         try {
-            Spinning spinning = (Spinning) spinningComboBox.getSelectedItem();
-            rezervacieTable.setModel(new RezervaciaTableModel(spinning));
+            Cvicenie cvicenie = (Cvicenie) spinningComboBox.getSelectedItem();
+            rezervacieTable.setModel(new RezervaciaTableModel(cvicenie));
         } catch (NullPointerException e) {
-            JOptionPane.showMessageDialog(this, "Vyber spinning!");
+            JOptionPane.showMessageDialog(this, "Vyber cvicenie!");
         }
     }
 
-    private void aktualizovatSpinningy() {
-        ((SpinningComboBoxModel) spinningComboBox.getModel()).aktualizovat();
+    private void aktualizovatCvicenia() {
+        ((CvicenieComboBoxModel) spinningComboBox.getModel()).aktualizovat();
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JMenu jMenu1;
     private javax.swing.JMenuItem jednorazovyMenuItem;
     private javax.swing.JMenu odhlasitZoSpinninguMenu;
     private javax.swing.JMenuItem permanentkouMenuItem;
@@ -236,9 +296,10 @@ public class SpinningForm extends javax.swing.JDialog {
     private javax.swing.JScrollPane rezervacieScrollPane;
     private javax.swing.JTable rezervacieTable;
     private javax.swing.JMenu rezervovatMenu;
-    private javax.swing.JComboBox<Spinning> spinningComboBox;
+    private javax.swing.JComboBox<Cvicenie> spinningComboBox;
     private javax.swing.JLabel spinningLabel;
     private javax.swing.JMenuBar spinningMenuBar;
+    private javax.swing.JComboBox<TypCvicenia> typCviceniaComboBox;
     private javax.swing.JMenu zrusitSpinnigMenu;
     // End of variables declaration//GEN-END:variables
 }
