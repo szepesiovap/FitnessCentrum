@@ -1,7 +1,6 @@
 package sk.upjs.ics.paz1c.fitnesscentrum.dao.impl;
 
 import java.time.LocalDateTime;
-import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import static org.junit.Assert.*;
 import java.util.List;
