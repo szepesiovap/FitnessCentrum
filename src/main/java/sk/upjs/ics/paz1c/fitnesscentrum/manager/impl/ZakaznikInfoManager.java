@@ -1,5 +1,6 @@
 package sk.upjs.ics.paz1c.fitnesscentrum.manager.impl;
 
+import java.util.AbstractMap;
 import java.util.Comparator;
 import java.util.Map.Entry;
 import java.util.stream.Collectors;
@@ -14,7 +15,7 @@ public class ZakaznikInfoManager {
     private final NavstevaDao navstevaDao =  ObjectFactory.INSTANCE.getNavstevaDao();
     
     public String getOblubeneCvicenie(Zakaznik zakaznik) {
-        return udalostDao.dajVsetkyUdalostiTypuOdZakaznika(zakaznik, "cvicenie")
+        String tc = udalostDao.dajVsetkyUdalostiTypuOdZakaznika(zakaznik, "cvicenie")
                 .stream()
                 .collect(Collectors.groupingBy(
                     t -> t.getObsah(),
@@ -23,7 +24,8 @@ public class ZakaznikInfoManager {
                 .entrySet()
                 .stream()
                 .max(Comparator.comparing(Entry::getValue))
-                .get().getKey();
+                .orElse(new AbstractMap.SimpleEntry<>("--", 99L)).getKey();
+        return tc;
     }
 
     public Integer getPocetCviceni(Zakaznik zakaznik) {
@@ -32,7 +34,9 @@ public class ZakaznikInfoManager {
 
     public Double getKreditCelkom(Zakaznik zakaznik) {
         return udalostDao.dajVsetkyUdalostiTypuOdZakaznika(zakaznik, "kredit+")
-                .stream().mapToDouble((t) -> {return Double.parseDouble(t.getObsah());}).reduce(0, Double::sum);
+                .stream()
+                .mapToDouble((t) -> {return Double.parseDouble(t.getObsah());})
+                .reduce(0, Double::sum);
     }
 
     public Integer getCelkovyCas(Zakaznik zakaznik) {

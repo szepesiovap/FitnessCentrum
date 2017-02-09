@@ -37,7 +37,7 @@ public class ZakaznikInfoForm extends javax.swing.JDialog {
         prichodDataLabel.setText(zakaznik.getPoslednyPrichod().format(DateTimeFormatter.ISO_DATE));
         menoDataLabel.setText(zakaznik.getMeno());
 
-//        oblubeneDataLabel.setText(zakaznikInfoManager.getOblubeneCvicenie(zakaznik));
+        oblubeneDataLabel.setText(zakaznikInfoManager.getOblubeneCvicenie(zakaznik));
         cviceniaDataLabel.setText(zakaznikInfoManager.getPocetCviceni(zakaznik).toString());
         kreditCelkomDataLabel.setText(zakaznikInfoManager.getKreditCelkom(zakaznik).toString());
         casDataLabel.setText(zakaznikInfoManager.getCelkovyCas(zakaznik).toString());
@@ -103,8 +103,10 @@ public class ZakaznikInfoForm extends javax.swing.JDialog {
 
         cviceniaDataLabel.setText("99");
 
+        oblubeneLabel.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         oblubeneLabel.setText("Obľúbené:");
 
+        oblubeneDataLabel.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         oblubeneDataLabel.setText("Aerobic");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());

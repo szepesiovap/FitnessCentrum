@@ -220,11 +220,13 @@
     </Component>
     <Component class="javax.swing.JLabel" name="oblubeneLabel">
       <Properties>
+        <Property name="horizontalAlignment" type="int" value="2"/>
         <Property name="text" type="java.lang.String" value="Ob&#x13e;&#xfa;ben&#xe9;:"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="oblubeneDataLabel">
       <Properties>
+        <Property name="horizontalAlignment" type="int" value="4"/>
         <Property name="text" type="java.lang.String" value="Aerobic"/>
       </Properties>
     </Component>
