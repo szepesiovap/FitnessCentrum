@@ -74,22 +74,22 @@ public class MySQLNavstevaDao implements NavstevaDao {
     public List<Navsteva> dajNavstevySKlucom(Kluc kluc) {
         
         String sql = "SELECT DISTINCT\n" +
-                "    navsteva.id AS n_id,\n" +
-                "    navsteva.prichod AS n_prichod,\n" +
-                "    navsteva.odchod AS n_odchod,\n" +
-                "    zakaznik.id AS z_id,\n" +
-                "    zakaznik.meno_priezvisko AS z_meno,\n" +
-                "    zakaznik.posledny_prichod AS z_posledny_prichod,\n" +
-                "    zakaznik.pritomny AS z_pritomny,\n" +
-                "    zakaznik.kredit AS z_kredit,\n" +
-                "    zakaznik.cislo_permanentky AS z_cislo_permanentky,\n" +
-                "    zakaznik.id_kluca AS k_id,\n" +
-                "    kluc.meno_kluca AS k_meno\n" +
-                "    FROM navsteva\n" +
-                "    LEFT JOIN zakaznik\n" +
-                "        ON navsteva.zakaznik_id = zakaznik.id\n" +
-                "    LEFT JOIN kluc ON zakaznik.id_kluca = kluc.id_kluca" +
-                "    WHERE k_id = ?;";
+                    "navsteva.id AS n_id,\n" +
+                    "navsteva.prichod AS n_prichod,\n" +
+                    "navsteva.odchod AS n_odchod,\n" +
+                    "zakaznik.id AS z_id,\n" +
+                    "zakaznik.meno_priezvisko AS z_meno,\n" +
+                    "zakaznik.posledny_prichod AS z_posledny_prichod,\n" +
+                    "zakaznik.pritomny AS z_pritomny,\n" +
+                    "zakaznik.kredit AS z_kredit,\n" +
+                    "zakaznik.cislo_permanentky AS z_cislo_permanentky,\n" +
+                    "zakaznik.id_kluca AS k_id,\n" +
+                    "kluc.meno_kluca AS k_meno\n" +
+                    "FROM navsteva\n" +
+                    "LEFT JOIN zakaznik\n" +
+                    "ON navsteva.zakaznik_id = zakaznik.id\n" +
+                    "LEFT JOIN kluc ON zakaznik.id_kluca = kluc.id_kluca\n" +
+                    "WHERE navsteva.id_kluca = ?;";
         //@todo: fix key id
         return jdbcTemplate.query(sql, navstevaRowMapper, kluc.getId());
     }
@@ -112,7 +112,7 @@ public class MySQLNavstevaDao implements NavstevaDao {
                 "    LEFT JOIN zakaznik\n" +
                 "        ON navsteva.zakaznik_id = zakaznik.id\n" +
                 "    LEFT JOIN kluc ON zakaznik.id_kluca = kluc.id_kluca" +
-                "    WHERE id = ?;";
+                "    WHERE navsteva.id = ?;";
         return jdbcTemplate.queryForObject(sql, navstevaRowMapper, id);
     }
 

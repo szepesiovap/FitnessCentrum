@@ -47,12 +47,15 @@ public class NavstevaTableModel extends AbstractTableModel {
                     return "0";
                 }
                 if (minuty < 60) {
-                    cas += " " + preloz(minuty, false);
+//                    cas += " " + preloz(minuty, false);
+                    cas += " min.";
                 } else {
                     int hours = (int)(minuty / 60);
                     int rem = (int) (minuty % 60);
-                    cas = hours + " " + preloz(hours, true);
-                    cas += (rem != 0) ? " a " + rem +  " " + preloz(rem, false) : "";
+//                    cas = hours + " " + preloz(hours, true);
+                    cas = hours + " hod.";
+//                    cas += (rem != 0) ? " a " + rem +  " " + preloz(rem, false) : "";
+                    cas += (rem != 0) ? " a " + rem +  " min." : "";
                 }
                 return cas;
             case 1:

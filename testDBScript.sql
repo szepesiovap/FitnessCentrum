@@ -133,8 +133,11 @@ CREATE TABLE IF NOT EXISTS `testFitnesscentrum`.`rezervacia` (
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8;
 
-INSERT INTO `testFitnesscentrum`.`instruktor` (`meno_priezvisko`) VALUES ('Janko Hrasko');
+CREATE TABLE navsteva (id INT(11) NOT NULL PRIMARY KEY AUTO_INCREMENT, zakaznik_id INT(11) NOT NULL, prichod TIMESTAMP DEFAULT CURRENT_TIMESTAMP, odchod TIMESTAMP NULL DEFAULT NULL, id_kluca INT(11));
 
+CREATE TABLE udalost (id INT(11) NOT NULL PRIMARY KEY AUTO_INCREMENT, zakaznik_id INT(11) NOT NULL, datum TIMESTAMP DEFAULT CURRENT_TIMESTAMP, typ VARCHAR(32) NOT NULL, obsah TEXT);
+
+INSERT INTO `testFitnesscentrum`.`instruktor` (`meno_priezvisko`) VALUES ('Janko Hrasko');
 
 INSERT INTO `testFitnesscentrum`.`kluc` (`meno_kluca`) VALUES ('1M');
 INSERT INTO `testFitnesscentrum`.`kluc` (`meno_kluca`) VALUES ('2M');
@@ -160,7 +163,17 @@ VALUES ('Ferko Nizky','ferko','3A5941FAFEB710CC30E47E9CFA73445A49B4B217CD9A6D6FA
 
 
 INSERT INTO `testFitnesscentrum`.`zakaznik` (`meno_priezvisko`, `posledny_prichod`, `pritomny`) VALUES ('Jan Vysoky', '2016-12-04 11:20:21', '0');
+INSERT INTO `testFitnesscentrum`.`udalost` (`zakaznik_id`, `typ`, `obsah`) VALUES (1, "kredit+", "0");
+INSERT INTO `testFitnesscentrum`.`udalost` (`zakaznik_id`, `typ`, `obsah`) VALUES (1, "cvicenie", "Zumba");
+INSERT INTO `testFitnesscentrum`.`udalost` (`zakaznik_id`, `typ`, `obsah`) VALUES (1, "cvicenie", "Zumba");
+INSERT INTO `testFitnesscentrum`.`navsteva` (`zakaznik_id`, `prichod`, `odchod`, `id_kluca`) VALUES (1, '2016-12-03 11:00:00', '2016-12-03 12:00:00', 1);
+INSERT INTO `testFitnesscentrum`.`navsteva` (`zakaznik_id`, `prichod`, `odchod`, `id_kluca`) VALUES (1, '2016-12-04 12:00:00', '2016-12-04 14:00:00', 2);
+
 INSERT INTO `testFitnesscentrum`.`zakaznik` (`meno_priezvisko`, `posledny_prichod`, `pritomny`,`kredit`,`cislo_permanentky`) VALUES ('Jane Doe', '2016-12-10 18:45:07', '0','50.0','111');
+INSERT INTO `testFitnesscentrum`.`udalost` (`zakaznik_id`, `typ`, `obsah`) VALUES (2, "kredit+", "50.0");
+INSERT INTO `testFitnesscentrum`.`udalost` (`zakaznik_id`, `typ`, `obsah`) VALUES (2, "kredit+", "30.0");
+INSERT INTO `testFitnesscentrum`.`navsteva` (`zakaznik_id`, `prichod`, `odchod`, `id_kluca`) VALUES (2, '2016-12-10 11:00:00', '2016-12-10 14:00:00', 1);
+
 INSERT INTO `testFitnesscentrum`.`zakaznik` (`meno_priezvisko`, `posledny_prichod`, `pritomny`,`kredit`,`cislo_permanentky`,`id_kluca`) VALUES ('John Doe', '2016-12-10 18:49:51','1', '100.0','123',2);
 INSERT INTO `testFitnesscentrum`.`zakaznik` (`meno_priezvisko`, `posledny_prichod`, `pritomny`) VALUES ('Zakaznik na vymazanie', '2016-12-04 11:20:21', '0');
 INSERT INTO `testFitnesscentrum`.`zakaznik` (`meno_priezvisko`, `posledny_prichod`, `pritomny`) VALUES ('Stale pritomny zakaznik', '2016-12-04 11:20:21', '1');
@@ -175,9 +188,9 @@ INSERT INTO `testFitnesscentrum`.`cvicenie` (`datum`, `kapacita`, `volne`,`id_in
 INSERT INTO `testFitnesscentrum`.`cvicenie` (`datum`, `kapacita`, `volne`,`id_instruktora`,`id_typ_cvicenia`) VALUES ('2016-12-25 16:00:00', '5', '5', '1', '1');
 INSERT INTO `testFitnesscentrum`.`cvicenie` (`datum`, `kapacita`, `volne`,`id_instruktora`,`id_typ_cvicenia`) VALUES ('2016-12-05 17:00:00', '10', '10', '1', '1');
 
-INSERT INTO `testFitnesscentrum`.`rezervacia` (`id_cvicenie`, `id_zakaznik`, `cas_rezervacie`) VALUES (1,2,'2016-12-24 15:00:00');
-INSERT INTO `testFitnesscentrum`.`rezervacia` (`id_cvicenie`, `id_zakaznik`, `cas_rezervacie`) VALUES (1,3,'2016-12-23 15:00:00');
-INSERT INTO `testFitnesscentrum`.`rezervacia` (`id_cvicenie`, `id_zakaznik`, `cas_rezervacie`) VALUES (2,1,'2016-12-25 15:00:00');
+-- INSERT INTO `testFitnesscentrum`.`rezervacia` (`id_cvicenie`, `id_zakaznik`, `cas_rezervacie`) VALUES (1,2,'2016-12-24 15:00:00');
+-- INSERT INTO `testFitnesscentrum`.`rezervacia` (`id_cvicenie`, `id_zakaznik`, `cas_rezervacie`) VALUES (1,3,'2016-12-23 15:00:00');
+-- INSERT INTO `testFitnesscentrum`.`rezervacia` (`id_cvicenie`, `id_zakaznik`, `cas_rezervacie`) VALUES (2,1,'2016-12-25 15:00:00');
 
 
 
